@@ -26,13 +26,13 @@ public class GridManager : MonoBehaviour
     #endregion
 
     //sets the width and height of the grid
-    [SerializeField] private int _width, _height;
+    public int width, height;
 
     //tile prefab
-    [SerializeField] private Tile _tilePrefab;
+    public Tile tilePrefab;
 
     //grid parent where we will spawn tiles 
-    [SerializeField] private Transform _gridParent;
+    public Transform gridParent;
 
 
     // Start is called before the first frame update
@@ -47,13 +47,14 @@ public class GridManager : MonoBehaviour
         GenerateGrid();
     }
 
+    //generate a grid based off width and height
     void GenerateGrid()
     {
-        for (int x = 0; x < _width; x++)
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < _height; y++)
+            for (int y = 0; y < height; y++)
             {
-                var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y,0), Quaternion.identity, _gridParent);
+                var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y,0), Quaternion.identity, gridParent);
                 spawnedTile.name = $"Tile {x} {y}";
 
                 var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
@@ -62,8 +63,8 @@ public class GridManager : MonoBehaviour
             }
         }
 
-
-        Camera.main.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 0.5f, -10);
+        //adjust camera to the middle of the grid
+        Camera.main.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
 
     // Update is called once per frame

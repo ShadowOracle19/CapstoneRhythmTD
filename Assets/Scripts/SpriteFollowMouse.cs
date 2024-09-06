@@ -15,6 +15,7 @@ public class SpriteFollowMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //have the sprite follow the mouse
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
     }

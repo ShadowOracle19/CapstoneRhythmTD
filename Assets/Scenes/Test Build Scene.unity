@@ -152,10 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3738644affe844fafeb70673592a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 9
-  _height: 5
-  _tilePrefab: {fileID: 6026861394526949739, guid: 87a3802f738b78040bfdfed40292f6ba, type: 3}
-  _gridParent: {fileID: 2013213461}
+  width: 9
+  height: 5
+  tilePrefab: {fileID: 6026861394526949739, guid: 87a3802f738b78040bfdfed40292f6ba, type: 3}
+  gridParent: {fileID: 2013213461}
 --- !u!4 &229527091
 Transform:
   m_ObjectHideFlags: 0
@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 464057543}
   - component: {fileID: 464057542}
   - component: {fileID: 464057541}
+  - component: {fileID: 464057544}
   m_Layer: 5
   m_Name: Drums
   m_TagString: Untagged
@@ -368,7 +369,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 464057542}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 464057544}
+        m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
+        m_MethodName: PressTowerButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &464057542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +420,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464057539}
   m_CullTransparentMesh: 1
+--- !u!114 &464057544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464057539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47e1af80c5f6ff438ad830c73c9586f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +775,7 @@ GameObject:
   - component: {fileID: 1595996617}
   - component: {fileID: 1595996616}
   - component: {fileID: 1595996615}
+  - component: {fileID: 1595996618}
   m_Layer: 5
   m_Name: Viola
   m_TagString: Untagged
@@ -819,7 +846,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1595996616}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1595996618}
+        m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
+        m_MethodName: PressTowerButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1595996616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,6 +897,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595996613}
   m_CullTransparentMesh: 1
+--- !u!114 &1595996618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595996613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47e1af80c5f6ff438ad830c73c9586f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
 --- !u!1 &1670817897
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,8 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    public GameObject towerToPlace;
+    [SerializeField] public GameObject towerToPlace;
+    [SerializeField] public bool isTowerHovering = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +37,32 @@ public class TowerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        //delete held tower when its not hovering over square
+        if(Input.anyKeyDown && !isTowerHovering)
         {
-            Destroy(towerToPlace);
+            DeleteHeldTower();
         }
+        //delete held tower while its hovering over a square
+        if(Input.GetMouseButtonDown(1))
+        {
+            DeleteHeldTower();
+        }
+
     }
 
+    public void PlaceTower(Vector3 tilePosition, Tile tile)
+    {
+        towerToPlace.GetComponent<SpriteFollowMouse>().enabled = false;
+        towerToPlace.transform.position = tilePosition;
+        tile.placedTower = towerToPlace;
+        towerToPlace.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        towerToPlace = null;
+        
+    }
 
+    public void DeleteHeldTower()
+    {
+        Destroy(towerToPlace);
+        towerToPlace = null;
+    }
 }

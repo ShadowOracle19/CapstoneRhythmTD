@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TowerButton : MonoBehaviour
 {
-    public GameObject tower;
+    [SerializeField] public GameObject tower;
     
     public void PressTowerButton()
     {

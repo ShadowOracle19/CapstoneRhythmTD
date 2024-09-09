@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class TowerManager : MonoBehaviour
 {
@@ -48,14 +49,19 @@ public class TowerManager : MonoBehaviour
             DeleteHeldTower();
         }
 
+        
+
     }
 
     public void PlaceTower(Vector3 tilePosition, Tile tile)
     {
         towerToPlace.GetComponent<SpriteFollowMouse>().enabled = false;
+        towerToPlace.GetComponent<BoxCollider2D>().enabled = true;
         towerToPlace.transform.position = tilePosition;
         tile.placedTower = towerToPlace;
         towerToPlace.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        towerToPlace.GetComponent<Tower>().rotateStarted = true;
+        towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
         towerToPlace = null;
         
     }

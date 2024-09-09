@@ -34,37 +34,43 @@ public class GridManager : MonoBehaviour
     //grid parent where we will spawn tiles 
     public Transform gridParent;
 
+    bool squareInit = false;
+    int squareTick = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        InitGrid();
+        //InitGrid();
     }
 
     //play this at the start
     public void InitGrid()
     {
-        GenerateGrid();
-    }
+        //GenerateGrid();
+        float y = 0;
+        float x = 0;
 
-    //generate a grid based off width and height
-    void GenerateGrid()
-    {
-        for (int x = 0; x < width; x++)
+        //at start iterate through tiles to allow offset color then after set width change the offset so they make checkered pattern
+        foreach(Transform child in gridParent)
         {
-            for (int y = 0; y < height; y++)
+            if(y != child.position.y)
             {
-                var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y,0), Quaternion.identity, gridParent);
-                spawnedTile.name = $"Tile {x} {y}";
-
-                var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                spawnedTile.Init(isOffset, x, y);
-
+                squareInit = !squareInit;
+                y = child.position.y;
+                x = child.position.x;
             }
-        }
+            squareInit = !squareInit;
+            if (child.position.x != x)
+            {
+                squareInit = !squareInit;
+                x = child.position.x;
+                x += 1;
+                //return;
+            }
+            child.GetComponent<Tile>().Init(squareInit);
 
-        //adjust camera to the middle of the grid
-        Camera.main.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
+        }
     }
 
     // Update is called once per frame

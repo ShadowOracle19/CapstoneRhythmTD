@@ -5,17 +5,16 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] public int _x, _z;
     [SerializeField] private Color _baseColor, _offsetColor;
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
 
     [SerializeField] public GameObject placedTower;
 
-    public void Init(bool isOffset, int x, int z)
+    //when init is called offset color based off true or false
+    //todo: look into if levels arent retangular and are at different shapes
+    public void Init(bool isOffset)
     {
-        _x = x;
-        _z = z;
         _renderer.color = isOffset ? _offsetColor : _baseColor;
     }
 
@@ -27,6 +26,8 @@ public class Tile : MonoBehaviour
             _highlight.SetActive(false);
             TowerManager.Instance.isTowerHovering = false;
         }
+
+        
     }
     
     //mouse hovers over tile

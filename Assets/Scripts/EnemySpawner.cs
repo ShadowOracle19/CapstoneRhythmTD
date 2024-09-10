@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity);
 
             enemy.GetComponent<Enemy>().path = path;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
 
     }

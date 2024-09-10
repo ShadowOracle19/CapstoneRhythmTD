@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6026861393989481482}
   - component: {fileID: 6026861393989481483}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6026861394526949737}
   - component: {fileID: 6026861394526949739}
   - component: {fileID: 8747713961684648156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

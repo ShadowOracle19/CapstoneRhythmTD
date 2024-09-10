@@ -15,4 +15,12 @@ public class Projectile : MonoBehaviour
 
         //transform.Translate(transform.forward * 20 * Time.deltaTime);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().Damage(1);
+        }
+    }
 }

@@ -10,6 +10,10 @@ public class EnemySpawner : MonoBehaviour
     public bool startOnce = false;
     public GameObject enemyPrefab;
 
+    public int numberOfEnemiesToSpawn = 0;
+
+    public Transform enemyParent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,29 +25,39 @@ public class EnemySpawner : MonoBehaviour
     {
         path = gameObject.GetComponent<AIPath>().path.vectorPath;
 
-        if(path != null)
-        {
-            StartSpawningEnemies();
-        }
     }
 
     public void StartSpawningEnemies()
     {
         if(!startOnce)
         {
-            StartCoroutine("SpawnEnemyOnTick");
+            //StartCoroutine("SpawnEnemyOnTick");
             startOnce = true;
         }
     }
 
-    IEnumerator SpawnEnemyOnTick()
+    // Just an example OnTick here
+    void OnTick()
     {
-        while (true)
+        if (path.Count != 0)
         {
-            GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity);
+            Debug.Log("EnemySpawnerTick");
+            // GetComponent<AudioSource>().Play();
+            GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
 
             enemy.GetComponent<Enemy>().path = path;
-            yield return new WaitForSeconds(0.1f);
+        }
+        
+    }
+
+    IEnumerator SpawnEnemyOnTick()
+    {
+        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
+
+            enemy.GetComponent<Enemy>().path = path;
+            yield return new WaitForSeconds(1f);
         }
 
     }

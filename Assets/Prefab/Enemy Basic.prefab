@@ -137,7 +137,8 @@ MonoBehaviour:
   path: []
   speed: 0.05
   currentPositionHolder: {x: 0, y: 0, z: 0}
-  move: 0
+  move: 1
+  health: 5
 --- !u!1 &663426221981257777
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: []
-  speed: 0.05
+  speed: 1
   currentPositionHolder: {x: 0, y: 0, z: 0}
-  move: 0
+  move: 1
   health: 5
 --- !u!61 &79028663795836632
 BoxCollider2D:

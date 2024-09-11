@@ -28,6 +28,12 @@ public class Tower : MonoBehaviour
         //FireProjectile();
     }
 
+    void OnTick()
+    {
+        FireProjectile();
+        Debug.Log("Tower Shoot Movement");
+    }
+
     private void RotateTowerOnPlace()
     {
         //rotate
@@ -52,7 +58,7 @@ public class Tower : MonoBehaviour
                 rotateOnce = true;
                 rotationSelect.SetActive(false);
 
-                StartCoroutine("TestFire");
+                //StartCoroutine("TestFire");
             }
         }
     }
@@ -62,21 +68,21 @@ public class Tower : MonoBehaviour
         if (!rotateOnce) return;
 
 
-        GameObject bullet = Instantiate(projectile, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(projectile, gameObject.transform.position, Quaternion.identity, GameManager.Instance.globelParent);
 
-        bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed);
+        //bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed);
     }
 
-    IEnumerator TestFire()
-    {
-        while(true)
-        {
-            GameObject bullet = Instantiate(projectile, firePoint.position, Quaternion.identity);
+    //IEnumerator TestFire()
+    //{
+    //    while(true)
+    //    {
+    //        GameObject bullet = Instantiate(projectile, firePoint.position, Quaternion.identity);
 
-            bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed);
-            yield return new WaitForSeconds(1);
-        }
+    //        bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed);
+    //        yield return new WaitForSeconds(1);
+    //    }
         
-    }
+    //}
 
 }

@@ -19,14 +19,15 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         //GetComponent<AIPath>().path.vectorPath
-        currentPositionHolder = gameObject.transform.position;
+        if (path.Count == 0) gameObject.SetActive(false);
+        currentPositionHolder = path[currentNode += 1];
+        move = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //if (!move) return;
+        if (!move) return;
 
         timer += Time.deltaTime * speed;
         if(gameObject.transform.position != currentPositionHolder)
@@ -37,10 +38,22 @@ public class Enemy : MonoBehaviour
         {
             if(currentNode < path.Count - 1)
             {
+                move = false;
                 currentNode++;
                 CheckNode();
             }
         }
+    }
+
+    void OnTick()
+    {
+        move = true;
+        Debug.Log("Enemy Movement");
+    }
+
+    void Movement()
+    {
+
     }
 
     void CheckNode()

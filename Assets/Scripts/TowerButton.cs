@@ -5,7 +5,9 @@ using UnityEngine;
 public class TowerButton : MonoBehaviour
 {
     [SerializeField] public GameObject tower;
-    
+
+    public Transform parent;
+
     public void PressTowerButton()
     {
         if(TowerManager.Instance.towerToPlace != null)
@@ -13,7 +15,7 @@ public class TowerButton : MonoBehaviour
             Destroy(TowerManager.Instance.towerToPlace);
         }
 
-        GameObject _tower = Instantiate(tower);
+        GameObject _tower = Instantiate(tower, parent);
         TowerManager.Instance.towerToPlace = _tower;
     }
 }

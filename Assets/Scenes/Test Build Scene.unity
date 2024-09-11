@@ -1342,6 +1342,7 @@ GameObject:
   - component: {fileID: 229527091}
   - component: {fileID: 229527090}
   - component: {fileID: 229527092}
+  - component: {fileID: 229527093}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1394,6 +1395,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerToPlace: {fileID: 0}
   isTowerHovering: 0
+--- !u!114 &229527093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229527089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ef574441cdda049a5c39cd5869aadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globelParent: {fileID: 1300826009}
 --- !u!1001 &240043332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8075,7 +8089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4748003607fa834e8710575d082637d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 60
+  bpm: 120
 --- !u!4 &1300826009
 Transform:
   m_ObjectHideFlags: 0
@@ -12454,7 +12468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &6612042896285204255
 PrefabInstance:
   m_ObjectHideFlags: 0

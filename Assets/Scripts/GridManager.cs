@@ -41,7 +41,7 @@ public class GridManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //InitGrid();
+        InitGrid();
     }
 
     //play this at the start
@@ -58,16 +58,8 @@ public class GridManager : MonoBehaviour
             {
                 squareInit = !squareInit;
                 y = child.position.y;
-                x = child.position.x;
             }
             squareInit = !squareInit;
-            if (child.position.x != x)
-            {
-                squareInit = !squareInit;
-                x = child.position.x;
-                x += 1;
-                //return;
-            }
             child.GetComponent<Tile>().Init(squareInit);
 
         }

@@ -11,6 +11,9 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
 
     public int numberOfEnemiesToSpawn = 0;
+    int currentNumberOfEnemiesSpawned = 0;
+
+    
 
     public Transform enemyParent;
 
@@ -24,6 +27,8 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         path = gameObject.GetComponent<AIPath>().path.vectorPath;
+        GetComponent<LineRenderer>().positionCount = path.Count;
+        GetComponent<LineRenderer>().SetPositions(path.ToArray());
 
     }
 
@@ -39,6 +44,8 @@ public class EnemySpawner : MonoBehaviour
     // Just an example OnTick here
     void OnTick()
     {
+        if (currentNumberOfEnemiesSpawned == numberOfEnemiesToSpawn) return;
+
         if (path.Count != 0)
         {
             Debug.Log("EnemySpawnerTick");
@@ -46,19 +53,20 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
 
             enemy.GetComponent<Enemy>().path = path;
+            currentNumberOfEnemiesSpawned += 1;
         }
         
     }
 
-    IEnumerator SpawnEnemyOnTick()
-    {
-        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
-        {
-            GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
+    //IEnumerator SpawnEnemyOnTick()
+    //{
+    //    for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+    //    {
+    //        GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
 
-            enemy.GetComponent<Enemy>().path = path;
-            yield return new WaitForSeconds(1f);
-        }
+    //        enemy.GetComponent<Enemy>().path = path;
+    //        yield return new WaitForSeconds(1f);
+    //    }
 
-    }
+    //}
 }

@@ -12,7 +12,10 @@ public class Tower : MonoBehaviour
     public Transform firePoint;
     public GameObject projectile;
 
+
+    [Header("Tower Statistics")]
     public int bulletSpeed;
+    public int range;
 
     // Start is called before the first frame update
     void Start()
@@ -69,8 +72,7 @@ public class Tower : MonoBehaviour
 
 
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, Quaternion.identity, GameManager.Instance.globelParent);
-
-        //bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed);
+        bullet.GetComponent<Projectile>().bulletRange = range;
     }
 
     //IEnumerator TestFire()

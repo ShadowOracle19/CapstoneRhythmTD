@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     float timer;
     bool canMove = false;
     Vector3 nextPosition;
+    public int bulletRange = 0;
+    int activeTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (!canMove) return;
         //transform.Translate(transform.right * 20 * Time.deltaTime);
         timer += Time.deltaTime * speed;
@@ -36,6 +39,8 @@ public class Projectile : MonoBehaviour
     void OnTick()
     {
         canMove = true;
+        activeTime += 1;
+        if (activeTime == bulletRange) Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

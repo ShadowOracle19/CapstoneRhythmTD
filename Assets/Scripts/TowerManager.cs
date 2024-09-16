@@ -26,8 +26,8 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] public GameObject towerToPlace;
-    [SerializeField] public bool isTowerHovering = false;
+    public GameObject towerToPlace;
+    public bool isTowerHovering = false;
 
     // Start is called before the first frame update
     void Start()
@@ -48,9 +48,6 @@ public class TowerManager : MonoBehaviour
         {
             DeleteHeldTower();
         }
-
-        
-
     }
 
     public void PlaceTower(Vector3 tilePosition, Tile tile)
@@ -62,6 +59,9 @@ public class TowerManager : MonoBehaviour
         towerToPlace.GetComponent<SpriteRenderer>().sortingOrder = 2;
         towerToPlace.GetComponent<Tower>().rotateStarted = true;
         towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
+
+        Conductor.Instance._intervals.Add(towerToPlace.GetComponent<Tower>().interval); 
+
         towerToPlace = null;
         
     }
@@ -71,4 +71,6 @@ public class TowerManager : MonoBehaviour
         Destroy(towerToPlace);
         towerToPlace = null;
     }
+
+
 }

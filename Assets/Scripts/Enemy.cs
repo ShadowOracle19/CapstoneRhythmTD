@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
 
     public int health = 5;
 
+    public Intervals interval;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,24 +30,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (!move) return;
+        Movement();
 
-        timer += Time.deltaTime * speed;
-        if(gameObject.transform.position != currentPositionHolder)
-        {
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentPositionHolder, timer);
-        }
-        else
-        {
-            if(currentNode < path.Count - 1)
-            {
-                move = false;
-                currentNode++;
-                CheckNode();
-            }
-        }
+
     }
 
-    void OnTick()
+    public void OnTick()
     {
         move = true;
         Debug.Log("Enemy Movement");
@@ -53,7 +43,20 @@ public class Enemy : MonoBehaviour
 
     void Movement()
     {
-
+        timer += Time.deltaTime * speed;
+        if (gameObject.transform.position != currentPositionHolder)
+        {
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentPositionHolder, timer);
+        }
+        else
+        {
+            if (currentNode < path.Count - 1)
+            {
+                move = false;
+                currentNode++;
+                CheckNode();
+            }
+        }
     }
 
     void CheckNode()
@@ -67,6 +70,7 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
+            Conductor.Instance._intervals.Remove(interval);
             Destroy(gameObject);
         }
     }

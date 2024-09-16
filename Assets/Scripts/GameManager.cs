@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public Transform globelParent;
+    public Transform projectileParent;
 
     // Start is called before the first frame update
     void Start()

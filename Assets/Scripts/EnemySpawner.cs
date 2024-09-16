@@ -42,15 +42,15 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // Just an example OnTick here
-    void OnTick()
+    public void OnTick()
     {
         if (currentNumberOfEnemiesSpawned == numberOfEnemiesToSpawn) return;
 
         if (path.Count != 0)
         {
             Debug.Log("EnemySpawnerTick");
-            // GetComponent<AudioSource>().Play();
             GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
+            Conductor.Instance._intervals.Add(enemy.GetComponent<Enemy>().interval);
 
             enemy.GetComponent<Enemy>().path = path;
             currentNumberOfEnemiesSpawned += 1;
@@ -58,15 +58,4 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    //IEnumerator SpawnEnemyOnTick()
-    //{
-    //    for (int i = 0; i < numberOfEnemiesToSpawn; i++)
-    //    {
-    //        GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
-
-    //        enemy.GetComponent<Enemy>().path = path;
-    //        yield return new WaitForSeconds(1f);
-    //    }
-
-    //}
 }

@@ -7,10 +7,12 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 1;
     float timer;
-    bool canMove = false;
+    public bool canMove = false;
     Vector3 nextPosition;
     public int bulletRange = 0;
     int activeTime;
+
+    public Intervals interval;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,11 +38,16 @@ public class Projectile : MonoBehaviour
         
     }
 
-    void OnTick()
+    public void OnTick()
     {
         canMove = true;
         activeTime += 1;
-        if (activeTime == bulletRange) Destroy(gameObject);
+        if (activeTime == bulletRange)
+        {
+            Conductor.Instance._intervals.Remove(interval);
+            Destroy(gameObject);
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

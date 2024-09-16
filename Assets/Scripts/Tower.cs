@@ -14,6 +14,7 @@ public class Tower : MonoBehaviour
 
     public Intervals interval;
 
+    private int direction;
 
     [Header("Tower Statistics")]
     public int bulletSpeed;
@@ -71,10 +72,11 @@ public class Tower : MonoBehaviour
     public void FireProjectile()
     {
         if (!rotateOnce) return;
+        
 
-
-        GameObject bullet = Instantiate(projectile, gameObject.transform.position, Quaternion.identity, GameManager.Instance.projectileParent);
+        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet.GetComponent<Projectile>().bulletRange = range;
+        bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
         bullet.GetComponent<Projectile>().interval._steps = interval._steps;
         Conductor.Instance._intervals.Add(bullet.GetComponent<Projectile>().interval);
     }

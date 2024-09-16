@@ -12,11 +12,13 @@ public class Projectile : MonoBehaviour
     public int bulletRange = 0;
     int activeTime;
 
+    public GameObject towerFiredFrom;
+
     public Intervals interval;
     // Start is called before the first frame update
     void Start()
     {
-        nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+        nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z) + transform.right;
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+            nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z) + transform.right;
             canMove = false;
         }
         

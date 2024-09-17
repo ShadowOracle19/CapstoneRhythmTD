@@ -70,8 +70,13 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
-            Conductor.Instance._intervals.Remove(interval);
-            Destroy(gameObject);
+            Kill();
         }
+    }
+
+    public void Kill()
+    {
+        Conductor.Instance._intervals.Remove(interval);
+        Destroy(gameObject);
     }
 }

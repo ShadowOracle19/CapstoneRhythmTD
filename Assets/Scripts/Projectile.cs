@@ -57,6 +57,9 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().Damage(1);
+
+            Conductor.Instance._intervals.Remove(interval);
+            Destroy(gameObject);
         }
     }
 }

@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
 
     public int numberOfEnemiesToSpawn = 0;
-    int currentNumberOfEnemiesSpawned = 0;
+    public int currentNumberOfEnemiesSpawned = 0;
 
     
 
@@ -51,9 +51,9 @@ public class EnemySpawner : MonoBehaviour
     public void OnTick()
     {
         if (!startOnce) return;
-        if (currentNumberOfEnemiesSpawned == numberOfEnemiesToSpawn) return;
+        if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn) return;
 
-        if (path.Count != 0)
+        if (placedPath.Count != 0)
         {
             Debug.Log("EnemySpawnerTick");
             GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);

@@ -78,7 +78,7 @@ public class Conductor : MonoBehaviour
 
     private void Update()
     {
-        foreach(Intervals interval in _intervals)
+        foreach(Intervals interval in _intervals.ToArray())
         {
             float sampledTime = (_audioSource.timeSamples / (_audioSource.clip.frequency * interval.GetIntervalLength(_bpm)));
             interval.CheckForNewInterval(sampledTime);

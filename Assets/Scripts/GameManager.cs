@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     public Transform globelParent;
     public Transform projectileParent;
 
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject winScreen;
+    [SerializeField] private GameObject conductor;
+
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private int _maxHealth = 5;
     [SerializeField] private int _currentHealth = 0;
@@ -56,7 +60,21 @@ public class GameManager : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            Debug.Log("Game Over");
+            GameOver();
         }
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+        gameOverScreen.SetActive(true);
+        conductor.SetActive(false);
+    }
+
+    public void WinLevel()
+    {
+        Debug.Log("Game Over");
+        winScreen.SetActive(true);
+        conductor.SetActive(false);
     }
 }

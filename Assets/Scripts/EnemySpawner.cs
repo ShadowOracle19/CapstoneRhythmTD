@@ -15,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     public int numberOfEnemiesToSpawn = 0;
     public int currentNumberOfEnemiesSpawned = 0;
 
+    public bool allEnemiesSpawned = false;
+
     
 
     public Transform enemyParent;
@@ -51,7 +53,12 @@ public class EnemySpawner : MonoBehaviour
     public void OnTick()
     {
         if (!startOnce) return;
-        if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn) return;
+        if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn)
+        {
+            allEnemiesSpawned = true;
+            return;
+        }
+            
 
         if (placedPath.Count != 0)
         {

@@ -34,7 +34,16 @@ public class ChangeScene : MonoBehaviour
             EditorSceneManager.OpenScene($"Assets/Scenes/Test Build Scene.unity", OpenSceneMode.Single);
         }
     }
-    
-    
+
+    [MenuItem("SonorantStudios/Scenes/Dialogue test")]
+    static void LoadDialogueTestScene()
+    {
+        if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+        {
+            EditorSceneManager.OpenScene($"Assets/Scenes/Dialogue Test Scene.unity", OpenSceneMode.Single);
+        }
+    }
+
+
 
 }

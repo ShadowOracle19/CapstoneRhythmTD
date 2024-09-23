@@ -17,6 +17,10 @@ public class Enemy : MonoBehaviour
 
     public Intervals interval;
 
+
+    float time = 1;
+    [SerializeField] private SpriteRenderer _renderer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +36,8 @@ public class Enemy : MonoBehaviour
         if (!move) return;
         Movement();
 
-
+        time -= Time.deltaTime * 2;
+        _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
     }
 
     public void OnTick()
@@ -67,6 +72,9 @@ public class Enemy : MonoBehaviour
 
     public void Damage(int damage)
     {
+        _renderer.color = Color.red;
+        time = 1;
+        Debug.Log(gameObject.name + " damaged");
         health -= damage;
         if(health <= 0)
         {

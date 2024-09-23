@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+
     public bool rotateStarted = false;
     public bool rotateOnce = false;
 
@@ -16,9 +17,14 @@ public class Tower : MonoBehaviour
 
     private int direction;
 
+    [SerializeField] public RaycastHit2D[] colliders;
+
     [Header("Tower Statistics")]
     public int bulletSpeed;
     public int range;
+    //AOE
+    public bool AOE = false;
+    [SerializeField] private GameObject AOERange;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +36,12 @@ public class Tower : MonoBehaviour
     void Update()
     {
         RotateTowerOnPlace();
-
-        //FireProjectile();
+        //if(AOE) AOERange.SetActive(false);
     }
 
     void OnTick()
     {
-        FireProjectile();
+        Fire();
         Debug.Log("Tower Shoot Movement");
     }
 
@@ -69,10 +74,28 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void FireProjectile()
+    public void Fire()
     {
         if (!rotateOnce) return;
         
+        if(AOE)
+        {
+            colliders = Physics2D.BoxCastAll(transform.position, new Vector2(2, 2), 0, transform.forward);
+
+            foreach (var item in colliders)
+            {
+                if(item.transform.CompareTag("StageTile"))
+                {
+                    item.transform.GetComponent<Tile>().Pulse(Color.red);
+                }
+                else if(item.transform.CompareTag("Enemy"))
+                {
+                    item.transform.GetComponent<Enemy>().Damage(1);
+                }
+            }
+            colliders = null;
+            return;
+        }
 
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet.GetComponent<Projectile>().bulletRange = range;

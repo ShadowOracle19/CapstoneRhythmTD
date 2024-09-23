@@ -15274,7 +15274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb6b160d8e08cc47b85946d7f48e705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnDelay: 10
+  enemySpawnDelay: 0
   timeRemaining: 0
   spawnerDelayRunning: 0
   allEnemiesSpawned: 0

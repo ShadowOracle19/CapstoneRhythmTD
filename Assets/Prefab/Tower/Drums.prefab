@@ -805,7 +805,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1202811070454382304}
           m_TargetAssemblyTypeName: Tower, Assembly-CSharp
-          m_MethodName: FireProjectile
+          m_MethodName: Fire
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -817,6 +817,8 @@ MonoBehaviour:
           m_CallState: 2
   bulletSpeed: 200
   range: 5
+  AOE: 1
+  AOERange: {fileID: 0}
 --- !u!1 &2958165086469427499
 GameObject:
   m_ObjectHideFlags: 0

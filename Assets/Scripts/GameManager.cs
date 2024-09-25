@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject conductor;
 
     [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private int _maxHealth = 5;
-    [SerializeField] private int _currentHealth = 0;
+    [SerializeField] public int _maxHealth = 5;
+    [SerializeField] public int _currentHealth = 0;
 
     // Start is called before the first frame update
     void Start()

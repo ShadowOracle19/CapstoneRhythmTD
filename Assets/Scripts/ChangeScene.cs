@@ -11,6 +11,11 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("Test Build Scene");
     }
+    
+    public void MainMenuLoad()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 
     public void QuitGame()
     {

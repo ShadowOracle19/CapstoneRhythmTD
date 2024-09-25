@@ -88,4 +88,11 @@ public class Enemy : MonoBehaviour
         CombatManager.Instance.enemyTotal -= 1;
         Destroy(gameObject);
     }
+
+    public void ReachedEnd()
+    {
+        Conductor.Instance._intervals.Remove(interval);
+        CombatManager.Instance.enemyTotal -= 1;
+        gameObject.SetActive(false);
+    }
 }

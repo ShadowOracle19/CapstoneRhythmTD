@@ -60,7 +60,7 @@ public class CombatManager : MonoBehaviour
             }
         }
 
-        if(allEnemiesSpawned && enemyTotal == 0)
+        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0)
         {
             GameManager.Instance.WinLevel();
         }

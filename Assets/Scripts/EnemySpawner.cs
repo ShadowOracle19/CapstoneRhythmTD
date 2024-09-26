@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
     // Just an example OnTick here
     public void OnTick()
     {
-        if (!startOnce) return;
+        if (!startOnce || GameManager.Instance.isGamePaused) return;
         if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn)
         {
             allEnemiesSpawned = true;

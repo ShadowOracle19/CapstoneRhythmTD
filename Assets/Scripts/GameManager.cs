@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int _maxHealth = 5;
     [SerializeField] public int _currentHealth = 0;
 
+    [SerializeField] public bool isGamePaused = false;
+    [SerializeField] private GameObject pauseMenu;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +50,22 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Health();
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            isGamePaused = !isGamePaused;
+
+            //game is paused
+            if(isGamePaused)
+            {
+                PauseGame();
+            }
+            //game is unpaused
+            else
+            {
+                ResumeGame();
+            }
+        }
     }
 
     public void Damage()
@@ -63,6 +82,23 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
     }
+
+    public void PauseGame()
+    {
+        isGamePaused = true;
+        pauseMenu.SetActive(true);
+        conductor.SetActive(false);
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        isGamePaused = false;
+        pauseMenu.SetActive(false);
+        conductor.SetActive(true);
+        Time.timeScale = 1;
+    }
+
 
     public void GameOver()
     {

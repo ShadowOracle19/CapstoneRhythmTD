@@ -32,15 +32,24 @@ public class CombatManager : MonoBehaviour
     public int enemyTotal = 0;
     [SerializeField] private List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
 
+    public CombatMaker currentEncounter;
+
     // Start is called before the first frame update
     void Start()
     {
         timeRemaining = enemySpawnDelay;
         spawnerDelayRunning = true;
+    }
+
+    //play this when loading up an encounter
+    public void LoadEncounter(CombatMaker encounter)
+    {
+        currentEncounter = encounter;
+        enemyTotal = currentEncounter.enemyTotal;
 
         foreach (var spawner in enemySpawners)
         {
-            enemyTotal += spawner.numberOfEnemiesToSpawn;
+            spawner.numberOfEnemiesToSpawn = enemyTotal;
         }
     }
 
@@ -65,9 +74,15 @@ public class CombatManager : MonoBehaviour
             GameManager.Instance.WinLevel();
         }
 
+        //delays enemy spawning
+        DelayTimer();
+    }
+
+    void DelayTimer()
+    {
         if (spawnerDelayRunning)
         {
-            if(timeRemaining > 0)
+            if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
             }

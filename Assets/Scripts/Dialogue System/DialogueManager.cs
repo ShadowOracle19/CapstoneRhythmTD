@@ -30,10 +30,12 @@ public class DialogueManager : MonoBehaviour
 
     public DialogueList myDialogue = new DialogueList();
 
+    public GameObject dialogueBox;
+    Coroutine typing;
+
     // Start is called before the first frame update
     void Start()
     {
-        LoadDialogue();
     }
 
 
@@ -43,8 +45,10 @@ public class DialogueManager : MonoBehaviour
         
     }
 
-    public void LoadDialogue()
+    public void LoadDialogue(TextAsset desiredDialogue)
     {
+        currentDialogue = desiredDialogue;
+        dialogueBox.SetActive(true);
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);
         index = 0;
         _speakerName.text = string.Empty;
@@ -69,11 +73,13 @@ public class DialogueManager : MonoBehaviour
         {
             index++;
             _dialogue.text = string.Empty;
-            StartCoroutine(TypeLine());
+            typing = StartCoroutine(TypeLine());
         }
         else //dialogue finished
         {
             //end dialogue
+            StopCoroutine(typing);
+            dialogueBox.SetActive(false);
             return;
         }
     }

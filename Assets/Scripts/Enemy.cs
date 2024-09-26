@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
     public void OnTick()
     {
         move = true;
-        Debug.Log("Enemy Movement");
+        //Debug.Log("Enemy Movement");
     }
 
     void Movement()

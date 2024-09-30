@@ -3282,6 +3282,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 318046281}
   winScreen: {fileID: 716715260}
   conductor: {fileID: 1300826007}
+  settings: {fileID: 648745825}
   healthText: {fileID: 25996096}
   _maxHealth: 5
   _currentHealth: 0

@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject conductor;
+    [SerializeField] private GameObject settings;
 
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] public int _maxHealth = 5;
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
         pauseMenu.SetActive(false);
         conductor.SetActive(true);
+        settings.SetActive(false);
         Time.timeScale = 1;
     }
 

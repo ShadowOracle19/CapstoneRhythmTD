@@ -9,7 +9,7 @@ public class ChangeScene : MonoBehaviour
 {
     public void MainScenePlay()
     {
-        SceneManager.LoadScene("Test Build Scene");
+        SceneManager.LoadScene("Game Scene");
     }
     
     public void MainMenuLoad()
@@ -31,23 +31,15 @@ public class ChangeScene : MonoBehaviour
         }
     }
 
-    [MenuItem("SonorantStudios/Scenes/Test Build Scene")]
+    [MenuItem("SonorantStudios/Scenes/Game Scene")]
     static void LoadBuildScene()
     {
         if(EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
         {
-            EditorSceneManager.OpenScene($"Assets/Scenes/Test Build Scene.unity", OpenSceneMode.Single);
+            EditorSceneManager.OpenScene($"Assets/Scenes/Game Scene.unity", OpenSceneMode.Single);
         }
     }
 
-    [MenuItem("SonorantStudios/Scenes/Dialogue test")]
-    static void LoadDialogueTestScene()
-    {
-        if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
-        {
-            EditorSceneManager.OpenScene($"Assets/Scenes/Dialogue Test Scene.unity", OpenSceneMode.Single);
-        }
-    }
 
 
 

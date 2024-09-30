@@ -11,7 +11,7 @@ public class SettingsManager : MonoBehaviour
 
 
     //Video
-
+    [SerializeField] private TextMeshProUGUI resolutionDropDown;
 
     [Header("Audio")] 
     [SerializeField] private AudioMixer masterAudioMixer;
@@ -37,10 +37,37 @@ public class SettingsManager : MonoBehaviour
         Volume();
     }
 
+    //Audio Setting Function
     void Volume()
     {
         masterAudioMixer.SetFloat("_masterVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
         masterAudioMixer.SetFloat("_musicVolume", Mathf.Log10(musicVolumeSlider.value) * 20);
         masterAudioMixer.SetFloat("_SFXVolume", Mathf.Log10(sfxVolumeSlider.value) * 20);
+    }
+
+
+    //Video Setting functions
+    public void HandleDropdownData(int num)
+    {
+        //1920x1080
+        if(num == 0)
+        {
+            SetGameResolution(new Vector2(1920, 1080));
+        }
+        //1280x720
+        else if (num == 1)
+        {
+            SetGameResolution(new Vector2(1280, 720));
+        }
+        //800x600
+        else if (num == 2)
+        {
+            SetGameResolution(new Vector2(960, 540));
+        }
+    }
+
+    void SetGameResolution(Vector2 resolution)
+    {
+        Screen.SetResolution((int)resolution.x, (int)resolution.y, true);
     }
 }

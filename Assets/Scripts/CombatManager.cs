@@ -34,22 +34,53 @@ public class CombatManager : MonoBehaviour
 
     public CombatMaker currentEncounter;
 
+    [SerializeField] private Transform enemiesParent;
+    [SerializeField] private Transform towersParent;
+    [SerializeField] private Transform projectilesParent;
+
     // Start is called before the first frame update
     void Start()
     {
-        timeRemaining = enemySpawnDelay;
-        spawnerDelayRunning = true;
+    }
+
+    public void RestartEncounter()
+    {
+        LoadEncounter(currentEncounter);
     }
 
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
+        GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
+        Conductor.Instance.gameObject.SetActive(true);
+        timeRemaining = enemySpawnDelay;
+        spawnerDelayRunning = true;
+        allEnemiesSpawned = false;
         currentEncounter = encounter;
         enemyTotal = currentEncounter.enemyTotal;
 
         foreach (var spawner in enemySpawners)
         {
             spawner.numberOfEnemiesToSpawn = enemyTotal;
+        }
+    }
+
+    public void EndEncounter()
+    {
+        //remove enemies
+        foreach (Transform child in enemiesParent)
+        {
+            child.gameObject.GetComponent<Enemy>().RemoveEnemy();
+        }
+        //remove towers
+        foreach (Transform child in towersParent)
+        {
+            child.gameObject.GetComponent<Tower>().RemoveTower();
+        }
+        //remove enemies
+        foreach (Transform child in projectilesParent)
+        {
+            child.gameObject.GetComponent<Projectile>().RemoveProjectile();
         }
     }
 

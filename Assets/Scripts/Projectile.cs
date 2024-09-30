@@ -46,9 +46,7 @@ public class Projectile : MonoBehaviour
         activeTime += 1;
         if (activeTime == bulletRange)
         {
-            Conductor.Instance._intervals.Remove(interval);
-            Destroy(gameObject);
-
+            RemoveProjectile();
         }
     }
 
@@ -58,8 +56,11 @@ public class Projectile : MonoBehaviour
         {
             collision.GetComponent<Enemy>().Damage(1);
 
-            Conductor.Instance._intervals.Remove(interval);
-            Destroy(gameObject);
+            RemoveProjectile();
         }
+    }
+    public void RemoveProjectile()
+    {
+        Conductor.Instance.RemoveInterval(interval, gameObject);
     }
 }

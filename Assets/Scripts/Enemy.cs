@@ -84,15 +84,13 @@ public class Enemy : MonoBehaviour
 
     public void Kill()
     {
-        Conductor.Instance._intervals.Remove(interval);
         CombatManager.Instance.enemyTotal -= 1;
-        Destroy(gameObject);
+        RemoveEnemy();
     }
 
-    public void ReachedEnd()
+
+    public void RemoveEnemy()
     {
-        Conductor.Instance._intervals.Remove(interval);
-        CombatManager.Instance.enemyTotal -= 1;
-        gameObject.SetActive(false);
+        Conductor.Instance.RemoveInterval(interval, gameObject);
     }
 }

@@ -43,6 +43,12 @@ public class Conductor : MonoBehaviour
         }
     }
 
+    public void RemoveInterval(Intervals interval, GameObject gameObject)
+    {
+        _intervals.Remove(interval);
+        Destroy(gameObject);
+    }
+
 }
 
 [System.Serializable]

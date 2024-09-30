@@ -104,6 +104,11 @@ public class Tower : MonoBehaviour
         Conductor.Instance._intervals.Add(bullet.GetComponent<Projectile>().interval);
     }
 
+    public void RemoveTower()
+    {
+        Conductor.Instance.RemoveInterval(interval, gameObject);
+    }
+
     //IEnumerator TestFire()
     //{
     //    while(true)

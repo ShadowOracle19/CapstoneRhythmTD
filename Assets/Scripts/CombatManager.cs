@@ -62,6 +62,8 @@ public class CombatManager : MonoBehaviour
         foreach (var spawner in enemySpawners)
         {
             spawner.numberOfEnemiesToSpawn = enemyTotal;
+            spawner.startOnce = false;
+            spawner.currentNumberOfEnemiesSpawned = 0;
         }
     }
 

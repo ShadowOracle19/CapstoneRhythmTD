@@ -66,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
             Conductor.Instance._intervals.Add(enemy.GetComponent<Enemy>().interval);
 
-            enemy.GetComponent<Enemy>().path = placedPath;
+            //enemy.GetComponent<Enemy>().path = placedPath;
             currentNumberOfEnemiesSpawned += 1;
         }
         

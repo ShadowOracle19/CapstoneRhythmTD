@@ -69,6 +69,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  nextPosition: {x: 0, y: 0, z: 0}
   _renderer: {fileID: 4349701985587343243}
 --- !u!61 &79028663795836632
 BoxCollider2D:

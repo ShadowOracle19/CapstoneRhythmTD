@@ -35,7 +35,7 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotateTowerOnPlace();
+        //RotateTowerOnPlace();
         //if(AOE) AOERange.SetActive(false);
     }
 
@@ -76,7 +76,7 @@ public class Tower : MonoBehaviour
 
     public void Fire()
     {
-        if (!rotateOnce) return;
+        if (!rotateStarted) return;
         
         if(AOE)
         {

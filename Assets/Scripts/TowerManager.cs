@@ -58,7 +58,7 @@ public class TowerManager : MonoBehaviour
         tile.placedTower = towerToPlace;
         towerToPlace.GetComponent<SpriteRenderer>().sortingOrder = 2;
         towerToPlace.GetComponent<Tower>().rotateStarted = true;
-        towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
+        //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 
         Conductor.Instance._intervals.Add(towerToPlace.GetComponent<Tower>().interval); 
 

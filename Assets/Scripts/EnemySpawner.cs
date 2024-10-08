@@ -35,8 +35,8 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         //path = gameObject.GetComponent<AIPath>().path.vectorPath;
-        GetComponent<LineRenderer>().positionCount = placedPath.Count;
-        GetComponent<LineRenderer>().SetPositions(placedPath.ToArray());
+        //GetComponent<LineRenderer>().positionCount = placedPath.Count;
+        //GetComponent<LineRenderer>().SetPositions(placedPath.ToArray());
 
     }
 
@@ -62,8 +62,10 @@ public class EnemySpawner : MonoBehaviour
 
         if (placedPath.Count != 0)
         {
+            int randSpawn = Random.Range(-1, 2);
+            Debug.Log(randSpawn);
             Debug.Log("EnemySpawnerTick");
-            GameObject enemy = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity, enemyParent);
+            GameObject enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
             Conductor.Instance._intervals.Add(enemy.GetComponent<Enemy>().interval);
 
             //enemy.GetComponent<Enemy>().path = placedPath;

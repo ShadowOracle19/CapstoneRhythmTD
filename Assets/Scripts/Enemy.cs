@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
         if (!move) return;
         Movement();
 
-        time -= Time.deltaTime * 2;
+        time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
     }
 

@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         isGamePaused = true;
         pauseMenu.SetActive(true);
         conductor.SetActive(false);
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        Cursor.lockState = CursorLockMode.None;
         isGamePaused = false;
         pauseMenu.SetActive(false);
         conductor.SetActive(true);
@@ -104,6 +106,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        Cursor.lockState = CursorLockMode.None;
         Debug.Log("Game Over");
         gameOverScreen.SetActive(true);
         conductor.SetActive(false);
@@ -111,6 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void WinLevel()
     {
+        Cursor.lockState = CursorLockMode.None;
         Debug.Log("Game Over");
         winScreen.SetActive(true);
         conductor.SetActive(false);

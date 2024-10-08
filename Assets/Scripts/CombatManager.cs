@@ -65,6 +65,7 @@ public class CombatManager : MonoBehaviour
             spawner.startOnce = false;
             spawner.currentNumberOfEnemiesSpawned = 0;
         }
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void EndEncounter()
@@ -84,6 +85,7 @@ public class CombatManager : MonoBehaviour
         {
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
         }
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame

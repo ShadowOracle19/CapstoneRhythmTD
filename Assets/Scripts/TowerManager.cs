@@ -66,6 +66,21 @@ public class TowerManager : MonoBehaviour
         
     }
 
+    public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile)
+    {
+        GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity);
+        _tower.GetComponent<SpriteFollowMouse>().enabled = false;
+        _tower.GetComponent<BoxCollider2D>().enabled = true;
+        _tower.transform.position = tilePosition;
+        tile.placedTower = _tower;
+        _tower.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        _tower.GetComponent<Tower>().rotateStarted = true;
+        //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
+
+        Conductor.Instance._intervals.Add(_tower.GetComponent<Tower>().interval);
+    }
+
+
     public void DeleteHeldTower()
     {
         Destroy(towerToPlace);

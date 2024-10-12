@@ -31,8 +31,7 @@ public class CursorTD : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.Space))
         {
-            towerSelectMenuOpened = !towerSelectMenuOpened;
-            placementMenu.SetActive(towerSelectMenuOpened);
+            TogglePlacementMenu();
         }
 
         //on press log which direction needs to be moved
@@ -41,6 +40,7 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TowerManager.Instance.SetTower(SlotW.GetComponent<TowerButton>().tower, transform.position, tile);
+                TogglePlacementMenu();
                 return;
             }
             desiredMovement = Vector3.up;
@@ -50,6 +50,7 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TowerManager.Instance.SetTower(SlotA.GetComponent<TowerButton>().tower, transform.position, tile);
+                TogglePlacementMenu();
                 return;
             }
             desiredMovement = Vector3.left;
@@ -59,6 +60,7 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TowerManager.Instance.SetTower(SlotS.GetComponent<TowerButton>().tower, transform.position, tile);
+                TogglePlacementMenu();
                 return;
             }
             desiredMovement = Vector3.down;
@@ -68,10 +70,17 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TowerManager.Instance.SetTower(SlotD.GetComponent<TowerButton>().tower, transform.position, tile);
+                TogglePlacementMenu();
                 return;
             }
             desiredMovement = Vector3.right;
         }
+    }
+
+    public void TogglePlacementMenu()
+    {
+        towerSelectMenuOpened = !towerSelectMenuOpened;
+        placementMenu.SetActive(towerSelectMenuOpened);
     }
 
     //plays every beat

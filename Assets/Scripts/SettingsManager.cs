@@ -41,8 +41,13 @@ public class SettingsManager : MonoBehaviour
     void Volume()
     {
         masterAudioMixer.SetFloat("_masterVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
+        masterVolumeText.text = Mathf.RoundToInt(masterVolumeSlider.value * 100) + "%";
+
         masterAudioMixer.SetFloat("_musicVolume", Mathf.Log10(musicVolumeSlider.value) * 20);
+        musicVolumeText.text = Mathf.RoundToInt(musicVolumeSlider.value * 100) + "%";
+
         masterAudioMixer.SetFloat("_SFXVolume", Mathf.Log10(sfxVolumeSlider.value) * 20);
+        sfxVolumeText.text = Mathf.RoundToInt(sfxVolumeSlider.value * 100) + "%";
     }
 
 

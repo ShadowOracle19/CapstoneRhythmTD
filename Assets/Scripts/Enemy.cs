@@ -36,16 +36,17 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!move) return;
-        Movement();
-
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
+
+        //if (!move) return;
+        Movement();
+
     }
 
     public void OnTick()
     {
-        move = true;
+        move = false;
         //Debug.Log("Enemy Movement");
     }
 
@@ -79,15 +80,14 @@ public class Enemy : MonoBehaviour
     //fixed direction movement
     public void Movement()
     {
-
         timer += Time.deltaTime * speed;
-        if (gameObject.transform.position != nextPosition)
+        if (gameObject.transform.position != nextPosition && !move)
         {
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, nextPosition, timer);
         }
         else
         {
-            move = false;
+            move = true;
             timer = 0;
             nextPosition = new Vector3(transform.position.x - 1, transform.position.y);
         }

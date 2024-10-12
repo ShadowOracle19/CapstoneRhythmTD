@@ -7112,10 +7112,10 @@ RectTransform:
   - {fileID: 1164532952}
   m_Father: {fileID: 1167487323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 237.78943, y: -565}
+  m_SizeDelta: {x: 395.57886, y: 290}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &694078965
 MonoBehaviour:
@@ -10660,6 +10660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 987591832}
   - component: {fileID: 987591833}
+  - component: {fileID: 987591834}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -10734,6 +10735,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &987591834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987591831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8b9bf2a8c3dba4796182345ce68f78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1006771057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12122,10 +12135,10 @@ RectTransform:
   - {fileID: 366296231}
   m_Father: {fileID: 1167487323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 237.78943, y: -235}
+  m_SizeDelta: {x: 395.57886, y: 290}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1242956589
 MonoBehaviour:
@@ -14580,10 +14593,10 @@ RectTransform:
   - {fileID: 1835674558}
   m_Father: {fileID: 1167487323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 237.78943, y: -895}
+  m_SizeDelta: {x: 395.57886, y: 290}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1536197000
 MonoBehaviour:
@@ -17536,7 +17549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1804208462
 Transform:
   m_ObjectHideFlags: 0
@@ -19773,7 +19786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb6b160d8e08cc47b85946d7f48e705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnDelay: 0
+  enemySpawnDelay: 10
   timeRemaining: 0
   spawnerDelayRunning: 0
   allEnemiesSpawned: 0

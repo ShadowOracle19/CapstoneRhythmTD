@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CursorTD : MonoBehaviour
 {
-    private bool isMoving;
+    public bool isMoving = false;
     private Vector3 originPos, targetPos;
-    private float timeToMove = 0.2f;
+    public float timeToMove = 1f;
+
+    public Vector3 desiredMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -17,48 +20,33 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.anyKey)
-        //{
-        //    switch (Input.inputString)
-        //    {
-        //        case "w":
-        //            transform.position = new Vector3();
-        //            break;
 
-        //        case "a":
-        //            Debug.Log("a");
-        //            break;
-
-        //        case "s":
-        //            Debug.Log("s");
-        //            break;
-
-        //        case "d":
-        //            Debug.Log("d");
-        //            break;
-
-        //        default:
-        //            break;
-        //    }
-        //}
-
+        //on press log which direction needs to be moved
         if(Input.GetKeyUp(KeyCode.W) && !isMoving)
         {
-            StartCoroutine(MovePlayer(Vector3.up));
+            desiredMovement = Vector3.up;
         }
         else if (Input.GetKeyUp(KeyCode.A) && !isMoving)
         {
-            StartCoroutine(MovePlayer(Vector3.left));
+            desiredMovement = Vector3.left;
         }
         else if (Input.GetKeyUp(KeyCode.S) && !isMoving)
         {
-            StartCoroutine(MovePlayer(Vector3.down));
+            desiredMovement = Vector3.down;
         }
         else if (Input.GetKeyUp(KeyCode.D) && !isMoving)
         {
-            StartCoroutine(MovePlayer(Vector3.right));
+            desiredMovement = Vector3.right;
         }
     }
+
+    //plays every beat
+    public void Move()
+    {
+        if (desiredMovement == Vector3.zero) return;
+        StartCoroutine(MovePlayer(desiredMovement));
+    }
+
 
     private IEnumerator MovePlayer(Vector3 direction)
     {
@@ -70,6 +58,14 @@ public class CursorTD : MonoBehaviour
 
         targetPos = originPos + direction;
 
+        //bounding box function
+        if((targetPos.x <= -6 || targetPos.x >= 8) || (targetPos.y <= -2 || targetPos.y >= 1))
+        {
+            isMoving = false;
+            desiredMovement = Vector3.zero;
+            yield break;
+        }
+
         while(elapsedTime < timeToMove)
         {
             transform.position = Vector3.Lerp(originPos, targetPos, elapsedTime / timeToMove);
@@ -80,6 +76,7 @@ public class CursorTD : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
+        desiredMovement = Vector3.zero;
 
         yield return null;
     }

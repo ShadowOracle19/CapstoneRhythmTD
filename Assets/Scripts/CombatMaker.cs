@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Encounter", menuName = "ScriptableObjects/EncounterCreator")]
+[CreateAssetMenu(fileName = "New Combat", menuName = "ScriptableObjects/CombatCreator")]
 public class CombatMaker : ScriptableObject
 {
     public int enemyTotal = 0;

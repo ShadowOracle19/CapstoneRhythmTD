@@ -68,7 +68,7 @@ public class TowerManager : MonoBehaviour
 
     public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile)
     {
-        GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity);
+        GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<SpriteFollowMouse>().enabled = false;
         _tower.GetComponent<BoxCollider2D>().enabled = true;
         _tower.transform.position = tilePosition;

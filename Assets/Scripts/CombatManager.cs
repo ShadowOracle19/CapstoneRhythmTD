@@ -34,14 +34,14 @@ public class CombatManager : MonoBehaviour
 
     public CombatMaker currentEncounter;
 
-    [SerializeField] private Transform enemiesParent;
-    [SerializeField] private Transform towersParent;
-    [SerializeField] private Transform projectilesParent;
+    [SerializeField] public Transform enemiesParent;
+    [SerializeField] public Transform towersParent;
+    [SerializeField] public Transform projectilesParent;
 
     // Start is called before the first frame update
     void Start()
     {
-        LoadEncounter(currentEncounter);
+        //LoadEncounter(currentEncounter);
     }
 
     public void RestartEncounter()
@@ -52,12 +52,12 @@ public class CombatManager : MonoBehaviour
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
+        currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
         Conductor.Instance.gameObject.SetActive(true);
         timeRemaining = enemySpawnDelay;
         spawnerDelayRunning = true;
         allEnemiesSpawned = false;
-        currentEncounter = encounter;
         enemyTotal = currentEncounter.enemyTotal;
 
         foreach (var spawner in enemySpawners)
@@ -87,6 +87,7 @@ public class CombatManager : MonoBehaviour
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
         }
         Cursor.lockState = CursorLockMode.None;
+        GameManager.Instance.winState = false;
     }
 
     // Update is called once per frame

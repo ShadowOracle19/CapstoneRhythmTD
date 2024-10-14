@@ -21,6 +21,27 @@ public class DialogueManager : MonoBehaviour
     }
     #endregion
 
+    #region dont touch this
+    private static DialogueManager _instance;
+    public static DialogueManager Instance
+    {
+        get
+        {
+            if (_instance is null)
+            {
+                Debug.LogError("DialogueManager is NULL");
+            }
+
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+    #endregion
+
     public TextAsset currentDialogue;
 
 
@@ -31,6 +52,10 @@ public class DialogueManager : MonoBehaviour
     public DialogueList myDialogue = new DialogueList();
 
     public GameObject dialogueBox;
+
+    public bool dialogueFinished = false;
+    public GameObject dialogueSystemParent;
+
     Coroutine typing;
 
     // Start is called before the first frame update
@@ -79,7 +104,23 @@ public class DialogueManager : MonoBehaviour
         {
             //end dialogue
             StopCoroutine(typing);
-            dialogueBox.SetActive(false);
+            //dialogue if its going into a combat
+            if(GameManager.Instance.encounterRunning)
+            {
+                GameManager.Instance.combatRoot.SetActive(true);
+                GameManager.Instance.combatRunning = true;
+                CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
+                GameManager.Instance.dialogueRoot.SetActive(false);
+                return;
+            }
+            //dialogue after combat
+            if(GameManager.Instance.winState)
+            {
+                GameManager.Instance.winScreen.SetActive(true);
+                GameManager.Instance.dialogueRoot.SetActive(false);
+            }
+
+            dialogueSystemParent.SetActive(false);
             return;
         }
     }

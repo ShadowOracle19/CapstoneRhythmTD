@@ -30,9 +30,13 @@ public class GameManager : MonoBehaviour
     public Transform projectileParent;
 
     [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private GameObject winScreen;
+    [SerializeField] public GameObject winScreen;
     [SerializeField] private GameObject conductor;
     [SerializeField] private GameObject settings;
+
+    public GameObject combatRoot;
+    public GameObject dialogueRoot;
+    public GameObject menuRoot;
 
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] public int _maxHealth = 5;
@@ -40,6 +44,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public bool isGamePaused = false;
     [SerializeField] private GameObject pauseMenu;
+
+    [SerializeField] public bool combatRunning = false;
+
+    public EncounterCreator currentEncounter;
+    public bool encounterRunning = false;
+    public bool winState = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,23 +60,36 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Health();
-
-        if(Input.GetKeyDown(KeyCode.Escape))
+        //stuff that happens during tower defense gameplay
+        if(combatRunning)
         {
-            isGamePaused = !isGamePaused;
+            Health();
 
-            //game is paused
-            if(isGamePaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                PauseGame();
-            }
-            //game is unpaused
-            else
-            {
-                ResumeGame();
+                isGamePaused = !isGamePaused;
+
+                //game is paused
+                if (isGamePaused)
+                {
+                    PauseGame();
+                }
+                //game is unpaused
+                else
+                {
+                    ResumeGame();
+                }
             }
         }
+        
+    }
+
+    public void LoadEncounter(EncounterCreator encounter)
+    {
+        currentEncounter = encounter;
+        encounterRunning = true;
+        dialogueRoot.SetActive(true);
+        DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
     }
 
     public void Damage()
@@ -114,9 +137,14 @@ public class GameManager : MonoBehaviour
 
     public void WinLevel()
     {
+        if (winState) return;
+        winState = true;
+        encounterRunning = false;
         Cursor.lockState = CursorLockMode.None;
         Debug.Log("Game Over");
-        winScreen.SetActive(true);
+        //winScreen.SetActive(true);
+        dialogueRoot.SetActive(true);
+        DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         conductor.SetActive(false);
     }
 }

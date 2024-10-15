@@ -88,6 +88,7 @@ public class CursorTD : MonoBehaviour
     {
         towerSelectMenuOpened = !towerSelectMenuOpened;
         placementMenu.SetActive(towerSelectMenuOpened);
+        unhighlightPlacementSlot();
     }
 
     public void HighlightPlacementSlot()
@@ -112,6 +113,14 @@ public class CursorTD : MonoBehaviour
             SlotD.GetComponent<SpriteRenderer>().color = Color.yellow;
 
         }
+    }
+
+    public void unhighlightPlacementSlot()
+    {
+        SlotW.GetComponent<SpriteRenderer>().color = Color.white;
+        SlotA.GetComponent<SpriteRenderer>().color = Color.white;
+        SlotS.GetComponent<SpriteRenderer>().color = Color.white;
+        SlotD.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     //plays every beat

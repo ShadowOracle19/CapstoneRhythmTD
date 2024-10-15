@@ -39,9 +39,8 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TowerManager.Instance.SetTower(SlotW.GetComponent<TowerButton>().tower, transform.position, tile);
+                TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
                 SlotW.GetComponent<SpriteRenderer>().color = Color.white;
-                TogglePlacementMenu();
                 return;
             }
             desiredMovement = Vector3.up;
@@ -50,9 +49,8 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TowerManager.Instance.SetTower(SlotA.GetComponent<TowerButton>().tower, transform.position, tile);
+                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
                 SlotA.GetComponent<SpriteRenderer>().color = Color.white;
-                TogglePlacementMenu();
                 return;
             }
             desiredMovement = Vector3.left;
@@ -61,9 +59,8 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TowerManager.Instance.SetTower(SlotS.GetComponent<TowerButton>().tower, transform.position, tile);
+                TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
                 SlotS.GetComponent<SpriteRenderer>().color = Color.white;
-                TogglePlacementMenu();
                 return;
             }
             desiredMovement = Vector3.down;
@@ -72,9 +69,9 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TowerManager.Instance.SetTower(SlotD.GetComponent<TowerButton>().tower, transform.position, tile);
+                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
                 SlotD.GetComponent<SpriteRenderer>().color = Color.white;
-                TogglePlacementMenu();
+                
                 return;
             }
             desiredMovement = Vector3.right;
@@ -82,6 +79,20 @@ public class CursorTD : MonoBehaviour
 
         HighlightPlacementSlot();
         
+    }
+
+    public void TryToPlaceTower(GameObject tower)
+    {
+        if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().resourceCost)
+        {
+            TowerManager.Instance.SetTower(tower, transform.position, tile);
+            CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().resourceCost;
+            TogglePlacementMenu();
+        }
+        else
+        {
+            return;
+        }    
     }
 
     public void TogglePlacementMenu()

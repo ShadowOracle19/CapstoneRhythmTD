@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class DialogueManager : MonoBehaviour
 
     public TextMeshProUGUI _speakerName;
     public TextMeshProUGUI _dialogue;
+    public Image characterImage;
     public int index;
 
     public DialogueList myDialogue = new DialogueList();
@@ -79,16 +81,20 @@ public class DialogueManager : MonoBehaviour
         _speakerName.text = string.Empty;
         _dialogue.text = string.Empty;
 
-        StartCoroutine(TypeLine());
+        typing = StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
+        
+
         foreach (char c in myDialogue.dialogue[index].text.ToCharArray())
         {
+            LoadCharacterSprite();
+
             _speakerName.text = myDialogue.dialogue[index].name;
             _dialogue.text += c;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
@@ -125,6 +131,21 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void LoadCharacterSprite()
+    {
+        var characterSprite = Resources.Load<Sprite>(myDialogue.dialogue[index].name);
+
+        if (characterSprite == null)
+        {
+            characterImage.sprite = Resources.Load<Sprite>("Null");
+        }
+        else
+        {
+
+            characterImage.sprite = characterSprite;
+        }
+    }
+
     public void FinishLine()
     {
         if(_dialogue.text == myDialogue.dialogue[index].text)
@@ -136,6 +157,29 @@ public class DialogueManager : MonoBehaviour
             StopCoroutine(typing);
             _dialogue.text = myDialogue.dialogue[index].text;
         }
+    }
+
+    public void SkipDialogue()
+    {
+        //end dialogue
+        StopCoroutine(typing);
+        //dialogue if its going into a combat
+        if (GameManager.Instance.encounterRunning)
+        {
+            GameManager.Instance.combatRoot.SetActive(true);
+            GameManager.Instance.combatRunning = true;
+            CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
+            GameManager.Instance.dialogueRoot.SetActive(false);
+            return;
+        }
+        //dialogue after combat
+        if (GameManager.Instance.winState)
+        {
+            GameManager.Instance.winScreen.SetActive(true);
+            GameManager.Instance.dialogueRoot.SetActive(false);
+        }
+
+        dialogueSystemParent.SetActive(false);
     }
 
 }

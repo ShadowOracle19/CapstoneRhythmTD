@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
@@ -38,11 +40,19 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public Transform towersParent;
     [SerializeField] public Transform projectilesParent;
 
+    [Header("Resources")]
+    public int resourceNum;
+    public int maxResource = 100;
+    public Slider resourceSlider;
+    public TextMeshProUGUI resourceText;
+
     // Start is called before the first frame update
     void Start()
     {
         //LoadEncounter(currentEncounter);
     }
+
+   
 
     public void RestartEncounter()
     {
@@ -66,6 +76,7 @@ public class CombatManager : MonoBehaviour
             spawner.startOnce = false;
             spawner.currentNumberOfEnemiesSpawned = 0;
         }
+        resourceNum = 10;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -93,6 +104,10 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
+        resourceSlider.value = resourceNum;
+        resourceText.text = resourceNum.ToString();
+
         foreach (var spawner in enemySpawners)
         {
             if(!spawner.allEnemiesSpawned)
@@ -133,5 +148,10 @@ public class CombatManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void GenerateResource()
+    {
+        resourceNum += 1;
     }
 }

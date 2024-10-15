@@ -851,6 +851,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  resourceCost: 5
   bulletSpeed: 200
   range: 5
   AOE: 0

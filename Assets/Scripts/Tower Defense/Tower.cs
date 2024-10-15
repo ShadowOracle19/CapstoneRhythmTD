@@ -17,6 +17,8 @@ public class Tower : MonoBehaviour
 
     private int direction;
 
+    public int resourceCost;
+
     [SerializeField] public RaycastHit2D[] colliders;
 
     [Header("Tower Statistics")]

@@ -730,7 +730,7 @@ GameObject:
   - component: {fileID: 1969963013028165710}
   - component: {fileID: 6367522176411443336}
   m_Layer: 0
-  m_Name: Viola
+  m_Name: Guitar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,7 +795,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  m_Color: {r: 0, g: 0.57301307, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.028217379, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -852,6 +852,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   resourceCost: 5
+  instrumentType: 1
   bulletSpeed: 200
   range: 5
   AOE: 0

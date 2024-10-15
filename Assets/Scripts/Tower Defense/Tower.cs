@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum InstrumentType
+{
+    Drums, Guitar, Bass, Piano
+}
+
 public class Tower : MonoBehaviour
 {
 
@@ -22,6 +27,7 @@ public class Tower : MonoBehaviour
     [SerializeField] public RaycastHit2D[] colliders;
 
     [Header("Tower Statistics")]
+    public InstrumentType instrumentType;
     public int bulletSpeed;
     public int range;
     //AOE

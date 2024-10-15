@@ -66,7 +66,7 @@ public class TowerManager : MonoBehaviour
         
     }
 
-    public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile)
+    public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type)
     {
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<SpriteFollowMouse>().enabled = false;
@@ -78,6 +78,29 @@ public class TowerManager : MonoBehaviour
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 
         Conductor.Instance._intervals.Add(_tower.GetComponent<Tower>().interval);
+
+        switch (type)
+        {
+            case InstrumentType.Drums:
+                Conductor.Instance.drums.volume = 0.5f;
+                break;
+
+            case InstrumentType.Guitar:
+                Conductor.Instance.guitarH.volume = 0.5f;
+                Conductor.Instance.guitarM.volume = 0.5f;
+                break;
+
+            case InstrumentType.Bass:
+                Conductor.Instance.bass.volume = 0.5f;
+                break;
+
+            case InstrumentType.Piano:
+                Conductor.Instance.piano.volume = 0.5f;
+                break;
+
+            default:
+                break;
+        }
     }
 
 

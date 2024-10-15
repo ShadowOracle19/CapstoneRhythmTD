@@ -85,7 +85,7 @@ public class CursorTD : MonoBehaviour
     {
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().resourceCost)
         {
-            TowerManager.Instance.SetTower(tower, transform.position, tile);
+            TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().instrumentType);
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().resourceCost;
             TogglePlacementMenu();
         }

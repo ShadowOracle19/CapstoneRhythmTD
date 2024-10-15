@@ -26,7 +26,11 @@ public class Conductor : MonoBehaviour
     }
     #endregion
 
-
+    public AudioSource drums;
+    public AudioSource bass;
+    public AudioSource piano;
+    public AudioSource guitarH;
+    public AudioSource guitarM;
     
 
     [SerializeField] private float _bpm;

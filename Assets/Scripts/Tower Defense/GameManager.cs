@@ -34,19 +34,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject conductor;
     [SerializeField] private GameObject settings;
 
+    [Header("Screen Roots")]
     public GameObject combatRoot;
     public GameObject dialogueRoot;
     public GameObject menuRoot;
 
+    [Header("Combat")]
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] public int _maxHealth = 5;
     [SerializeField] public int _currentHealth = 0;
+    [SerializeField] public bool combatRunning = false;
 
+    [Header("Pause Menu")]
     [SerializeField] public bool isGamePaused = false;
     [SerializeField] private GameObject pauseMenu;
 
-    [SerializeField] public bool combatRunning = false;
 
+    [Header("Encounter")]
     public EncounterCreator currentEncounter;
     public bool encounterRunning = false;
     public bool winState = false;

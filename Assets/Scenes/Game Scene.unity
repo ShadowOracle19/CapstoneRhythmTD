@@ -3070,9 +3070,9 @@ MonoBehaviour:
   healthText: {fileID: 25996096}
   _maxHealth: 5
   _currentHealth: 0
+  combatRunning: 0
   isGamePaused: 0
   pauseMenu: {fileID: 838862864}
-  combatRunning: 0
   currentEncounter: {fileID: 0}
   encounterRunning: 0
   winState: 0
@@ -3694,10 +3694,10 @@ RectTransform:
   - {fileID: 1662493674}
   m_Father: {fileID: 1124504290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 275.50842, y: -404.45544}
-  m_SizeDelta: {x: 391.01685, y: 65.43028}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &336209612
 MonoBehaviour:
@@ -3743,9 +3743,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ResumeGame
+      - m_Target: {fileID: 2096350185}
+        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
+        m_MethodName: RestartEncounter
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3755,9 +3755,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 838862869}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: MainScenePlay
+      - m_Target: {fileID: 263461692}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4568,10 +4568,10 @@ RectTransform:
   - {fileID: 1679355758}
   m_Father: {fileID: 1124504290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 275.50842, y: -276.71515}
-  m_SizeDelta: {x: 391.01685, y: 65.43028}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416400673
 MonoBehaviour:
@@ -4617,7 +4617,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 263461692}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
@@ -5229,9 +5229,9 @@ RectTransform:
   - {fileID: 1885905483}
   m_Father: {fileID: 1356460257}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100.50348, y: -260}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464057541
@@ -7275,10 +7275,10 @@ RectTransform:
   - {fileID: 577392912}
   m_Father: {fileID: 1124504290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 275.50842, y: -532.19574}
-  m_SizeDelta: {x: 391.01685, y: 65.43028}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682267636
 MonoBehaviour:
@@ -9362,7 +9362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &838862865
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13101,10 +13101,10 @@ RectTransform:
   - {fileID: 1692409153}
   m_Father: {fileID: 1124504290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 275.50842, y: -659.93604}
-  m_SizeDelta: {x: 391.01685, y: 65.43028}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1247884989
 MonoBehaviour:
@@ -16063,9 +16063,9 @@ RectTransform:
   - {fileID: 1177124979}
   m_Father: {fileID: 1356460257}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100.50348, y: -90}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595996615
@@ -20132,7 +20132,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 958416914}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: NextLine
+        m_MethodName: FinishLine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21044,7 +21044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2096350185
 MonoBehaviour:
   m_ObjectHideFlags: 0

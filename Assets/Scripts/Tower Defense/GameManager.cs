@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
         isGamePaused = true;
         pauseMenu.SetActive(true);
         conductor.SetActive(false);
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         isGamePaused = false;
         pauseMenu.SetActive(false);
         conductor.SetActive(true);

@@ -19,7 +19,7 @@ public class ChangeScene : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        Application.Quit(); 
     }
 
     //[MenuItem("SonorantStudios/Scenes/Main Menu")]

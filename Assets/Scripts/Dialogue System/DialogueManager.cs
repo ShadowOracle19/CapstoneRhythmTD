@@ -125,4 +125,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void FinishLine()
+    {
+        if(_dialogue.text == myDialogue.dialogue[index].text)
+        {
+            NextLine();
+        }
+        else
+        {
+            StopCoroutine(typing);
+            _dialogue.text = myDialogue.dialogue[index].text;
+        }
+    }
+
 }

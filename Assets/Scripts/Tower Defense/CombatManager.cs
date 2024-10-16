@@ -32,7 +32,7 @@ public class CombatManager : MonoBehaviour
     public bool spawnerDelayRunning = false;
     public bool allEnemiesSpawned = false;
     public int enemyTotal = 0;
-    [SerializeField] private List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
+    [SerializeField] private EnemySpawner enemySpawners;
 
     public CombatMaker currentEncounter;
 
@@ -46,6 +46,12 @@ public class CombatManager : MonoBehaviour
     public Slider resourceSlider;
     public TextMeshProUGUI resourceText;
 
+    [Header("beat indicator")]
+    public GameObject beatPrefab;
+    public Transform beatParent;
+    public Transform beatSpawnPoint;
+    public Transform beatEndPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +62,7 @@ public class CombatManager : MonoBehaviour
 
     public void RestartEncounter()
     {
+        EndEncounter();
         LoadEncounter(currentEncounter);
     }
 
@@ -65,17 +72,14 @@ public class CombatManager : MonoBehaviour
         currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
         Conductor.Instance.gameObject.SetActive(true);
-        timeRemaining = enemySpawnDelay;
-        spawnerDelayRunning = true;
-        allEnemiesSpawned = false;
-        enemyTotal = currentEncounter.enemyTotal;
 
-        foreach (var spawner in enemySpawners)
-        {
-            spawner.numberOfEnemiesToSpawn = enemyTotal;
-            spawner.startOnce = false;
-            spawner.currentNumberOfEnemiesSpawned = 0;
-        }
+        allEnemiesSpawned = false;
+
+        enemyTotal = currentEncounter.enemyTotal;
+        enemySpawners.numberOfEnemiesToSpawn = enemyTotal;
+        enemySpawners.startOnce = false;
+        enemySpawners.currentNumberOfEnemiesSpawned = 0;
+
         resourceNum = 10;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -99,28 +103,30 @@ public class CombatManager : MonoBehaviour
         }
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.winState = false;
+        GameManager.Instance.bar = 0;
+        GameManager.Instance.beat = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //resource stuff
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
 
-        foreach (var spawner in enemySpawners)
+        //checks if all enemies have spawned
+        if (!enemySpawners.allEnemiesSpawned)
         {
-            if(!spawner.allEnemiesSpawned)
-            {
-                allEnemiesSpawned = false;
-                break;
-            }
-            else
-            {
-                allEnemiesSpawned = true;
-            }
+            allEnemiesSpawned = false;
+            
         }
-
+        else
+        {
+            allEnemiesSpawned = true;
+        }
+        
+        //checks if all enemies have died or player health hasnt reached zero to give a win state
         if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0)
         {
             GameManager.Instance.WinLevel();
@@ -132,26 +138,22 @@ public class CombatManager : MonoBehaviour
 
     void DelayTimer()
     {
-        if (spawnerDelayRunning)
+        //Start spawning enemies on the 10th bar
+        if(GameManager.Instance.bar >= 10)
         {
-            if (timeRemaining > 0)
-            {
-                timeRemaining -= Time.deltaTime;
-            }
-            else
-            {
-                timeRemaining = 0;
-                spawnerDelayRunning = false;
-                foreach (var spawner in enemySpawners)
-                {
-                    spawner.StartSpawningEnemies();
-                }
-            }
+            enemySpawners.StartSpawningEnemies();
         }
+
     }
 
     public void GenerateResource()
     {
         resourceNum += 1;
+    }
+
+    public void SpawnBeat()
+    {
+        GameObject beat = Instantiate(beatPrefab, beatSpawnPoint.position, Quaternion.identity, beatParent);
+        beat.GetComponent<BeatMover>().endPos = beatEndPoint;
     }
 }

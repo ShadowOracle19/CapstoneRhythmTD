@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20599c7cee95274eaeb438403b60787, type: 3}
   m_Name: 1-1
   m_EditorClassIdentifier: 
-  enemyTotal: 5
+  enemyTotal: 20
   encounterBPM: 0
   levelSong: {fileID: 0}

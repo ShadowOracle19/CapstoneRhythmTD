@@ -17,26 +17,19 @@ public class EnemySpawner : MonoBehaviour
 
     public bool allEnemiesSpawned = false;
 
-    
-
     public Transform enemyParent;
     [SerializeField] private Transform _pathParent;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Transform child in _pathParent)
-        {
-            placedPath.Add(child.position);
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //path = gameObject.GetComponent<AIPath>().path.vectorPath;
-        //GetComponent<LineRenderer>().positionCount = placedPath.Count;
-        //GetComponent<LineRenderer>().SetPositions(placedPath.ToArray());
+        
 
     }
 
@@ -44,7 +37,6 @@ public class EnemySpawner : MonoBehaviour
     {
         if(!startOnce)
         {
-            //StartCoroutine("SpawnEnemyOnTick");
             startOnce = true;
         }
     }
@@ -58,19 +50,22 @@ public class EnemySpawner : MonoBehaviour
             allEnemiesSpawned = true;
             return;
         }
-            
 
-        if (placedPath.Count != 0)
+        if(GameManager.Instance.beat >= 3)
         {
+            //randomly spawn an enemy on the y value from -1,0,1
             int randSpawn = Random.Range(-1, 2);
-            Debug.Log(randSpawn);
-            Debug.Log("EnemySpawnerTick");
             GameObject enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
+
+            //adds enemy onto the conductor so they move on beat
             Conductor.Instance._intervals.Add(enemy.GetComponent<Enemy>().interval);
 
             //enemy.GetComponent<Enemy>().path = placedPath;
             currentNumberOfEnemiesSpawned += 1;
         }
+
+        
+
         
     }
 

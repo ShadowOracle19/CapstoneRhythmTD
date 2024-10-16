@@ -1,0 +1,13 @@
+{
+	"dialogue": [
+		{"name": "", "text": "Fayruz sits on an amp, wiping sweat from her brow."},
+        {"name": "Fayruz", "text": "...I know I'm the one who suggested going on tour, but this is a lot of work."},
+		{"name": "Sonu", "text": "Fayruz, you put one suitcase into the van and then sat down."},
+		{"name": "Fayruz", "text": "It was heavy!!!"},
+		{"name": "Niimi", "text": "You gotta work out more."},
+		{"name": "Fayruz", "text": "My power is in my words and thoughts. I have no need for physical strength."},
+		{"name": "Sonu", "text": "Are your words and thoughts going to get that amp packed?"},
+		{"name": "Fayruz", "text": "Not yet!! I need somewhere to sit!!!"},
+		{"name": "Sonu", "text": "*sigh*"}
+	]
+}

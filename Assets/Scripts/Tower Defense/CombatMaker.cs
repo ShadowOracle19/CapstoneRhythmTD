@@ -9,3 +9,9 @@ public class CombatMaker : ScriptableObject
     public int encounterBPM = 0;
     public AudioClip levelSong;
 }
+
+[System.Serializable]
+public class Wave
+{
+
+}

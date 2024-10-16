@@ -32,12 +32,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] public GameObject winScreen;
     [SerializeField] private GameObject conductor;
-    [SerializeField] private GameObject settings;
 
     [Header("Screen Roots")]
     public GameObject combatRoot;
     public GameObject dialogueRoot;
     public GameObject menuRoot;
+    [SerializeField] private GameObject settings;
 
     [Header("Combat")]
     [SerializeField] private TextMeshProUGUI healthText;
@@ -54,6 +54,10 @@ public class GameManager : MonoBehaviour
     public EncounterCreator currentEncounter;
     public bool encounterRunning = false;
     public bool winState = false;
+
+    [Header("Beats and Bars")]
+    public int beat;
+    public int bar;
 
     // Start is called before the first frame update
     void Start()
@@ -150,5 +154,15 @@ public class GameManager : MonoBehaviour
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         conductor.SetActive(false);
+    }
+
+    public void Beat()
+    {
+        if(beat >= 4)
+        {
+            bar += 1;
+            beat = 0;
+        }
+        beat += 1;
     }
 }

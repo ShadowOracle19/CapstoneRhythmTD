@@ -152,7 +152,7 @@ public class CursorTD : MonoBehaviour
         targetPos = originPos + direction;
 
         //bounding box function
-        if((targetPos.x <= -6 || targetPos.x >= 8) || (targetPos.y <= -2 || targetPos.y >= 1))
+        if((targetPos.x <= -3 || targetPos.x >= 9) || (targetPos.y <= -2 || targetPos.y >= 2))
         {
             isMoving = false;
             desiredMovement = Vector3.zero;

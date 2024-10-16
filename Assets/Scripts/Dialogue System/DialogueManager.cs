@@ -137,11 +137,13 @@ public class DialogueManager : MonoBehaviour
 
         if (characterSprite == null)
         {
-            characterImage.sprite = Resources.Load<Sprite>("Null");
+            characterImage.sprite = null;
+            characterImage.color = Color.clear;
         }
         else
         {
 
+            characterImage.color = Color.white;
             characterImage.sprite = characterSprite;
         }
     }

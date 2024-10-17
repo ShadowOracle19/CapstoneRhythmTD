@@ -81,6 +81,13 @@ public class CombatManager : MonoBehaviour
         enemySpawners.currentNumberOfEnemiesSpawned = 0;
 
         resourceNum = 10;
+
+        Conductor.Instance.bass.volume = 0;
+        Conductor.Instance.piano.volume = 0;
+        Conductor.Instance.guitarH.volume = 0;
+        Conductor.Instance.guitarM.volume = 0;
+        Conductor.Instance.drums.volume = 0;
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -100,6 +107,10 @@ public class CombatManager : MonoBehaviour
         foreach (Transform child in projectilesParent)
         {
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
+        }
+        foreach(Transform child in beatParent)
+        {
+            Destroy(child.gameObject);
         }
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.winState = false;
@@ -150,9 +161,10 @@ public class CombatManager : MonoBehaviour
     {
         resourceNum += 1;
     }
-
+     
     public void SpawnBeat()
     {
+        if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused) return;
         GameObject beat = Instantiate(beatPrefab, beatSpawnPoint.position, Quaternion.identity, beatParent);
         beat.GetComponent<BeatMover>().endPos = beatEndPoint;
     }

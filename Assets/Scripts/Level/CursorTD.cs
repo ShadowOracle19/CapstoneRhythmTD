@@ -29,6 +29,7 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.winState) return;
         if(Input.GetKeyUp(KeyCode.Space))
         {
             TogglePlacementMenu();

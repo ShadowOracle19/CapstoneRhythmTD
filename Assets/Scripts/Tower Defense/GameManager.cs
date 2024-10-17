@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public EncounterCreator currentEncounter;
     public bool encounterRunning = false;
     public bool winState = false;
+    public bool loseState = false;
 
     [Header("Beats and Bars")]
     public int beat;
@@ -137,8 +138,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        loseState = true;
         Cursor.lockState = CursorLockMode.None;
         Debug.Log("Game Over");
+        CombatManager.Instance.EndEncounter();
         gameOverScreen.SetActive(true);
         conductor.SetActive(false);
     }
@@ -147,6 +150,7 @@ public class GameManager : MonoBehaviour
     {
         if (winState) return;
         winState = true;
+        CombatManager.Instance.EndEncounter();
         encounterRunning = false;
         Cursor.lockState = CursorLockMode.None;
         Debug.Log("Game Over");

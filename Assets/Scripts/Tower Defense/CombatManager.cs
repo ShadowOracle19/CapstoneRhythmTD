@@ -69,6 +69,7 @@ public class CombatManager : MonoBehaviour
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
+        GameManager.Instance.winState = false;
         currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
         Conductor.Instance.gameObject.SetActive(true);
@@ -113,7 +114,6 @@ public class CombatManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         Cursor.lockState = CursorLockMode.None;
-        GameManager.Instance.winState = false;
         GameManager.Instance.bar = 0;
         GameManager.Instance.beat = 1;
     }

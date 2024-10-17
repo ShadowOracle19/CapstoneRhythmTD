@@ -3128,6 +3128,7 @@ MonoBehaviour:
   currentEncounter: {fileID: 0}
   encounterRunning: 0
   winState: 0
+  loseState: 0
   beat: 1
   bar: 0
 --- !u!4 &263461693
@@ -4652,10 +4653,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1318714084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1816.31, y: 320}
+  m_SizeDelta: {x: -19.689941, y: -24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414073666
 MonoBehaviour:
@@ -18595,10 +18596,10 @@ RectTransform:
   - {fileID: 1343466661}
   m_Father: {fileID: 1282555542}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 778, y: 477}
-  m_SizeDelta: {x: 249.4912, y: 46.7796}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -182, y: -63}
+  m_SizeDelta: {x: 249.49121, y: 46.779602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1698589930
 MonoBehaviour:
@@ -21041,10 +21042,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1318714084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.0031757}
-  m_SizeDelta: {x: 1496.1145, y: 184.2522}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.0031738281}
+  m_SizeDelta: {x: -147.8855, y: -159.7478}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1916783293
 PrefabInstance:

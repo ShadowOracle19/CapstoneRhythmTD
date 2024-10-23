@@ -66,6 +66,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Log")]
     public GameObject logEntry;
     public Transform logParent;
+    public GameObject log;
 
     // Start is called before the first frame update
     void Start()
@@ -81,6 +82,9 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadDialogue(TextAsset desiredDialogue)
     {
+        //set log to inactive so it doesnt show when dialogue is loaded
+        log.SetActive(false);
+
         currentDialogue = desiredDialogue;
         dialogueBox.SetActive(true);
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);

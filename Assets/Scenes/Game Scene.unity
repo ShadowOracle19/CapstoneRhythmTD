@@ -12126,6 +12126,7 @@ MonoBehaviour:
   textSpeed: 0.05
   logEntry: {fileID: 6258508907429296415, guid: 2347d53b504133b44807ef20927c323e, type: 3}
   logParent: {fileID: 1756866540}
+  log: {fileID: 783519641}
 --- !u!4 &958416915
 Transform:
   m_ObjectHideFlags: 0

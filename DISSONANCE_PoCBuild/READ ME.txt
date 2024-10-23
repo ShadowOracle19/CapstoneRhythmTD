@@ -1,0 +1,15 @@
+The Gameplay of our PoC demo is plants vs zombies meets crypt of the necrodancer
+
+To launch the game play the Dissonance.exe file 
+
+The game has basic dialogue upon playing level 1-1 as well in the level select screen
+there are character specific sample dialogue showing off our dialogue system as a whole.
+
+Our tower defense system has enemies and tower projectiles moving to the beat as well as 
+player movement with a cursor. As towers are placed more tracks to the song starts to play.
+
+Game controls:
+WASD to move on beat
+SPACE to open tower placement menu
+	WASD to select tower
+ESCAPE to pause game

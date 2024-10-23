@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject dialogueRoot;
     public GameObject menuRoot;
     [SerializeField] private GameObject settings;
+    public GameObject pauseMenuRoot;
 
     [Header("Combat")]
     [SerializeField] private TextMeshProUGUI healthText;
@@ -47,7 +49,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Pause Menu")]
     [SerializeField] public bool isGamePaused = false;
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private Button restartEncounterButton;
+    //[SerializeField] private GameObject pauseMenu;
 
 
     [Header("Encounter")]
@@ -69,13 +72,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //stuff that happens during tower defense gameplay
-        if(combatRunning)
+        //Manages health only while combat is running
+        if (combatRunning)
         {
             Health();
+        }
 
+        //allows player to use pause menu in combat, level select and dialogue
+        if (combatRunning || menuRoot.activeSelf || dialogueRoot.activeSelf)
+        {
+            //When the escape button is pressed the game will pause and open the pause menu
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                //flips the isGamePaused bool
                 isGamePaused = !isGamePaused;
 
                 //game is paused
@@ -118,19 +127,32 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (dialogueRoot.activeSelf || menuRoot.activeSelf)
+        {
+            //set the restart encounter button to disabled
+            restartEncounterButton.interactable = false;
+        }
+        else
+        {
+            restartEncounterButton.interactable = true;
+            conductor.SetActive(false);
+        }
         Cursor.lockState = CursorLockMode.None;
         isGamePaused = true;
-        pauseMenu.SetActive(true);
-        conductor.SetActive(false);
+        pauseMenuRoot.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void ResumeGame()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        if (combatRunning && !dialogueRoot.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            conductor.SetActive(true);
+        }
+        
         isGamePaused = false;
-        pauseMenu.SetActive(false);
-        conductor.SetActive(true);
+        pauseMenuRoot.SetActive(false);
         settings.SetActive(false);
         Time.timeScale = 1;
     }

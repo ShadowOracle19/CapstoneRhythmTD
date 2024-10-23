@@ -1146,7 +1146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Medium
+  m_text: Slow
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2700,9 +2700,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Medium
-      m_Image: {fileID: 0}
     - m_Text: Slow
+      m_Image: {fileID: 0}
+    - m_Text: Medium
       m_Image: {fileID: 0}
     - m_Text: Fast
       m_Image: {fileID: 0}
@@ -3561,7 +3561,7 @@ MonoBehaviour:
   loseState: 0
   beat: 1
   bar: 0
-  textSpeed: 0.05
+  textSpeed: 0.1
 --- !u!4 &263461693
 Transform:
   m_ObjectHideFlags: 0

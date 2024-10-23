@@ -58,6 +58,8 @@ public class DialogueManager : MonoBehaviour
     public bool dialogueFinished = false;
     public GameObject dialogueSystemParent;
 
+    public float textSpeed = 0.05f;
+
     Coroutine typing;
 
     // Start is called before the first frame update
@@ -86,15 +88,13 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        
-
         foreach (char c in myDialogue.dialogue[index].text.ToCharArray())
         {
             LoadCharacterSprite();
 
             _speakerName.text = myDialogue.dialogue[index].name;
             _dialogue.text += c;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
     }
 

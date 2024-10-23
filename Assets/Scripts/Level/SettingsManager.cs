@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 public class SettingsManager : MonoBehaviour
 {
     //Gameplay/General
-
+    [SerializeField] private TextMeshProUGUI textSpeedDropDown;
 
     //Video
     [SerializeField] private TextMeshProUGUI resolutionDropDown;
@@ -50,9 +50,31 @@ public class SettingsManager : MonoBehaviour
         sfxVolumeText.text = Mathf.RoundToInt(sfxVolumeSlider.value * 100) + "%";
     }
 
+    //Text Speed function
+    public void HandleTextSpeedData(int num)
+    {
+        switch (num)
+        {
+            //Medium
+            case 0:
+                GameManager.Instance.textSpeed = 0.05f;
+                break;
+            //Slow
+            case 1:
+                GameManager.Instance.textSpeed = 0.1f;
+                break;
+            //Fast
+            case 2:
+                GameManager.Instance.textSpeed = 0.01f;
+                break;
+
+            default:
+                break;
+        }
+    }
 
     //Video Setting functions
-    public void HandleDropdownData(int num)
+    public void HandleResolutionDropdownData(int num)
     {
         //1920x1080
         if(num == 0)

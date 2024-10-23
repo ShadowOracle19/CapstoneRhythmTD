@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -62,6 +63,10 @@ public class DialogueManager : MonoBehaviour
 
     Coroutine typing;
 
+    [Header("Log")]
+    public GameObject logEntry;
+    public Transform logParent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,11 +101,16 @@ public class DialogueManager : MonoBehaviour
             _dialogue.text += c;
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
+        
     }
 
     public void NextLine()
     {
-        if(index < myDialogue.dialogue.Length - 1)
+        GameObject _newLog = Instantiate(logEntry, logParent);
+        _newLog.GetComponent<DialogueLogEntry>().characterName.text = _speakerName.text;
+        _newLog.GetComponent<DialogueLogEntry>().dialogue.text = _dialogue.text;
+
+        if (index < myDialogue.dialogue.Length - 1)
         {
             index++;
             _dialogue.text = string.Empty;
@@ -165,6 +175,14 @@ public class DialogueManager : MonoBehaviour
     {
         //end dialogue
         StopCoroutine(typing);
+
+        for (int i = index; i < myDialogue.dialogue.Length; i++)
+        {
+            GameObject _newLog = Instantiate(logEntry, logParent);
+            _newLog.GetComponent<DialogueLogEntry>().characterName.text = myDialogue.dialogue[i].name;
+            _newLog.GetComponent<DialogueLogEntry>().dialogue.text = myDialogue.dialogue[i].text;
+        }
+
         //dialogue if its going into a combat
         if (GameManager.Instance.encounterRunning)
         {

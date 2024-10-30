@@ -35,6 +35,13 @@ public class ConductorV2 : MonoBehaviour
 
     public float beatThreshold = 0.45f;
 
+    public float beatDuration;
+    public int numberOfBeats;
+
+    public bool threshold;
+
+    private int beatTrack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +62,7 @@ public class ConductorV2 : MonoBehaviour
     void Update()
     {
         //determine how many seconds since the song started
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime - offset);
+        songPosition = (float)(AudioSettings.dspTime - dspSongTime);
 
         //determine how many beats since the song started
         songPositionInBeats = songPosition / crotchet;
@@ -67,6 +74,35 @@ public class ConductorV2 : MonoBehaviour
 
         loopPositionInAnalog = (loopPositionInBeats-1) / beatsPerLoop;
 
+        if (songPositionInBeats >= numberOfBeats + 1 * 1)
+        {
+            numberOfBeats++;
+        }
+
+        beatDuration = songPositionInBeats - numberOfBeats * 1;
+        threshold = InThreshHold();
+    }
+
+    public bool InThreshHold()
+    {
+        if (beatDuration > beatThreshold)
+            return true;
+        else
+            return false;
+
+
+    }
+
+    public bool Beat()
+    {
+        if (songPositionInBeats >= beatTrack + 1 * 1)
+        {
+            beatTrack++;
+            Debug.Log("do I get here?");
+            return true;
+        }
+        else
+            return false;
     }
 }
 

@@ -149,7 +149,7 @@ public class CombatManager : MonoBehaviour
     void DelayTimer()
     {
         //Start spawning enemies on the 10th bar
-        if (ConductorV2.instance.completedLoops >= 10)
+        if (ConductorV2.instance.completedLoops >= 0)
         {
             enemySpawners.StartSpawningEnemies();
         }

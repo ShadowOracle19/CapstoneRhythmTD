@@ -50,21 +50,6 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    public void PlaceTower(Vector3 tilePosition, Tile tile)
-    {
-        towerToPlace.GetComponent<SpriteFollowMouse>().enabled = false;
-        towerToPlace.GetComponent<BoxCollider2D>().enabled = true;
-        towerToPlace.transform.position = tilePosition;
-        tile.placedTower = towerToPlace;
-        towerToPlace.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        towerToPlace.GetComponent<Tower>().rotateStarted = true;
-        //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
-
-        Conductor.Instance._intervals.Add(towerToPlace.GetComponent<Tower>().interval); 
-
-        towerToPlace = null;
-        
-    }
 
     public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type)
     {
@@ -77,30 +62,29 @@ public class TowerManager : MonoBehaviour
         _tower.GetComponent<Tower>().rotateStarted = true;
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 
-        Conductor.Instance._intervals.Add(_tower.GetComponent<Tower>().interval);
 
-        switch (type)
-        {
-            case InstrumentType.Drums:
-                Conductor.Instance.drums.volume = 0.5f;
-                break;
+        //switch (type)
+        //{
+        //    case InstrumentType.Drums:
+        //        Conductor.Instance.drums.volume = 0.5f;
+        //        break;
 
-            case InstrumentType.Guitar:
-                Conductor.Instance.guitarH.volume = 0.5f;
-                Conductor.Instance.guitarM.volume = 0.5f;
-                break;
+        //    case InstrumentType.Guitar:
+        //        Conductor.Instance.guitarH.volume = 0.5f;
+        //        Conductor.Instance.guitarM.volume = 0.5f;
+        //        break;
 
-            case InstrumentType.Bass:
-                Conductor.Instance.bass.volume = 0.5f;
-                break;
+        //    case InstrumentType.Bass:
+        //        Conductor.Instance.bass.volume = 0.5f;
+        //        break;
 
-            case InstrumentType.Piano:
-                Conductor.Instance.piano.volume = 0.5f;
-                break;
+        //    case InstrumentType.Piano:
+        //        Conductor.Instance.piano.volume = 0.5f;
+        //        break;
 
-            default:
-                break;
-        }
+        //    default:
+        //        break;
+        //}
     }
 
 

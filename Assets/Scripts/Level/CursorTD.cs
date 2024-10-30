@@ -20,6 +20,8 @@ public class CursorTD : MonoBehaviour
     public GameObject SlotS;
     public GameObject SlotD;
 
+    public GameObject cursorSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,11 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //increase the size of the cursor sprite to the beat
+        //cursorSprite.transform.localScale = new Vector3( ConductorV2.instance.beatDuration, 
+        //    ConductorV2.instance.beatDuration, 
+        //    ConductorV2.instance.beatDuration);
+
         if (GameManager.Instance.winState) return;
         if(Input.GetKeyUp(KeyCode.Space))
         {
@@ -40,62 +47,42 @@ public class CursorTD : MonoBehaviour
 
         HighlightPlacementSlot();
 
-        if(ConductorV2.instance.loopPositionInBeats < (ConductorV2.instance.loopPositionInBeats + ConductorV2.instance.beatThreshold))
+        if(ConductorV2.instance.InThreshHold())
         {
             MoveCursor();
         }
+        Move();
+
     }
 
 
     public void MoveCursor()
     {
-        
         //on press log which direction needs to be moved
         if (Input.GetKeyUp(KeyCode.UpArrow) && !isMoving)
         {
             Debug.Log("Try move");
-            if (towerSelectMenuOpened && tile.placedTower == null)
-            {
-                TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
-                SlotW.GetComponent<SpriteRenderer>().color = Color.white;
-                return;
-            }
+            
             desiredMovement = Vector3.up;
-            Move();
+            
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow) && !isMoving)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null)
-            {
-                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
-                SlotA.GetComponent<SpriteRenderer>().color = Color.white;
-                return;
-            }
+            
             desiredMovement = Vector3.left;
-            Move();
+            
         }
         else if (Input.GetKeyUp(KeyCode.DownArrow) && !isMoving)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null)
-            {
-                TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
-                SlotS.GetComponent<SpriteRenderer>().color = Color.white;
-                return;
-            }
+            
             desiredMovement = Vector3.down;
-            Move();
+            
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow) && !isMoving)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null)
-            {
-                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
-                SlotD.GetComponent<SpriteRenderer>().color = Color.white;
-
-                return;
-            }
+            
             desiredMovement = Vector3.right;
-            Move();
+            
         }
         
     }
@@ -127,20 +114,46 @@ public class CursorTD : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             SlotW.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (towerSelectMenuOpened && tile.placedTower == null)
+            {
+                TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
+                SlotW.GetComponent<SpriteRenderer>().color = Color.white;
+                return;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             SlotA.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (towerSelectMenuOpened && tile.placedTower == null)
+            {
+                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
+                SlotA.GetComponent<SpriteRenderer>().color = Color.white;
+                return;
+            }
 
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             SlotS.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (towerSelectMenuOpened && tile.placedTower == null)
+            {
+                TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
+                SlotS.GetComponent<SpriteRenderer>().color = Color.white;
+                return;
+            }
 
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+
             SlotD.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (towerSelectMenuOpened && tile.placedTower == null)
+            {
+                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
+                SlotD.GetComponent<SpriteRenderer>().color = Color.white;
+
+                return;
+            }
 
         }
     }
@@ -156,7 +169,7 @@ public class CursorTD : MonoBehaviour
     //plays every beat
     public void Move()
     {
-        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || !isMoving) return;
+        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving) return;
         StartCoroutine(MovePlayer(desiredMovement));
     }
 

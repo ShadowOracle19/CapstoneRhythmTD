@@ -66,7 +66,7 @@ public class Tile : MonoBehaviour
         if (TowerManager.Instance.towerToPlace == null || placedTower != null) return;
 
         _highlight.SetActive(false);
-        TowerManager.Instance.PlaceTower(transform.position, this);
+        //TowerManager.Instance.PlaceTower(transform.position, this);
 
     }
 }

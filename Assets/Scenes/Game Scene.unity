@@ -3634,8 +3634,6 @@ MonoBehaviour:
   encounterRunning: 0
   winState: 0
   loseState: 0
-  beat: 1
-  bar: 0
   textSpeed: 0.1
 --- !u!4 &263461693
 Transform:
@@ -15643,7 +15641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1300826009}
-  - component: {fileID: 1300826008}
+  - component: {fileID: 1300826011}
   - component: {fileID: 1300826010}
   m_Layer: 0
   m_Name: Conductor
@@ -15652,106 +15650,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1300826008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300826007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4748003607fa834e8710575d082637d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drums: {fileID: 1605680384}
-  bass: {fileID: 244566259}
-  piano: {fileID: 2024583871}
-  guitarH: {fileID: 1800567050}
-  guitarM: {fileID: 339680849}
-  _bpm: 160
-  _audioSource: {fileID: 1300826010}
-  _intervals:
-  - _steps: 1
-    _trigger:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 987591834}
-          m_TargetAssemblyTypeName: CursorTD, Assembly-CSharp
-          m_MethodName: Move
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - _steps: 0.5
-    _trigger:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1683981607}
-          m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
-          m_MethodName: OnTick
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - _steps: 1
-    _trigger:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2096350185}
-          m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
-          m_MethodName: GenerateResource
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - _steps: 1
-    _trigger:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 263461692}
-          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-          m_MethodName: Beat
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - _steps: 1
-    _trigger:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2096350185}
-          m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
-          m_MethodName: SpawnBeat
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!4 &1300826009
 Transform:
   m_ObjectHideFlags: 0
@@ -15783,7 +15681,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 8300000, guid: ae1e292b77a49724bb0a45cf4ae7a12b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
@@ -15868,6 +15766,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1300826011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300826007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e2caf3a8ef0e5488f0b045c30c76be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bpm: 160
+  crotchet: 0
+  songPosition: 0
+  songPositionInBeats: 0
+  dspSongTime: 0
+  musicSource: {fileID: 0}
+  offset: 0
+  beatsPerLoop: 4
+  completedLoops: 0
+  loopPositionInBeats: 0
+  loopPositionInAnalog: 0
+  beatThreshold: 0.45
 --- !u!1 &1307426422
 GameObject:
   m_ObjectHideFlags: 0

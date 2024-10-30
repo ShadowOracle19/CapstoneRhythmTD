@@ -35,9 +35,25 @@ public class CursorTD : MonoBehaviour
             TogglePlacementMenu();
         }
 
-        //on press log which direction needs to be moved
-        if(Input.GetKeyUp(KeyCode.W) && !isMoving)
+        
+        
+
+        HighlightPlacementSlot();
+
+        if(ConductorV2.instance.loopPositionInBeats < (ConductorV2.instance.loopPositionInBeats + ConductorV2.instance.beatThreshold))
         {
+            MoveCursor();
+        }
+    }
+
+
+    public void MoveCursor()
+    {
+        
+        //on press log which direction needs to be moved
+        if (Input.GetKeyUp(KeyCode.UpArrow) && !isMoving)
+        {
+            Debug.Log("Try move");
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
@@ -45,8 +61,9 @@ public class CursorTD : MonoBehaviour
                 return;
             }
             desiredMovement = Vector3.up;
+            Move();
         }
-        else if (Input.GetKeyUp(KeyCode.A) && !isMoving)
+        else if (Input.GetKeyUp(KeyCode.LeftArrow) && !isMoving)
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
@@ -55,8 +72,9 @@ public class CursorTD : MonoBehaviour
                 return;
             }
             desiredMovement = Vector3.left;
+            Move();
         }
-        else if (Input.GetKeyUp(KeyCode.S) && !isMoving)
+        else if (Input.GetKeyUp(KeyCode.DownArrow) && !isMoving)
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
@@ -65,20 +83,20 @@ public class CursorTD : MonoBehaviour
                 return;
             }
             desiredMovement = Vector3.down;
+            Move();
         }
-        else if (Input.GetKeyUp(KeyCode.D) && !isMoving)
+        else if (Input.GetKeyUp(KeyCode.RightArrow) && !isMoving)
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
                 SlotD.GetComponent<SpriteRenderer>().color = Color.white;
-                
+
                 return;
             }
             desiredMovement = Vector3.right;
+            Move();
         }
-
-        HighlightPlacementSlot();
         
     }
 
@@ -106,21 +124,21 @@ public class CursorTD : MonoBehaviour
     public void HighlightPlacementSlot()
     {
         if (!towerSelectMenuOpened) return;
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             SlotW.GetComponent<SpriteRenderer>().color = Color.yellow;
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             SlotA.GetComponent<SpriteRenderer>().color = Color.yellow;
 
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             SlotS.GetComponent<SpriteRenderer>().color = Color.yellow;
 
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             SlotD.GetComponent<SpriteRenderer>().color = Color.yellow;
 
@@ -138,7 +156,7 @@ public class CursorTD : MonoBehaviour
     //plays every beat
     public void Move()
     {
-        if (desiredMovement == Vector3.zero || towerSelectMenuOpened) return;
+        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || !isMoving) return;
         StartCoroutine(MovePlayer(desiredMovement));
     }
 

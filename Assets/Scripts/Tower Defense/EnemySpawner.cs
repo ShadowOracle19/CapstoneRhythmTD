@@ -29,7 +29,10 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(ConductorV2.instance.loopPositionInBeats == 4)
+        {
+            SpawnUnit();
+        }
 
     }
 
@@ -41,8 +44,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // Just an example OnTick here
-    public void OnTick()
+    public void SpawnUnit()
     {
         if (!startOnce || GameManager.Instance.isGamePaused) return;
         if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn)
@@ -50,22 +52,12 @@ public class EnemySpawner : MonoBehaviour
             allEnemiesSpawned = true;
             return;
         }
+        //randomly spawn an enemy on the y value from -1,0,1
+        int randSpawn = Random.Range(-1, 2);
+        GameObject enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
 
-        if(GameManager.Instance.beat >= 3)
-        {
-            //randomly spawn an enemy on the y value from -1,0,1
-            int randSpawn = Random.Range(-1, 2);
-            GameObject enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
-
-            //adds enemy onto the conductor so they move on beat
-            Conductor.Instance._intervals.Add(enemy.GetComponent<Enemy>().interval);
-
-            //enemy.GetComponent<Enemy>().path = placedPath;
-            currentNumberOfEnemiesSpawned += 1;
-        }
-
-        
-
+        //enemy.GetComponent<Enemy>().path = placedPath;
+        currentNumberOfEnemiesSpawned += 1;
         
     }
 

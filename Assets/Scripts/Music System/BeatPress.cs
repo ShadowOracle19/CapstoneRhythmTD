@@ -26,13 +26,6 @@ public class BeatPress : MonoBehaviour
     {
         beatIndicator.color = new Color(1, 1, 1, ConductorV2.instance.loopPositionInAnalog);
 
-        
-        
-        if ((ConductorV2.instance.songPosition - lastBeat) / ConductorV2.instance.crotchet == 1)
-        {
-            Debug.Log("hit");
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //miss happens between 0 and 0.3, good happens between 0.31 and 0.6, perfect happens between 0.61 and 1

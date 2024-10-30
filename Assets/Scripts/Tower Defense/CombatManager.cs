@@ -72,7 +72,7 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.winState = false;
         currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
-        Conductor.Instance.gameObject.SetActive(true);
+        ConductorV2.instance.gameObject.SetActive(true);
 
         allEnemiesSpawned = false;
 
@@ -83,11 +83,11 @@ public class CombatManager : MonoBehaviour
 
         resourceNum = 10;
 
-        Conductor.Instance.bass.volume = 0;
-        Conductor.Instance.piano.volume = 0;
-        Conductor.Instance.guitarH.volume = 0;
-        Conductor.Instance.guitarM.volume = 0;
-        Conductor.Instance.drums.volume = 0;
+        //Conductor.Instance.bass.volume = 0;
+        //Conductor.Instance.piano.volume = 0;
+        //Conductor.Instance.guitarH.volume = 0;
+        //Conductor.Instance.guitarM.volume = 0;
+        //Conductor.Instance.drums.volume = 0;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -114,8 +114,7 @@ public class CombatManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         Cursor.lockState = CursorLockMode.None;
-        GameManager.Instance.bar = 0;
-        GameManager.Instance.beat = 1;
+        
     }
 
     // Update is called once per frame
@@ -150,7 +149,7 @@ public class CombatManager : MonoBehaviour
     void DelayTimer()
     {
         //Start spawning enemies on the 10th bar
-        if(GameManager.Instance.bar >= 10)
+        if (ConductorV2.instance.completedLoops >= 10)
         {
             enemySpawners.StartSpawningEnemies();
         }

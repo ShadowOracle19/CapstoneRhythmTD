@@ -59,10 +59,6 @@ public class GameManager : MonoBehaviour
     public bool winState = false;
     public bool loseState = false;
 
-    [Header("Beats and Bars")]
-    public int beat;
-    public int bar;
-
     [Header("Dialogue")]
     public float textSpeed = 0.05f;
 
@@ -185,13 +181,4 @@ public class GameManager : MonoBehaviour
         conductor.SetActive(false);
     }
 
-    public void Beat()
-    {
-        if(beat >= 4)
-        {
-            bar += 1;
-            beat = 0;
-        }
-        beat += 1;
-    }
 }

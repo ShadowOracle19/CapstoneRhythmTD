@@ -33,6 +33,8 @@ public class ConductorV2 : MonoBehaviour
     //The current relative position of the song within the loop measured between 0 and 1.
     public float loopPositionInAnalog;
 
+    public float beatThreshold = 0.45f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,9 +63,9 @@ public class ConductorV2 : MonoBehaviour
         //calculate the loop position
         if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
             completedLoops++;
-        loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop;
+        loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop + 1;
 
-        loopPositionInAnalog = loopPositionInBeats / beatsPerLoop;
+        loopPositionInAnalog = (loopPositionInBeats-1) / beatsPerLoop;
 
     }
 }

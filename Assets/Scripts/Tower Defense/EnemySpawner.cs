@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ConductorV2.instance.loopPositionInBeats == 4)
+        if(ConductorV2.instance.Beat())
         {
             SpawnUnit();
         }

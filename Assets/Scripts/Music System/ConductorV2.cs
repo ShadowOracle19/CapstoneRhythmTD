@@ -80,6 +80,7 @@ public class ConductorV2 : MonoBehaviour
         }
 
         beatDuration = songPositionInBeats - numberOfBeats * 1;
+
         threshold = InThreshHold();
     }
 

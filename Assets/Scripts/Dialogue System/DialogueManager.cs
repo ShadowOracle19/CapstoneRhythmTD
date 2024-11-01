@@ -131,6 +131,7 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.combatRunning = true;
                 CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
                 GameManager.Instance.dialogueRoot.SetActive(false);
+
                 return;
             }
             //dialogue after combat

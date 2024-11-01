@@ -21,6 +21,7 @@ public class CursorTD : MonoBehaviour
     public GameObject SlotD;
 
     public GameObject cursorSprite;
+    public Vector3 pulseSize;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +32,9 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //increase the size of the cursor sprite to the beat
-        //cursorSprite.transform.localScale = new Vector3( ConductorV2.instance.beatDuration, 
-        //    ConductorV2.instance.beatDuration, 
-        //    ConductorV2.instance.beatDuration);
+        //return cursor sprite to origin size
+        cursorSprite.transform.localScale = Vector3.Lerp(cursorSprite.transform.localScale, Vector3.one, Time.deltaTime * 5);
+        
 
         if (GameManager.Instance.winState) return;
         if(Input.GetKeyUp(KeyCode.Space))
@@ -52,7 +52,6 @@ public class CursorTD : MonoBehaviour
             MoveCursor();
         }
         Move();
-
     }
 
 
@@ -166,7 +165,6 @@ public class CursorTD : MonoBehaviour
         SlotD.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    //plays every beat
     public void Move()
     {
         if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving) return;
@@ -202,16 +200,22 @@ public class CursorTD : MonoBehaviour
 
         isMoving = false;
         desiredMovement = Vector3.zero;
-
+        tile = null;
         yield return null;
     }
 
     //check which tile cursor is on
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("StageTile"))
         {
             tile = collision.gameObject.GetComponent<Tile>();
         }
+    }
+
+    public void Pulse()
+    {
+        Debug.Log("pulse");
+        cursorSprite.transform.localScale = pulseSize;
     }
 }

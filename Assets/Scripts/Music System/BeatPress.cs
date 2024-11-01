@@ -66,17 +66,18 @@ public class BeatPress : MonoBehaviour
             }
         }
 
-        if(ConductorV2.instance.Beat())
-        {
-            GameObject indicatorLeft = Instantiate(beat, leftPos.position, Quaternion.identity, beatIndParent);
-            indicatorLeft.GetComponent<BeatMover>().endPos = centerPos;
-            leftBeat = indicatorLeft;
-            GameObject indicatorRight = Instantiate(beat, rightPos.position, Quaternion.identity, beatIndParent);
-            indicatorRight.GetComponent<BeatMover>().endPos = centerPos;
-            rightBeat = indicatorRight;
-
-            Debug.Log("beat");
-        }
         
+    }
+
+    public void BeatHit()
+    {
+        GameObject indicatorLeft = Instantiate(beat, leftPos.position, Quaternion.identity, beatIndParent);
+        indicatorLeft.GetComponent<BeatMover>().endPos = centerPos;
+        leftBeat = indicatorLeft;
+        GameObject indicatorRight = Instantiate(beat, rightPos.position, Quaternion.identity, beatIndParent);
+        indicatorRight.GetComponent<BeatMover>().endPos = centerPos;
+        rightBeat = indicatorRight;
+
+        Debug.Log("beat");
     }
 }

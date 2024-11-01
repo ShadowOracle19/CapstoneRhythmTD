@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     public int health = 5;
 
-    public Intervals interval;
+    public UnityEvent trigger;
 
     [SerializeField] private Vector3 nextPosition;
 
@@ -39,7 +40,8 @@ public class Enemy : MonoBehaviour
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
-        //if (!move) return;
+        
+
         Movement();
 
     }
@@ -114,6 +116,7 @@ public class Enemy : MonoBehaviour
 
     public void RemoveEnemy()
     {
-        Conductor.Instance.RemoveInterval(interval, gameObject);
+        ConductorV2.instance.triggerEvent.Remove(trigger);
+        Destroy(gameObject);
     }
 }

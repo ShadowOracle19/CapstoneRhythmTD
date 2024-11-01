@@ -60,31 +60,32 @@ public class TowerManager : MonoBehaviour
         tile.placedTower = _tower;
         _tower.GetComponent<SpriteRenderer>().sortingOrder = 2;
         _tower.GetComponent<Tower>().rotateStarted = true;
+        ConductorV2.instance.triggerEvent.Add(_tower.GetComponent<Tower>().trigger);
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 
 
-        //switch (type)
-        //{
-        //    case InstrumentType.Drums:
-        //        Conductor.Instance.drums.volume = 0.5f;
-        //        break;
+        switch (type)
+        {
+            case InstrumentType.Drums:
+                ConductorV2.instance.drums.volume = 0.5f;
+                break;
 
-        //    case InstrumentType.Guitar:
-        //        Conductor.Instance.guitarH.volume = 0.5f;
-        //        Conductor.Instance.guitarM.volume = 0.5f;
-        //        break;
+            case InstrumentType.Guitar:
+                ConductorV2.instance.guitarH.volume = 0.5f;
+                ConductorV2.instance.guitarM.volume = 0.5f;
+                break;
 
-        //    case InstrumentType.Bass:
-        //        Conductor.Instance.bass.volume = 0.5f;
-        //        break;
+            case InstrumentType.Bass:
+                ConductorV2.instance.bass.volume = 0.5f;
+                break;
 
-        //    case InstrumentType.Piano:
-        //        Conductor.Instance.piano.volume = 0.5f;
-        //        break;
+            case InstrumentType.Piano:
+                ConductorV2.instance.piano.volume = 0.5f;
+                break;
 
-        //    default:
-        //        break;
-        //}
+            default:
+                break;
+        }
     }
 
 

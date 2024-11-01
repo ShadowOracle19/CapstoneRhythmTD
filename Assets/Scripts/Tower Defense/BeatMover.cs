@@ -5,6 +5,7 @@ using UnityEngine;
 public class BeatMover : MonoBehaviour
 {
     public Transform endPos;
+    public Vector3 originPos;
 
     public float positionInBeats;
     public float positionInAnalog;
@@ -13,7 +14,7 @@ public class BeatMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        originPos = transform.position;   
     }
 
     // Update is called once per frame
@@ -22,7 +23,8 @@ public class BeatMover : MonoBehaviour
 
         positionInAnalog = ConductorV2.instance.beatDuration;
 
-        transform.position = Vector3.Lerp(transform.position, endPos.position, positionInAnalog);
+        //transform.position = Vector3.Lerp(transform.position, endPos.position, Time.deltaTime);
+        transform.position = Vector3.LerpUnclamped(transform.position, endPos.position, positionInAnalog);
 
         if(transform.position == endPos.position)
         {

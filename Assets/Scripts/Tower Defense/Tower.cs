@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum InstrumentType
 {
@@ -9,6 +10,7 @@ public enum InstrumentType
 
 public class Tower : MonoBehaviour
 {
+    public UnityEvent trigger;
 
     public bool rotateStarted = false;
     public bool rotateOnce = false;
@@ -45,13 +47,10 @@ public class Tower : MonoBehaviour
     {
         //RotateTowerOnPlace();
         //if(AOE) AOERange.SetActive(false);
+
+        
     }
 
-    void OnTick()
-    {
-        Fire();
-        Debug.Log("Tower Shoot Movement");
-    }
 
     private void RotateTowerOnPlace()
     {
@@ -108,13 +107,14 @@ public class Tower : MonoBehaviour
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet.GetComponent<Projectile>().bulletRange = range;
         bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
-        bullet.GetComponent<Projectile>().interval._steps = interval._steps;
-        Conductor.Instance._intervals.Add(bullet.GetComponent<Projectile>().interval);
+        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        
     }
 
     public void RemoveTower()
     {
-        Conductor.Instance.RemoveInterval(interval, gameObject);
+        ConductorV2.instance.triggerEvent.Remove(trigger);
+        Destroy(gameObject);
     }
 
     //IEnumerator TestFire()

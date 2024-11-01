@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Projectile : MonoBehaviour
 
     public GameObject towerFiredFrom;
 
-    public Intervals interval;
+    public UnityEvent trigger;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +62,7 @@ public class Projectile : MonoBehaviour
     }
     public void RemoveProjectile()
     {
-        Conductor.Instance.RemoveInterval(interval, gameObject);
+        ConductorV2.instance.triggerEvent.Remove(trigger);
+        Destroy(gameObject);
     }
 }

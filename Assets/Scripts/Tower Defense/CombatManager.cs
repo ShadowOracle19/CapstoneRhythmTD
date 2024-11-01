@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.ShaderData;
 
 public class CombatManager : MonoBehaviour
 {
@@ -72,7 +73,7 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.winState = false;
         currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
-        ConductorV2.instance.gameObject.SetActive(true);
+        ConductorV2.instance.StartConductor();
 
         allEnemiesSpawned = false;
 
@@ -114,7 +115,12 @@ public class CombatManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         Cursor.lockState = CursorLockMode.None;
-        
+        ConductorV2.instance.musicSource.Stop();
+        ConductorV2.instance.drums.Stop();
+        ConductorV2.instance.bass.Stop();
+        ConductorV2.instance.piano.Stop();
+        ConductorV2.instance.guitarH.Stop();
+        ConductorV2.instance.guitarM.Stop();
     }
 
     // Update is called once per frame
@@ -149,7 +155,7 @@ public class CombatManager : MonoBehaviour
     void DelayTimer()
     {
         //Start spawning enemies on the 10th bar
-        if (ConductorV2.instance.completedLoops >= 0)
+        if (ConductorV2.instance.completedLoops >= 10)
         {
             enemySpawners.StartSpawningEnemies();
         }

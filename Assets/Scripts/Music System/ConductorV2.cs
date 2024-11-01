@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ConductorV2 : MonoBehaviour
@@ -42,8 +43,24 @@ public class ConductorV2 : MonoBehaviour
 
     private int beatTrack;
 
+    private int lastInterval;
+
+    //Dynamic Music tracks
+    public AudioSource drums;
+    public AudioSource bass;
+    public AudioSource piano;
+    public AudioSource guitarH;
+    public AudioSource guitarM;
+
+    public List<UnityEvent> triggerEvent = new List<UnityEvent>();
+
     // Start is called before the first frame update
     void Start()
+    {
+        
+    }
+
+    public void StartConductor()
     {
         //load the audio source attached to the conductor gameobject
         musicSource = GetComponent<AudioSource>();
@@ -54,13 +71,44 @@ public class ConductorV2 : MonoBehaviour
         //record the time when the music starts
         dspSongTime = (float)AudioSettings.dspTime;
 
+        completedLoops = 0;
+        numberOfBeats = 0;
+        beatTrack = 0;
+
         //Start the song
         musicSource.Play();
+
+        drums.Play();
+        bass.Play();
+        piano.Play();
+        guitarH.Play();
+        guitarM.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isGamePaused)
+        {
+            musicSource.Pause();
+            drums.Pause();
+            bass.Pause();
+            piano.Pause();
+            guitarH.Pause();
+            guitarM.Pause();
+            return;
+        }
+        else
+        {
+            musicSource.UnPause();
+            drums.UnPause();
+            bass.UnPause();
+            piano.UnPause();
+            guitarH.UnPause();
+            guitarM.UnPause();
+        }
+
+
         //determine how many seconds since the song started
         songPosition = (float)(AudioSettings.dspTime - dspSongTime);
 
@@ -82,6 +130,8 @@ public class ConductorV2 : MonoBehaviour
         beatDuration = songPositionInBeats - numberOfBeats * 1;
 
         threshold = InThreshHold();
+
+        TriggerBeatEvent(musicSource.timeSamples / (musicSource.clip.frequency * crotchet));
     }
 
     public bool InThreshHold()
@@ -96,6 +146,9 @@ public class ConductorV2 : MonoBehaviour
 
     public bool Beat()
     {
+        if (GameManager.Instance.isGamePaused)
+            return false;
+
         if (songPositionInBeats >= beatTrack + 1 * 1)
         {
             beatTrack++;
@@ -104,6 +157,20 @@ public class ConductorV2 : MonoBehaviour
         }
         else
             return false;
+
+        
+    }
+
+    public void TriggerBeatEvent(float interval)
+    {
+        if(Mathf.FloorToInt(interval) != lastInterval)
+        {
+            lastInterval = Mathf.FloorToInt(interval);
+            foreach(UnityEvent _event in triggerEvent.ToArray())
+            {
+                _event.Invoke();
+            }
+        }
     }
 }
 

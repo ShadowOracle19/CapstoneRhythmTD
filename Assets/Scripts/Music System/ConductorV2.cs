@@ -98,6 +98,12 @@ public class ConductorV2 : MonoBehaviour
         numberOfBeats = 0;
         beatTrack = 0;
 
+        drums.volume = 0;
+        bass.volume = 0;
+        piano.volume = 0;
+        guitarH.volume = 0;
+        guitarM.volume = 0;
+
         //Start the song
         PlayMusic();
     }

@@ -99,13 +99,7 @@ public class ConductorV2 : MonoBehaviour
         beatTrack = 0;
 
         //Start the song
-        musicSource.Play();
-
-        drums.Play();
-        bass.Play();
-        piano.Play();
-        guitarH.Play();
-        guitarM.Play();
+        PlayMusic();
     }
 
     // Update is called once per frame
@@ -114,22 +108,12 @@ public class ConductorV2 : MonoBehaviour
 
         if (GameManager.Instance.isGamePaused)
         {
-            musicSource.Pause();
-            drums.Pause();
-            bass.Pause();
-            piano.Pause();
-            guitarH.Pause();
-            guitarM.Pause();
+            PauseMusic();
             return;
         }
         else
         {
-            musicSource.UnPause();
-            drums.UnPause();
-            bass.UnPause();
-            piano.UnPause();
-            guitarH.UnPause();
-            guitarM.UnPause();
+            ResumeMusic();
         }
 
 
@@ -206,6 +190,46 @@ public class ConductorV2 : MonoBehaviour
                 _event.Invoke();
             }
         }
+    }
+
+    public void PauseMusic()
+    {
+        musicSource.Pause();
+        drums.Pause();
+        bass.Pause();
+        piano.Pause();
+        guitarH.Pause();
+        guitarM.Pause();
+    }
+
+    public void ResumeMusic()
+    {
+        musicSource.UnPause();
+        drums.UnPause();
+        bass.UnPause();
+        piano.UnPause();
+        guitarH.UnPause();
+        guitarM.UnPause();
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+        drums.Stop();
+        bass.Stop();
+        piano.Stop();
+        guitarH.Stop();
+        guitarM.Stop();
+    }
+
+    public void PlayMusic()
+    {
+        musicSource.Play();
+        drums.Play();
+        bass.Play();
+        piano.Play();
+        guitarH.Play();
+        guitarM.Play();
     }
 }
 

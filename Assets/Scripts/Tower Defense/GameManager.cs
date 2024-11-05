@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
         else
         {
             restartEncounterButton.interactable = true;
+            
             //conductor.SetActive(false);
         }
         Cursor.lockState = CursorLockMode.None;
@@ -165,6 +166,7 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.EndEncounter();
         gameOverScreen.SetActive(true);
         //conductor.SetActive(false);
+        ConductorV2.instance.StopMusic();
     }
 
     public void WinLevel()
@@ -179,6 +181,7 @@ public class GameManager : MonoBehaviour
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         //conductor.SetActive(false);
+        ConductorV2.instance.StopMusic();
     }
 
 }

@@ -1,0 +1,17 @@
+The Gameplay of our v0.3 demo is plants vs zombies meets crypt of the necrodancer
+
+To launch the game play the Dissonance.exe file 
+
+The game has basic dialogue upon playing level 1-1 as well in the level select screen
+there are character specific sample dialogue showing off our dialogue system as a whole.
+
+Our tower defense system has enemies and tower projectiles moving to the beat as well as 
+player movement with a cursor. As towers are placed more tracks to the song starts to play.
+
+Game controls:
+Arrow Keys to move on beat
+SPACE to open tower placement menu
+	Arrow keys to select tower
+ESCAPE to pause game
+
+Warning audio may be loud on first playthrough

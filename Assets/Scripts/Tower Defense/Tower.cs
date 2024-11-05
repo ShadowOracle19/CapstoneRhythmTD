@@ -32,6 +32,7 @@ public class Tower : MonoBehaviour
     public InstrumentType instrumentType;
     public int bulletSpeed;
     public int range;
+    public int damage;
     //AOE
     public bool AOE = false;
     [SerializeField] private GameObject AOERange;
@@ -97,7 +98,7 @@ public class Tower : MonoBehaviour
                 }
                 else if(item.transform.CompareTag("Enemy"))
                 {
-                    item.transform.GetComponent<Enemy>().Damage(1);
+                    item.transform.GetComponent<Enemy>().Damage(damage);
                 }
             }
             colliders = null;
@@ -107,6 +108,7 @@ public class Tower : MonoBehaviour
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet.GetComponent<Projectile>().bulletRange = range;
         bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
+        bullet.GetComponent<Projectile>().damage = damage;
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
         
     }

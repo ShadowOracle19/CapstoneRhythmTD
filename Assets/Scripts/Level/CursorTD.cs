@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ public class CursorTD : MonoBehaviour
 
     public GameObject cursorSprite;
     public Vector3 pulseSize;
+
+    public GameObject beatHitResultPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +49,8 @@ public class CursorTD : MonoBehaviour
         
 
         HighlightPlacementSlot();
+        MoveCursor();
 
-        if(ConductorV2.instance.InThreshHold())
-        {
-            MoveCursor();
-        }
         Move();
     }
 
@@ -60,28 +60,39 @@ public class CursorTD : MonoBehaviour
         //on press log which direction needs to be moved
         if (Input.GetKeyUp(KeyCode.UpArrow) && !isMoving)
         {
-            Debug.Log("Try move");
-            
-            desiredMovement = Vector3.up;
-            
+            //Debug.Log("Try move");
+            if(ConductorV2.instance.InThreshHold())
+            {
+                desiredMovement = Vector3.up;
+            }
+            SpawnBeatHitResult();
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow) && !isMoving)
         {
-            
-            desiredMovement = Vector3.left;
-            
+            if (ConductorV2.instance.InThreshHold())
+            {
+                desiredMovement = Vector3.left;
+            }
+            SpawnBeatHitResult();
+
         }
         else if (Input.GetKeyUp(KeyCode.DownArrow) && !isMoving)
         {
-            
-            desiredMovement = Vector3.down;
-            
+            if (ConductorV2.instance.InThreshHold())
+            {
+                desiredMovement = Vector3.down;
+            }
+            SpawnBeatHitResult();
+
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow) && !isMoving)
         {
-            
-            desiredMovement = Vector3.right;
-            
+            if (ConductorV2.instance.InThreshHold())
+            {
+                desiredMovement = Vector3.right;
+            }
+
+            SpawnBeatHitResult();
         }
         
     }
@@ -90,8 +101,24 @@ public class CursorTD : MonoBehaviour
     {
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().resourceCost)
         {
+            if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
+            {
+                Debug.Log("perfect Beat Hit");
+                tower.GetComponent<Tower>().damage += 2;
+            }
+            else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
+            {
+                Debug.Log("early Beat Hit");
+                tower.GetComponent<Tower>().damage += 1;
+            }
+            else
+            {
+                Debug.Log("miss Beat Hit");
+
+            }
             TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().instrumentType);
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().resourceCost;
+            SpawnBeatHitResult();
             TogglePlacementMenu();
         }
         else
@@ -110,7 +137,7 @@ public class CursorTD : MonoBehaviour
     public void HighlightPlacementSlot()
     {
         if (!towerSelectMenuOpened) return;
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             SlotW.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
@@ -120,7 +147,7 @@ public class CursorTD : MonoBehaviour
                 return;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             SlotA.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
@@ -131,7 +158,7 @@ public class CursorTD : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             SlotS.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
@@ -142,7 +169,7 @@ public class CursorTD : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyUp(KeyCode.RightArrow))
         {
 
             SlotD.GetComponent<SpriteRenderer>().color = Color.yellow;
@@ -173,6 +200,7 @@ public class CursorTD : MonoBehaviour
 
     private IEnumerator MovePlayer(Vector3 direction)
     {
+        
         isMoving = true;
 
         float elapsedTime = 0;
@@ -215,7 +243,28 @@ public class CursorTD : MonoBehaviour
 
     public void Pulse()
     {
-        Debug.Log("pulse");
+        //Debug.Log("pulse");
         cursorSprite.transform.localScale = pulseSize;
     }
+
+    public void SpawnBeatHitResult()
+    {
+        GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
+        if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
+        {
+            beatResult.GetComponent<TMP_Text>().text = "perfect!";
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
+        {
+            beatResult.GetComponent<TMP_Text>().text = "early";
+            Debug.Log("early Beat Hit");
+        }
+        else
+        {
+            beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
+            Debug.Log("miss Beat Hit");
+
+        }
+    }
+    
 }

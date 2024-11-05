@@ -1380,7 +1380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e2caf3a8ef0e5488f0b045c30c76be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 120
+  isInTestingEnvironment: 1
+  bpm: 100
   crotchet: 0
   songPosition: 0
   songPositionInBeats: 0

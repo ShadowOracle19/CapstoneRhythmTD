@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
     public int bulletRange = 0;
     int activeTime;
 
+    public int damage = 1;
+
     public GameObject towerFiredFrom;
 
     public UnityEvent trigger;
@@ -55,7 +57,7 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().Damage(1);
+            collision.GetComponent<Enemy>().Damage(damage);
 
             RemoveProjectile();
         }

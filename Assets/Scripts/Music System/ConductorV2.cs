@@ -13,6 +13,8 @@ public class ConductorV2 : MonoBehaviour
         instance = this;
     }
 
+    public bool isInTestingEnvironment = false;
+
     public float bpm = 160;//song beats per minute
     public float crotchet;//Gives the time duration of a beat, calculated from the bpm
     public float songPosition;
@@ -34,12 +36,15 @@ public class ConductorV2 : MonoBehaviour
     //The current relative position of the song within the loop measured between 0 and 1.
     public float loopPositionInAnalog;
 
-    public float beatThreshold = 0.45f;
+
+    //Beat Thresholds
+    public float earlyBeatThreshold = 0.45f;
+    public float perfectBeatThreshold = 0.61f;
 
     public float beatDuration;
     public int numberOfBeats;
 
-    public bool threshold;
+    //public bool threshold;
 
     private int beatTrack;
 
@@ -57,6 +62,24 @@ public class ConductorV2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(isInTestingEnvironment)//if in a testing environment thats not the game scene play this to start conductor
+        {
+            //load the audio source attached to the conductor gameobject
+            musicSource = GetComponent<AudioSource>();
+
+            //calculate the number of seconds in each beat
+            crotchet = 60 / bpm;
+
+            //record the time when the music starts
+            dspSongTime = (float)AudioSettings.dspTime;
+
+            completedLoops = 0;
+            numberOfBeats = 0;
+            beatTrack = 0;
+
+            //Start the song
+            musicSource.Play();
+        }
         
     }
 
@@ -88,6 +111,7 @@ public class ConductorV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (GameManager.Instance.isGamePaused)
         {
             musicSource.Pause();
@@ -129,17 +153,29 @@ public class ConductorV2 : MonoBehaviour
 
         beatDuration = songPositionInBeats - numberOfBeats * 1;
 
-        threshold = InThreshHold();
+        //threshold = InThreshHold();
 
         TriggerBeatEvent(musicSource.timeSamples / (musicSource.clip.frequency * crotchet));
     }
 
     public bool InThreshHold()
     {
-        if (beatDuration > beatThreshold)
+        if(beatDuration >= perfectBeatThreshold)
+        {
+            Debug.Log("perfect Beat Hit");
             return true;
+        }
+        else if (beatDuration >= earlyBeatThreshold)//good beat hit
+        {
+            Debug.Log("early Beat Hit");
+            return true;
+        }
         else
+        {
+            Debug.Log("miss Beat Hit");
             return false;
+
+        }
 
 
     }
@@ -152,7 +188,6 @@ public class ConductorV2 : MonoBehaviour
         if (songPositionInBeats >= beatTrack + 1 * 1)
         {
             beatTrack++;
-            Debug.Log("do I get here?");
             return true;
         }
         else

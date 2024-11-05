@@ -23,6 +23,9 @@ public class Enemy : MonoBehaviour
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
 
+    float moveCounter = 0;
+    public float moveOnBeat = 4;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +51,12 @@ public class Enemy : MonoBehaviour
 
     public void OnTick()
     {
-        move = false;
+        moveCounter += 1;
+        if(moveCounter == 4)
+        {
+            move = false;
+            moveCounter = 0;
+        }
         //Debug.Log("Enemy Movement");
     }
 

@@ -41,6 +41,10 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public Transform towersParent;
     [SerializeField] public Transform projectilesParent;
 
+    public TextMeshProUGUI enemiesSpawnIn;
+    public int enemyTimer = 40;
+    bool switchColor = false;
+
     [Header("Resources")]
     public int resourceNum;
     public int maxResource = 100;
@@ -83,6 +87,8 @@ public class CombatManager : MonoBehaviour
         enemySpawners.currentNumberOfEnemiesSpawned = 0;
 
         resourceNum = 10;
+        enemyTimer = 40;
+        enemiesSpawnIn.gameObject.SetActive(true);
 
         //Conductor.Instance.bass.volume = 0;
         //Conductor.Instance.piano.volume = 0;
@@ -154,12 +160,23 @@ public class CombatManager : MonoBehaviour
 
     void DelayTimer()
     {
+        enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
         //Start spawning enemies on the 10th bar
         if (ConductorV2.instance.completedLoops >= 10)
         {
+            enemiesSpawnIn.gameObject.SetActive(false);
             enemySpawners.StartSpawningEnemies();
         }
 
+    }
+    public void BeatCountdown()
+    {
+        enemyTimer -= 1;
+        if (switchColor)
+            enemiesSpawnIn.color = Color.red;
+        else
+            enemiesSpawnIn.color = Color.blue;
+        switchColor = !switchColor;
     }
 
     public void GenerateResource()
@@ -170,6 +187,7 @@ public class CombatManager : MonoBehaviour
     public void SpawnBeat()
     {
         if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused) return;
+
         GameObject beat = Instantiate(beatPrefab, beatSpawnPoint.position, Quaternion.identity, beatParent);
         beat.GetComponent<BeatMover>().endPos = beatEndPoint;
     }

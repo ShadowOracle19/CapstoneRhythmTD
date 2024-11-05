@@ -22,20 +22,9 @@ public class EnemySpawner : MonoBehaviour
 
     public bool spawnBeat;
 
+    public float spawnOnBeat = 4;
+    public float currentBeat = 0;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-
-    }
 
     public void StartSpawningEnemies()
     {
@@ -48,18 +37,18 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnUnit()
     {
         if (!startOnce || GameManager.Instance.isGamePaused)
-        {
-            Debug.Log("Stop Spawning");
             return;
-        }
-        if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn)
+
+        //once all enemies are spawned stop spawning them
+        if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn) 
         {
             Debug.Log("spawned enemies");
             allEnemiesSpawned = true;
             return;
         }
-        Debug.Log("spawn enemies");
+
         //randomly spawn an enemy on the y value from -1,0,1
+        Debug.Log(currentNumberOfEnemiesSpawned + " Enemy Spawned");
         int randSpawn = Random.Range(-1, 2);
         GameObject enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
         ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
@@ -67,5 +56,4 @@ public class EnemySpawner : MonoBehaviour
         currentNumberOfEnemiesSpawned += 1;
         
     }
-
 }

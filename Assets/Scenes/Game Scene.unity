@@ -8289,10 +8289,10 @@ RectTransform:
   - {fileID: 1164532952}
   m_Father: {fileID: 1167487323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 317.03455, y: -230.60904}
+  m_SizeDelta: {x: 554.0691, y: 67.07269}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &694078965
 MonoBehaviour:
@@ -14680,10 +14680,10 @@ RectTransform:
   - {fileID: 366296231}
   m_Father: {fileID: 1167487323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 317.03455, y: -123.53635}
+  m_SizeDelta: {x: 554.0691, y: 67.07269}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1242956589
 MonoBehaviour:
@@ -15754,20 +15754,6 @@ MonoBehaviour:
   triggerEvent:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1683981607}
-        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
-        m_MethodName: SpawnUnit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 2096350185}
         m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
         m_MethodName: GenerateResource
@@ -15809,6 +15795,20 @@ MonoBehaviour:
       - m_Target: {fileID: 987591834}
         m_TargetAssemblyTypeName: CursorTD, Assembly-CSharp
         m_MethodName: Pulse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1683981607}
+        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
+        m_MethodName: SpawnUnit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18213,10 +18213,10 @@ RectTransform:
   - {fileID: 1835674558}
   m_Father: {fileID: 1167487323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 317.03455, y: -337.68173}
+  m_SizeDelta: {x: 554.0691, y: 67.07269}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1536197000
 MonoBehaviour:
@@ -20519,8 +20519,10 @@ MonoBehaviour:
   enemyParent: {fileID: 223948866}
   _pathParent: {fileID: 0}
   spawnBeat: 0
-  spawnOnBeat: 4
+  restForBeats: 20
   currentBeat: 0
+  enemyTracker: 0
+  lastRandomSpawn: 0
 --- !u!4 &1683981611
 Transform:
   m_ObjectHideFlags: 0
@@ -22290,7 +22292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1804208462
 Transform:
   m_ObjectHideFlags: 0
@@ -24395,7 +24397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2019509088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25219,7 +25221,7 @@ MonoBehaviour:
   towersParent: {fileID: 1701595669}
   projectilesParent: {fileID: 140131886}
   enemiesSpawnIn: {fileID: 1636255719}
-  enemyTimer: 40
+  enemyTimer: 35
   resourceNum: 0
   maxResource: 100
   resourceSlider: {fileID: 1714969127}

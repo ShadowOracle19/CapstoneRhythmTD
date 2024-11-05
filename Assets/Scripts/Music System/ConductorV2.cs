@@ -185,7 +185,7 @@ public class ConductorV2 : MonoBehaviour
         if (GameManager.Instance.isGamePaused)
             return false;
 
-        if (songPositionInBeats >= beatTrack + 1 * 1)
+        if (songPositionInBeats >= beatTrack + 4 * 1)
         {
             beatTrack++;
             return true;

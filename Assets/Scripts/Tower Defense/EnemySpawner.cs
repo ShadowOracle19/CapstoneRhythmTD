@@ -22,9 +22,16 @@ public class EnemySpawner : MonoBehaviour
 
     public bool spawnBeat;
 
-    public float spawnOnBeat = 4;
+    public float restForBeats = 10;
     public float currentBeat = 0;
+    public float enemyTracker = 0;
 
+    public int lastRandomSpawn;
+
+    private void Update()
+    {
+        
+    }
 
     public void StartSpawningEnemies()
     {
@@ -47,13 +54,32 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
+        if(enemyTracker == 5)
+        {
+            currentBeat += 1;
+            if(currentBeat == restForBeats)
+            {
+                currentBeat = 0;
+                enemyTracker = 0;
+            }
+            return;
+        }
+
         //randomly spawn an enemy on the y value from -1,0,1
         Debug.Log(currentNumberOfEnemiesSpawned + " Enemy Spawned");
-        int randSpawn = Random.Range(-1, 2);
+
+        int randSpawn = Random.Range(-2, 2);
+        if (randSpawn == lastRandomSpawn)
+        {
+            randSpawn = Random.Range(-2, 2);
+        }
         GameObject enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
+        lastRandomSpawn = randSpawn;
+
         ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
 
         currentNumberOfEnemiesSpawned += 1;
+        enemyTracker += 1;
         
     }
 }

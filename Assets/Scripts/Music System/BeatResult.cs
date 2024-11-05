@@ -20,7 +20,7 @@ public class BeatResult : MonoBehaviour
         fade = Mathf.Clamp(fade, 0, 1);
 
         GetComponent<TMP_Text>().color = new Color(0, 0, 0, fade);
-        transform.position = Vector3.Lerp(new Vector3(originPos.x, originPos.y + 1), transform.position, fade);
+        transform.position = Vector3.Lerp(new Vector3(originPos.x, originPos.y + 0.5f), transform.position, fade);
         if(fade == 0)
         {
             Destroy(gameObject);

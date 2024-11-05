@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     float moveCounter = 0;
     public float moveOnBeat = 4;
 
+    public bool firstSpawn = true;
+
     // Start is called before the first frame update
     void Start()
     {

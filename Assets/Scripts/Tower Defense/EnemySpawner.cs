@@ -20,17 +20,17 @@ public class EnemySpawner : MonoBehaviour
     public Transform enemyParent;
     [SerializeField] private Transform _pathParent;
 
-    // Start is called before the first frame update
-    void Start()
+    public bool spawnBeat;
+
+    public float restForBeats = 10;
+    public float currentBeat = 0;
+    public float enemyTracker = 0;
+
+    public int lastRandomSpawn;
+
+    private void Update()
     {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-
     }
 
     public void StartSpawningEnemies()
@@ -41,32 +41,45 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // Just an example OnTick here
-    public void OnTick()
+    public void SpawnUnit()
     {
-        if (!startOnce || GameManager.Instance.isGamePaused) return;
-        if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn)
+        if (!startOnce || GameManager.Instance.isGamePaused)
+            return;
+
+        //once all enemies are spawned stop spawning them
+        if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn) 
         {
+            Debug.Log("spawned enemies");
             allEnemiesSpawned = true;
             return;
         }
 
-        if(GameManager.Instance.beat >= 3)
+        if(enemyTracker == 5)
         {
-            //randomly spawn an enemy on the y value from -1,0,1
-            int randSpawn = Random.Range(-1, 2);
-            GameObject enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
-
-            //adds enemy onto the conductor so they move on beat
-            Conductor.Instance._intervals.Add(enemy.GetComponent<Enemy>().interval);
-
-            //enemy.GetComponent<Enemy>().path = placedPath;
-            currentNumberOfEnemiesSpawned += 1;
+            currentBeat += 1;
+            if(currentBeat == restForBeats)
+            {
+                currentBeat = 0;
+                enemyTracker = 0;
+            }
+            return;
         }
 
-        
+        //randomly spawn an enemy on the y value from -1,0,1
+        Debug.Log(currentNumberOfEnemiesSpawned + " Enemy Spawned");
 
+        int randSpawn = Random.Range(-2, 2);
+        if (randSpawn == lastRandomSpawn)
+        {
+            randSpawn = Random.Range(-2, 2);
+        }
+        GameObject enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
+        lastRandomSpawn = randSpawn;
+
+        ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
+
+        currentNumberOfEnemiesSpawned += 1;
+        enemyTracker += 1;
         
     }
-
 }

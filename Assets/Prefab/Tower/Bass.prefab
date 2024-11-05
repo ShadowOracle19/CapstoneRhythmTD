@@ -156,12 +156,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487236645069580213}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: 0.5306001, y: 0.01769994, z: 0}
+  m_LocalScale: {x: 0.65651226, y: 1.0612, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6295085651820455764}
+  m_Father: {fileID: 6265875441098591601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1262268297489250623
 GameObject:
@@ -440,14 +440,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2416119472238725123}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 0.0177, z: 0}
-  m_LocalScale: {x: 0.6565123, y: 1.0612, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3199641180352351627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15627956, z: 0.22848013}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
   m_Father: {fileID: 6265875441098591601}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3804421271596065783
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -489,7 +488,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88f0b11e59de9d34a9d9217f0a3f07dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -749,6 +748,7 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 3199641180352351627}
   - {fileID: 6295085651820455764}
   - {fileID: 843541784823512210}
   m_Father: {fileID: 0}
@@ -829,6 +829,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ab0915b36e22647a7b0d506fe5cbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1969963013028165710}
+        m_TargetAssemblyTypeName: Tower, Assembly-CSharp
+        m_MethodName: Fire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   rotateStarted: 0
   rotateOnce: 0
   rotationSelect: {fileID: 6168423145390469160}
@@ -855,6 +870,7 @@ MonoBehaviour:
   instrumentType: 2
   bulletSpeed: 200
   range: 5
+  damage: 1
   AOE: 1
   AOERange: {fileID: 0}
 --- !u!61 &6367522176411443336

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class Projectile : MonoBehaviour
     public int bulletRange = 0;
     int activeTime;
 
+    public int damage = 1;
+
     public GameObject towerFiredFrom;
 
-    public Intervals interval;
+    public UnityEvent trigger;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,13 +57,14 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().Damage(1);
+            collision.GetComponent<Enemy>().Damage(damage);
 
             RemoveProjectile();
         }
     }
     public void RemoveProjectile()
     {
-        Conductor.Instance.RemoveInterval(interval, gameObject);
+        ConductorV2.instance.triggerEvent.Remove(trigger);
+        Destroy(gameObject);
     }
 }

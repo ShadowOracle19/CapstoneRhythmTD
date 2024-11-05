@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,6 +21,11 @@ public class CursorTD : MonoBehaviour
     public GameObject SlotS;
     public GameObject SlotD;
 
+    public GameObject cursorSprite;
+    public Vector3 pulseSize;
+
+    public GameObject beatHitResultPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,56 +35,65 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //return cursor sprite to origin size
+        cursorSprite.transform.localScale = Vector3.Lerp(cursorSprite.transform.localScale, Vector3.one, Time.deltaTime * 5);
+        
+
         if (GameManager.Instance.winState) return;
         if(Input.GetKeyUp(KeyCode.Space))
         {
             TogglePlacementMenu();
         }
 
-        //on press log which direction needs to be moved
-        if(Input.GetKeyUp(KeyCode.W) && !isMoving)
-        {
-            if (towerSelectMenuOpened && tile.placedTower == null)
-            {
-                TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
-                SlotW.GetComponent<SpriteRenderer>().color = Color.white;
-                return;
-            }
-            desiredMovement = Vector3.up;
-        }
-        else if (Input.GetKeyUp(KeyCode.A) && !isMoving)
-        {
-            if (towerSelectMenuOpened && tile.placedTower == null)
-            {
-                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
-                SlotA.GetComponent<SpriteRenderer>().color = Color.white;
-                return;
-            }
-            desiredMovement = Vector3.left;
-        }
-        else if (Input.GetKeyUp(KeyCode.S) && !isMoving)
-        {
-            if (towerSelectMenuOpened && tile.placedTower == null)
-            {
-                TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
-                SlotS.GetComponent<SpriteRenderer>().color = Color.white;
-                return;
-            }
-            desiredMovement = Vector3.down;
-        }
-        else if (Input.GetKeyUp(KeyCode.D) && !isMoving)
-        {
-            if (towerSelectMenuOpened && tile.placedTower == null)
-            {
-                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
-                SlotD.GetComponent<SpriteRenderer>().color = Color.white;
-                
-                return;
-            }
-            desiredMovement = Vector3.right;
-        }
+        
+        
 
         HighlightPlacementSlot();
+        MoveCursor();
+
+        Move();
+    }
+
+
+    public void MoveCursor()
+    {
+        //on press log which direction needs to be moved
+        if (Input.GetKeyUp(KeyCode.UpArrow) && !isMoving)
+        {
+            //Debug.Log("Try move");
+            if(ConductorV2.instance.InThreshHold())
+            {
+                desiredMovement = Vector3.up;
+            }
+            SpawnBeatHitResult();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftArrow) && !isMoving)
+        {
+            if (ConductorV2.instance.InThreshHold())
+            {
+                desiredMovement = Vector3.left;
+            }
+            SpawnBeatHitResult();
+
+        }
+        else if (Input.GetKeyUp(KeyCode.DownArrow) && !isMoving)
+        {
+            if (ConductorV2.instance.InThreshHold())
+            {
+                desiredMovement = Vector3.down;
+            }
+            SpawnBeatHitResult();
+
+        }
+        else if (Input.GetKeyUp(KeyCode.RightArrow) && !isMoving)
+        {
+            if (ConductorV2.instance.InThreshHold())
+            {
+                desiredMovement = Vector3.right;
+            }
+
+            SpawnBeatHitResult();
+        }
         
     }
 
@@ -86,8 +101,24 @@ public class CursorTD : MonoBehaviour
     {
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().resourceCost)
         {
+            if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
+            {
+                Debug.Log("perfect Beat Hit");
+                tower.GetComponent<Tower>().damage += 2;
+            }
+            else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
+            {
+                Debug.Log("early Beat Hit");
+                tower.GetComponent<Tower>().damage += 1;
+            }
+            else
+            {
+                Debug.Log("miss Beat Hit");
+
+            }
             TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().instrumentType);
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().resourceCost;
+            SpawnBeatHitResult();
             TogglePlacementMenu();
         }
         else
@@ -106,23 +137,49 @@ public class CursorTD : MonoBehaviour
     public void HighlightPlacementSlot()
     {
         if (!towerSelectMenuOpened) return;
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             SlotW.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (towerSelectMenuOpened && tile.placedTower == null)
+            {
+                TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
+                SlotW.GetComponent<SpriteRenderer>().color = Color.white;
+                return;
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             SlotA.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (towerSelectMenuOpened && tile.placedTower == null)
+            {
+                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
+                SlotA.GetComponent<SpriteRenderer>().color = Color.white;
+                return;
+            }
 
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             SlotS.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (towerSelectMenuOpened && tile.placedTower == null)
+            {
+                TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
+                SlotS.GetComponent<SpriteRenderer>().color = Color.white;
+                return;
+            }
 
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyUp(KeyCode.RightArrow))
         {
+
             SlotD.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (towerSelectMenuOpened && tile.placedTower == null)
+            {
+                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
+                SlotD.GetComponent<SpriteRenderer>().color = Color.white;
+
+                return;
+            }
 
         }
     }
@@ -135,15 +192,15 @@ public class CursorTD : MonoBehaviour
         SlotD.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    //plays every beat
     public void Move()
     {
-        if (desiredMovement == Vector3.zero || towerSelectMenuOpened) return;
+        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving) return;
         StartCoroutine(MovePlayer(desiredMovement));
     }
 
     private IEnumerator MovePlayer(Vector3 direction)
     {
+        
         isMoving = true;
 
         float elapsedTime = 0;
@@ -171,16 +228,43 @@ public class CursorTD : MonoBehaviour
 
         isMoving = false;
         desiredMovement = Vector3.zero;
-
+        tile = null;
         yield return null;
     }
 
     //check which tile cursor is on
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("StageTile"))
         {
             tile = collision.gameObject.GetComponent<Tile>();
         }
     }
+
+    public void Pulse()
+    {
+        //Debug.Log("pulse");
+        cursorSprite.transform.localScale = pulseSize;
+    }
+
+    public void SpawnBeatHitResult()
+    {
+        GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
+        if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
+        {
+            beatResult.GetComponent<TMP_Text>().text = "perfect!";
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
+        {
+            beatResult.GetComponent<TMP_Text>().text = "early";
+            Debug.Log("early Beat Hit");
+        }
+        else
+        {
+            beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
+            Debug.Log("miss Beat Hit");
+
+        }
+    }
+    
 }

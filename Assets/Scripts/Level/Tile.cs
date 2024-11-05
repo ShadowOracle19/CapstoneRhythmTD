@@ -11,7 +11,8 @@ public class Tile : MonoBehaviour
 
     [SerializeField] public GameObject placedTower;
 
-    Color currentColor;
+    public Color currentColor;
+    
     float time = 1;
     //when init is called offset color based off true or false
     //todo: look into if levels arent retangular and are at different shapes
@@ -19,6 +20,7 @@ public class Tile : MonoBehaviour
     {
         _renderer.color = isOffset ? _offsetColor : _baseColor;
         currentColor = _renderer.color;
+        currentColor = new Color(currentColor.r, currentColor.g, currentColor.b, 0);
     }
 
     private void Update()
@@ -66,7 +68,7 @@ public class Tile : MonoBehaviour
         if (TowerManager.Instance.towerToPlace == null || placedTower != null) return;
 
         _highlight.SetActive(false);
-        TowerManager.Instance.PlaceTower(transform.position, this);
+        //TowerManager.Instance.PlaceTower(transform.position, this);
 
     }
 }

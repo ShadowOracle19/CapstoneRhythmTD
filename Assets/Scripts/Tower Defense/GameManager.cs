@@ -59,10 +59,6 @@ public class GameManager : MonoBehaviour
     public bool winState = false;
     public bool loseState = false;
 
-    [Header("Beats and Bars")]
-    public int beat;
-    public int bar;
-
     [Header("Dialogue")]
     public float textSpeed = 0.05f;
 
@@ -138,7 +134,8 @@ public class GameManager : MonoBehaviour
         else
         {
             restartEncounterButton.interactable = true;
-            conductor.SetActive(false);
+            
+            //conductor.SetActive(false);
         }
         Cursor.lockState = CursorLockMode.None;
         isGamePaused = true;
@@ -168,7 +165,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over");
         CombatManager.Instance.EndEncounter();
         gameOverScreen.SetActive(true);
-        conductor.SetActive(false);
+        //conductor.SetActive(false);
+        ConductorV2.instance.StopMusic();
     }
 
     public void WinLevel()
@@ -182,16 +180,8 @@ public class GameManager : MonoBehaviour
         //winScreen.SetActive(true);
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
-        conductor.SetActive(false);
+        //conductor.SetActive(false);
+        ConductorV2.instance.StopMusic();
     }
 
-    public void Beat()
-    {
-        if(beat >= 4)
-        {
-            bar += 1;
-            beat = 0;
-        }
-        beat += 1;
-    }
 }

@@ -52,23 +52,21 @@ MonoBehaviour:
   currentPositionHolder: {x: 0, y: 0, z: 0}
   move: 1
   health: 5
-  interval:
-    _steps: 0.25
-    _trigger:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5669857762305846285}
-          m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-          m_MethodName: OnTick
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  trigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5669857762305846285}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnTick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextPosition: {x: 0, y: 0, z: 0}
   _renderer: {fileID: 4349701985587343243}
 --- !u!61 &79028663795836632

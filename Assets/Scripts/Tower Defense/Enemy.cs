@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,12 +16,17 @@ public class Enemy : MonoBehaviour
 
     public int health = 5;
 
-    public Intervals interval;
+    public UnityEvent trigger;
 
     [SerializeField] private Vector3 nextPosition;
 
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
+
+    float moveCounter = 0;
+    public float moveOnBeat = 4;
+
+    public bool firstSpawn = true;
 
     // Start is called before the first frame update
     void Start()
@@ -39,14 +45,20 @@ public class Enemy : MonoBehaviour
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
-        //if (!move) return;
+        
+
         Movement();
 
     }
 
     public void OnTick()
     {
-        move = false;
+        moveCounter += 1;
+        if(moveCounter == 4)
+        {
+            move = false;
+            moveCounter = 0;
+        }
         //Debug.Log("Enemy Movement");
     }
 
@@ -114,6 +126,7 @@ public class Enemy : MonoBehaviour
 
     public void RemoveEnemy()
     {
-        Conductor.Instance.RemoveInterval(interval, gameObject);
+        ConductorV2.instance.triggerEvent.Remove(trigger);
+        Destroy(gameObject);
     }
 }

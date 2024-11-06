@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     void Health()
     {
-        healthText.text = _currentHealth + "/" + _maxHealth;
+        healthText.text = "Health: " + _currentHealth + "/" + _maxHealth;
 
         if (_currentHealth <= 0)
         {

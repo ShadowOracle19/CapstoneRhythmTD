@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuRoot;
     [SerializeField] private GameObject settings;
     public GameObject pauseMenuRoot;
+    public GameObject titleRoot;
 
     [Header("Combat")]
     [SerializeField] private TextMeshProUGUI healthText;
@@ -65,6 +66,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //make sure when scene starts title root is set active
+        titleRoot.SetActive(true);
+        menuRoot.SetActive(false);
+        combatRoot.SetActive(false);
+        dialogueRoot.SetActive(false);
+        settings.SetActive(false);
+        pauseMenuRoot.SetActive(false);
+
         _currentHealth = _maxHealth;
     }
 

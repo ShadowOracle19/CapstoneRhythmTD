@@ -51,9 +51,12 @@ public class CursorTD : MonoBehaviour
         HighlightPlacementSlot();
         MoveCursor();
 
+
+
         Move();
     }
 
+    
 
     public void MoveCursor()
     {
@@ -61,35 +64,35 @@ public class CursorTD : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.UpArrow) && !isMoving)
         {
             //Debug.Log("Try move");
-            if(ConductorV2.instance.InThreshHold())
+            desiredMovement = Vector3.up;
+            if (ConductorV2.instance.InThreshHold())//beat hit or early
             {
-                desiredMovement = Vector3.up;
             }
             SpawnBeatHitResult();
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow) && !isMoving)
         {
-            if (ConductorV2.instance.InThreshHold())
+            desiredMovement = Vector3.left;
+            if (ConductorV2.instance.InThreshHold())//beat hit or early
             {
-                desiredMovement = Vector3.left;
             }
             SpawnBeatHitResult();
 
         }
         else if (Input.GetKeyUp(KeyCode.DownArrow) && !isMoving)
         {
-            if (ConductorV2.instance.InThreshHold())
+            desiredMovement = Vector3.down;
+            if (ConductorV2.instance.InThreshHold())//beat hit or early
             {
-                desiredMovement = Vector3.down;
             }
             SpawnBeatHitResult();
 
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow) && !isMoving)
         {
-            if (ConductorV2.instance.InThreshHold())
+            desiredMovement = Vector3.right;
+            if (ConductorV2.instance.InThreshHold())//beat hit or early
             {
-                desiredMovement = Vector3.right;
             }
 
             SpawnBeatHitResult();

@@ -520,7 +520,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Heath: x/x'
+  m_text: 'Health: x/x'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70.6
+  m_fontSize: 67.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3624,6 +3624,7 @@ MonoBehaviour:
   menuRoot: {fileID: 1804208461}
   settings: {fileID: 648745825}
   pauseMenuRoot: {fileID: 504395057}
+  titleRoot: {fileID: 2019509087}
   healthText: {fileID: 25996096}
   _maxHealth: 5
   _currentHealth: 0
@@ -15731,7 +15732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInTestingEnvironment: 0
-  bpm: 160
+  bpm: 80
   crotchet: 0
   songPosition: 0
   songPositionInBeats: 0

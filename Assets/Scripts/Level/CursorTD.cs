@@ -97,25 +97,25 @@ public class CursorTD : MonoBehaviour
 
     public void TryToPlaceTower(GameObject tower)
     {
-        if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().resourceCost)
+        if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost)
         {
             if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
             {
                 Debug.Log("perfect Beat Hit");
-                tower.GetComponent<Tower>().damage += 2;
+                tower.GetComponent<Tower>().towerInfo.damage += 2;
             }
             else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
             {
                 Debug.Log("early Beat Hit");
-                tower.GetComponent<Tower>().damage += 1;
+                tower.GetComponent<Tower>().towerInfo.damage += 1;
             }
             else
             {
                 Debug.Log("miss Beat Hit");
 
             }
-            TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().instrumentType);
-            CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().resourceCost;
+            TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type);
+            CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             SpawnBeatHitResult();
             TogglePlacementMenu();
         }

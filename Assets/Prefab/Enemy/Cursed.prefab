@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 79028663795836632}
   - component: {fileID: 2951424127729736265}
   m_Layer: 0
-  m_Name: Enemy Basic
+  m_Name: Cursed
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,11 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ad5d2c844a09d46bfd90e9270aa7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 11400000, guid: a244aef10e8a0884ebeeb0b89f5269d2, type: 2}
   path: []
   speed: 1
   currentPositionHolder: {x: 0, y: 0, z: 0}
   move: 1
-  health: 5
+  currentHealth: 0
   trigger:
     m_PersistentCalls:
       m_Calls:
@@ -214,7 +215,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 1740127526, guid: 681b36b64a9036f49bb005faa1f1d3ed, type: 3}
+  m_Sprite: {fileID: 1036698107, guid: 99650fc522a0aac44996b9a29f1f1230, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

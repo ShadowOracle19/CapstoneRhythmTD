@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18102bcf76c94404eafc40143c5c6aad, type: 3}
+  m_Name: Piano
+  m_EditorClassIdentifier: 
+  towerName: Piano
+  towerDescription: Projectile based tower that deals 1 damage that pierces through
+    enemies
+  towerImage: {fileID: 21300000, guid: 4121966fd11d72540b1de23e433f1f9b, type: 3}
+  type: 3
+  resourceCost: 15
+  cooldownTime: 10
+  towerHealth: 5
+  attackPattern: 2
+  damage: 1
+  range: 4
+  projectilePiercesEnemies: 1
+  projectileColor: {r: 0, g: 1, b: 0.046749115, a: 1}
+  isAOETower: 0

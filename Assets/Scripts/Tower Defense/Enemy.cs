@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
+    public EnemyCreator enemy;
+
     public List<Vector3> path;
     public float speed = 1;
     float timer;
@@ -13,8 +15,9 @@ public class Enemy : MonoBehaviour
     int currentNode;
 
     public bool move;
+    private bool otherBeatMove = false;
 
-    public int health = 5;
+    public int currentHealth;
 
     public UnityEvent trigger;
 
@@ -23,10 +26,7 @@ public class Enemy : MonoBehaviour
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
 
-    float moveCounter = 0;
-    public float moveOnBeat = 4;
 
-    public bool firstSpawn = true;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour
         //GetComponent<AIPath>().path.vectorPath
         //if (path.Count == 0) gameObject.SetActive(false);
         //currentPositionHolder = path[currentNode += 1];
+
+        currentHealth = enemy.maxHealth;
+
         move = true;
 
         nextPosition = new Vector3(transform.position.x - 1, transform.position.y);
@@ -53,13 +56,25 @@ public class Enemy : MonoBehaviour
 
     public void OnTick()
     {
-        moveCounter += 1;
-        if(moveCounter == 4)
+
+        switch (enemy.movementPattern)
         {
-            move = false;
-            moveCounter = 0;
+            case EnemyMovementPattern.everyBeat:
+                move = false;
+                break;
+
+            case EnemyMovementPattern.everyOtherBeat:
+                otherBeatMove = !otherBeatMove;
+                if(otherBeatMove)
+                {
+                    move = false;
+                }
+                break;
+
+            default:
+                break;
         }
-        //Debug.Log("Enemy Movement");
+        
     }
 
     #region pathing
@@ -110,8 +125,8 @@ public class Enemy : MonoBehaviour
         _renderer.color = Color.red;
         time = 1;
         Debug.Log(gameObject.name + " damaged");
-        health -= damage;
-        if(health <= 0)
+        currentHealth -= damage;
+        if(currentHealth <= 0)
         {
             Kill();
         }

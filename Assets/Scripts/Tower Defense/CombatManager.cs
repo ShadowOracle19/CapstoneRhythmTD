@@ -80,13 +80,19 @@ public class CombatManager : MonoBehaviour
 
         allEnemiesSpawned = false;
 
-        enemyTotal = currentEncounter.enemyTotal;
+        enemyTotal = 0;
+        foreach (var item in currentEncounter.waves)
+        {
+            enemyTotal += item.numberOfEnemies;
+        }
         enemySpawners.numberOfEnemiesToSpawn = enemyTotal;
         enemySpawners.startOnce = false;
         enemySpawners.currentNumberOfEnemiesSpawned = 0;
+        enemySpawners.currentWaves = currentEncounter.waves;
+        enemySpawners.currentWave = currentEncounter.waves[0];
 
         resourceNum = 10;
-        enemyTimer = 40;
+        enemyTimer = 35;
         enemiesSpawnIn.gameObject.SetActive(true);
 
         //Conductor.Instance.bass.volume = 0;
@@ -119,6 +125,7 @@ public class CombatManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        enemySpawners.startOnce = false;
         Cursor.lockState = CursorLockMode.None;
         ConductorV2.instance.musicSource.Stop();
         ConductorV2.instance.drums.Stop();
@@ -161,7 +168,7 @@ public class CombatManager : MonoBehaviour
     {
         enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
         //Start spawning enemies on the 10th bar
-        if (ConductorV2.instance.completedLoops >= 10)
+        if (ConductorV2.instance.completedLoops >= 0)
         {
             enemiesSpawnIn.gameObject.SetActive(false);
             enemySpawners.StartSpawningEnemies();

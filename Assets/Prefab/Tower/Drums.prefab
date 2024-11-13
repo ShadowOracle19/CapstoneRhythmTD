@@ -794,6 +794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ab0915b36e22647a7b0d506fe5cbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerInfo: {fileID: 11400000, guid: c6827d0b3828b0c4ab69976db279f395, type: 2}
   trigger:
     m_PersistentCalls:
       m_Calls:
@@ -810,34 +811,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   rotateStarted: 0
-  rotateOnce: 0
-  rotationSelect: {fileID: 627538069483677777}
   firePoint: {fileID: 3492212302174833441}
   projectile: {fileID: 2456792131810543251, guid: a77cb059551aa414e9549713c6ebc95d, type: 3}
-  interval:
-    _steps: 1
-    _trigger:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1202811070454382304}
-          m_TargetAssemblyTypeName: Tower, Assembly-CSharp
-          m_MethodName: Fire
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  resourceCost: 10
-  instrumentType: 0
-  bulletSpeed: 200
-  range: 5
-  damage: 1
-  AOE: 1
-  AOERange: {fileID: 0}
 --- !u!1 &2958165086469427499
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14bcd4c7a6ee51543a7cf4900f94b217, type: 3}
+  m_Name: Cursed
+  m_EditorClassIdentifier: 
+  enemyName: Cursed
+  enemyDescription: 
+  enemySprite: {fileID: 1036698107, guid: 99650fc522a0aac44996b9a29f1f1230, type: 3}
+  maxHealth: 7
+  movementPattern: 1

@@ -5,13 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Combat", menuName = "ScriptableObjects/CombatCreator")]
 public class CombatMaker : ScriptableObject
 {
-    public int enemyTotal = 0;
+    
     public int encounterBPM = 0;
-    public AudioClip levelSong;
+    public List<Wave> waves = new List<Wave>();
 }
 
 [System.Serializable]
 public class Wave
 {
-
+    public int delay;
+    public GameObject enemy;
+    public int numberOfEnemies;
 }

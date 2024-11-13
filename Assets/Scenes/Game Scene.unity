@@ -20510,20 +20510,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1fb3fc0506d184283b66cc13cf0540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: []
-  placedPath: []
+  currentWaves: []
+  currentWave:
+    delay: 0
+    enemy: {fileID: 0}
+    numberOfEnemies: 0
   startOnce: 0
-  enemyPrefab: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
   numberOfEnemiesToSpawn: 5
   currentNumberOfEnemiesSpawned: 0
   allEnemiesSpawned: 0
   enemyParent: {fileID: 223948866}
-  _pathParent: {fileID: 0}
-  spawnBeat: 0
-  restForBeats: 20
-  currentBeat: 0
-  enemyTracker: 0
   lastRandomSpawn: 0
+  timeRemainingToWaveStart: 0
+  waveIndex: 0
+  allEnemiesSpawnedFromWave: 0
+  numEnemiesInWave: 0
 --- !u!4 &1683981611
 Transform:
   m_ObjectHideFlags: 0

@@ -47,6 +47,8 @@ public class CursorTD : MonoBehaviour
 
     public GameObject beatHitResultPrefab;
 
+    public bool pauseMovement = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +58,9 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (pauseMovement)
+            return;
+
         //return cursor sprite to origin size
         cursorSprite.transform.localScale = Vector3.Lerp(cursorSprite.transform.localScale, Vector3.one, Time.deltaTime * 5);
         
@@ -134,7 +139,9 @@ public class CursorTD : MonoBehaviour
 
     public void TryToPlaceTower(GameObject tower)
     {
-        if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost)
+        //checks if resource is available and if the tower is on cooldown
+        if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
+            && !TowerManager.Instance.CheckIfOnCoolDown(tower.GetComponent<Tower>().towerInfo.type)) 
         {
             if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
             {
@@ -155,9 +162,11 @@ public class CursorTD : MonoBehaviour
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             SpawnBeatHitResult();
             TogglePlacementMenu();
+            return;
         }
         else
         {
+            unhighlightPlacementSlot();
             return;
         }    
     }
@@ -242,7 +251,7 @@ public class CursorTD : MonoBehaviour
         targetPos = originPos + direction;
 
         //bounding box function
-        if((targetPos.x <= -3 || targetPos.x >= 9) || (targetPos.y <= -2 || targetPos.y >= 2))
+        if((targetPos.x <= -3 || targetPos.x >= 9) || (targetPos.y <= -3 || targetPos.y >= 2))
         {
             isMoving = false;
             desiredMovement = Vector3.zero;

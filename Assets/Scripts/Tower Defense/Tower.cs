@@ -21,7 +21,6 @@ public class Tower : MonoBehaviour
 
     private RaycastHit2D[] colliders;
 
-    
 
     // Start is called before the first frame update
     void Start()
@@ -32,41 +31,11 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //RotateTowerOnPlace();
-        //if(AOE) AOERange.SetActive(false);
+       
 
         
     }
 
-
-    //private void RotateTowerOnPlace()
-    //{
-    //    //rotate
-    //    if (rotateStarted)
-    //    {
-    //        //rotation
-    //        Vector3 mousePos = Input.mousePosition;
-    //        mousePos.z = 0;
-
-    //        Vector3 objectPos = Camera.main.WorldToScreenPoint(transform.position);
-    //        mousePos.x = mousePos.x - objectPos.x;
-    //        mousePos.y = mousePos.y - objectPos.y;
-
-    //        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-
-    //        float rotation = Mathf.Round(angle / 90) * 90f;
-    //        transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotation));
-
-    //        if (Input.GetMouseButtonUp(0))
-    //        {
-    //            rotateStarted = false;
-    //            rotateOnce = true;
-    //            rotationSelect.SetActive(false);
-
-    //            //StartCoroutine("TestFire");
-    //        }
-    //    }
-    //}
 
     public void Fire()
     {

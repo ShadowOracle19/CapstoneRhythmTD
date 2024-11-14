@@ -17,11 +17,11 @@ MonoBehaviour:
     enemies
   towerImage: {fileID: 21300000, guid: 4121966fd11d72540b1de23e433f1f9b, type: 3}
   type: 3
-  resourceCost: 15
+  resourceCost: 10
   cooldownTime: 10
   towerHealth: 5
   attackPattern: 2
-  damage: 1
+  damage: 3
   range: 4
   projectilePiercesEnemies: 1
   projectileColor: {r: 0, g: 1, b: 0.046749115, a: 1}

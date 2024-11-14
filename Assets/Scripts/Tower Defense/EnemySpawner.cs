@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public List<Wave> currentWaves = new List<Wave>();
-    public Wave currentWave;
 
     public bool startOnce = false;
 
@@ -34,11 +33,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 Debug.Log("Are we here");
                 //allow enemies to spawn
-                if(waveIndex >= currentWaves.Count - 1) //if at the last wave stop running this
+                if(waveIndex >= currentWaves.Count) //if at the last wave stop running this
                 {
                     return;
                 }
-                currentWave = currentWaves[waveIndex];
                 timeRemainingToWaveStart = 0;//set delay for next wave
                 allEnemiesSpawnedFromWave = false;
             }
@@ -82,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
         {
             randSpawn = Random.Range(-2, 2);
         }
-        GameObject enemy = Instantiate(currentWave.enemy, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
+        GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
         lastRandomSpawn = randSpawn;
 
         ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);

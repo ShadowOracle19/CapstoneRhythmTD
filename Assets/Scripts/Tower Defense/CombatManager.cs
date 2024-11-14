@@ -89,10 +89,9 @@ public class CombatManager : MonoBehaviour
         enemySpawners.startOnce = false;
         enemySpawners.currentNumberOfEnemiesSpawned = 0;
         enemySpawners.currentWaves = currentEncounter.waves;
-        enemySpawners.currentWave = currentEncounter.waves[0];
 
         resourceNum = 10;
-        enemyTimer = 35;
+        enemyTimer = 30;
         enemiesSpawnIn.gameObject.SetActive(true);
 
         //Conductor.Instance.bass.volume = 0;
@@ -177,7 +176,7 @@ public class CombatManager : MonoBehaviour
     {
         enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
         //Start spawning enemies on the 10th bar
-        if (ConductorV2.instance.completedLoops >= 100)
+        if (ConductorV2.instance.numberOfBeats >= 30)
         {
             enemiesSpawnIn.gameObject.SetActive(false);
             enemySpawners.StartSpawningEnemies();

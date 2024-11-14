@@ -294,15 +294,20 @@ public class CursorTD : MonoBehaviour
         if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
         {
             beatResult.GetComponent<TMP_Text>().text = "perfect!";
+            beatResult.GetComponent<TMP_Text>().fontSize = 72;
+            beatResult.GetComponent<TMP_Text>().color = Color.green;
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
         {
             beatResult.GetComponent<TMP_Text>().text = "early";
+            beatResult.GetComponent<TMP_Text>().fontSize = 56;
+            beatResult.GetComponent<TMP_Text>().color = Color.yellow;
             Debug.Log("early Beat Hit");
         }
         else
         {
             beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
+            beatResult.GetComponent<TMP_Text>().color = Color.red;
             Debug.Log("miss Beat Hit");
 
         }

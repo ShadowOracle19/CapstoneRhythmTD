@@ -15338,7 +15338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -43.1, y: -89.4}
+  m_AnchoredPosition: {x: -43.1, y: -89.399994}
   m_SizeDelta: {x: -54.789993, y: -54.789993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1232649542
@@ -16549,18 +16549,6 @@ MonoBehaviour:
       - m_Target: {fileID: 2096350185}
         m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
         m_MethodName: GenerateResource
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2096350185}
-        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
-        m_MethodName: SpawnBeat
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17960,7 +17948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -725.31, y: -15.252075}
+  m_AnchoredPosition: {x: -725.31, y: -15.252136}
   m_SizeDelta: {x: -1485.35, y: -541.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1455474862
@@ -19974,7 +19962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -299, y: 55}
+  m_AnchoredPosition: {x: -299, y: -1}
   m_SizeDelta: {x: 389.70996, y: 84.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636255719
@@ -20006,8 +19994,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -21389,10 +21377,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWaves: []
-  currentWave:
-    delay: 0
-    enemy: {fileID: 0}
-    numberOfEnemies: 0
   startOnce: 0
   numberOfEnemiesToSpawn: 5
   currentNumberOfEnemiesSpawned: 0
@@ -21692,7 +21676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -47, y: -87.4}
+  m_AnchoredPosition: {x: -47, y: -87.399994}
   m_SizeDelta: {x: -54.79, y: -54.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1693472527
@@ -22469,7 +22453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -46, y: -87.9}
+  m_AnchoredPosition: {x: -46, y: -87.899994}
   m_SizeDelta: {x: -54.789993, y: -54.789993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1726372497

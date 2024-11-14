@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Bass
   towerDescription: AOE based tower that deals 1 damage in its radius
-  towerImage: {fileID: 0}
+  towerImage: {fileID: 21300000, guid: 88f0b11e59de9d34a9d9217f0a3f07dc, type: 3}
   type: 0
   resourceCost: 15
   cooldownTime: 10

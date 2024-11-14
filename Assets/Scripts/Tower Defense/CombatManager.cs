@@ -101,6 +101,8 @@ public class CombatManager : MonoBehaviour
         //Conductor.Instance.guitarM.volume = 0;
         //Conductor.Instance.drums.volume = 0;
 
+        CursorTD.Instance.InitializePlacementMenu();
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 

@@ -29,6 +29,8 @@ public class TowerManager : MonoBehaviour
     public GameObject towerToPlace;
     public bool isTowerHovering = false;
 
+    public List<GameObject> towers = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,16 +40,7 @@ public class TowerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //delete held tower when its not hovering over square
-        if(Input.anyKeyDown && !isTowerHovering)
-        {
-            DeleteHeldTower();
-        }
-        //delete held tower while its hovering over a square
-        if(Input.GetMouseButtonDown(1))
-        {
-            DeleteHeldTower();
-        }
+        
     }
 
 
@@ -87,13 +80,5 @@ public class TowerManager : MonoBehaviour
                 break;
         }
     }
-
-
-    public void DeleteHeldTower()
-    {
-        Destroy(towerToPlace);
-        towerToPlace = null;
-    }
-
 
 }

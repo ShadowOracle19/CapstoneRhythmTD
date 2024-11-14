@@ -6,6 +6,27 @@ using UnityEngine;
 
 public class CursorTD : MonoBehaviour
 {
+    #region dont touch this
+    private static CursorTD _instance;
+    public static CursorTD Instance
+    {
+        get
+        {
+            if (_instance is null)
+            {
+                Debug.LogError("CursorTD Manager is NULL");
+            }
+
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+    #endregion
+
     public bool isMoving = false;
     private Vector3 originPos, targetPos;
     public float timeToMove = 1f;
@@ -50,7 +71,23 @@ public class CursorTD : MonoBehaviour
         Move();
     }
 
-    
+    public void InitializePlacementMenu()
+    {
+        SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
+        SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+
+        SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
+        SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
+
+
+        SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
+        SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+
+
+        SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
+        SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
+
+    }
 
     public void MoveCursor()
     {

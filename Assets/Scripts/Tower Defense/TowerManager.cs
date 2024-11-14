@@ -67,6 +67,11 @@ public class TowerManager : MonoBehaviour
 
     public void Cooldown()
     {
+        drumCooldownSlot.SetActive(drumCooldown);
+        bassCooldownSlot.SetActive(bassCooldown);
+        pianoCooldownSlot.SetActive(pianoCooldown);
+        guitarCooldownSlot.SetActive(guitarCooldown);
+
         if(drumCooldown)
         {
             drumCooldownTime += Time.deltaTime;
@@ -162,6 +167,7 @@ public class TowerManager : MonoBehaviour
                 ConductorV2.instance.drums.volume = 0.5f;
                 drumCooldown = true;
                 drumCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                drumCooldownTime = 0;
                 break;
 
             case InstrumentType.Guitar:
@@ -169,18 +175,21 @@ public class TowerManager : MonoBehaviour
                 ConductorV2.instance.guitarM.volume = 0.5f;
                 guitarCooldown = true;
                 guitarCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                guitarCooldownTime = 0;
                 break;
 
             case InstrumentType.Bass:
                 ConductorV2.instance.bass.volume = 0.5f;
                 bassCooldown = true;
                 bassCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                bassCooldownTime = 0;
                 break;
 
             case InstrumentType.Piano:
                 ConductorV2.instance.piano.volume = 0.5f;
                 pianoCooldown = true;
                 pianoCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                pianoCooldownTime = 0;
                 break;
 
             default:

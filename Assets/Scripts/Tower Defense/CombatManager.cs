@@ -104,6 +104,11 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.InitializePlacementMenu();
         CursorTD.Instance.pauseMovement = false;
 
+        TowerManager.Instance.drumCooldown = false;
+        TowerManager.Instance.drumCooldown = false;
+        TowerManager.Instance.drumCooldown = false;
+        TowerManager.Instance.drumCooldown = false;
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 

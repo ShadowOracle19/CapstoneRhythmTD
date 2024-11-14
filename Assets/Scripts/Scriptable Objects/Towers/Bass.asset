@@ -15,12 +15,12 @@ MonoBehaviour:
   towerName: Bass
   towerDescription: AOE based tower that deals 1 damage in its radius
   towerImage: {fileID: 21300000, guid: 88f0b11e59de9d34a9d9217f0a3f07dc, type: 3}
-  type: 0
+  type: 2
   resourceCost: 10
   cooldownTime: 10
   towerHealth: 5
   attackPattern: 3
-  damage: 3
+  damage: 5
   range: 2
   projectilePiercesEnemies: 0
   projectileColor: {r: 0.80276585, g: 0, b: 1, a: 1}

@@ -6,6 +6,27 @@ using UnityEngine;
 
 public class CursorTD : MonoBehaviour
 {
+    #region dont touch this
+    private static CursorTD _instance;
+    public static CursorTD Instance
+    {
+        get
+        {
+            if (_instance is null)
+            {
+                Debug.LogError("CursorTD Manager is NULL");
+            }
+
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+    #endregion
+
     public bool isMoving = false;
     private Vector3 originPos, targetPos;
     public float timeToMove = 1f;
@@ -26,6 +47,8 @@ public class CursorTD : MonoBehaviour
 
     public GameObject beatHitResultPrefab;
 
+    public bool pauseMovement = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +58,9 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (pauseMovement)
+            return;
+
         //return cursor sprite to origin size
         cursorSprite.transform.localScale = Vector3.Lerp(cursorSprite.transform.localScale, Vector3.one, Time.deltaTime * 5);
         
@@ -50,7 +76,23 @@ public class CursorTD : MonoBehaviour
         Move();
     }
 
-    
+    public void InitializePlacementMenu()
+    {
+        SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
+        SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+
+        SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
+        SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
+
+
+        SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
+        SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+
+
+        SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
+        SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
+
+    }
 
     public void MoveCursor()
     {
@@ -97,7 +139,9 @@ public class CursorTD : MonoBehaviour
 
     public void TryToPlaceTower(GameObject tower)
     {
-        if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost)
+        //checks if resource is available and if the tower is on cooldown
+        if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
+            && !TowerManager.Instance.CheckIfOnCoolDown(tower.GetComponent<Tower>().towerInfo.type)) 
         {
             if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
             {
@@ -118,9 +162,11 @@ public class CursorTD : MonoBehaviour
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             SpawnBeatHitResult();
             TogglePlacementMenu();
+            return;
         }
         else
         {
+            unhighlightPlacementSlot();
             return;
         }    
     }
@@ -205,7 +251,7 @@ public class CursorTD : MonoBehaviour
         targetPos = originPos + direction;
 
         //bounding box function
-        if((targetPos.x <= -3 || targetPos.x >= 9) || (targetPos.y <= -2 || targetPos.y >= 2))
+        if((targetPos.x <= -3 || targetPos.x >= 9) || (targetPos.y <= -3 || targetPos.y >= 2))
         {
             isMoving = false;
             desiredMovement = Vector3.zero;

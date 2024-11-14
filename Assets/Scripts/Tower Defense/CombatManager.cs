@@ -101,6 +101,14 @@ public class CombatManager : MonoBehaviour
         //Conductor.Instance.guitarM.volume = 0;
         //Conductor.Instance.drums.volume = 0;
 
+        CursorTD.Instance.InitializePlacementMenu();
+        CursorTD.Instance.pauseMovement = false;
+
+        TowerManager.Instance.drumCooldown = false;
+        TowerManager.Instance.drumCooldown = false;
+        TowerManager.Instance.drumCooldown = false;
+        TowerManager.Instance.drumCooldown = false;
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -126,6 +134,7 @@ public class CombatManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         enemySpawners.startOnce = false;
+        CursorTD.Instance.pauseMovement = true;
         Cursor.lockState = CursorLockMode.None;
         ConductorV2.instance.musicSource.Stop();
         ConductorV2.instance.drums.Stop();
@@ -168,7 +177,7 @@ public class CombatManager : MonoBehaviour
     {
         enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
         //Start spawning enemies on the 10th bar
-        if (ConductorV2.instance.completedLoops >= 0)
+        if (ConductorV2.instance.completedLoops >= 100)
         {
             enemiesSpawnIn.gameObject.SetActive(false);
             enemySpawners.StartSpawningEnemies();

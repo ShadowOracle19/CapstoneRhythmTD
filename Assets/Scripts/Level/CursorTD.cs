@@ -145,20 +145,18 @@ public class CursorTD : MonoBehaviour
         {
             if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
             {
-                Debug.Log("perfect Beat Hit");
-                tower.GetComponent<Tower>().towerInfo.damage += 2;
+                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.perfect);
             }
             else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
             {
-                Debug.Log("early Beat Hit");
-                tower.GetComponent<Tower>().towerInfo.damage += 1;
+                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.early);
             }
             else
             {
-                Debug.Log("miss Beat Hit");
+                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
+                //miss beat
 
             }
-            TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type);
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             SpawnBeatHitResult();
             TogglePlacementMenu();
@@ -302,13 +300,11 @@ public class CursorTD : MonoBehaviour
             beatResult.GetComponent<TMP_Text>().text = "early";
             beatResult.GetComponent<TMP_Text>().fontSize = 56;
             beatResult.GetComponent<TMP_Text>().color = Color.yellow;
-            Debug.Log("early Beat Hit");
         }
         else
         {
             beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
             beatResult.GetComponent<TMP_Text>().color = Color.red;
-            Debug.Log("miss Beat Hit");
 
         }
     }

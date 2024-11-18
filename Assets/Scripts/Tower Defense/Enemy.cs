@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public EnemyCreator enemy;
 
     public List<Vector3> path;
-    public float speed = 1;
+    private float speed = 1;
     float timer;
     public Vector3 currentPositionHolder;
     int currentNode;
@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
 
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
+
+    public Tile tileInFront;
 
 
 
@@ -56,14 +58,21 @@ public class Enemy : MonoBehaviour
 
     public void OnTick()
     {
-
         switch (enemy.movementPattern)
         {
             case EnemyMovementPattern.everyBeat:
+                if (tileInFront.placedTower)
+                {
+                    Clash(enemy.clashStrength);
+                }
                 move = false;
                 break;
 
             case EnemyMovementPattern.everyOtherBeat:
+                if (tileInFront.placedTower)
+                {
+                    Clash(enemy.clashStrength);
+                }
                 otherBeatMove = !otherBeatMove;
                 if(otherBeatMove)
                 {
@@ -75,6 +84,28 @@ public class Enemy : MonoBehaviour
                 break;
         }
         
+    }
+
+
+    public void Clash(ClashStrength clashStrength)
+    {
+        switch (clashStrength)
+        {
+            case ClashStrength.Weak:
+                tileInFront.placedTower.GetComponent<Tower>().Damage(1);
+                RemoveEnemy();
+                break;
+            case ClashStrength.Medium:
+                tileInFront.placedTower.GetComponent<Tower>().RemoveTower();
+                RemoveEnemy();
+                break;
+            case ClashStrength.High:
+                break;
+            case ClashStrength.Immune:
+                break;
+            default:
+                break;
+        }
     }
 
     #region pathing

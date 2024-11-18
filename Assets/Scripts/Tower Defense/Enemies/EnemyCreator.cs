@@ -14,9 +14,15 @@ public class EnemyCreator : ScriptableObject
     [Header("Enemy Stats")]
     public int maxHealth;
     public EnemyMovementPattern movementPattern;
+    public ClashStrength clashStrength;
 }
 
 public enum EnemyMovementPattern
 {
     everyBeat, everyOtherBeat
+}
+
+public enum ClashStrength
+{
+    Weak, Medium, High, Immune
 }

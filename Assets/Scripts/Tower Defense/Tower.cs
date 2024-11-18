@@ -21,21 +21,15 @@ public class Tower : MonoBehaviour
 
     private RaycastHit2D[] colliders;
 
+    public int currentHealth = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public Tile connectedTile;
+    public int currentDamage;
+
+    private void Start()
     {
-        
+        currentHealth = towerInfo.towerHealth;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-
-        
-    }
-
 
     public void Fire()
     {
@@ -53,7 +47,7 @@ public class Tower : MonoBehaviour
                 }
                 else if(item.transform.CompareTag("Enemy"))
                 {
-                    item.transform.GetComponent<Enemy>().Damage(towerInfo.damage);
+                    item.transform.GetComponent<Enemy>().Damage(currentDamage);
                 }
             }
             colliders = null;
@@ -63,7 +57,7 @@ public class Tower : MonoBehaviour
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
         bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
-        bullet.GetComponent<Projectile>().damage = towerInfo.damage;
+        bullet.GetComponent<Projectile>().damage = currentDamage;
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
         
     }
@@ -71,19 +65,18 @@ public class Tower : MonoBehaviour
     public void RemoveTower()
     {
         ConductorV2.instance.triggerEvent.Remove(trigger);
+        connectedTile.placedTower = null;
         Destroy(gameObject);
     }
 
-    //IEnumerator TestFire()
-    //{
-    //    while(true)
-    //    {
-    //        GameObject bullet = Instantiate(projectile, firePoint.position, Quaternion.identity);
+    public void Damage(int damage)
+    {
+        currentHealth -= damage;
 
-    //        bullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed);
-    //        yield return new WaitForSeconds(1);
-    //    }
-        
-    //}
+        if(currentHealth <= 0)
+        {
+            RemoveTower();
+        }
+    }
 
 }

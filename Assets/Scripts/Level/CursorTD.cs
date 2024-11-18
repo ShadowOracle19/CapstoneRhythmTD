@@ -66,14 +66,34 @@ public class CursorTD : MonoBehaviour
         
 
         if (GameManager.Instance.winState) return;
-        if(Input.GetKeyUp(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftControl))
         {
             TogglePlacementMenu();
         }
 
+        DestroyMode();
         HighlightPlacementSlot();
         MoveCursor();
+        TowerEmpowermentInput();
         Move();
+    }
+
+    public void DestroyMode()
+    {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            cursorSprite.GetComponent<SpriteRenderer>().color = Color.red;
+            if (tile.placedTower != null && Input.GetKeyDown(KeyCode.Space))
+            {
+                tile.placedTower.GetComponent<Tower>().RemoveTower();
+
+
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            cursorSprite.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 
     public void InitializePlacementMenu()
@@ -98,43 +118,83 @@ public class CursorTD : MonoBehaviour
     {
         if (isMoving) return;
         //on press log which direction needs to be moved
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            //movement
+            desiredMovement = Vector3.up;
+            SpawnBeatHitResult();
+        }
+        else if (Input.GetKeyUp(KeyCode.A))
+        {
+            //movement
+            desiredMovement = Vector3.left;
+            SpawnBeatHitResult();
+
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            //movement
+            desiredMovement = Vector3.down;
+            SpawnBeatHitResult();
+
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            //movement
+            desiredMovement = Vector3.right;
+
+            SpawnBeatHitResult();
+        }
+        
+    }
+
+    public void TowerEmpowermentInput()
+    {
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            //Debug.Log("Try move");
-            desiredMovement = Vector3.up;
-            if (ConductorV2.instance.InThreshHold())//beat hit or early
-            {
-            }
+            TowerEmpowerment();
             SpawnBeatHitResult();
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            desiredMovement = Vector3.left;
-            if (ConductorV2.instance.InThreshHold())//beat hit or early
-            {
-            }
+            TowerEmpowerment();
             SpawnBeatHitResult();
 
         }
         else if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            desiredMovement = Vector3.down;
-            if (ConductorV2.instance.InThreshHold())//beat hit or early
-            {
-            }
+            TowerEmpowerment();
             SpawnBeatHitResult();
 
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            desiredMovement = Vector3.right;
-            if (ConductorV2.instance.InThreshHold())//beat hit or early
-            {
-            }
-
+            TowerEmpowerment();
             SpawnBeatHitResult();
         }
-        
+    }
+
+    public void TowerEmpowerment()
+    {
+        if(tile.placedTower != null)
+        {
+            if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
+            {
+                tile.placedTower.GetComponentInChildren<SpriteRenderer>().color = Color.green;
+            }
+            else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
+            {
+                tile.placedTower.GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+            }
+            else
+            {
+                tile.placedTower.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+            }
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void TryToPlaceTower(GameObject tower)

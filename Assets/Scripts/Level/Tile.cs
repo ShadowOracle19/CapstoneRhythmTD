@@ -25,12 +25,7 @@ public class Tile : MonoBehaviour
 
     private void Update()
     {
-        //if tower is no longer being held hide highlight
-        if (TowerManager.Instance.towerToPlace == null)
-        {
-            _highlight.SetActive(false);
-            TowerManager.Instance.isTowerHovering = false;
-        }
+        
         time -= Time.deltaTime;
         _renderer.color = Color.Lerp(_renderer.color, currentColor, Time.deltaTime / time);
         

@@ -20,7 +20,7 @@ MonoBehaviour:
   cooldownTime: 10
   towerHealth: 5
   attackPattern: 3
-  damage: 5
+  damage: 1
   range: 2
   projectilePiercesEnemies: 0
   projectileColor: {r: 0.80276585, g: 0, b: 1, a: 1}

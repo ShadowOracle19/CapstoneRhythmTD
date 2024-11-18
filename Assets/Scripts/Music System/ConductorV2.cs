@@ -239,3 +239,8 @@ public class ConductorV2 : MonoBehaviour
     }
 }
 
+public enum _BeatResult
+{
+    miss, early, perfect
+}
+

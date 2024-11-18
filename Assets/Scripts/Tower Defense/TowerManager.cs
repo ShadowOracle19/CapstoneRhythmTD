@@ -148,17 +148,34 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type)
+    public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type, _BeatResult result)
     {
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<SpriteFollowMouse>().enabled = false;
         _tower.GetComponent<BoxCollider2D>().enabled = true;
         _tower.transform.position = tilePosition;
         tile.placedTower = _tower;
-        _tower.GetComponent<SpriteRenderer>().sortingOrder = 2;
         _tower.GetComponent<Tower>().rotateStarted = true;
+        _tower.GetComponent<Tower>().connectedTile = tile;
         ConductorV2.instance.triggerEvent.Add(_tower.GetComponent<Tower>().trigger);
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
+
+        switch (result)
+        {
+            case _BeatResult.miss:
+                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage;
+
+
+                break;
+            case _BeatResult.early:
+                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage + 1;
+                break;
+            case _BeatResult.perfect:
+                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage + 2;
+                break;
+            default:
+                break;
+        }
 
 
         switch (type)

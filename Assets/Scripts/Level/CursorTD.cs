@@ -240,7 +240,7 @@ public class CursorTD : MonoBehaviour
     {
         if (!towerSelectMenuOpened) return;
 
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (Input.GetKeyUp(KeyCode.W))
         {
             SlotW.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
@@ -249,7 +249,7 @@ public class CursorTD : MonoBehaviour
                 return;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow))
+        else if (Input.GetKeyUp(KeyCode.A))
         {
             SlotA.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
@@ -259,7 +259,7 @@ public class CursorTD : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyUp(KeyCode.DownArrow))
+        else if (Input.GetKeyUp(KeyCode.S))
         {
             SlotS.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
@@ -269,7 +269,7 @@ public class CursorTD : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
+        else if (Input.GetKeyUp(KeyCode.D))
         {
 
             SlotD.GetComponent<SpriteRenderer>().color = Color.yellow;

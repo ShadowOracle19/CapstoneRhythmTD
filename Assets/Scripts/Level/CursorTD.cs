@@ -224,7 +224,6 @@ public class CursorTD : MonoBehaviour
         }
         else
         {
-            unhighlightPlacementSlot();
             return;
         }    
     }
@@ -233,7 +232,6 @@ public class CursorTD : MonoBehaviour
     {
         towerSelectMenuOpened = !towerSelectMenuOpened;
         placementMenu.SetActive(towerSelectMenuOpened);
-        unhighlightPlacementSlot();
     }
 
     public void HighlightPlacementSlot()
@@ -242,7 +240,6 @@ public class CursorTD : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W))
         {
-            SlotW.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
@@ -251,7 +248,6 @@ public class CursorTD : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.A))
         {
-            SlotA.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
@@ -261,7 +257,6 @@ public class CursorTD : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
-            SlotS.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
@@ -272,7 +267,6 @@ public class CursorTD : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.D))
         {
 
-            SlotD.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
@@ -283,13 +277,6 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void unhighlightPlacementSlot()
-    {
-        SlotW.GetComponent<SpriteRenderer>().color = Color.white;
-        SlotA.GetComponent<SpriteRenderer>().color = Color.white;
-        SlotS.GetComponent<SpriteRenderer>().color = Color.white;
-        SlotD.GetComponent<SpriteRenderer>().color = Color.white;
-    }
 
     public void Move()
     {
@@ -306,10 +293,11 @@ public class CursorTD : MonoBehaviour
 
         originPos = transform.position;
 
-        targetPos = originPos + direction;
+        targetPos = originPos + (direction * 1.2f);
+
 
         //bounding box function
-        if((targetPos.x <= -3 || targetPos.x >= 9) || (targetPos.y <= -3 || targetPos.y >= 2))
+        if((targetPos.x <= -5 || targetPos.x >= 9) || (targetPos.y <= -3.5 || targetPos.y >= 2))
         {
             isMoving = false;
             desiredMovement = Vector3.zero;

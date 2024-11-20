@@ -176,7 +176,7 @@ public class CombatManager : MonoBehaviour
     {
         enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
         //Start spawning enemies on the 10th bar
-        if (ConductorV2.instance.numberOfBeats >= 30)
+        if (ConductorV2.instance.numberOfBeats >= 0)
         {
             enemiesSpawnIn.gameObject.SetActive(false);
             enemySpawners.StartSpawningEnemies();

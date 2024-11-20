@@ -128,10 +128,6 @@ public class CombatManager : MonoBehaviour
         {
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
         }
-        foreach(Transform child in beatParent)
-        {
-            Destroy(child.gameObject);
-        }
         enemySpawners.startOnce = false;
         CursorTD.Instance.pauseMovement = true;
         Cursor.lockState = CursorLockMode.None;

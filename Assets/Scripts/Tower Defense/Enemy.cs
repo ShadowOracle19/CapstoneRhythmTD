@@ -102,11 +102,11 @@ public class Enemy : MonoBehaviour
         {
             case ClashStrength.Weak:
                 tileInFront.placedTower.GetComponent<Tower>().Damage(1);
-                RemoveEnemy();
+                Kill();
                 break;
             case ClashStrength.Medium:
                 tileInFront.placedTower.GetComponent<Tower>().RemoveTower();
-                RemoveEnemy();
+                Kill();
                 break;
             case ClashStrength.High:
                 break;
@@ -174,13 +174,13 @@ public class Enemy : MonoBehaviour
 
     public void Kill()
     {
-        CombatManager.Instance.enemyTotal -= 1;
         RemoveEnemy();
     }
 
 
     public void RemoveEnemy()
     {
+        CombatManager.Instance.enemyTotal -= 1;
         ConductorV2.instance.triggerEvent.Remove(trigger);
         Destroy(gameObject);
     }

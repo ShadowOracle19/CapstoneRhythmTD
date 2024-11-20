@@ -18,6 +18,8 @@ public class EnemySpawner : MonoBehaviour
 
     public int lastRandomSpawn;
 
+    public List<GameObject> spawnTiles = new List<GameObject>();
+
     [Header("Wave info")]
     public float timeRemainingToWaveStart = 0;
     public int waveIndex = 0;
@@ -75,12 +77,12 @@ public class EnemySpawner : MonoBehaviour
         }
 
 
-        int randSpawn = Random.Range(-2, 2);
+        int randSpawn = Random.Range(0, spawnTiles.Count);
         if (randSpawn == lastRandomSpawn)
         {
-            randSpawn = Random.Range(-2, 2);
+            randSpawn = Random.Range(0, spawnTiles.Count);
         }
-        GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, transform.position.y + randSpawn), Quaternion.identity, enemyParent);
+        GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, spawnTiles[randSpawn].transform.position.y), Quaternion.identity, enemyParent);
         lastRandomSpawn = randSpawn;
 
         ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);

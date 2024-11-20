@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     public GameObject titleRoot;
 
     [Header("Combat")]
-    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private Slider healthSlider;
     [SerializeField] public int _maxHealth = 5;
     [SerializeField] public int _currentHealth = 0;
     [SerializeField] public bool combatRunning = false;
@@ -125,7 +125,8 @@ public class GameManager : MonoBehaviour
 
     void Health()
     {
-        healthText.text = "Health: " + _currentHealth + "/" + _maxHealth;
+        healthSlider.maxValue = _maxHealth;
+        healthSlider.value = _currentHealth;
 
         if (_currentHealth <= 0)
         {

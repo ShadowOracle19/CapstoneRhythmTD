@@ -61,23 +61,32 @@ public class Enemy : MonoBehaviour
         switch (enemy.movementPattern)
         {
             case EnemyMovementPattern.everyBeat:
-                if (tileInFront.placedTower)
+                if (tileInFront.placedTower != null)
                 {
                     Clash(enemy.clashStrength);
                 }
-                move = false;
+                else
+                {
+                    move = false;
+
+                }
                 break;
 
             case EnemyMovementPattern.everyOtherBeat:
-                if (tileInFront.placedTower)
+                if (tileInFront.placedTower != null)
                 {
                     Clash(enemy.clashStrength);
                 }
-                otherBeatMove = !otherBeatMove;
-                if(otherBeatMove)
+                else
                 {
-                    move = false;
+                    otherBeatMove = !otherBeatMove;
+                    if (otherBeatMove)
+                    {
+                        move = false;
+                    }
+
                 }
+                
                 break;
 
             default:
@@ -147,7 +156,7 @@ public class Enemy : MonoBehaviour
         {
             move = true;
             timer = 0;
-            nextPosition = new Vector3(transform.position.x - 1, transform.position.y);
+            nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
         }
     }
 

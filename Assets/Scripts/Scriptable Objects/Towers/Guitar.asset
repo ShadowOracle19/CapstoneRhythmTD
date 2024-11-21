@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Guitar
   towerDescription: Projectile based tower that deals 1 damage on hit
-  towerImage: {fileID: 21300000, guid: 1fc7310b633e27840a7ab788e6ba0958, type: 3}
+  towerImage: {fileID: 1578135943, guid: 3dc3546abb730ec4daec6f1bacb16737, type: 3}
   type: 1
   resourceCost: 10
   cooldownTime: 10

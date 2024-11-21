@@ -71,6 +71,11 @@ public class CursorTD : MonoBehaviour
             TogglePlacementMenu();
         }
 
+        if(tile.placedTower != null && tile != null)
+        {
+            tile.placedTower.GetComponent<Tower>().towerHover = true;
+        }
+
         DestroyMode();
         HighlightPlacementSlot();
         MoveCursor();
@@ -324,6 +329,8 @@ public class CursorTD : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("StageTile"))
         {
+            if (tile != collision.gameObject.GetComponent<Tile>())
+                tile.placedTower.GetComponent<Tower>().towerHover = false;
             tile = collision.gameObject.GetComponent<Tile>();
         }
     }

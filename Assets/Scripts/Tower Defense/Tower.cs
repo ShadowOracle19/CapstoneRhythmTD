@@ -26,6 +26,9 @@ public class Tower : MonoBehaviour
     public Tile connectedTile;
     public int currentDamage;
 
+    [Header("Tower Empower Indicator")]
+    public bool towerHover = false;
+
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;

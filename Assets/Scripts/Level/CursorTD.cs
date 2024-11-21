@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -71,7 +72,7 @@ public class CursorTD : MonoBehaviour
             TogglePlacementMenu();
         }
 
-        if(tile.placedTower != null && tile != null)
+        if(tile != null && tile.placedTower != null)
         {
             tile.placedTower.GetComponent<Tower>().towerHover = true;
         }
@@ -88,7 +89,7 @@ public class CursorTD : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             cursorSprite.GetComponent<SpriteRenderer>().color = Color.red;
-            if (tile.placedTower != null && Input.GetKeyDown(KeyCode.Space))
+            if (tile != null && tile.placedTower != null && Input.GetKeyDown(KeyCode.Space))
             {
                 tile.placedTower.GetComponent<Tower>().RemoveTower();
 
@@ -329,8 +330,15 @@ public class CursorTD : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("StageTile"))
         {
-            if (tile != collision.gameObject.GetComponent<Tile>())
-                tile.placedTower.GetComponent<Tower>().towerHover = false;
+            if ( tile != null && tile != collision.gameObject.GetComponent<Tile>())
+            {
+                if(tile.placedTower != null)
+                {
+                    tile.placedTower.GetComponent<Tower>().towerHover = false;
+
+                }
+
+            }
             tile = collision.gameObject.GetComponent<Tile>();
         }
     }

@@ -57,7 +57,17 @@ public class ConductorV2 : MonoBehaviour
     public AudioSource guitarH;
     public AudioSource guitarM;
 
+    [Header("Metronome")]
+    public GameObject ticker;
+    public bool ping = false;//true left, false right
+    public Vector3 rotationLeft;
+    public Vector3 rotationRight;
+    private Quaternion currentRotation;
+    public Vector3 currentEulerAngles;
+    
+
     public List<UnityEvent> triggerEvent = new List<UnityEvent>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -145,7 +155,28 @@ public class ConductorV2 : MonoBehaviour
 
         //threshold = InThreshHold();
 
+        if(ping)
+        {
+            
+            currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationLeft, beatDuration);
+            currentRotation.eulerAngles = currentEulerAngles;
+            ticker.transform.rotation = currentRotation;
+        }
+        else
+        {
+            
+            currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationRight, beatDuration);
+            currentRotation.eulerAngles = currentEulerAngles;
+            ticker.transform.rotation = currentRotation;
+        }
+
+
         TriggerBeatEvent(musicSource.timeSamples / (musicSource.clip.frequency * crotchet));
+    }
+
+    public void Tick()
+    {
+        ping = !ping;
     }
 
     public bool InThreshHold()

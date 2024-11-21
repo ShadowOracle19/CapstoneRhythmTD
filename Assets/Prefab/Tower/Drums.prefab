@@ -214,6 +214,8 @@ MonoBehaviour:
   connectedTile: {fileID: 0}
   currentDamage: 0
   towerHover: 0
+  beatIndicator: {fileID: 4686513911658087842}
+  beatCircle: {fileID: 31395926951258363}
 --- !u!1 &3880868882564430295
 GameObject:
   m_ObjectHideFlags: 0

@@ -284,6 +284,8 @@ MonoBehaviour:
   connectedTile: {fileID: 0}
   currentDamage: 0
   towerHover: 0
+  beatIndicator: {fileID: 5507092617889812758}
+  beatCircle: {fileID: 1651270596960188021}
 --- !u!61 &6367522176411443336
 BoxCollider2D:
   m_ObjectHideFlags: 0

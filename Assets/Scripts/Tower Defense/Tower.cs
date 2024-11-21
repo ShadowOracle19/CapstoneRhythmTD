@@ -28,10 +28,35 @@ public class Tower : MonoBehaviour
 
     [Header("Tower Empower Indicator")]
     public bool towerHover = false;
+    public GameObject beatIndicator;
+    public GameObject beatCircle;
 
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;
+    }
+
+    private void Update()
+    {
+        if(towerHover)
+        {
+            if(ConductorV2.instance.beatDuration < 0.2)
+            {
+                beatIndicator.transform.localScale = Vector3.one * 1.5f;
+            }
+            if(ConductorV2.instance.beatDuration >= 0.2)
+            {
+                
+            }
+            beatIndicator.SetActive(true);
+            beatCircle.SetActive(true);
+            beatIndicator.transform.localScale = Vector3.Lerp(Vector3.one * 1.5f, Vector3.one * 0.75f, ConductorV2.instance.beatDuration);
+        }
+        else
+        {
+            beatIndicator.SetActive(false);
+            beatCircle.SetActive(false);
+        }
     }
 
     public void Fire()

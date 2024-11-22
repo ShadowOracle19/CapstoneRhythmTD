@@ -1707,9 +1707,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 22682a35c24c9f948900f917a754057c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: aacee094186844e419bc49d7b600e494, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -10390,7 +10390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &786319191
 Transform:
   m_ObjectHideFlags: 0
@@ -17613,7 +17613,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 8300000, guid: ae1e292b77a49724bb0a45cf4ae7a12b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -17710,7 +17710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInTestingEnvironment: 0
-  bpm: 80
+  bpm: 160
   crotchet: 0
   songPosition: 0
   songPositionInBeats: 0
@@ -17721,8 +17721,8 @@ MonoBehaviour:
   completedLoops: 0
   loopPositionInBeats: 0
   loopPositionInAnalog: 0
-  earlyBeatThreshold: 0.35
-  perfectBeatThreshold: 0.61
+  earlyBeatThreshold: 0.2
+  perfectBeatThreshold: 0.4
   beatDuration: 0
   numberOfBeats: 0
   drums: {fileID: 1605680384}
@@ -17736,6 +17736,20 @@ MonoBehaviour:
   rotationRight: {x: 0, y: 0, z: -45}
   currentEulerAngles: {x: 0, y: 0, z: 0}
   triggerEvent:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 172033161}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2096350185}
@@ -17795,20 +17809,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1300826011}
         m_TargetAssemblyTypeName: ConductorV2, Assembly-CSharp
         m_MethodName: Tick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 172033161}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28955,7 +28955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.3999634, y: -5.4100037}
+  m_AnchoredPosition: {x: 2.3999023, y: -5.409973}
   m_SizeDelta: {x: -4.81, y: -10.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2124439085

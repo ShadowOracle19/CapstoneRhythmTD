@@ -192,7 +192,7 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
             }
-            else
+            else if(ConductorV2.instance.beatDuration < ConductorV2.instance.earlyBeatThreshold)
             {
                 tile.placedTower.GetComponentInChildren<SpriteRenderer>().color = Color.white;
             }
@@ -217,7 +217,7 @@ public class CursorTD : MonoBehaviour
             {
                 TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.early);
             }
-            else
+            else if(ConductorV2.instance.beatDuration < ConductorV2.instance.earlyBeatThreshold)
             {
                 TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
                 //miss beat
@@ -351,6 +351,7 @@ public class CursorTD : MonoBehaviour
 
     public void SpawnBeatHitResult()
     {
+        Debug.Log(ConductorV2.instance.beatDuration);
         GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
         if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
         {
@@ -364,7 +365,7 @@ public class CursorTD : MonoBehaviour
             beatResult.GetComponent<TMP_Text>().fontSize = 56;
             beatResult.GetComponent<TMP_Text>().color = Color.yellow;
         }
-        else
+        else if(ConductorV2.instance.beatDuration < ConductorV2.instance.earlyBeatThreshold)
         {
             beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
             beatResult.GetComponent<TMP_Text>().color = Color.red;

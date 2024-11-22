@@ -86,6 +86,7 @@ public class ConductorV2 : MonoBehaviour
             completedLoops = 0;
             numberOfBeats = 0;
             beatTrack = 0;
+            beatDuration = 0;
 
             //Start the song
             musicSource.Play();
@@ -101,12 +102,16 @@ public class ConductorV2 : MonoBehaviour
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;
 
+        AudioConfiguration config = AudioSettings.GetConfiguration();
+
         //record the time when the music starts
+        AudioSettings.Reset(config);
         dspSongTime = (float)AudioSettings.dspTime;
 
         completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 0;
+        beatDuration = 0;
 
         drums.volume = 0;
         bass.volume = 0;

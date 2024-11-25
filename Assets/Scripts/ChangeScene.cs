@@ -19,7 +19,19 @@ public class ChangeScene : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit(); 
+        if(GameManager.Instance.combatRoot.activeSelf)
+        {
+            CombatManager.Instance.EndEncounter();
+            GameManager.Instance.combatRoot.SetActive(false);
+            GameManager.Instance.menuRoot.SetActive(true);
+            GameManager.Instance.ResumeGame();
+        }
+        else
+        {
+            Application.Quit();
+
+        }
+
     }
 
     //[MenuItem("SonorantStudios/Scenes/Main Menu")]

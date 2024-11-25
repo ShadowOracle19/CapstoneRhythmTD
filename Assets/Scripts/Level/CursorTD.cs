@@ -50,6 +50,7 @@ public class CursorTD : MonoBehaviour
 
     public bool pauseMovement = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +68,7 @@ public class CursorTD : MonoBehaviour
         
 
         if (GameManager.Instance.winState) return;
-        if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftControl))
+        if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftControl) && (tile != null && tile.placedTower == null))
         {
             TogglePlacementMenu();
         }
@@ -77,11 +78,16 @@ public class CursorTD : MonoBehaviour
             tile.placedTower.GetComponent<Tower>().towerHover = true;
         }
 
-        DestroyMode();
+
+        if(!towerSelectMenuOpened)
+        {
+            MoveCursor();
+            TowerEmpowermentInput();
+            Move();
+            DestroyMode();
+
+        }
         HighlightPlacementSlot();
-        MoveCursor();
-        TowerEmpowermentInput();
-        Move();
     }
 
     public void DestroyMode()
@@ -122,10 +128,11 @@ public class CursorTD : MonoBehaviour
 
     public void MoveCursor()
     {
-        if (isMoving) return;
+        if (isMoving || towerSelectMenuOpened) return;
         //on press log which direction needs to be moved
         if (Input.GetKeyUp(KeyCode.W))
         {
+            Debug.Log("is this happening?");
             //movement
             desiredMovement = Vector3.up;
             SpawnBeatHitResult();
@@ -230,6 +237,7 @@ public class CursorTD : MonoBehaviour
         }
         else
         {
+            TogglePlacementMenu();
             return;
         }    
     }

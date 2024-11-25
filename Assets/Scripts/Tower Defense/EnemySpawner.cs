@@ -29,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        GameManager.Instance.waveCounter.text = "Wave " + waveIndex + "/" + currentWaves.Count;
         if(startOnce && allEnemiesSpawnedFromWave)
         {
             if(timeRemainingToWaveStart >= delay)

@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int _maxHealth = 5;
     [SerializeField] public int _currentHealth = 0;
     [SerializeField] public bool combatRunning = false;
+    public TextMeshProUGUI waveCounter;
 
     [Header("Pause Menu")]
     [SerializeField] public bool isGamePaused = false;

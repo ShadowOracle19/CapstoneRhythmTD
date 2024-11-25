@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
 
     public Tile tileInFront;
 
+    bool playOnce = false;
+
 
 
     // Start is called before the first frame update
@@ -179,6 +181,8 @@ public class Enemy : MonoBehaviour
 
     public void RemoveEnemy()
     {
+        if (playOnce) return;
+        playOnce = true;
         CombatManager.Instance.enemyTotal -= 1;
         ConductorV2.instance.triggerEvent.Remove(trigger);
         Destroy(gameObject);

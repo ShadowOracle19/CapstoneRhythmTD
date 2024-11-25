@@ -66,7 +66,7 @@ public class CursorTD : MonoBehaviour
         
 
         if (GameManager.Instance.winState) return;
-        if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftControl))
+        if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftControl) && (tile != null && tile.placedTower == null))
         {
             TogglePlacementMenu();
         }

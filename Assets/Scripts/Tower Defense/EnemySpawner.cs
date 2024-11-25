@@ -33,7 +33,6 @@ public class EnemySpawner : MonoBehaviour
         {
             if(timeRemainingToWaveStart >= delay)
             {
-                Debug.Log("Are we here");
                 //allow enemies to spawn
                 if(waveIndex >= currentWaves.Count) //if at the last wave stop running this
                 {
@@ -44,7 +43,6 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                Debug.Log("Are we here?");
                 timeRemainingToWaveStart += Time.deltaTime;
             }
         }

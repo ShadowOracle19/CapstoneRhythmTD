@@ -15,7 +15,7 @@ MonoBehaviour:
   towerName: Piano
   towerDescription: Projectile based tower that deals 1 damage that pierces through
     enemies
-  towerImage: {fileID: 21300000, guid: 4121966fd11d72540b1de23e433f1f9b, type: 3}
+  towerImage: {fileID: -1468530389, guid: 768718a5289a8754caf9695dd1451137, type: 3}
   type: 3
   resourceCost: 10
   cooldownTime: 10

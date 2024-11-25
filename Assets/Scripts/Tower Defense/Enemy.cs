@@ -164,7 +164,6 @@ public class Enemy : MonoBehaviour
     {
         _renderer.color = Color.red;
         time = 1;
-        Debug.Log(gameObject.name + " damaged");
         currentHealth -= damage;
         if(currentHealth <= 0)
         {

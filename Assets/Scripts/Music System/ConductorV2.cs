@@ -57,7 +57,17 @@ public class ConductorV2 : MonoBehaviour
     public AudioSource guitarH;
     public AudioSource guitarM;
 
+    [Header("Metronome")]
+    public GameObject ticker;
+    public bool ping = false;//true left, false right
+    public Vector3 rotationLeft;
+    public Vector3 rotationRight;
+    private Quaternion currentRotation;
+    public Vector3 currentEulerAngles;
+    
+
     public List<UnityEvent> triggerEvent = new List<UnityEvent>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +86,7 @@ public class ConductorV2 : MonoBehaviour
             completedLoops = 0;
             numberOfBeats = 0;
             beatTrack = 0;
+            beatDuration = 0;
 
             //Start the song
             musicSource.Play();
@@ -91,12 +102,16 @@ public class ConductorV2 : MonoBehaviour
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;
 
+        AudioConfiguration config = AudioSettings.GetConfiguration();
+
         //record the time when the music starts
+        AudioSettings.Reset(config);
         dspSongTime = (float)AudioSettings.dspTime;
 
         completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 0;
+        beatDuration = 0;
 
         drums.volume = 0;
         bass.volume = 0;
@@ -145,7 +160,28 @@ public class ConductorV2 : MonoBehaviour
 
         //threshold = InThreshHold();
 
+        if(ping)
+        {
+            
+            currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationLeft, beatDuration);
+            currentRotation.eulerAngles = currentEulerAngles;
+            ticker.transform.rotation = currentRotation;
+        }
+        else
+        {
+            
+            currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationRight, beatDuration);
+            currentRotation.eulerAngles = currentEulerAngles;
+            ticker.transform.rotation = currentRotation;
+        }
+
+
         TriggerBeatEvent(musicSource.timeSamples / (musicSource.clip.frequency * crotchet));
+    }
+
+    public void Tick()
+    {
+        ping = !ping;
     }
 
     public bool InThreshHold()

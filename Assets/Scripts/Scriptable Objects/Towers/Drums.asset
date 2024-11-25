@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Drums
   towerDescription: AOE type tower dealing 2 damage in the tower radius
-  towerImage: {fileID: 21300000, guid: edbc1aff3bb7b7744aa6aeb802dd4cf3, type: 3}
+  towerImage: {fileID: -1491893640, guid: f6f4c8c3f240bfd4fbc212fff7b4d3d0, type: 3}
   type: 0
   resourceCost: 10
   cooldownTime: 10

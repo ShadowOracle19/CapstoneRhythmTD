@@ -17890,7 +17890,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2096350185}
         m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
-        m_MethodName: GenerateResource
+        m_MethodName: BeatCountdown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17902,7 +17902,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2096350185}
         m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
-        m_MethodName: BeatCountdown
+        m_MethodName: GenerateResource
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -68,7 +68,7 @@ public class CursorTD : MonoBehaviour
         
 
         if (GameManager.Instance.winState) return;
-        if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftControl) && (tile != null && tile.placedTower == null))
+        if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftShift) && (tile != null && tile.placedTower == null))
         {
             TogglePlacementMenu();
         }
@@ -92,7 +92,7 @@ public class CursorTD : MonoBehaviour
 
     public void DestroyMode()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             cursorSprite.GetComponent<SpriteRenderer>().color = Color.red;
             if (tile != null && tile.placedTower != null && Input.GetKeyDown(KeyCode.Space))
@@ -102,7 +102,7 @@ public class CursorTD : MonoBehaviour
 
             }
         }
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             cursorSprite.GetComponent<SpriteRenderer>().color = Color.white;
         }

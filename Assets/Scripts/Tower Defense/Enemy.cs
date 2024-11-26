@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
                 Kill();
                 break;
             case ClashStrength.Medium:
-                tileInFront.placedTower.GetComponent<Tower>().RemoveTower();
+                tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
                 Kill();
                 break;
             case ClashStrength.High:

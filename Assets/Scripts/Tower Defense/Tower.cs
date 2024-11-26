@@ -34,6 +34,10 @@ public class Tower : MonoBehaviour
     public GameObject beatIndicator;
     public GameObject beatCircle;
 
+    [Header("Shield")]
+    public GameObject shieldEffect;
+    public bool isShielded = false;
+
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;
@@ -41,6 +45,8 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
+        shieldEffect.SetActive(isShielded);
+
         if(towerHover)
         {
             if(ConductorV2.instance.beatDuration < 0.2)
@@ -113,6 +119,11 @@ public class Tower : MonoBehaviour
 
     public void Damage(int damage)
     {
+        if(isShielded)
+        {
+            isShielded = false;
+            return;
+        }
         currentHealth -= damage;
 
         if(currentHealth <= 0)
@@ -135,7 +146,7 @@ public class Tower : MonoBehaviour
                 attackBuffed = true;
                 break;
             case KeyCode.LeftArrow: //Niimi's Buff
-                Debug.Log("Shield Tower");
+                isShielded = true;
 
                 break;
             default:

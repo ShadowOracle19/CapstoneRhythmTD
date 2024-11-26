@@ -25,11 +25,18 @@ public class Tower : MonoBehaviour
 
     public Tile connectedTile;
     public int currentDamage;
+    public int tempDamageHolder;
+
+    public bool attackBuffed = false;
 
     [Header("Tower Empower Indicator")]
     public bool towerHover = false;
     public GameObject beatIndicator;
     public GameObject beatCircle;
+
+    [Header("Shield")]
+    public GameObject shieldEffect;
+    public bool isShielded = false;
 
     private void Start()
     {
@@ -38,6 +45,8 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
+        shieldEffect.SetActive(isShielded);
+
         if(towerHover)
         {
             if(ConductorV2.instance.beatDuration < 0.2)
@@ -63,6 +72,16 @@ public class Tower : MonoBehaviour
     {
         if (!rotateStarted) return;
         
+        if(attackBuffed)
+        {
+            currentDamage = currentDamage * 2;
+        }
+        else
+        {
+            currentDamage = tempDamageHolder;
+        }
+
+
         if(towerInfo.isAOETower)
         {
             colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
@@ -86,7 +105,46 @@ public class Tower : MonoBehaviour
         bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
         bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
         bullet.GetComponent<Projectile>().damage = currentDamage;
+
+        if(attackBuffed)
+            bullet.GetComponent<SpriteRenderer>().color = Color.red;
+
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        attackBuffed = false;
+        
+    }
+    
+    public void ExtraFire()
+    {
+        if (!rotateStarted) return;
+        
+        if(towerInfo.isAOETower)
+        {
+            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
+
+            foreach (var item in colliders)
+            {
+                if(item.transform.CompareTag("StageTile"))
+                {
+                    item.transform.GetComponent<Tile>().Pulse(Color.blue);
+                }
+                else if(item.transform.CompareTag("Enemy"))
+                {
+                    item.transform.GetComponent<Enemy>().Damage(currentDamage);
+                }
+            }
+            colliders = null;
+            return;
+        }
+
+        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
+        bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
+        bullet.GetComponent<Projectile>().damage = currentDamage;
+        bullet.GetComponent<SpriteRenderer>().color = Color.blue;
+
+        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        attackBuffed = false;
         
     }
 
@@ -99,11 +157,38 @@ public class Tower : MonoBehaviour
 
     public void Damage(int damage)
     {
+        if(isShielded)
+        {
+            isShielded = false;
+            return;
+        }
         currentHealth -= damage;
 
         if(currentHealth <= 0)
         {
             RemoveTower();
+        }
+    }
+
+    public void ActivateBuff(KeyCode keyCode)
+    {
+        switch (keyCode)
+        {
+            case KeyCode.UpArrow://Sonu's Buff
+                Debug.Log("Extra Attack");
+                ExtraFire();
+                break;
+            case KeyCode.RightArrow://Fayruz's Buff
+
+                Debug.Log("Buff Attack");
+                attackBuffed = true;
+                break;
+            case KeyCode.LeftArrow: //Niimi's Buff
+                isShielded = true;
+
+                break;
+            default:
+                break;
         }
     }
 

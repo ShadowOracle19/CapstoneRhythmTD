@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ComboManager : MonoBehaviour
@@ -30,6 +31,11 @@ public class ComboManager : MonoBehaviour
     public int currentMultiplier;
     public int streak;
 
+    public TextMeshProUGUI currentComboText;
+    public TextMeshProUGUI streakText;
+    public TextMeshProUGUI currentMultiplierText;
+    public TextMeshProUGUI highestComboText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +46,11 @@ public class ComboManager : MonoBehaviour
     void Update()
     {
         currentMultiplier = Mathf.Clamp(currentMultiplier, 1, 5);
+
+        currentComboText.text = "Combo: " + currentCombo;
+        streakText.text = "Streak: " + streak;
+        currentMultiplierText.text = "Multiplier: x" + currentMultiplier;
+        highestComboText.text = "Highest Combo: " + highestCombo;
     }
 
     public void IncreaseCombo()

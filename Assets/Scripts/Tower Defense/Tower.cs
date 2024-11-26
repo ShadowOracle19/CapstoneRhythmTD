@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour
 
     public Tile connectedTile;
     public int currentDamage;
-    private int tempDamageHolder;
+    public int tempDamageHolder;
 
     public bool attackBuffed = false;
 
@@ -74,7 +74,6 @@ public class Tower : MonoBehaviour
         
         if(attackBuffed)
         {
-            tempDamageHolder = currentDamage;
             currentDamage = currentDamage * 2;
         }
         else
@@ -114,6 +113,40 @@ public class Tower : MonoBehaviour
         attackBuffed = false;
         
     }
+    
+    public void ExtraFire()
+    {
+        if (!rotateStarted) return;
+        
+        if(towerInfo.isAOETower)
+        {
+            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
+
+            foreach (var item in colliders)
+            {
+                if(item.transform.CompareTag("StageTile"))
+                {
+                    item.transform.GetComponent<Tile>().Pulse(Color.blue);
+                }
+                else if(item.transform.CompareTag("Enemy"))
+                {
+                    item.transform.GetComponent<Enemy>().Damage(currentDamage);
+                }
+            }
+            colliders = null;
+            return;
+        }
+
+        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
+        bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
+        bullet.GetComponent<Projectile>().damage = currentDamage;
+        bullet.GetComponent<SpriteRenderer>().color = Color.blue;
+
+        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        attackBuffed = false;
+        
+    }
 
     public void RemoveTower()
     {
@@ -143,7 +176,7 @@ public class Tower : MonoBehaviour
         {
             case KeyCode.UpArrow://Sonu's Buff
                 Debug.Log("Extra Attack");
-                Fire();
+                ExtraFire();
                 break;
             case KeyCode.RightArrow://Fayruz's Buff
 

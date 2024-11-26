@@ -176,6 +176,7 @@ public class TowerManager : MonoBehaviour
             default:
                 break;
         }
+        _tower.GetComponent<Tower>().tempDamageHolder = _tower.GetComponent<Tower>().currentDamage;
 
         switch (type)
         {

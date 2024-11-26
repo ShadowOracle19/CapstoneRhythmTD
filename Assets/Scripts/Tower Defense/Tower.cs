@@ -106,7 +106,12 @@ public class Tower : MonoBehaviour
         bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
         bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
         bullet.GetComponent<Projectile>().damage = currentDamage;
+
+        if(attackBuffed)
+            bullet.GetComponent<SpriteRenderer>().color = Color.red;
+
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        attackBuffed = false;
         
     }
 

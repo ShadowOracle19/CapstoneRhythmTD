@@ -165,47 +165,50 @@ public class CursorTD : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            TowerEmpowerment();
+            TowerEmpowerment(KeyCode.UpArrow);
             SpawnBeatHitResult();
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            TowerEmpowerment();
-            SpawnBeatHitResult();
-
-        }
-        else if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            TowerEmpowerment();
+            TowerEmpowerment(KeyCode.LeftArrow);
             SpawnBeatHitResult();
 
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            TowerEmpowerment();
+            TowerEmpowerment(KeyCode.RightArrow);
             SpawnBeatHitResult();
         }
     }
 
-    public void TowerEmpowerment()
+    public void TowerEmpowerment(KeyCode _keyCode)
     {
         if(tile.placedTower != null)
         {
-            if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
+
+            switch (CheckOnBeat())
             {
-                tile.placedTower.GetComponentInChildren<SpriteRenderer>().color = Color.green;
-            }
-            else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
-            {
-                tile.placedTower.GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-            }
-            else if(ConductorV2.instance.beatDuration < ConductorV2.instance.earlyBeatThreshold)
-            {
-                tile.placedTower.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+                case _BeatResult.miss:
+                    
+                    ComboManager.Instance.ResetCombo();
+                    break;
+                case _BeatResult.great:
+                    
+                    ComboManager.Instance.IncreaseCombo();
+                    tile.placedTower.GetComponent<Tower>().ActivateBuff(_keyCode);
+                    break;
+                case _BeatResult.perfect:
+                    
+                    ComboManager.Instance.IncreaseCombo();
+                    tile.placedTower.GetComponent<Tower>().ActivateBuff(_keyCode);
+                    break;
+                default:
+                    break;
             }
         }
         else
         {
+            SpawnBeatHitResult();
             return;
         }
     }
@@ -216,20 +219,34 @@ public class CursorTD : MonoBehaviour
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
             && !TowerManager.Instance.CheckIfOnCoolDown(tower.GetComponent<Tower>().towerInfo.type)) 
         {
-            if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
-            {
-                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.perfect);
-            }
-            else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
-            {
-                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.early);
-            }
-            else if(ConductorV2.instance.beatDuration < ConductorV2.instance.earlyBeatThreshold)
-            {
-                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
-                //miss beat
 
+            switch (CheckOnBeat())
+            {
+                case _BeatResult.late:
+                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
+                    break;
+                case _BeatResult.miss:
+
+                    ComboManager.Instance.ResetCombo();
+                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
+                    break;
+                case _BeatResult.early:
+                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.early);
+                    break;
+                case _BeatResult.great:
+
+                    ComboManager.Instance.IncreaseCombo();
+                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.perfect);
+                    break;
+                case _BeatResult.perfect:
+
+                    ComboManager.Instance.IncreaseCombo();
+                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.perfect);
+                    break;
+                default:
+                    break;
             }
+
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             SpawnBeatHitResult();
             TogglePlacementMenu();
@@ -361,23 +378,67 @@ public class CursorTD : MonoBehaviour
     {
         Debug.Log(ConductorV2.instance.beatDuration);
         GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
+
+        switch (CheckOnBeat())
+        {
+            case _BeatResult.late:
+                beatResult.GetComponent<TMP_Text>().text = "late";//miss beat
+                beatResult.GetComponent<TMP_Text>().color = Color.grey;
+                break;
+            case _BeatResult.miss:
+                beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
+                beatResult.GetComponent<TMP_Text>().color = Color.red;
+                break;
+            case _BeatResult.early:
+                beatResult.GetComponent<TMP_Text>().text = "early";
+                beatResult.GetComponent<TMP_Text>().fontSize = 56;
+                beatResult.GetComponent<TMP_Text>().color = Color.yellow;
+                break;
+            case _BeatResult.great:
+                beatResult.GetComponent<TMP_Text>().text = "great";
+                beatResult.GetComponent<TMP_Text>().fontSize = 65;
+                beatResult.GetComponent<TMP_Text>().color = Color.cyan;
+                break;
+            case _BeatResult.perfect:
+                beatResult.GetComponent<TMP_Text>().text = "perfect!";
+                beatResult.GetComponent<TMP_Text>().fontSize = 72;
+                beatResult.GetComponent<TMP_Text>().color = Color.green;
+                break;
+            default:
+                beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
+                beatResult.GetComponent<TMP_Text>().color = Color.red;
+                break;
+        }
+    }
+
+    public _BeatResult CheckOnBeat()
+    {
         if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
         {
-            beatResult.GetComponent<TMP_Text>().text = "perfect!";
-            beatResult.GetComponent<TMP_Text>().fontSize = 72;
-            beatResult.GetComponent<TMP_Text>().color = Color.green;
+            return _BeatResult.perfect;
+            
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.greatBeatThreshold)//great beat hit
+        {
+            return _BeatResult.great;
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
         {
-            beatResult.GetComponent<TMP_Text>().text = "early";
-            beatResult.GetComponent<TMP_Text>().fontSize = 56;
-            beatResult.GetComponent<TMP_Text>().color = Color.yellow;
-        }
-        else if(ConductorV2.instance.beatDuration < ConductorV2.instance.earlyBeatThreshold)
-        {
-            beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
-            beatResult.GetComponent<TMP_Text>().color = Color.red;
+            return _BeatResult.early;
 
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.missBeatThreshold)//miss beat hit
+        {
+            return _BeatResult.miss;
+
+        }
+        else if (ConductorV2.instance.beatDuration < ConductorV2.instance.missBeatThreshold)//late beat hit
+        {
+            return _BeatResult.late;
+        }
+        else
+        {
+            return _BeatResult.miss;
         }
     }
     

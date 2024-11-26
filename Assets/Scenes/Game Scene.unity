@@ -3030,6 +3030,7 @@ GameObject:
   m_Component:
   - component: {fileID: 229527091}
   - component: {fileID: 229527090}
+  - component: {fileID: 229527092}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -3068,6 +3069,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2096350186}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &229527092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229527089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d980dd795a464f64db56cfaa04178acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCombo: 0
+  highestCombo: 0
+  currentMultiplier: 1
+  streak: 0
 --- !u!1 &236346784
 GameObject:
   m_ObjectHideFlags: 0
@@ -17857,8 +17874,10 @@ MonoBehaviour:
   completedLoops: 0
   loopPositionInBeats: 0
   loopPositionInAnalog: 0
+  missBeatThreshold: 0.05
   earlyBeatThreshold: 0.2
-  perfectBeatThreshold: 0.4
+  greatBeatThreshold: 0.3
+  perfectBeatThreshold: 0.5
   beatDuration: 0
   numberOfBeats: 0
   drums: {fileID: 1605680384}

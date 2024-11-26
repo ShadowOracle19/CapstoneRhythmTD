@@ -25,6 +25,9 @@ public class Tower : MonoBehaviour
 
     public Tile connectedTile;
     public int currentDamage;
+    private int tempDamageHolder;
+
+    public bool attackBuffed = false;
 
     [Header("Tower Empower Indicator")]
     public bool towerHover = false;
@@ -63,6 +66,17 @@ public class Tower : MonoBehaviour
     {
         if (!rotateStarted) return;
         
+        if(attackBuffed)
+        {
+            tempDamageHolder = currentDamage;
+            currentDamage = currentDamage * 2;
+        }
+        else
+        {
+            currentDamage = tempDamageHolder;
+        }
+
+
         if(towerInfo.isAOETower)
         {
             colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
@@ -104,6 +118,28 @@ public class Tower : MonoBehaviour
         if(currentHealth <= 0)
         {
             RemoveTower();
+        }
+    }
+
+    public void ActivateBuff(KeyCode keyCode)
+    {
+        switch (keyCode)
+        {
+            case KeyCode.UpArrow://Sonu's Buff
+                Debug.Log("Extra Attack");
+                Fire();
+                break;
+            case KeyCode.RightArrow://Fayruz's Buff
+
+                Debug.Log("Buff Attack");
+                attackBuffed = true;
+                break;
+            case KeyCode.LeftArrow: //Niimi's Buff
+                Debug.Log("Shield Tower");
+
+                break;
+            default:
+                break;
         }
     }
 

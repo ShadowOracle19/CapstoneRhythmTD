@@ -38,7 +38,11 @@ public class ConductorV2 : MonoBehaviour
 
 
     //Beat Thresholds
+    //Note:
+    //When checking beat threshold check late, miss, early, great, and then perfect
+    public float missBeatThreshold = 0.45f;
     public float earlyBeatThreshold = 0.45f;
+    public float greatBeatThreshold = 0.45f;
     public float perfectBeatThreshold = 0.61f;
 
     public float beatDuration;
@@ -277,6 +281,6 @@ public class ConductorV2 : MonoBehaviour
 
 public enum _BeatResult
 {
-    miss, early, perfect
+    late, miss, early, great, perfect
 }
 

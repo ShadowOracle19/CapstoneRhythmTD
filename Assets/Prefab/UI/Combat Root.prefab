@@ -1242,6 +1242,7 @@ GameObject:
   - component: {fileID: 3345942754331929566}
   - component: {fileID: 3612089567287708847}
   - component: {fileID: 3766578829842431984}
+  - component: {fileID: 527936733991456964}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1300,6 +1301,21 @@ MonoBehaviour:
   streakText: {fileID: 7655487255119597911}
   currentMultiplierText: {fileID: 4373154114407681201}
   highestComboText: {fileID: 1617468971779332651}
+--- !u!114 &527936733991456964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705044747473532798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b7aed6bef50db499604740c4b21680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feverBar: {fileID: 7310860854342391194}
+  feverModeActive: 0
+  feverBarNum: 0
 --- !u!1 &6646137276671927310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,6 +2527,17 @@ MonoBehaviour:
 --- !u!114 &5357066480712527213 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6806902770354482583, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7310860854342391194 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8168263790559712608, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 1454352159991415034}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -88,6 +88,11 @@ public class CursorTD : MonoBehaviour
 
         }
         HighlightPlacementSlot();
+
+        if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            FeverSystem.Instance.ActivateFeverMode();
+        }
     }
 
     public void DestroyMode()

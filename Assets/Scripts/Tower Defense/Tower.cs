@@ -45,6 +45,9 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
+        if(FeverSystem.Instance.feverModeActive)
+            isShielded = true;
+
         shieldEffect.SetActive(isShielded);
 
         if(towerHover)
@@ -72,7 +75,7 @@ public class Tower : MonoBehaviour
     {
         if (!rotateStarted) return;
         
-        if(attackBuffed)
+        if(attackBuffed || FeverSystem.Instance.feverModeActive)
         {
             currentDamage = currentDamage * 2;
         }
@@ -106,7 +109,7 @@ public class Tower : MonoBehaviour
         bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
         bullet.GetComponent<Projectile>().damage = currentDamage;
 
-        if(attackBuffed)
+        if(attackBuffed || FeverSystem.Instance.feverModeActive)
             bullet.GetComponent<SpriteRenderer>().color = Color.red;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);

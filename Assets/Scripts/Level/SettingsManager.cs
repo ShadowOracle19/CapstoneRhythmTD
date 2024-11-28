@@ -7,11 +7,6 @@ using UnityEngine.Audio;
 
 public class SettingsManager : MonoBehaviour
 {
-    //Gameplay/General
-    [SerializeField] private TextMeshProUGUI textSpeedDropDown;
-
-    //Video
-    [SerializeField] private TextMeshProUGUI resolutionDropDown;
 
     [Header("Audio")] 
     [SerializeField] private AudioMixer masterAudioMixer;

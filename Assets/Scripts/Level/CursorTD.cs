@@ -136,6 +136,8 @@ public class CursorTD : MonoBehaviour
             SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
             SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
         }
+
+        TowerManager.Instance.SwapTowers();
     }
 
     public void DestroyMode()

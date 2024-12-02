@@ -1526,22 +1526,26 @@ MonoBehaviour:
   - {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
   - {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
   - {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
+  - {fileID: 5183850645279424415, guid: 335f2a430ad950b4982c2a3ca8951fc2, type: 3}
+  - {fileID: 2167625354041566739, guid: 1a208b9ecaf6f0f4d817a63e46fa6547, type: 3}
+  - {fileID: 5183850645279424415, guid: f64de0cd98f03494d9a5770c06aa11a4, type: 3}
+  - {fileID: 5183850645279424415, guid: d92bc725aeb0a3f46bd544fc35131520, type: 3}
   drumCooldownSlot: {fileID: 8856928359568320219}
   drumCooldown: 0
-  drumCooldownTimeRemaining: 0
-  drumCooldownTime: 0
   bassCooldownSlot: {fileID: 7614343940101376932}
   bassCooldown: 0
-  bassCooldownTimeRemaining: 0
-  bassCooldownTime: 0
   guitarCooldownSlot: {fileID: 2936708332142353515}
   guitarCooldown: 0
-  guitarCooldownTimeRemaining: 0
-  guitarCooldownTime: 0
   pianoCooldownSlot: {fileID: 1449537002321852296}
   pianoCooldown: 0
-  pianoCooldownTimeRemaining: 0
-  pianoCooldownTime: 0
+  drumCooldownSlotBack: {fileID: 2698869909941171550}
+  drumCooldownBack: 0
+  bassCooldownSlotBack: {fileID: 309663869581853440}
+  bassCooldownBack: 0
+  guitarCooldownSlotBack: {fileID: 6906991662551447674}
+  guitarCooldownBack: 0
+  pianoCooldownSlotBack: {fileID: 6328596300317074030}
+  pianoCooldownBack: 0
 --- !u!1 &7243257818393121727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2471,6 +2475,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &309663869581853440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1180717380027761658, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1087988791341581498 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1961235857534469184, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
@@ -2508,6 +2517,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3516640260633789674, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 1454352159991415034}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2698869909941171550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3556342287188686244, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2936708332142353515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4390918646476184721, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
@@ -2535,6 +2549,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6328596300317074030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4899165821225165460, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6906991662551447674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5473128944761501824, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7310860854342391194 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8168263790559712608, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}

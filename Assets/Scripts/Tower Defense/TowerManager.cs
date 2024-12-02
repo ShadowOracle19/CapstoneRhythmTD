@@ -35,23 +35,43 @@ public class TowerManager : MonoBehaviour
     //Note: After this sprint replace to be more dynamic
     public GameObject drumCooldownSlot;
     public bool drumCooldown;
-    public float drumCooldownTimeRemaining = 0;
-    public float drumCooldownTime = 0;
+    private float drumCooldownTimeRemaining = 0;
+    private float drumCooldownTime = 0;
 
     public GameObject bassCooldownSlot;
     public bool bassCooldown;
-    public float bassCooldownTimeRemaining = 0;
-    public float bassCooldownTime = 0;
+    private float bassCooldownTimeRemaining = 0;
+    private float bassCooldownTime = 0;
 
     public GameObject guitarCooldownSlot;
     public bool guitarCooldown;
-    public float guitarCooldownTimeRemaining = 0;
-    public float guitarCooldownTime = 0;
+    private float guitarCooldownTimeRemaining = 0;
+    private float guitarCooldownTime = 0;
 
     public GameObject pianoCooldownSlot;
     public bool pianoCooldown;
-    public float pianoCooldownTimeRemaining = 0;
-    public float pianoCooldownTime = 0;
+    private float pianoCooldownTimeRemaining = 0;
+    private float pianoCooldownTime = 0;
+
+    public GameObject drumCooldownSlotBack;
+    public bool drumCooldownBack;
+    private float drumCooldownTimeRemainingBack = 0;
+    private float drumCooldownTimeBack = 0;
+
+    public GameObject bassCooldownSlotBack;
+    public bool bassCooldownBack;
+    private float bassCooldownTimeRemainingBack = 0;
+    private float bassCooldownTimeBack = 0;
+
+    public GameObject guitarCooldownSlotBack;
+    public bool guitarCooldownBack;
+    private float guitarCooldownTimeRemainingBack = 0;
+    private float guitarCooldownTimeBack = 0;
+
+    public GameObject pianoCooldownSlotBack;
+    public bool pianoCooldownBack;
+    private float pianoCooldownTimeRemainingBack = 0;
+    private float pianoCooldownTimeBack = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +92,13 @@ public class TowerManager : MonoBehaviour
         pianoCooldownSlot.SetActive(pianoCooldown);
         guitarCooldownSlot.SetActive(guitarCooldown);
 
-        if(drumCooldown)
+        drumCooldownSlotBack.SetActive(drumCooldownBack);
+        bassCooldownSlotBack.SetActive(bassCooldownBack);
+        pianoCooldownSlotBack.SetActive(pianoCooldownBack);
+        guitarCooldownSlotBack.SetActive(guitarCooldownBack);
+
+        //front slots
+        if (drumCooldown)
         {
             drumCooldownTime += Time.deltaTime;
 
@@ -125,6 +151,80 @@ public class TowerManager : MonoBehaviour
                 pianoCooldownTime = 0;
             }
         }
+
+        //back slots
+        if (drumCooldownBack)
+        {
+            drumCooldownTimeBack += Time.deltaTime;
+
+            //cooldown effect
+            drumCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(drumCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((drumCooldownTimeBack / drumCooldownTimeRemainingBack) * 100));
+
+            if (drumCooldownTimeBack >= drumCooldownTimeRemainingBack)
+            {
+                drumCooldownBack = false;
+                drumCooldownTimeBack = 0;
+            }
+
+        }
+        if (bassCooldownBack)
+        {
+            bassCooldownTimeBack += Time.deltaTime;
+
+            //cooldown effect
+            bassCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(bassCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((bassCooldownTimeBack / bassCooldownTimeRemainingBack) * 100));
+
+            if (bassCooldownTimeBack >= bassCooldownTimeRemainingBack)
+            {
+                bassCooldownBack = false;
+                bassCooldownTimeBack = 0;
+            }
+        }
+        if (guitarCooldownBack)
+        {
+            guitarCooldownTimeBack += Time.deltaTime;
+
+            //cooldown effect
+            guitarCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(guitarCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((guitarCooldownTimeBack / guitarCooldownTimeRemainingBack) * 100));
+
+            if (guitarCooldownTimeBack >= guitarCooldownTimeRemainingBack)
+            {
+                guitarCooldownBack = false;
+                guitarCooldownTimeBack = 0;
+            }
+        }
+        if (pianoCooldownBack)
+        {
+            pianoCooldownTimeBack += Time.deltaTime;
+
+            //cooldown effect
+            pianoCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(pianoCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((pianoCooldownTimeBack / pianoCooldownTimeRemainingBack) * 100));
+
+            if (pianoCooldownTimeBack >= pianoCooldownTimeRemainingBack)
+            {
+                pianoCooldownBack = false;
+                pianoCooldownTimeBack = 0;
+            }
+        }
+    }
+
+    public void SwapTowers()
+    {
+        (drumCooldown, drumCooldownBack) = (drumCooldownBack, drumCooldown);
+        (bassCooldown, bassCooldownBack) = (bassCooldownBack, bassCooldown);
+        (guitarCooldown, guitarCooldownBack) = (guitarCooldownBack, guitarCooldown);
+        (pianoCooldown, pianoCooldownBack) = (pianoCooldownBack, pianoCooldown);
+
+        (drumCooldownTime, drumCooldownTimeBack) = (drumCooldownTimeBack, drumCooldownTime);
+        (bassCooldownTime, bassCooldownTimeBack) = (bassCooldownTimeBack, bassCooldownTime);
+        (guitarCooldownTime, guitarCooldownTimeBack) = (guitarCooldownTimeBack, guitarCooldownTime);
+        (pianoCooldownTime, pianoCooldownTimeBack) = (pianoCooldownTimeBack, pianoCooldownTime);
+
+        (drumCooldownTimeRemaining, drumCooldownTimeRemainingBack) = (drumCooldownTimeRemainingBack, drumCooldownTimeRemaining);
+        (bassCooldownTimeRemaining, bassCooldownTimeRemainingBack) = (bassCooldownTimeRemainingBack, bassCooldownTimeRemaining);
+        (guitarCooldownTimeRemaining, guitarCooldownTimeRemainingBack) = (guitarCooldownTimeRemainingBack, guitarCooldownTimeRemaining);
+        (pianoCooldownTimeRemaining, pianoCooldownTimeRemainingBack) = (pianoCooldownTimeRemainingBack, pianoCooldownTimeRemaining);
+
     }
 
     public bool CheckIfOnCoolDown(InstrumentType type)

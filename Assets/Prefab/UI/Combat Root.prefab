@@ -1523,9 +1523,9 @@ MonoBehaviour:
   isTowerHovering: 0
   towers:
   - {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
-  - {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
-  - {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
   - {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
+  - {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
+  - {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
   drumCooldownSlot: {fileID: 8856928359568320219}
   drumCooldown: 0
   drumCooldownTimeRemaining: 0

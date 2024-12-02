@@ -3195,6 +3195,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 360970424296580332, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 454428862685434380, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3271,6 +3275,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1167859193132363721, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_Name
+      value: Tower 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588399451249071123, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2006741146610802601, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3291,6 +3303,30 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2343834623665018367, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1916601345, guid: a94ec11b7e5c0034daa35196378d62e7, type: 3}
+    - target: {fileID: 2751378064255184901, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: towers.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751378064255184901, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: towers.Array.data[4]
+      value: 
+      objectReference: {fileID: 5183850645279424415, guid: 335f2a430ad950b4982c2a3ca8951fc2, type: 3}
+    - target: {fileID: 2751378064255184901, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: towers.Array.data[5]
+      value: 
+      objectReference: {fileID: 2167625354041566739, guid: 1a208b9ecaf6f0f4d817a63e46fa6547, type: 3}
+    - target: {fileID: 2751378064255184901, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: towers.Array.data[6]
+      value: 
+      objectReference: {fileID: 5183850645279424415, guid: f64de0cd98f03494d9a5770c06aa11a4, type: 3}
+    - target: {fileID: 2751378064255184901, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: towers.Array.data[7]
+      value: 
+      objectReference: {fileID: 5183850645279424415, guid: d92bc725aeb0a3f46bd544fc35131520, type: 3}
     - target: {fileID: 3027064594267395884, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_Camera
       value: 
@@ -3347,17 +3383,45 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4157367118696172162, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4201360459971936570, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_Name
       value: Combat Root
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335394624163504152, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5129187372497375343, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5207571317805809428, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -431828135, guid: 0dba711137238d04c87f48b346142d46, type: 3}
+    - target: {fileID: 5249657198905213552, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714477302160903073, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766644262211073659, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6645288240496362704, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692318005536809954, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_Name
+      value: Tower 3
       objectReference: {fileID: 0}
     - target: {fileID: 6759788318938958477, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
@@ -3403,16 +3467,33 @@ PrefabInstance:
       propertyPath: triggerEvent.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7539631380949961411, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_Name
+      value: Tower 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565427099740420935, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102216202243628512, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8541981869643708278, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585683417752612695, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9154697066075946882, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3395063772672332214, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}

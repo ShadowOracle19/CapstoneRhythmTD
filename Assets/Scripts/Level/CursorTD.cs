@@ -50,6 +50,7 @@ public class CursorTD : MonoBehaviour
 
     public bool pauseMovement = false;
 
+    public bool towerSwap;
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +93,48 @@ public class CursorTD : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
             FeverSystem.Instance.ActivateFeverMode();
+        }
+
+        if(Input.GetKeyUp(KeyCode.E))
+        {
+            SwapTowers();
+        }
+    }
+
+    public void SwapTowers()
+    {
+        towerSwap = !towerSwap;
+        if(towerSwap)
+        {
+            SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[4];
+            SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[4].GetComponent<Tower>().towerInfo.towerImage;
+
+            SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[5];
+            SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[5].GetComponent<Tower>().towerInfo.towerImage;
+
+
+            SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[6];
+            SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[6].GetComponent<Tower>().towerInfo.towerImage;
+
+
+            SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[7];
+            SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[7].GetComponent<Tower>().towerInfo.towerImage;
+        }
+        else
+        {
+            SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
+            SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+
+            SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
+            SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
+
+
+            SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
+            SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+
+
+            SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
+            SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
         }
     }
 

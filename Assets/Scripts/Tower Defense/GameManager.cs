@@ -128,7 +128,13 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.waveCounter.SetActive(false);
         CombatManager.Instance.combo.SetActive(false);
 
-        ConductorV2.instance.CountUsIn(100);
+        CursorTD.Instance.movementSequence = false;
+        CursorTD.Instance.towerPlacementMenuSequence = false;
+        CursorTD.Instance.towerPlaceSequence = false;
+        CursorTD.Instance.towerBuffSequence = false;
+        CursorTD.Instance.feverModeSequence = false;
+
+        ConductorV2.instance.CountUsIn(80);
     }
 
     public void LoadEncounter(EncounterCreator encounter)

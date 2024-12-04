@@ -311,12 +311,20 @@ public class ConductorV2 : MonoBehaviour
 
     public void PlayMusic()
     {
+        if (GameManager.Instance.tutorialRunning)
+        {
+            CombatManager.Instance.metronome.SetActive(true);
+            CursorTD.Instance.movementSequence = true;
+        }
+
         musicSource.Play();
         drums.Play();
         bass.Play();
         piano.Play();
         guitarH.Play();
         guitarM.Play();
+
+        
     }
 }
 

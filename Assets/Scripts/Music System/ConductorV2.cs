@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -63,6 +64,9 @@ public class ConductorV2 : MonoBehaviour
 
     public AudioSource _ping;
 
+    public AudioClip bpmTrack1; //80
+    public AudioClip bpmTrack2; //100
+
     [Header("Metronome")]
     public GameObject ticker;
     public bool ping = false;//true left, false right
@@ -75,6 +79,7 @@ public class ConductorV2 : MonoBehaviour
     public List<UnityEvent> triggerEvent = new List<UnityEvent>();
 
     public bool pauseConductor = false;
+    public TextMeshProUGUI countInText;
 
 
     // Start is called before the first frame update
@@ -113,20 +118,13 @@ public class ConductorV2 : MonoBehaviour
 
     IEnumerator CountIn()
     {
-        for (int i = 0; i < 4; i++)
+        countInText.gameObject.SetActive(true);
+        for (int i = 1; i <= 4; i++)
         {
             Debug.Log("count in " + i);
+            countInText.text = i.ToString();
             _ping.Play();
             yield return new WaitForSeconds(60 / bpm);
-            //if (i < 3)
-            //{
-                
-            //}
-            //else
-            //{
-            //    yield return null;
-            //}
-            
         }
         StartConductor();
         yield return null;
@@ -134,11 +132,17 @@ public class ConductorV2 : MonoBehaviour
 
     public void StartConductor()
     {
+        countInText.gameObject.SetActive(false);
         Debug.Log("Conductor Start");
         pauseConductor = false;
 
         //load the audio source attached to the conductor gameobject
         musicSource = GetComponent<AudioSource>();
+
+        if (GameManager.Instance.tutorialRunning)
+            musicSource.clip = bpmTrack1;
+        else
+            musicSource.clip = bpmTrack2;
 
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;

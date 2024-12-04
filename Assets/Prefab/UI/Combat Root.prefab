@@ -1057,6 +1057,8 @@ MonoBehaviour:
   guitarH: {fileID: 6719426819543971625}
   guitarM: {fileID: 2499021777660696541}
   _ping: {fileID: 3455449906209016773}
+  bpmTrack1: {fileID: 8300000, guid: 5b1779a8fe179ed4ab51d69bf4770191, type: 3}
+  bpmTrack2: {fileID: 8300000, guid: d8f72b88495da984c90f1e87393c3cda, type: 3}
   ticker: {fileID: 1464096593661718287}
   ping: 0
   rotationLeft: {x: 0, y: 0, z: 45}
@@ -1146,6 +1148,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   pauseConductor: 0
+  countInText: {fileID: 0}
 --- !u!82 &8935945286973304900
 AudioSource:
   m_ObjectHideFlags: 0

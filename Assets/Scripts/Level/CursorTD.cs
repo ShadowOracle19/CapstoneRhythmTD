@@ -158,8 +158,10 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void InitializePlacementMenu()
+    public void InitializeCursor()
     {
+        gameObject.transform.position = new Vector3(-2.5f, -0.54f, 0);
+
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
         SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
 

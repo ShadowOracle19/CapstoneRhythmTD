@@ -347,6 +347,7 @@ MonoBehaviour:
   encounterRunning: 0
   winState: 0
   loseState: 0
+  tutorialRunning: 0
   textSpeed: 0.1
 --- !u!4 &263461693
 Transform:
@@ -1973,11 +1974,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 263461692}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: LoadEncounter
-        m_Mode: 2
+        m_MethodName: LoadTutorial
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 0588ba88b5d0e3643bc91c82a858f9fe, type: 2}
-          m_ObjectArgumentAssemblyTypeName: EncounterCreator, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3523,6 +3524,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1074699631739324890, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1163226883112835705, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -3577,11 +3582,11 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 2199224633335421815, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2199224633335421815, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2343834623665018367, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_Sprite
@@ -3653,7 +3658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4201360459971936570, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4335394624163504152, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_IsActive
@@ -3661,7 +3666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5129187372497375343, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5207571317805809428, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_Sprite
@@ -3702,10 +3707,6 @@ PrefabInstance:
     - target: {fileID: 7310860854342391194, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_MaxValue
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.size
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: triggerEvent.Array.data[5].m_PersistentCalls.m_Calls.Array.size

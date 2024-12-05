@@ -51,6 +51,8 @@ public class CursorTD : MonoBehaviour
     public bool towerSwap;
 
     [Header("Tutorial Objects")]
+    public GameObject tutorialParent;
+
     public GameObject wasdParent;
     public GameObject wKey;
     public GameObject aKey;
@@ -63,6 +65,9 @@ public class CursorTD : MonoBehaviour
     public GameObject downKey;
     public GameObject rightKey;
 
+    public GameObject spaceKeyParent;
+    public GameObject spaceKey;
+
     public bool movementSequence = false;
     public bool towerPlacementMenuSequence = false;
     public bool towerPlaceSequence = false ;
@@ -70,6 +75,7 @@ public class CursorTD : MonoBehaviour
     public bool feverModeSequence = false;
 
     public int moveCounter = 0;
+    public int buffCounter = 0;
    
 
 
@@ -93,6 +99,8 @@ public class CursorTD : MonoBehaviour
         if (GameManager.Instance.winState) return;
         if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftShift) && (tile != null && tile.placedTower == null))
         {
+            
+
             TogglePlacementMenu();
         }
 
@@ -133,6 +141,8 @@ public class CursorTD : MonoBehaviour
             leftKey.GetComponent<TextMeshPro>().color = Color.Lerp(leftKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
             downKey.GetComponent<TextMeshPro>().color = Color.Lerp(downKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
             rightKey.GetComponent<TextMeshPro>().color = Color.Lerp(rightKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+
+            spaceKey.GetComponent<TextMeshPro>().color = Color.Lerp(spaceKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
         }
 
     }
@@ -307,6 +317,8 @@ public class CursorTD : MonoBehaviour
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
             && !TowerManager.Instance.CheckIfOnCoolDown(tower.GetComponent<Tower>().towerInfo.type)) 
         {
+           
+
 
             switch (CheckOnBeat())
             {
@@ -351,6 +363,20 @@ public class CursorTD : MonoBehaviour
     {
         towerSelectMenuOpened = !towerSelectMenuOpened;
         placementMenu.SetActive(towerSelectMenuOpened);
+
+        if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
+        {
+            towerPlacementMenuSequence = false;
+            spaceKeyParent.SetActive(false);
+            towerPlaceSequence = true;
+            wasdParent.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0);
+            CombatManager.Instance.towerDisplay.SetActive(true);
+        }
+        //else if(GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && !towerSelectMenuOpened)
+        //{
+        //    towerPlacementMenuSequence = true;
+        //    towerPlaceSequence = false;
+        //}
     }
 
     public void HighlightPlacementSlot()
@@ -436,7 +462,7 @@ public class CursorTD : MonoBehaviour
         desiredMovement = Vector3.zero;
         tile = null;
 
-        if(GameManager.Instance.tutorialRunning)
+        if(GameManager.Instance.tutorialRunning && movementSequence)
         {
             moveCounter += 1;
             if (moveCounter == 4)
@@ -444,6 +470,8 @@ public class CursorTD : MonoBehaviour
                 movementSequence = false;
                 wasdParent.SetActive(false);
                 moveCounter = 0;
+                CombatManager.Instance.resources.SetActive(true);
+                CombatManager.Instance.resourceNum = 0;
             }
         }
         
@@ -497,6 +525,35 @@ public class CursorTD : MonoBehaviour
                 default:
                     break;
             }
+        }
+        if(towerPlacementMenuSequence && GameManager.Instance.tutorialRunning)
+        {
+            spaceKeyParent.SetActive(true);
+            spaceKey.GetComponent<TextMeshPro>().color = Color.red;
+        }
+        if (towerBuffSequence && GameManager.Instance.tutorialRunning && tile != null && tile.placedTower != null)
+        {
+            arrowKeyParent.SetActive(true);
+            int rand = Random.Range(1, 4);
+            switch (rand)
+            {
+                case 1:
+                    upKey.GetComponent<TextMeshPro>().color = Color.red;
+                    break;
+                case 2:
+                    leftKey.GetComponent<TextMeshPro>().color = Color.red;
+                    break;
+                case 3:
+                    rightKey.GetComponent<TextMeshPro>().color = Color.red;
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (feverModeSequence && FeverSystem.Instance.feverBarNum == 100 && GameManager.Instance.tutorialRunning)
+        {
+            arrowKeyParent.SetActive(true);
+            downKey.GetComponent<TextMeshPro>().color = Color.red;
         }
     }
 

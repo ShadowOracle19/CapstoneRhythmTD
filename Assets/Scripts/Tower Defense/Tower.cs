@@ -175,6 +175,23 @@ public class Tower : MonoBehaviour
 
     public void ActivateBuff(KeyCode keyCode)
     {
+        if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerBuffSequence)
+        {
+            CursorTD.Instance.buffCounter += 1;
+            if(CursorTD.Instance.buffCounter == 4)
+            {
+                CursorTD.Instance.towerBuffSequence = false;
+                CombatManager.Instance.healthBar.SetActive(true);
+                CombatManager.Instance.feverBar.SetActive(true);
+                CombatManager.Instance.combo.SetActive(true);
+
+                CursorTD.Instance.arrowKeyParent.SetActive(false);
+                CursorTD.Instance.feverModeSequence = true;
+
+                EnemySpawner.Instance.ForceEnemySpawn(CursorTD.Instance.gameObject.transform.position.y);
+                CursorTD.Instance.buffCounter = 0;
+            }
+        }
         switch (keyCode)
         {
             case KeyCode.UpArrow://Sonu's Buff

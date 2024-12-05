@@ -109,10 +109,14 @@ public class ConductorV2 : MonoBehaviour
 
     public void CountUsIn(int _bpm)
     {
-        AudioConfiguration config = AudioSettings.GetConfiguration();
-        AudioSettings.Reset(config);
-        bpm = _bpm;
         pauseConductor = true;
+        //load the audio source attached to the conductor gameobject
+        musicSource = GetComponent<AudioSource>();
+        bpm = _bpm;
+        completedLoops = 0;
+        numberOfBeats = 0;
+        beatTrack = 0;
+        beatDuration = 0;
         StartCoroutine(CountIn());
     }
 
@@ -132,12 +136,10 @@ public class ConductorV2 : MonoBehaviour
 
     public void StartConductor()
     {
+        pauseConductor = false;
         countInText.gameObject.SetActive(false);
         Debug.Log("Conductor Start");
-        pauseConductor = false;
 
-        //load the audio source attached to the conductor gameobject
-        musicSource = GetComponent<AudioSource>();
 
         if (GameManager.Instance.tutorialRunning)
             musicSource.clip = bpmTrack1;
@@ -148,7 +150,8 @@ public class ConductorV2 : MonoBehaviour
         crotchet = 60 / bpm;
 
         //record the time when the music starts
-        
+        AudioConfiguration config = AudioSettings.GetConfiguration();
+        AudioSettings.Reset(config);
         dspSongTime = (float)AudioSettings.dspTime;
 
         completedLoops = 0;

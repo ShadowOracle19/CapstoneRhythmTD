@@ -250,6 +250,8 @@ public class TowerManager : MonoBehaviour
 
     public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type, _BeatResult result)
     {
+       
+
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<SpriteFollowMouse>().enabled = false;
         _tower.GetComponent<BoxCollider2D>().enabled = true;
@@ -311,6 +313,15 @@ public class TowerManager : MonoBehaviour
 
             default:
                 break;
+        }
+
+        if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerPlaceSequence)
+        {
+            CursorTD.Instance.towerPlaceSequence = false;
+            CursorTD.Instance.wasdParent.transform.position = new Vector3(0, 1, 0);
+            CursorTD.Instance.wasdParent.SetActive(false);
+            CursorTD.Instance.towerBuffSequence = true;
+            EnemySpawner.Instance.ForceEnemySpawn(gameObject.transform.position.y);
         }
     }
 

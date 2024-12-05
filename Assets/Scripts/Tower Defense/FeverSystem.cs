@@ -39,6 +39,8 @@ public class FeverSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         feverBarNum = Mathf.Clamp(feverBarNum, 0, 100);
         feverBar.value = feverBarNum;
         if(feverBarNum == 0)
@@ -52,6 +54,13 @@ public class FeverSystem : MonoBehaviour
         if(feverBarNum == 100)
         {
             feverModeActive = true;
+
+            if(GameManager.Instance.tutorialRunning && CursorTD.Instance.feverModeSequence)
+            {
+                CursorTD.Instance.feverModeSequence = false;
+                CursorTD.Instance.arrowKeyParent.SetActive(false);
+            }
+
         }
     }
 
@@ -64,6 +73,16 @@ public class FeverSystem : MonoBehaviour
         else
         {
             feverBarNum += 1 * ComboManager.Instance.currentMultiplier;
+
+            if (GameManager.Instance.tutorialRunning && CursorTD.Instance.feverModeSequence && feverBarNum >= 99 && !EnemySpawner.Instance.allEnemiesSpawned)
+            {
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[0].transform.position.y);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[1].transform.position.y);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[2].transform.position.y);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[3].transform.position.y);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[4].transform.position.y);
+                EnemySpawner.Instance.allEnemiesSpawned = true;
+            }
 
         }
 

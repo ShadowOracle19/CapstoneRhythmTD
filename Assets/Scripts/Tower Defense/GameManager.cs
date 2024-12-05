@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
     public bool encounterRunning = false;
     public bool winState = false;
     public bool loseState = false;
+    public bool tutorialRunning = false;
 
     [Header("Dialogue")]
     public float textSpeed = 0.05f;
@@ -109,6 +111,30 @@ public class GameManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void LoadTutorial()
+    {
+        tutorialRunning = true;
+        combatRoot.SetActive(true);
+
+        CombatManager.Instance.enemyTimerObject.SetActive(false);
+        CombatManager.Instance.healthBar.SetActive(false);
+        CombatManager.Instance.controls.SetActive(false);
+        CombatManager.Instance.resources.SetActive(false);
+        CombatManager.Instance.towerDisplay.SetActive(false);
+        CombatManager.Instance.feverBar.SetActive(false);
+        CombatManager.Instance.metronome.SetActive(false);
+        CombatManager.Instance.waveCounter.SetActive(false);
+        CombatManager.Instance.combo.SetActive(false);
+
+        CursorTD.Instance.movementSequence = false;
+        CursorTD.Instance.towerPlacementMenuSequence = false;
+        CursorTD.Instance.towerPlaceSequence = false;
+        CursorTD.Instance.towerBuffSequence = false;
+        CursorTD.Instance.feverModeSequence = false;
+
+        ConductorV2.instance.CountUsIn(80);
     }
 
     public void LoadEncounter(EncounterCreator encounter)

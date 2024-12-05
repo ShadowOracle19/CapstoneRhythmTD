@@ -1,8 +1,6 @@
-using System;
+
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CursorTD : MonoBehaviour
@@ -52,6 +50,30 @@ public class CursorTD : MonoBehaviour
 
     public bool towerSwap;
 
+    [Header("Tutorial Objects")]
+    public GameObject wasdParent;
+    public GameObject wKey;
+    public GameObject aKey;
+    public GameObject sKey;
+    public GameObject dKey;
+
+    public GameObject arrowKeyParent;
+    public GameObject upKey;
+    public GameObject leftKey;
+    public GameObject downKey;
+    public GameObject rightKey;
+
+    public bool movementSequence = false;
+    public bool towerPlacementMenuSequence = false;
+    public bool towerPlaceSequence = false ;
+    public bool towerBuffSequence = false;
+    public bool feverModeSequence = false;
+
+    public int moveCounter = 0;
+   
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +121,20 @@ public class CursorTD : MonoBehaviour
         {
             SwapTowers();
         }
+
+        if(GameManager.Instance.tutorialRunning) //reset color of keys
+        {
+            wKey.GetComponent<TextMeshPro>().color = Color.Lerp(wKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+            aKey.GetComponent<TextMeshPro>().color = Color.Lerp(aKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+            sKey.GetComponent<TextMeshPro>().color = Color.Lerp(sKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+            dKey.GetComponent<TextMeshPro>().color = Color.Lerp(dKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+
+            upKey.GetComponent<TextMeshPro>().color = Color.Lerp(upKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+            leftKey.GetComponent<TextMeshPro>().color = Color.Lerp(leftKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+            downKey.GetComponent<TextMeshPro>().color = Color.Lerp(downKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+            rightKey.GetComponent<TextMeshPro>().color = Color.Lerp(rightKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+        }
+
     }
 
     public void SwapTowers()
@@ -158,8 +194,10 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void InitializePlacementMenu()
+    public void InitializeCursor()
     {
+        gameObject.transform.position = new Vector3(-2.5f, -0.54f, 0);
+
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
         SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
 
@@ -397,6 +435,18 @@ public class CursorTD : MonoBehaviour
         isMoving = false;
         desiredMovement = Vector3.zero;
         tile = null;
+
+        if(GameManager.Instance.tutorialRunning)
+        {
+            moveCounter += 1;
+            if (moveCounter == 4)
+            {
+                movementSequence = false;
+                wasdParent.SetActive(false);
+                moveCounter = 0;
+            }
+        }
+        
         yield return null;
     }
 
@@ -418,10 +468,36 @@ public class CursorTD : MonoBehaviour
         }
     }
 
+    //I will store all the on beat tutorial stuff here
     public void Pulse()
     {
         //Debug.Log("pulse");
         cursorSprite.transform.localScale = pulseSize;
+
+        //tutorial stuff
+        //display movement tutorial
+        if((movementSequence || towerPlaceSequence) && GameManager.Instance.tutorialRunning)
+        {
+            wasdParent.SetActive(true);
+            int rand = Random.Range(1, 5);
+            switch (rand)
+            {
+                case 1:
+                    wKey.GetComponent<TextMeshPro>().color = Color.red;
+                    break;
+                case 2:
+                    aKey.GetComponent<TextMeshPro>().color = Color.red;
+                    break;
+                case 3:
+                    sKey.GetComponent<TextMeshPro>().color = Color.red;
+                    break;
+                case 4:
+                    dKey.GetComponent<TextMeshPro>().color = Color.red;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void SpawnBeatHitResult()

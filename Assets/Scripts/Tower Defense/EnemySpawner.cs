@@ -49,6 +49,11 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void ForceEnemySpawn(Vector3 spawnPosition)
+    {
+
+    }
+
     public void StartSpawningEnemies()
     {
         if(!startOnce)

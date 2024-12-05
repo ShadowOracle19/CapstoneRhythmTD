@@ -51,6 +51,8 @@ public class CursorTD : MonoBehaviour
     public bool towerSwap;
 
     [Header("Tutorial Objects")]
+    public GameObject tutorialParent;
+
     public GameObject wasdParent;
     public GameObject wKey;
     public GameObject aKey;
@@ -62,6 +64,9 @@ public class CursorTD : MonoBehaviour
     public GameObject leftKey;
     public GameObject downKey;
     public GameObject rightKey;
+
+    public GameObject spaceKeyParent;
+    public GameObject spaceKey;
 
     public bool movementSequence = false;
     public bool towerPlacementMenuSequence = false;
@@ -93,6 +98,8 @@ public class CursorTD : MonoBehaviour
         if (GameManager.Instance.winState) return;
         if(Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.LeftShift) && (tile != null && tile.placedTower == null))
         {
+            
+
             TogglePlacementMenu();
         }
 
@@ -133,6 +140,8 @@ public class CursorTD : MonoBehaviour
             leftKey.GetComponent<TextMeshPro>().color = Color.Lerp(leftKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
             downKey.GetComponent<TextMeshPro>().color = Color.Lerp(downKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
             rightKey.GetComponent<TextMeshPro>().color = Color.Lerp(rightKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+
+            spaceKey.GetComponent<TextMeshPro>().color = Color.Lerp(spaceKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
         }
 
     }
@@ -351,6 +360,18 @@ public class CursorTD : MonoBehaviour
     {
         towerSelectMenuOpened = !towerSelectMenuOpened;
         placementMenu.SetActive(towerSelectMenuOpened);
+
+        if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
+        {
+            towerPlacementMenuSequence = false;
+            spaceKeyParent.SetActive(false);
+            towerPlaceSequence = true;
+        }
+        else if(GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && !towerSelectMenuOpened)
+        {
+            towerPlacementMenuSequence = true;
+            towerPlaceSequence = false;
+        }
     }
 
     public void HighlightPlacementSlot()
@@ -436,7 +457,7 @@ public class CursorTD : MonoBehaviour
         desiredMovement = Vector3.zero;
         tile = null;
 
-        if(GameManager.Instance.tutorialRunning)
+        if(GameManager.Instance.tutorialRunning && movementSequence)
         {
             moveCounter += 1;
             if (moveCounter == 4)
@@ -444,6 +465,8 @@ public class CursorTD : MonoBehaviour
                 movementSequence = false;
                 wasdParent.SetActive(false);
                 moveCounter = 0;
+                CombatManager.Instance.resources.SetActive(true);
+                CombatManager.Instance.resourceNum = 0;
             }
         }
         
@@ -497,6 +520,11 @@ public class CursorTD : MonoBehaviour
                 default:
                     break;
             }
+        }
+        if(towerPlacementMenuSequence && GameManager.Instance.tutorialRunning)
+        {
+            spaceKeyParent.SetActive(true);
+            spaceKey.GetComponent<TextMeshPro>().color = Color.red;
         }
     }
 

@@ -128,6 +128,9 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.waveCounter.SetActive(false);
         CombatManager.Instance.combo.SetActive(false);
 
+        CursorTD.Instance.tutorialParent.SetActive(true); 
+
+
         CursorTD.Instance.movementSequence = false;
         CursorTD.Instance.towerPlacementMenuSequence = false;
         CursorTD.Instance.towerPlaceSequence = false;

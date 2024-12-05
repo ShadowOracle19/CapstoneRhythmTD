@@ -203,6 +203,11 @@ public class CombatManager : MonoBehaviour
 
     public void GenerateResource()
     {
+        if (GameManager.Instance.tutorialRunning && resourceNum == 10 && !CursorTD.Instance.towerPlaceSequence)
+        {
+            CursorTD.Instance.towerPlacementMenuSequence = true;
+            return;
+        }
         resourceNum += 1;
     }
      

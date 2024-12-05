@@ -1,7 +1,7 @@
 {
 	"dialogue": [
 		{"name": "", "text": "Niimi tries fruitlessly to drag the bass drum from their drum kit (which is about as tall as they are) into the van."},
-        {"name": "Niimi", "text": "Just... Gotta try a *little* harder..."},
+        {"name": "Niimi", "text": "Just... Gotta try a <i>little</i> harder..."},
 		{"name": "Sonu", "text": "Niimi, do you need help with that?"},
 		{"name": "Niimi", "text": "No, no, I think I got it."},
 		{"name": "Fayruz", "text": "You very clearly do not got it."},

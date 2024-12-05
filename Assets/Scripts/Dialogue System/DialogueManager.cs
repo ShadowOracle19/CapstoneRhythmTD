@@ -59,6 +59,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueSystemParent;
 
     public float textSpeed = 0.05f;
+    public float defaultTextSpeed = 0.05f;
 
     Coroutine typing;
 
@@ -102,6 +103,12 @@ public class DialogueManager : MonoBehaviour
 
             _speakerName.text = myDialogue.dialogue[index].name;
             _dialogue.text += c;
+            if (c == '<'){
+                GameManager.Instance.textSpeed = 0f;
+            }
+            else if (c == '>'){
+                GameManager.Instance.textSpeed = defaultTextSpeed;
+            }
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
         

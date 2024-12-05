@@ -16,12 +16,12 @@ MonoBehaviour:
   towerDescription: AOE based tower that deals 1 damage in its radius
   towerImage: {fileID: -1669861985, guid: 84f7ef109e3c21b40b0af03faa9ee338, type: 3}
   type: 2
-  resourceCost: 10
-  cooldownTime: 10
+  resourceCost: 24
+  cooldownTime: 8
   towerHealth: 5
-  attackPattern: 3
+  attackPattern: 0
   damage: 1
-  range: 2
+  range: 9
   projectilePiercesEnemies: 0
-  projectileColor: {r: 0.80276585, g: 0, b: 1, a: 1}
-  isAOETower: 1
+  projectileColor: {r: 0.004316493, g: 0.9150943, b: 0.04689455, a: 1}
+  isAOETower: 0

@@ -14,21 +14,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterBPM: 100
   waves:
-  - delay: 1
+  - delay: 0
     enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
     numberOfEnemies: 1
-  - delay: 5
+  - delay: 8
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 1
+  - delay: 4
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 1
+  - delay: 12
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 2
+  - delay: 8
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 1
+  - delay: 4
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 2
+  - delay: 12
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 2
+  - delay: 4
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 2
+  - delay: 4
     enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
     numberOfEnemies: 3
-  - delay: 7
-    enemy: {fileID: 239132429429542008, guid: c7f2100669706ec4ab887a3e3798b15c, type: 3}
-    numberOfEnemies: 1
-  - delay: 2
+  - delay: 8
     enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
-    numberOfEnemies: 6
-  - delay: 10
-    enemy: {fileID: 239132429429542008, guid: c7f2100669706ec4ab887a3e3798b15c, type: 3}
-    numberOfEnemies: 2
-  - delay: 3
+    numberOfEnemies: 5
+  - delay: 4
     enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
-    numberOfEnemies: 6
+    numberOfEnemies: 3
+  - delay: 0
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 3
+  - delay: 0
+    enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    numberOfEnemies: 5

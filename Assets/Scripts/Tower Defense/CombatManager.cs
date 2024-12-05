@@ -56,13 +56,23 @@ public class CombatManager : MonoBehaviour
     public Transform beatSpawnPoint;
     public Transform beatEndPoint;
 
+    [Header("Combat UI")]
+    public GameObject enemyTimerObject;
+    public GameObject healthBar;
+    public GameObject controls;
+    public GameObject resources;
+    public GameObject towerDisplay;
+    public GameObject feverBar;
+    public GameObject metronome;
+    public GameObject waveCounter;
+    public GameObject combo;
+
     // Start is called before the first frame update
     void Start()
     {
         //LoadEncounter(currentEncounter);
     }
 
-   
 
     public void RestartEncounter()
     {
@@ -76,7 +86,7 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.winState = false;
         currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
-        ConductorV2.instance.StartConductor();
+        ConductorV2.instance.CountUsIn(currentEncounter.encounterBPM);
 
         allEnemiesSpawned = false;
 
@@ -100,15 +110,20 @@ public class CombatManager : MonoBehaviour
         //Conductor.Instance.guitarM.volume = 0;
         //Conductor.Instance.drums.volume = 0;
 
-        CursorTD.Instance.InitializePlacementMenu();
+        CursorTD.Instance.InitializeCursor();
         CursorTD.Instance.pauseMovement = false;
         CursorTD.Instance.towerSwap = false;
         CursorTD.Instance.placementMenu.SetActive(false);
 
         TowerManager.Instance.drumCooldown = false;
-        TowerManager.Instance.drumCooldown = false;
-        TowerManager.Instance.drumCooldown = false;
-        TowerManager.Instance.drumCooldown = false;
+        TowerManager.Instance.bassCooldown = false;
+        TowerManager.Instance.pianoCooldown = false;
+        TowerManager.Instance.guitarCooldown = false;
+
+        TowerManager.Instance.drumCooldownBack = false;
+        TowerManager.Instance.bassCooldownBack = false;
+        TowerManager.Instance.pianoCooldownBack = false;
+        TowerManager.Instance.guitarCooldownBack = false;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -161,9 +176,14 @@ public class CombatManager : MonoBehaviour
         }
         
         //checks if all enemies have died or player health hasnt reached zero to give a win state
-        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0)
+        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0 && !GameManager.Instance.tutorialRunning)
         {
             GameManager.Instance.WinLevel();
+        }
+
+        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0 && GameManager.Instance.tutorialRunning)
+        {
+            GameManager.Instance.TutorialWinState();
         }
 
         //delays enemy spawning
@@ -193,6 +213,14 @@ public class CombatManager : MonoBehaviour
 
     public void GenerateResource()
     {
+        if (GameManager.Instance.tutorialRunning && CursorTD.Instance.movementSequence)
+            return;
+
+        if (GameManager.Instance.tutorialRunning && resourceNum == 10 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence)
+        {
+            CursorTD.Instance.towerPlacementMenuSequence = true;
+            return;
+        }
         resourceNum += 1;
     }
      

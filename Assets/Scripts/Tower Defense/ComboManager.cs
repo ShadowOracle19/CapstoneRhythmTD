@@ -55,6 +55,8 @@ public class ComboManager : MonoBehaviour
 
     public void IncreaseCombo()
     {
+        
+
         streak += 1;
         if(streak == 10)
         {

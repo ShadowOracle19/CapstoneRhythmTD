@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -61,6 +62,11 @@ public class ConductorV2 : MonoBehaviour
     public AudioSource guitarH;
     public AudioSource guitarM;
 
+    public AudioSource _ping;
+
+    public AudioClip bpmTrack1; //80
+    public AudioClip bpmTrack2; //100
+
     [Header("Metronome")]
     public GameObject ticker;
     public bool ping = false;//true left, false right
@@ -72,43 +78,79 @@ public class ConductorV2 : MonoBehaviour
 
     public List<UnityEvent> triggerEvent = new List<UnityEvent>();
 
+    public bool pauseConductor = false;
+    public TextMeshProUGUI countInText;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        if(isInTestingEnvironment)//if in a testing environment thats not the game scene play this to start conductor
-        {
-            //load the audio source attached to the conductor gameobject
-            musicSource = GetComponent<AudioSource>();
+        //if(isInTestingEnvironment)//if in a testing environment thats not the game scene play this to start conductor
+        //{
+        //    //load the audio source attached to the conductor gameobject
+        //    musicSource = GetComponent<AudioSource>();
 
-            //calculate the number of seconds in each beat
-            crotchet = 60 / bpm;
+        //    //calculate the number of seconds in each beat
+        //    crotchet = 60 / bpm;
 
-            //record the time when the music starts
-            dspSongTime = (float)AudioSettings.dspTime;
+        //    //record the time when the music starts
+        //    dspSongTime = (float)AudioSettings.dspTime;
 
-            completedLoops = 0;
-            numberOfBeats = 0;
-            beatTrack = 0;
-            beatDuration = 0;
+        //    completedLoops = 0;
+        //    numberOfBeats = 0;
+        //    beatTrack = 0;
+        //    beatDuration = 0;
 
-            //Start the song
-            musicSource.Play();
-        }
+        //    //Start the song
+        //    musicSource.Play();
+        //}
         
+    }
+
+    public void CountUsIn(int _bpm)
+    {
+        pauseConductor = true;
+        //load the audio source attached to the conductor gameobject
+        musicSource = GetComponent<AudioSource>();
+        bpm = _bpm;
+        completedLoops = 0;
+        numberOfBeats = 0;
+        beatTrack = 0;
+        beatDuration = 0;
+        StartCoroutine(CountIn());
+    }
+
+    IEnumerator CountIn()
+    {
+        countInText.gameObject.SetActive(true);
+        for (int i = 1; i <= 4; i++)
+        {
+            Debug.Log("count in " + i);
+            countInText.text = i.ToString();
+            _ping.Play();
+            yield return new WaitForSeconds(60 / bpm);
+        }
+        StartConductor();
+        yield return null;
     }
 
     public void StartConductor()
     {
-        //load the audio source attached to the conductor gameobject
-        musicSource = GetComponent<AudioSource>();
+        pauseConductor = false;
+        countInText.gameObject.SetActive(false);
+        Debug.Log("Conductor Start");
+
+
+        if (GameManager.Instance.tutorialRunning)
+            musicSource.clip = bpmTrack1;
+        else
+            musicSource.clip = bpmTrack2;
 
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;
 
-        AudioConfiguration config = AudioSettings.GetConfiguration();
-
         //record the time when the music starts
+        AudioConfiguration config = AudioSettings.GetConfiguration();
         AudioSettings.Reset(config);
         dspSongTime = (float)AudioSettings.dspTime;
 
@@ -125,11 +167,13 @@ public class ConductorV2 : MonoBehaviour
 
         //Start the song
         PlayMusic();
+        //musicSource.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (pauseConductor) return;
 
         if (GameManager.Instance.isGamePaused)
         {
@@ -270,12 +314,20 @@ public class ConductorV2 : MonoBehaviour
 
     public void PlayMusic()
     {
+        if (GameManager.Instance.tutorialRunning)
+        {
+            CombatManager.Instance.metronome.SetActive(true);
+            CursorTD.Instance.movementSequence = true;
+        }
+
         musicSource.Play();
         drums.Play();
         bass.Play();
         piano.Play();
         guitarH.Play();
         guitarM.Play();
+
+        
     }
 }
 

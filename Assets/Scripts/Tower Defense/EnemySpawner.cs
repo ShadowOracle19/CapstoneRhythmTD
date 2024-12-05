@@ -5,6 +5,27 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    #region dont touch this
+    private static EnemySpawner _instance;
+    public static EnemySpawner Instance
+    {
+        get
+        {
+            if (_instance is null)
+            {
+                Debug.LogError("EnemySpawner Manager is NULL");
+            }
+
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+    #endregion
+
     public List<Wave> currentWaves = new List<Wave>();
 
     public bool startOnce = false;
@@ -27,6 +48,9 @@ public class EnemySpawner : MonoBehaviour
     public int numEnemiesInWave = 0;
     public int delay;
 
+    [Header("Tutorial")]
+    public GameObject tutortialEnemy;
+
     private void Update()
     {
         GameManager.Instance.waveCounter.text = "Wave " + waveIndex + "/" + currentWaves.Count;
@@ -47,6 +71,14 @@ public class EnemySpawner : MonoBehaviour
                 timeRemainingToWaveStart += Time.deltaTime;
             }
         }
+    }
+
+    public void ForceEnemySpawn(float ypos)
+    {
+        currentNumberOfEnemiesSpawned += 1;
+        GameObject enemy = Instantiate(tutortialEnemy, new Vector3(transform.position.x, ypos), Quaternion.identity, enemyParent);
+        ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
+
     }
 
     public void StartSpawningEnemies()
@@ -87,6 +119,10 @@ public class EnemySpawner : MonoBehaviour
         ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
 
         currentNumberOfEnemiesSpawned += 1;
+
+        if (GameManager.Instance.tutorialRunning)
+            return;
+
         numEnemiesInWave += 1;
         if(numEnemiesInWave == currentWaves[waveIndex].numberOfEnemies)
         {

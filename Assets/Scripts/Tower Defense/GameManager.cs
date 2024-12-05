@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
     public bool encounterRunning = false;
     public bool winState = false;
     public bool loseState = false;
+    public bool tutorialRunning = false;
 
     [Header("Dialogue")]
     public float textSpeed = 0.05f;
@@ -88,7 +90,7 @@ public class GameManager : MonoBehaviour
         }
 
         //allows player to use pause menu in combat, level select and dialogue
-        if (combatRunning || menuRoot.activeSelf || dialogueRoot.activeSelf)
+        if (combatRunning || menuRoot.activeSelf || dialogueRoot.activeSelf || tutorialRunning)
         {
             //When the escape button is pressed the game will pause and open the pause menu
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -111,12 +113,77 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void LoadTutorial()
+    {
+        tutorialRunning = true;
+        winState = false;
+        combatRoot.SetActive(true);
+
+        CombatManager.Instance.enemyTimerObject.SetActive(false);
+        CombatManager.Instance.healthBar.SetActive(false);
+        CombatManager.Instance.controls.SetActive(false);
+        CombatManager.Instance.resources.SetActive(false);
+        CombatManager.Instance.towerDisplay.SetActive(false);
+        CombatManager.Instance.feverBar.SetActive(false);
+        CombatManager.Instance.metronome.SetActive(false);
+        CombatManager.Instance.waveCounter.SetActive(false);
+        CombatManager.Instance.combo.SetActive(false);
+
+        CursorTD.Instance.tutorialParent.SetActive(true); 
+
+
+        CursorTD.Instance.movementSequence = false;
+        CursorTD.Instance.towerPlacementMenuSequence = false;
+        CursorTD.Instance.towerPlaceSequence = false;
+        CursorTD.Instance.towerBuffSequence = false;
+        CursorTD.Instance.feverModeSequence = false;
+
+        CursorTD.Instance.wasdParent.transform.localPosition = Vector3.zero;
+        CursorTD.Instance.wasdParent.SetActive(false);
+        CursorTD.Instance.arrowKeyParent.SetActive(false);
+        CursorTD.Instance.spaceKeyParent.SetActive(false);
+
+        CursorTD.Instance.InitializeCursor();
+        CursorTD.Instance.pauseMovement = false;
+        CursorTD.Instance.towerSwap = false;
+        CursorTD.Instance.placementMenu.SetActive(false);
+
+        TowerManager.Instance.drumCooldown = false;
+        TowerManager.Instance.bassCooldown = false;
+        TowerManager.Instance.pianoCooldown = false;
+        TowerManager.Instance.guitarCooldown = false;
+
+        TowerManager.Instance.drumCooldownBack = false;
+        TowerManager.Instance.bassCooldownBack = false;
+        TowerManager.Instance.pianoCooldownBack = false;
+        TowerManager.Instance.guitarCooldownBack = false;
+
+
+        ConductorV2.instance.CountUsIn(80);
+        CombatManager.Instance.enemyTotal = 7;
+        EnemySpawner.Instance.numberOfEnemiesToSpawn = 7;
+        EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
+    }
+
     public void LoadEncounter(EncounterCreator encounter)
     {
         currentEncounter = encounter;
         encounterRunning = true;
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
+
+        CombatManager.Instance.enemyTimerObject.SetActive(true);
+        CombatManager.Instance.healthBar.SetActive(true);
+        CombatManager.Instance.controls.SetActive(true);
+        CombatManager.Instance.resources.SetActive(true);
+        CombatManager.Instance.towerDisplay.SetActive(true);
+        CombatManager.Instance.feverBar.SetActive(true);
+        CombatManager.Instance.metronome.SetActive(true);
+        CombatManager.Instance.waveCounter.SetActive(true);
+        CombatManager.Instance.combo.SetActive(true);
+
+
+        
     }
 
     public void Damage()
@@ -173,7 +240,6 @@ public class GameManager : MonoBehaviour
     {
         loseState = true;
         Cursor.lockState = CursorLockMode.None;
-        Debug.Log("Game Over");
         CombatManager.Instance.EndEncounter();
         gameOverScreen.SetActive(true);
         //conductor.SetActive(false);
@@ -187,10 +253,22 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
         Cursor.lockState = CursorLockMode.None;
-        Debug.Log("Game Over");
         //winScreen.SetActive(true);
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
+        //conductor.SetActive(false);
+        ConductorV2.instance.StopMusic();
+    }
+
+    public void TutorialWinState()
+    {
+        if (winState) return;
+        winState = true;
+        CombatManager.Instance.EndEncounter();
+        encounterRunning = false;
+        Cursor.lockState = CursorLockMode.None;
+        
+        winScreen.SetActive(true);
         //conductor.SetActive(false);
         ConductorV2.instance.StopMusic();
     }

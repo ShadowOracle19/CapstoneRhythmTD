@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Guitar
   m_EditorClassIdentifier: 
   towerName: Guitar
-  towerDescription: Projectile based tower that deals 1 damage on hit
+  towerDescription: Electric Guitar - Projectile based tower that deals 3 damage
+    on hit
   towerImage: {fileID: 1578135943, guid: 3dc3546abb730ec4daec6f1bacb16737, type: 3}
   type: 1
-  resourceCost: 10
-  cooldownTime: 10
+  resourceCost: 24
+  cooldownTime: 8
   towerHealth: 5
-  attackPattern: 0
-  damage: 1
-  range: 4
+  attackPattern: 3
+  damage: 2
+  range: 5
   projectilePiercesEnemies: 0
-  projectileColor: {r: 0.014359474, g: 0, b: 1, a: 1}
+  projectileColor: {r: 1, g: 0, b: 0.62614346, a: 1}
   isAOETower: 0

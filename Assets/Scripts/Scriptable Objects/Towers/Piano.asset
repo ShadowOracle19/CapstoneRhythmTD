@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Piano
   m_EditorClassIdentifier: 
   towerName: Piano
-  towerDescription: Projectile based tower that deals 1 damage that pierces through
-    enemies
+  towerDescription: Keyboard - Projectile based tower that deals 2 damage that pierces
+    through enemies
   towerImage: {fileID: -1468530389, guid: 768718a5289a8754caf9695dd1451137, type: 3}
   type: 3
-  resourceCost: 10
-  cooldownTime: 10
+  resourceCost: 24
+  cooldownTime: 16
   towerHealth: 5
-  attackPattern: 2
-  damage: 1
-  range: 4
+  attackPattern: 1
+  damage: 5
+  range: 7
   projectilePiercesEnemies: 1
-  projectileColor: {r: 0, g: 1, b: 0.046749115, a: 1}
+  projectileColor: {r: 1, g: 1, b: 1, a: 1}
   isAOETower: 0

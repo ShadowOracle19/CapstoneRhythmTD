@@ -166,13 +166,20 @@ public class GameManager : MonoBehaviour
 
         ConductorV2.instance.CountUsIn(80);
         CombatManager.Instance.enemyTotal = 7;
-        EnemySpawner.Instance.currentWaves.Clear();
+
+
+        List<Wave> empty = new List<Wave>();
+        EnemySpawner.Instance.currentWaves = empty;
         EnemySpawner.Instance.numberOfEnemiesToSpawn = 7;
+        EnemySpawner.Instance.startOnce = false;
+        EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
+
         EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
     }
 
     public void LoadEncounter(EncounterCreator encounter)
     {
+        tutorialRunning = false;
         currentEncounter = encounter;
         encounterRunning = true;
         dialogueRoot.SetActive(true);

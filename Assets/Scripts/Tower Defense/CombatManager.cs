@@ -162,6 +162,7 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.piano.Stop();
         ConductorV2.instance.guitarH.Stop();
         ConductorV2.instance.guitarM.Stop();
+        GameManager.Instance.tutorialRunning = false;
     }
 
     // Update is called once per frame

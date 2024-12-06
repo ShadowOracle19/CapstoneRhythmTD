@@ -1148,7 +1148,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   pauseConductor: 0
-  countInText: {fileID: 0}
+  countInText: {fileID: 1972839837729125251}
 --- !u!82 &8935945286973304900
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1159,7 +1159,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
-  m_audioClip: {fileID: 8300000, guid: ae1e292b77a49724bb0a45cf4ae7a12b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5b1779a8fe179ed4ab51d69bf4770191, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2528,6 +2528,17 @@ GameObject:
 --- !u!114 &1617468971779332651 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 170154785734122193, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1972839837729125251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1102831004995367801, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 1454352159991415034}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -142,11 +142,6 @@ public class ConductorV2 : MonoBehaviour
         Debug.Log("Conductor Start");
 
 
-        if (GameManager.Instance.tutorialRunning)
-            musicSource.clip = bpmTrack1;
-        else
-            musicSource.clip = bpmTrack2;
-
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;
 

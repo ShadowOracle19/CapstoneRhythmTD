@@ -67,6 +67,9 @@ public class CombatManager : MonoBehaviour
     public GameObject waveCounter;
     public GameObject combo;
 
+    
+           
+
     // Start is called before the first frame update
     void Start()
     {
@@ -125,6 +128,11 @@ public class CombatManager : MonoBehaviour
         TowerManager.Instance.pianoCooldownBack = false;
         TowerManager.Instance.guitarCooldownBack = false;
 
+        CursorTD.Instance.tutorialParent.SetActive(false);
+
+        
+
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -154,11 +162,14 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.piano.Stop();
         ConductorV2.instance.guitarH.Stop();
         ConductorV2.instance.guitarM.Stop();
+        GameManager.Instance.tutorialRunning = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        TowerManager.Instance.TowerCost();
+
         //resource stuff
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
@@ -216,7 +227,7 @@ public class CombatManager : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.movementSequence)
             return;
 
-        if (GameManager.Instance.tutorialRunning && resourceNum == 10 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence)
+        if (GameManager.Instance.tutorialRunning && resourceNum == 24 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence)
         {
             CursorTD.Instance.towerPlacementMenuSequence = true;
             return;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -73,6 +74,13 @@ public class TowerManager : MonoBehaviour
     private float pianoCooldownTimeRemainingBack = 0;
     private float pianoCooldownTimeBack = 0;
 
+    [Header("Tower Cost Labels")]
+    public TextMeshProUGUI tower1Cost;
+    public TextMeshProUGUI tower2Cost;
+    public TextMeshProUGUI tower3Cost;
+    public TextMeshProUGUI tower4Cost;
+    public bool towerSwap;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +91,25 @@ public class TowerManager : MonoBehaviour
     void Update()
     {
         Cooldown();
+    }
+
+    public void TowerCost()
+    {
+        if (!towerSwap)
+        {
+            tower1Cost.text = towers[0].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            tower2Cost.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            tower3Cost.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            tower4Cost.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        }
+        else
+        {
+            tower1Cost.text = towers[4].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            tower2Cost.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            tower3Cost.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            tower4Cost.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        }
+        
     }
 
     public void Cooldown()
@@ -225,6 +252,7 @@ public class TowerManager : MonoBehaviour
         (guitarCooldownTimeRemaining, guitarCooldownTimeRemainingBack) = (guitarCooldownTimeRemainingBack, guitarCooldownTimeRemaining);
         (pianoCooldownTimeRemaining, pianoCooldownTimeRemainingBack) = (pianoCooldownTimeRemainingBack, pianoCooldownTimeRemaining);
 
+        towerSwap = !towerSwap;
     }
 
     public bool CheckIfOnCoolDown(InstrumentType type)

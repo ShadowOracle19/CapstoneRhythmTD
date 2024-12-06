@@ -120,6 +120,7 @@ public class EnemySpawner : MonoBehaviour
 
         currentNumberOfEnemiesSpawned += 1;
 
+
         if (GameManager.Instance.tutorialRunning)
             return;
 

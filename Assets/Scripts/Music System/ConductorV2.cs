@@ -109,6 +109,7 @@ public class ConductorV2 : MonoBehaviour
 
     public void CountUsIn(int _bpm)
     {
+        PlayMusic();
         pauseConductor = true;
         //load the audio source attached to the conductor gameobject
         musicSource = GetComponent<AudioSource>();
@@ -141,11 +142,6 @@ public class ConductorV2 : MonoBehaviour
         Debug.Log("Conductor Start");
 
 
-        if (GameManager.Instance.tutorialRunning)
-            musicSource.clip = bpmTrack1;
-        else
-            musicSource.clip = bpmTrack2;
-
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;
 
@@ -165,8 +161,15 @@ public class ConductorV2 : MonoBehaviour
         guitarH.volume = 0;
         guitarM.volume = 0;
 
+        if (GameManager.Instance.tutorialRunning)
+        {
+            CombatManager.Instance.metronome.SetActive(true);
+            CursorTD.Instance.movementSequence = true;
+        }
+
+        musicSource.Play();
         //Start the song
-        PlayMusic();
+        
         //musicSource.Play();
     }
 
@@ -314,13 +317,7 @@ public class ConductorV2 : MonoBehaviour
 
     public void PlayMusic()
     {
-        if (GameManager.Instance.tutorialRunning)
-        {
-            CombatManager.Instance.metronome.SetActive(true);
-            CursorTD.Instance.movementSequence = true;
-        }
-
-        musicSource.Play();
+        
         drums.Play();
         bass.Play();
         piano.Play();

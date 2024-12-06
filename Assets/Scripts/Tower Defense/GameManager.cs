@@ -166,6 +166,7 @@ public class GameManager : MonoBehaviour
 
         ConductorV2.instance.CountUsIn(80);
         CombatManager.Instance.enemyTotal = 7;
+        EnemySpawner.Instance.currentWaves.Clear();
         EnemySpawner.Instance.numberOfEnemiesToSpawn = 7;
         EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
     }

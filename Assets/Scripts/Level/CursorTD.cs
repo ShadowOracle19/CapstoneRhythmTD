@@ -517,24 +517,12 @@ public class CursorTD : MonoBehaviour
         if((movementSequence || towerPlaceSequence) && GameManager.Instance.tutorialRunning)
         {
             wasdParent.SetActive(true);
-            int rand = Random.Range(1, 5);
-            switch (rand)
-            {
-                case 1:
-                    wKey.GetComponent<TextMeshPro>().color = Color.red;
-                    break;
-                case 2:
-                    aKey.GetComponent<TextMeshPro>().color = Color.red;
-                    break;
-                case 3:
-                    sKey.GetComponent<TextMeshPro>().color = Color.red;
-                    break;
-                case 4:
-                    dKey.GetComponent<TextMeshPro>().color = Color.red;
-                    break;
-                default:
-                    break;
-            }
+            wKey.GetComponent<TextMeshPro>().color = Color.red;
+            aKey.GetComponent<TextMeshPro>().color = Color.red;
+            sKey.GetComponent<TextMeshPro>().color = Color.red;
+            dKey.GetComponent<TextMeshPro>().color = Color.red;
+            
+            
         }
         if(towerPlacementMenuSequence && GameManager.Instance.tutorialRunning)
         {
@@ -544,21 +532,10 @@ public class CursorTD : MonoBehaviour
         if (towerBuffSequence && GameManager.Instance.tutorialRunning && tile != null && tile.placedTower != null)
         {
             arrowKeyParent.SetActive(true);
-            int rand = Random.Range(1, 4);
-            switch (rand)
-            {
-                case 1:
-                    upKey.GetComponent<TextMeshPro>().color = Color.red;
-                    break;
-                case 2:
-                    leftKey.GetComponent<TextMeshPro>().color = Color.red;
-                    break;
-                case 3:
-                    rightKey.GetComponent<TextMeshPro>().color = Color.red;
-                    break;
-                default:
-                    break;
-            }
+            upKey.GetComponent<TextMeshPro>().color = Color.red;
+            leftKey.GetComponent<TextMeshPro>().color = Color.red;
+            rightKey.GetComponent<TextMeshPro>().color = Color.red;
+            
         }
         if (feverModeSequence && FeverSystem.Instance.feverBarNum == 100 && GameManager.Instance.tutorialRunning)
         {

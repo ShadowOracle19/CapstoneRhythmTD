@@ -110,6 +110,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        if(menuRoot.activeSelf || dialogueRoot.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
         
     }
 

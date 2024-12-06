@@ -122,6 +122,10 @@ public class CursorTD : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
+            if (GameManager.Instance.tutorialRunning && !feverModeSequence)
+                return;
+
+
             FeverSystem.Instance.ActivateFeverMode();
         }
 
@@ -143,6 +147,10 @@ public class CursorTD : MonoBehaviour
             rightKey.GetComponent<TextMeshPro>().color = Color.Lerp(rightKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
 
             spaceKey.GetComponent<TextMeshPro>().color = Color.Lerp(spaceKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
+        }
+        else
+        {
+            tutorialParent.SetActive(false);
         }
 
     }
@@ -361,6 +369,8 @@ public class CursorTD : MonoBehaviour
 
     public void TogglePlacementMenu()
     {
+        
+
         towerSelectMenuOpened = !towerSelectMenuOpened;
         placementMenu.SetActive(towerSelectMenuOpened);
 

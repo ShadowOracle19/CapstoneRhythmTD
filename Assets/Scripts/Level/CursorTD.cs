@@ -590,7 +590,7 @@ public class CursorTD : MonoBehaviour
             case _BeatResult.great:
                 beatResult.GetComponent<TMP_Text>().text = "great";
                 beatResult.GetComponent<TMP_Text>().fontSize = 65;
-                beatResult.GetComponent<TMP_Text>().color = Color.cyan;
+                beatResult.GetComponent<TMP_Text>().color = Color.blue;
                 break;
             case _BeatResult.perfect:
                 beatResult.GetComponent<TMP_Text>().text = "perfect!";

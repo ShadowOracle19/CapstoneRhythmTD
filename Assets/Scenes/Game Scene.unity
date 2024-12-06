@@ -722,7 +722,7 @@ MonoBehaviour:
   winState: 0
   loseState: 0
   tutorialRunning: 0
-  textSpeed: 0.1
+  textSpeed: 0.05
 --- !u!4 &263461693
 Transform:
   m_ObjectHideFlags: 0

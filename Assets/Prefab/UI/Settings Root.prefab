@@ -2016,9 +2016,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Slow
-      m_Image: {fileID: 0}
     - m_Text: Medium
+      m_Image: {fileID: 0}
+    - m_Text: Slow
       m_Image: {fileID: 0}
     - m_Text: Fast
       m_Image: {fileID: 0}

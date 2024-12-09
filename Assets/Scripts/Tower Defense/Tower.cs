@@ -38,9 +38,13 @@ public class Tower : MonoBehaviour
     public GameObject shieldEffect;
     public bool isShielded = false;
 
+    public int beat;
+    public bool everyOtherBeat = false;
+
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;
+        beat = 1;
     }
 
     private void Update()
@@ -70,6 +74,45 @@ public class Tower : MonoBehaviour
             beatCircle.SetActive(false);
         }
     }
+
+    public void OnBeat()
+    {
+        switch (towerInfo.attackPattern)
+        {
+            case TowerAttackPattern.everyBeat:
+                Fire();
+                break;
+            case TowerAttackPattern.everyMeasure:
+                beat += 1;
+                if(beat == 4)
+                {
+                    Fire();
+                    beat = 1;
+                }
+                break;
+            case TowerAttackPattern.everyOtherBeat:
+                everyOtherBeat = !everyOtherBeat;
+                if(everyOtherBeat)
+                {
+                    Fire();
+                }
+                break;
+            case TowerAttackPattern.everyBeatButOne:
+                beat += 1;
+                if (beat < 4)
+                {
+                    Fire();
+                }
+                else if(beat == 4)
+                {
+                    beat = 1;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
 
     public void Fire()
     {

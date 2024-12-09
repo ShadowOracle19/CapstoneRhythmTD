@@ -103,7 +103,7 @@ public class CombatManager : MonoBehaviour
         enemySpawners.currentNumberOfEnemiesSpawned = 0;
         enemySpawners.currentWaves = currentEncounter.waves;
 
-        resourceNum = 10;
+        resourceNum = 24;
         enemyTimer = 30;
         enemiesSpawnIn.gameObject.SetActive(true);
 

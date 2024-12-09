@@ -198,7 +198,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1202811070454382304}
         m_TargetAssemblyTypeName: Tower, Assembly-CSharp
-        m_MethodName: Fire
+        m_MethodName: OnBeat
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -221,6 +221,8 @@ MonoBehaviour:
   beatCircle: {fileID: 31395926951258363}
   shieldEffect: {fileID: 5223548057794400369}
   isShielded: 0
+  beat: 0
+  everyOtherBeat: 0
 --- !u!1 &3880868882564430295
 GameObject:
   m_ObjectHideFlags: 0

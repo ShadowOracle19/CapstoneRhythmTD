@@ -1,6 +1,6 @@
 {
 	"dialogue": [
-		{"name": "Fayruz", "text": "<size=30%>We're almost there..."},
+		{"name": "Fayruz", "text": "We're almost there..."},
 		{"name": "Fayruz", "text": "Just one audition between us and a spot in the Concert of Cleansing, playing in cities around the world."},
 		{"name": "Fayruz", "text": "I feel like I can reach out and touch it. Just one more performance, one more song, and everything will be differe--"},
 		{"name": "Sonu", "text": "Fayruz?"},

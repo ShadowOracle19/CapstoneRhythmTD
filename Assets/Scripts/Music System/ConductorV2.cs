@@ -109,7 +109,13 @@ public class ConductorV2 : MonoBehaviour
 
     public void CountUsIn(int _bpm)
     {
+        ////record the time when the music starts
+        AudioConfiguration config = AudioSettings.GetConfiguration();
+        AudioSettings.Reset(config);
+        dspSongTime = (float)AudioSettings.dspTime;
+
         PlayMusic();
+
         pauseConductor = true;
         //load the audio source attached to the conductor gameobject
         musicSource = GetComponent<AudioSource>();
@@ -145,10 +151,7 @@ public class ConductorV2 : MonoBehaviour
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;
 
-        //record the time when the music starts
-        AudioConfiguration config = AudioSettings.GetConfiguration();
-        AudioSettings.Reset(config);
-        dspSongTime = (float)AudioSettings.dspTime;
+        
 
         completedLoops = 0;
         numberOfBeats = 0;
@@ -188,6 +191,7 @@ public class ConductorV2 : MonoBehaviour
             ResumeMusic();
         }
 
+       
 
         //determine how many seconds since the song started
         songPosition = (float)(AudioSettings.dspTime - dspSongTime);
@@ -317,7 +321,7 @@ public class ConductorV2 : MonoBehaviour
 
     public void PlayMusic()
     {
-        
+        Debug.Log("music started");
         drums.Play();
         bass.Play();
         piano.Play();

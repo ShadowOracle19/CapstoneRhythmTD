@@ -1034,7 +1034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInTestingEnvironment: 0
-  bpm: 160
+  bpm: 80
   crotchet: 0
   songPosition: 0
   songPositionInBeats: 0

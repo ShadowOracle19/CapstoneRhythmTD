@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 304a875105d333049a8721bc2a921925
+guid: d1ce7511ac3914a4e8e233ffefb77ad5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,28 +121,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Untitled_Artwork-27_0
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 6
-        width: 162
-        height: 293
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e416c57b1070114aa11e6781f09dc94
-      internalID: -623672982
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -153,11 +132,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Untitled_Artwork-27_0: -623672982
-      Untitled_Artwork-27_1: 700819553
-      Untitled_Artwork-27_2: 1205680514
-      Untitled_Artwork-27_3: -608069586
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

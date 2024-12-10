@@ -66,7 +66,7 @@ public class CombatManager : MonoBehaviour
     public GameObject metronome;
     public GameObject waveCounter;
     public GameObject combo;
-
+    public GameObject knockEmDead;
     
            
 

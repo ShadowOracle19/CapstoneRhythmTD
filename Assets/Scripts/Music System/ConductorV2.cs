@@ -143,6 +143,9 @@ public class ConductorV2 : MonoBehaviour
 
     public void StartConductor()
     {
+        CombatManager.Instance.knockEmDead.SetActive(true);
+        CombatManager.Instance.knockEmDead.GetComponent<Animator>().SetTrigger("KnockEmDead");
+
         pauseConductor = false;
         countInText.gameObject.SetActive(false);
         Debug.Log("Conductor Start");

@@ -66,7 +66,7 @@ public class CombatManager : MonoBehaviour
     public GameObject metronome;
     public GameObject waveCounter;
     public GameObject combo;
-
+    public GameObject knockEmDead;
     
            
 
@@ -159,12 +159,18 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.pauseMovement = true;
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.menuMusic.Play();
-        ConductorV2.instance.musicSource.Stop();
-        ConductorV2.instance.drums.Stop();
-        ConductorV2.instance.bass.Stop();
-        ConductorV2.instance.piano.Stop();
-        ConductorV2.instance.guitarH.Stop();
-        ConductorV2.instance.guitarM.Stop();
+        ConductorV2.instance.musicSource.volume = 0;
+        ConductorV2.instance.drums.volume = 0;
+        ConductorV2.instance.bass.volume = 0;
+        ConductorV2.instance.piano.volume = 0;
+        ConductorV2.instance.guitarH.volume = 0;
+        ConductorV2.instance.guitarM.volume = 0;
+
+        FeverSystem.Instance.feverBarNum = 0;
+        ComboManager.Instance.ResetCombo();
+        ComboManager.Instance.highestCombo = 0;
+
+        ConductorV2.instance.StopMusic();
         GameManager.Instance.tutorialRunning = false;
     }
 
@@ -230,7 +236,7 @@ public class CombatManager : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.movementSequence)
             return;
 
-        if (GameManager.Instance.tutorialRunning && resourceNum == 24 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence)
+        if (GameManager.Instance.tutorialRunning && resourceNum >= 24 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence && !CursorTD.Instance.towerPlacementMenuSequencePassed)
         {
             CursorTD.Instance.tutorialPopupParent.SetActive(true);
             CursorTD.Instance.tutorialText.text = "Now you have enough magic press space to open the tower place menu!";

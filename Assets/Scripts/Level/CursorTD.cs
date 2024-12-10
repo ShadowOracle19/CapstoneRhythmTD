@@ -70,6 +70,7 @@ public class CursorTD : MonoBehaviour
 
     public bool movementSequence = false;
     public bool towerPlacementMenuSequence = false;
+    public bool towerPlacementMenuSequencePassed = false;
     public bool towerPlaceSequence = false ;
     public bool towerBuffSequence = false;
     public bool feverModeSequence = false;
@@ -386,6 +387,7 @@ public class CursorTD : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
         {
+            towerPlacementMenuSequencePassed = true;
             tutorialText.text = "use WASD to select and place a tower";
             towerPlacementMenuSequence = false;
             spaceKeyParent.SetActive(false);

@@ -59,6 +59,8 @@ public class FeverSystem : MonoBehaviour
             {
                 CursorTD.Instance.feverModeSequence = false;
                 CursorTD.Instance.arrowKeyParent.SetActive(false);
+
+                CursorTD.Instance.tutorialText.text = "Good job now just finish off this last wave of enemies!";
             }
 
         }
@@ -76,6 +78,8 @@ public class FeverSystem : MonoBehaviour
 
             if (GameManager.Instance.tutorialRunning && CursorTD.Instance.feverModeSequence && feverBarNum >= 99 && !EnemySpawner.Instance.allEnemiesSpawned)
             {
+                CursorTD.Instance.tutorialText.text = "Quick activate fever mode by pressing the down arrow key!";
+
                 EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[0].transform.position.y);
                 EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[1].transform.position.y);
                 EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[2].transform.position.y);

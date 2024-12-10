@@ -175,6 +175,9 @@ public class GameManager : MonoBehaviour
         EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
 
         EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
+
+        CursorTD.Instance.tutorialPopupParent.SetActive(true);
+        CursorTD.Instance.tutorialText.text = "Use WASD keys to move the cursor";
     }
 
     public void LoadEncounter(EncounterCreator encounter)
@@ -280,7 +283,9 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
         Cursor.lockState = CursorLockMode.None;
-        
+
+        CursorTD.Instance.tutorialPopupParent.SetActive(false);
+
         winScreen.SetActive(true);
         //conductor.SetActive(false);
         ConductorV2.instance.StopMusic();

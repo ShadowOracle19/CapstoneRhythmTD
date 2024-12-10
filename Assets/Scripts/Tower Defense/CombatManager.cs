@@ -129,6 +129,7 @@ public class CombatManager : MonoBehaviour
         TowerManager.Instance.guitarCooldownBack = false;
 
         CursorTD.Instance.tutorialParent.SetActive(false);
+        CursorTD.Instance.tutorialPopupParent.SetActive(false);
 
         
 
@@ -229,6 +230,8 @@ public class CombatManager : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning && resourceNum == 24 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence)
         {
+            CursorTD.Instance.tutorialPopupParent.SetActive(true);
+            CursorTD.Instance.tutorialText.text = "Now you have enough magic press space to open the tower place menu!";
             CursorTD.Instance.towerPlacementMenuSequence = true;
             return;
         }

@@ -76,7 +76,10 @@ public class CursorTD : MonoBehaviour
 
     public int moveCounter = 0;
     public int buffCounter = 0;
-   
+
+
+    public GameObject tutorialPopupParent;
+    public TextMeshProUGUI tutorialText;
 
 
 
@@ -134,7 +137,9 @@ public class CursorTD : MonoBehaviour
             SwapTowers();
         }
 
-        if(GameManager.Instance.tutorialRunning) //reset color of keys
+
+        #region tutorial
+        if (GameManager.Instance.tutorialRunning) //reset color of keys
         {
             wKey.GetComponent<TextMeshPro>().color = Color.Lerp(wKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
             aKey.GetComponent<TextMeshPro>().color = Color.Lerp(aKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
@@ -152,7 +157,12 @@ public class CursorTD : MonoBehaviour
         {
             tutorialParent.SetActive(false);
         }
-
+        if(feverModeSequence)
+        {
+            wasdParent.SetActive(false);
+            spaceKeyParent.SetActive(false);
+        }
+        #endregion
     }
 
     public void SwapTowers()
@@ -376,6 +386,7 @@ public class CursorTD : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
         {
+            tutorialText.text = "use WASD to select and place a tower";
             towerPlacementMenuSequence = false;
             spaceKeyParent.SetActive(false);
             towerPlaceSequence = true;
@@ -480,6 +491,9 @@ public class CursorTD : MonoBehaviour
                 movementSequence = false;
                 wasdParent.SetActive(false);
                 moveCounter = 0;
+
+                tutorialPopupParent.SetActive(false);
+
                 CombatManager.Instance.resources.SetActive(true);
                 CombatManager.Instance.resourceNum = 0;
             }

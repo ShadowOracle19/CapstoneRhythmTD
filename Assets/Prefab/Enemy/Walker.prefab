@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 5766a935811d27948977134265fff02b, type: 2}
   path: []
-  speed: 1
   currentPositionHolder: {x: 0, y: 0, z: 0}
   move: 1
   currentHealth: 0
@@ -71,6 +70,7 @@ MonoBehaviour:
         m_CallState: 2
   nextPosition: {x: 0, y: 0, z: 0}
   _renderer: {fileID: 4349701985587343243}
+  tileInFront: {fileID: 0}
 --- !u!61 &79028663795836632
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 1740127526, guid: 681b36b64a9036f49bb005faa1f1d3ed, type: 3}
+  m_Sprite: {fileID: -2010960486, guid: e9db40d112479b14bbb2c2fe952c0456, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

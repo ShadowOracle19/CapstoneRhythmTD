@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
 
         CursorTD.Instance.movementSequence = false;
         CursorTD.Instance.towerPlacementMenuSequence = false;
+        CursorTD.Instance.towerPlacementMenuSequencePassed = false;
         CursorTD.Instance.towerPlaceSequence = false;
         CursorTD.Instance.towerBuffSequence = false;
         CursorTD.Instance.feverModeSequence = false;

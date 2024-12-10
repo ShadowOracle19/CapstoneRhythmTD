@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public Transform globelParent;
     public Transform projectileParent;
+    public AudioSource menuMusic;
 
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] public GameObject winScreen;
@@ -120,6 +121,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadTutorial()
     {
+        menuMusic.Stop();
         tutorialRunning = true;
         winState = false;
         combatRoot.SetActive(true);

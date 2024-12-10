@@ -86,6 +86,7 @@ public class CombatManager : MonoBehaviour
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
+        GameManager.Instance.menuMusic.Stop();
         GameManager.Instance.winState = false;
         currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
@@ -157,6 +158,7 @@ public class CombatManager : MonoBehaviour
         enemySpawners.startOnce = false;
         CursorTD.Instance.pauseMovement = true;
         Cursor.lockState = CursorLockMode.None;
+        GameManager.Instance.menuMusic.Play();
         ConductorV2.instance.musicSource.Stop();
         ConductorV2.instance.drums.Stop();
         ConductorV2.instance.bass.Stop();

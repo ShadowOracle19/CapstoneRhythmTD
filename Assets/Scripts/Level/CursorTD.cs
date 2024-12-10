@@ -579,18 +579,22 @@ public class CursorTD : MonoBehaviour
                 beatResult.GetComponent<TMP_Text>().color = Color.yellow;
                 break;
             case _BeatResult.great:
+                CombatManager.Instance.resourceNum += 1;
                 beatResult.GetComponent<TMP_Text>().text = "great";
                 beatResult.GetComponent<TMP_Text>().fontSize = 65;
                 beatResult.GetComponent<TMP_Text>().color = Color.blue;
                 break;
             case _BeatResult.perfect:
+                CombatManager.Instance.resourceNum += 3;
                 beatResult.GetComponent<TMP_Text>().text = "perfect!";
                 beatResult.GetComponent<TMP_Text>().fontSize = 72;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
                 break;
             default:
-                beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
-                beatResult.GetComponent<TMP_Text>().color = Color.red;
+                CombatManager.Instance.resourceNum += 3;
+                beatResult.GetComponent<TMP_Text>().text = "perfect!";
+                beatResult.GetComponent<TMP_Text>().fontSize = 72;
+                beatResult.GetComponent<TMP_Text>().color = Color.green;
                 break;
         }
     }

@@ -74,11 +74,24 @@ public class TowerManager : MonoBehaviour
     private float pianoCooldownTimeRemainingBack = 0;
     private float pianoCooldownTimeBack = 0;
 
+
+    public GameObject drumCooldownSlotPM;
+    public GameObject bassCooldownSlotPM;
+    public GameObject pianoCooldownSlotPM;
+    public GameObject guitarCooldownSlotPM;
+
+
     [Header("Tower Cost Labels")]
     public TextMeshProUGUI tower1Cost;
     public TextMeshProUGUI tower2Cost;
     public TextMeshProUGUI tower3Cost;
     public TextMeshProUGUI tower4Cost;
+
+    public TextMeshPro towerCost1PM;
+    public TextMeshPro towerCost2PM;
+    public TextMeshPro towerCost3PM;
+    public TextMeshPro towerCost4PM;
+
     public bool towerSwap;
 
     // Start is called before the first frame update
@@ -101,6 +114,11 @@ public class TowerManager : MonoBehaviour
             tower2Cost.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
             tower3Cost.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
             tower4Cost.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+
+            towerCost1PM.text = towers[0].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            towerCost2PM.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            towerCost3PM.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            towerCost4PM.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
         }
         else
         {
@@ -108,6 +126,11 @@ public class TowerManager : MonoBehaviour
             tower2Cost.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
             tower3Cost.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
             tower4Cost.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+
+            towerCost1PM.text = towers[4].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            towerCost2PM.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            towerCost3PM.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+            towerCost4PM.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
         }
         
     }
@@ -118,6 +141,11 @@ public class TowerManager : MonoBehaviour
         bassCooldownSlot.SetActive(bassCooldown);
         pianoCooldownSlot.SetActive(pianoCooldown);
         guitarCooldownSlot.SetActive(guitarCooldown);
+
+        drumCooldownSlotPM.SetActive(drumCooldown);
+        bassCooldownSlotPM.SetActive(bassCooldown);
+        pianoCooldownSlotPM.SetActive(pianoCooldown);
+        guitarCooldownSlotPM.SetActive(guitarCooldown);
 
         drumCooldownSlotBack.SetActive(drumCooldownBack);
         bassCooldownSlotBack.SetActive(bassCooldownBack);
@@ -131,6 +159,7 @@ public class TowerManager : MonoBehaviour
 
             //cooldown effect
             drumCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(drumCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((drumCooldownTime / drumCooldownTimeRemaining) * 100));
+            drumCooldownSlotPM.transform.localScale = new Vector3(1, drumCooldownTime / drumCooldownTimeRemaining, 1);
 
             if(drumCooldownTime >= drumCooldownTimeRemaining)
             {
@@ -145,6 +174,7 @@ public class TowerManager : MonoBehaviour
 
             //cooldown effect
             bassCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(bassCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((bassCooldownTime / bassCooldownTimeRemaining) * 100));
+            bassCooldownSlotPM.transform.localScale = new Vector3(1, bassCooldownTime / bassCooldownTimeRemaining, 1);
 
             if (bassCooldownTime >= bassCooldownTimeRemaining)
             {
@@ -159,6 +189,8 @@ public class TowerManager : MonoBehaviour
             //cooldown effect
             guitarCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(guitarCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((guitarCooldownTime / guitarCooldownTimeRemaining) * 100));
 
+            guitarCooldownSlotPM.transform.localScale = new Vector3(1, guitarCooldownTime / guitarCooldownTimeRemaining, 1);
+
             if (guitarCooldownTime >= guitarCooldownTimeRemaining)
             {
                 guitarCooldown = false;
@@ -171,6 +203,8 @@ public class TowerManager : MonoBehaviour
 
             //cooldown effect
             pianoCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(pianoCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((pianoCooldownTime / pianoCooldownTimeRemaining) * 100));
+            pianoCooldownSlotPM.transform.localScale = new Vector3(1, pianoCooldownTime / pianoCooldownTimeRemaining, 1);
+
 
             if (pianoCooldownTime >= pianoCooldownTimeRemaining)
             { 

@@ -1432,7 +1432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2737315247605731274, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4261318937950874629, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_Sprite
@@ -1685,7 +1685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2006741146610802601, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2073497125186653847, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_Camera
@@ -1693,11 +1693,11 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 2199224633335421815, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2199224633335421815, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2751378064255184901, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: towerCost1PM
@@ -1913,11 +1913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4201360459971936570, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5129187372497375343, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6003804639936651715, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: knockEmDead
@@ -2005,19 +2005,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2658100399398339600, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       insertIndex: -1
       addedObject: {fileID: 65746390}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3968354926899066993, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5523975721767120877, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 8615482807705449774, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5563446803280805559, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
 --- !u!224 &4903281166377591324 stripped
 RectTransform:

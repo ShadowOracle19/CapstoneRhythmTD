@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     public EnemyCreator enemy;
+    public AudioSource enemyDeathSFX;
 
     public List<Vector3> path;
     private float speed = 1;
@@ -167,7 +168,8 @@ public class Enemy : MonoBehaviour
         _renderer.color = Color.red;
         time = 1;
         currentHealth -= damage;
-        if(currentHealth <= 0)
+        enemyDeathSFX.Play();
+        if (currentHealth <= 0)
         {
             Kill();
         }

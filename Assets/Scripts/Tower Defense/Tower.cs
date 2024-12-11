@@ -10,6 +10,7 @@ public enum InstrumentType
 
 public class Tower : MonoBehaviour
 {
+    public AudioSource towerAttackSFX;
     public TowerTypeCreator towerInfo;
 
     public UnityEvent trigger;
@@ -117,6 +118,9 @@ public class Tower : MonoBehaviour
     public void Fire()
     {
         if (!rotateStarted) return;
+
+        //Audio SFX
+        towerAttackSFX.Play();
         
         if(attackBuffed || FeverSystem.Instance.feverModeActive)
         {

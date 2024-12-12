@@ -159,7 +159,6 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.pauseMovement = true;
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.menuMusic.Play();
-        ConductorV2.instance.musicSource.volume = 0;
         ConductorV2.instance.drums.volume = 0;
         ConductorV2.instance.bass.volume = 0;
         ConductorV2.instance.piano.volume = 0;

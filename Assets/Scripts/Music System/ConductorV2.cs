@@ -80,6 +80,7 @@ public class ConductorV2 : MonoBehaviour
 
     public bool pauseConductor = false;
     public TextMeshProUGUI countInText;
+    public bool countingIn = false;
 
 
     // Start is called before the first frame update
@@ -124,6 +125,7 @@ public class ConductorV2 : MonoBehaviour
         numberOfBeats = 0;
         beatTrack = 0;
         beatDuration = 0;
+        countingIn = true;
         StartCoroutine(CountIn());
     }
 
@@ -143,6 +145,8 @@ public class ConductorV2 : MonoBehaviour
 
     public void StartConductor()
     {
+
+        countingIn = false;
         CombatManager.Instance.knockEmDead.SetActive(true);
         CombatManager.Instance.knockEmDead.GetComponent<Animator>().SetTrigger("KnockEmDead");
 

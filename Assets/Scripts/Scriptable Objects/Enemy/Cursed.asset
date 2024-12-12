@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Cursed
   enemyDescription: 
-  enemySprite: {fileID: 1036698107, guid: 99650fc522a0aac44996b9a29f1f1230, type: 3}
+  enemySprite: {fileID: -1401634021, guid: 2828d16b38215aa4aa8bd42adfadc37a, type: 3}
   maxHealth: 45
   movementPattern: 1
   clashStrength: 1

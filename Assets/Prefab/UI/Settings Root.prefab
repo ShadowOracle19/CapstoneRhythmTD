@@ -6952,9 +6952,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: 1920x1080
-      m_Image: {fileID: 0}
     - m_Text: 1280x720
+      m_Image: {fileID: 0}
+    - m_Text: 1920x1080
       m_Image: {fileID: 0}
     - m_Text: 800x600
       m_Image: {fileID: 0}

@@ -1,11 +1,11 @@
 Keep to the rhythm in Dissonance: an exciting musical journey! Lead a band of rebellious musicians as they weaponize music against Absolute Records, a label trying to sanitize and erase their sound. Place instrumental﻿ towers to orchestrate your defense and your sound, adding them to the music as you fight back. Can you strike a chord with the audience and become a smash hit? Find out in Dissonance
 
-To launch the game play the Dissonance.exe file 
+To launch the game, double click on the Dissonance.exe file (which looks like a guitar)
 
-The game has two levels a tutorial/intro level and level 1-1. 
+The game has two levels: a tutorial/intro level, and level 1-1. 
 
-Our tower defense system has enemies and tower projectiles moving to the beat as well as 
-player movement with a cursor. As towers are placed more tracks to the song starts to play. The player is able to buff towers while hovering over them and press the up, left or right arrow key to the beat. 
+Our tower defense system has enemies and tower projectiles moving to the beat, as well as 
+player movement with a cursor. As towers are placed, more tracks to the song start to play. The player is able to buff towers while hovering over them and pressing the up, left, or right arrow key to the beat. 
 
 Game controls:
 WASD to move on beat

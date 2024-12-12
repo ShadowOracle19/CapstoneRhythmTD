@@ -7,7 +7,6 @@ using UnityEngine.Audio;
 
 public class SettingsManager : MonoBehaviour
 {
-
     [Header("Audio")] 
     [SerializeField] private AudioMixer masterAudioMixer;
 
@@ -42,7 +41,10 @@ public class SettingsManager : MonoBehaviour
         musicVolumeText.text = Mathf.RoundToInt(musicVolumeSlider.value * 100) + "%";
 
         masterAudioMixer.SetFloat("_SFXVolume", Mathf.Log10(sfxVolumeSlider.value) * 20);
-        sfxVolumeText.text = Mathf.RoundToInt(sfxVolumeSlider.value * 100) + "%";
+        float sfxVolume = Mathf.RoundToInt(sfxVolumeSlider.value * 100);
+        sfxVolumeText.text = sfxVolume + "%";
+        
+
     }
 
     //Text Speed function

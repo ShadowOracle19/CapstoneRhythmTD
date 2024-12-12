@@ -74,12 +74,12 @@ public class SettingsManager : MonoBehaviour
     public void HandleResolutionDropdownData(int num)
     {
         //1920x1080
-        if(num == 0)
+        if(num == 1)
         {
             SetGameResolution(new Vector2(1920, 1080));
         }
         //1280x720
-        else if (num == 1)
+        else if (num == 0)
         {
             SetGameResolution(new Vector2(1280, 720));
         }
@@ -92,6 +92,6 @@ public class SettingsManager : MonoBehaviour
 
     void SetGameResolution(Vector2 resolution)
     {
-        Screen.SetResolution((int)resolution.x, (int)resolution.y, true);
+        Screen.SetResolution((int)resolution.x, (int)resolution.y, false);
     }
 }

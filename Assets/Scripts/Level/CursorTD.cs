@@ -1,4 +1,5 @@
 
+using Pathfinding.Ionic.Zip;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -93,7 +94,7 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pauseMovement)
+        if (pauseMovement || ConductorV2.instance.countingIn)
             return;
 
         //return cursor sprite to origin size

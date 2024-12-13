@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -79,6 +78,11 @@ public class GameManager : MonoBehaviour
         pauseMenuRoot.SetActive(false);
 
         _currentHealth = _maxHealth;
+
+        QualitySettings.maxQueuedFrames = 1;
+
+        Debug.Log(QualitySettings.maxQueuedFrames + " frame");
+        Debug.Log(QualitySettings.vSyncCount + " Vsync");
     }
 
     // Update is called once per frame
@@ -122,6 +126,8 @@ public class GameManager : MonoBehaviour
     public void LoadTutorial()
     {
         menuMusic.Stop();
+        CombatManager.Instance.allEnemiesSpawned = false;
+        EnemySpawner.Instance.allEnemiesSpawned = false;
         tutorialRunning = true;
         winState = false;
         combatRoot.SetActive(true);

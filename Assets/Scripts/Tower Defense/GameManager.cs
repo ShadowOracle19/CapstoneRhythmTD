@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
     [Header("Dialogue")]
     public float textSpeed = 0.05f;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log(QualitySettings.maxQueuedFrames + " frame");
         Debug.Log(QualitySettings.vSyncCount + " Vsync");
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -94,33 +97,35 @@ public class GameManager : MonoBehaviour
             Health();
         }
 
-        //allows player to use pause menu in combat, level select and dialogue
-        if (combatRunning || menuRoot.activeSelf || dialogueRoot.activeSelf || tutorialRunning)
-        {
-            //When the escape button is pressed the game will pause and open the pause menu
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                //flips the isGamePaused bool
-                isGamePaused = !isGamePaused;
-
-                //game is paused
-                if (isGamePaused)
-                {
-                    PauseGame();
-                }
-                //game is unpaused
-                else
-                {
-                    ResumeGame();
-                }
-            }
-        }
+        
 
         if(menuRoot.activeSelf || dialogueRoot.activeSelf)
         {
             Cursor.lockState = CursorLockMode.None;
         }
         
+    }
+
+    public void HandlePauseMenuInput()
+    {
+        //allows player to use pause menu in combat, level select and dialogue
+        if (combatRunning || menuRoot.activeSelf || dialogueRoot.activeSelf || tutorialRunning)
+        {
+            //flips the isGamePaused bool
+            isGamePaused = !isGamePaused;
+
+            //game is paused
+            if (isGamePaused)
+            {
+                PauseGame();
+            }
+            //game is unpaused
+            else
+            {
+                ResumeGame();
+            }
+            
+        }
     }
 
     public void LoadTutorial()

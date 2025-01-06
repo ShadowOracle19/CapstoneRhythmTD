@@ -771,7 +771,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2514,6 +2514,9 @@ MonoBehaviour:
   dialogueSystemParent: {fileID: 9088167558878582843}
   textSpeed: 0.05
   defaultTextSpeed: 0.05
+  defaultColour:
+    serializedVersion: 2
+    rgba: 4278190080
   logEntry: {fileID: 6258508907429296415, guid: 2347d53b504133b44807ef20927c323e, type: 3}
   logParent: {fileID: 6913343813156350082}
   log: {fileID: 3331500780463842690}

@@ -51,6 +51,8 @@ public class DialogueManager : MonoBehaviour
     public Image characterImage;
     public int index;
 
+    TMP_TextInfo textInfo;
+
     public DialogueList myDialogue = new DialogueList();
 
     public GameObject dialogueBox;
@@ -60,6 +62,8 @@ public class DialogueManager : MonoBehaviour
 
     public float textSpeed = 0.05f;
     public float defaultTextSpeed = 0.05f;
+
+    public Color32 defaultColour = new Color32(0, 0, 0, 255);
 
     Coroutine typing;
 
@@ -71,6 +75,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        textInfo = _dialogue.textInfo;
     }
 
 
@@ -97,13 +102,43 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeLine()
     {
+        _dialogue.text = myDialogue.dialogue[index].text;
+        _speakerName.text = myDialogue.dialogue[index].name;
+
+        int currentChar = 0;
+
         foreach (char c in myDialogue.dialogue[index].text.ToCharArray())
         {
             LoadCharacterSprite();
+            if (_dialogue.textInfo.characterInfo[currentChar].isVisible || currentChar == 0)
+            {
+                print(currentChar);
+                print("c = " + c);
+                int vertexIndex = _dialogue.textInfo.characterInfo[currentChar].vertexIndex;
+                int materialIndex = _dialogue.textInfo.characterInfo[currentChar].materialReferenceIndex;
 
-            _speakerName.text = myDialogue.dialogue[index].name;
-            _dialogue.text += c;
+                Color32[] destinationColors = _dialogue.textInfo.meshInfo[materialIndex].colors32;
+
+                destinationColors[vertexIndex + 0] = defaultColour;
+                destinationColors[vertexIndex + 1] = defaultColour;
+                destinationColors[vertexIndex + 2] = defaultColour;
+                destinationColors[vertexIndex + 3] = defaultColour;
+            }
+
+            _dialogue.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
+
+            for (int i = 0; i<_dialogue.textInfo.meshInfo.Length; i++) {
+                TMP_MeshInfo theInfo = _dialogue.textInfo.meshInfo[i];
+                theInfo.mesh.vertices = theInfo.vertices;
+                _dialogue.UpdateGeometry(theInfo.mesh, i);
+            }
+                
+
+            //_speakerName.text = myDialogue.dialogue[index].name;
+            //_dialogue.text += c;
+            currentChar++;
             if (c == '<'){
+                
                 GameManager.Instance.textSpeed = 0f;
             }
             else if (c == '>'){

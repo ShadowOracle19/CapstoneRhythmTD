@@ -256,6 +256,7 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
         pauseMenuRoot.SetActive(false);
         settings.SetActive(false);
+        MenuEventManager.Instance.PauseMenuClose();
         Time.timeScale = 1;
     }
 

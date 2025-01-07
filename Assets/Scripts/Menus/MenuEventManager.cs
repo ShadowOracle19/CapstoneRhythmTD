@@ -30,6 +30,7 @@ public class MenuEventManager : MonoBehaviour
     public GameObject pauseMenuFirstObject;
     public GameObject titleMenuFirstObject;
     public GameObject DialogueMenuFirstObject;
+    public GameObject mainMenuFirstObject;
 
     private void Start()
     {
@@ -56,5 +57,25 @@ public class MenuEventManager : MonoBehaviour
     public void PauseMenuOpen()
     {
         eventSystem.SetSelectedGameObject(pauseMenuFirstObject);
+    }
+
+    public void PauseMenuClose()
+    {
+        if (GameManager.Instance.titleRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(titleMenuFirstObject);
+        }
+        else if(GameManager.Instance.menuRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(mainMenuFirstObject);
+        }
+        else if(GameManager.Instance.dialogueRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(DialogueMenuFirstObject);
+        }
+        else if(GameManager.Instance.combatRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(null);
+        }
     }
 }

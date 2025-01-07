@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     public void HandlePauseMenuInput()
     {
+        Debug.Log("pause");
         //allows player to use pause menu in combat, level select and dialogue
         if (combatRunning || menuRoot.activeSelf || dialogueRoot.activeSelf || tutorialRunning)
         {
@@ -202,15 +203,7 @@ public class GameManager : MonoBehaviour
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
 
-        CombatManager.Instance.enemyTimerObject.SetActive(true);
-        CombatManager.Instance.healthBar.SetActive(true);
-        CombatManager.Instance.controls.SetActive(true);
-        CombatManager.Instance.resources.SetActive(true);
-        CombatManager.Instance.towerDisplay.SetActive(true);
-        CombatManager.Instance.feverBar.SetActive(true);
-        CombatManager.Instance.metronome.SetActive(true);
-        CombatManager.Instance.waveCounter.SetActive(true);
-        CombatManager.Instance.combo.SetActive(true);
+        
 
 
         
@@ -248,6 +241,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         isGamePaused = true;
         pauseMenuRoot.SetActive(true);
+        MenuEventManager.Instance.PauseMenuOpen();
         Time.timeScale = 0;
     }
 

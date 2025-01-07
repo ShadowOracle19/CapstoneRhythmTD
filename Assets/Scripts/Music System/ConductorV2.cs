@@ -201,7 +201,7 @@ public class ConductorV2 : MonoBehaviour
        
 
         //determine how many seconds since the song started
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime);
+        songPosition = (float)(AudioSettings.dspTime - dspSongTime - offset);
 
         //determine how many beats since the song started
         songPositionInBeats = songPosition / crotchet;

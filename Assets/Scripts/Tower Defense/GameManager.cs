@@ -132,11 +132,11 @@ public class GameManager : MonoBehaviour
     public void LoadTutorial()
     {
         menuMusic.Stop();
+        combatRoot.SetActive(true);
         CombatManager.Instance.allEnemiesSpawned = false;
         EnemySpawner.Instance.allEnemiesSpawned = false;
         tutorialRunning = true;
         winState = false;
-        combatRoot.SetActive(true);
 
         CombatManager.Instance.enemyTimerObject.SetActive(false);
         CombatManager.Instance.healthBar.SetActive(false);
@@ -267,6 +267,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         CombatManager.Instance.EndEncounter();
         gameOverScreen.SetActive(true);
+        MenuEventManager.Instance.LoseScreenOpen();
         //conductor.SetActive(false);
         ConductorV2.instance.StopMusic();
     }
@@ -282,6 +283,7 @@ public class GameManager : MonoBehaviour
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         //conductor.SetActive(false);
+        MenuEventManager.Instance.WinScreenOpen();
         ConductorV2.instance.StopMusic();
     }
 
@@ -297,6 +299,7 @@ public class GameManager : MonoBehaviour
 
         winScreen.SetActive(true);
         //conductor.SetActive(false);
+        MenuEventManager.Instance.WinScreenOpen();
         ConductorV2.instance.StopMusic();
     }
 

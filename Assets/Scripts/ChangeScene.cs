@@ -19,7 +19,7 @@ public class ChangeScene : MonoBehaviour
 
     public void QuitGame()
     {
-        if(GameManager.Instance.combatRoot.activeSelf)
+        if(GameManager.Instance.combatRoot.activeSelf || GameManager.Instance.dialogueRoot.activeSelf)
         {
             CombatManager.Instance.EndEncounter();
             GameManager.Instance.combatRoot.SetActive(false);

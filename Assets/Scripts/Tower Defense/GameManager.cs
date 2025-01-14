@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject settings;
     public GameObject pauseMenuRoot;
     public GameObject titleRoot;
+    public GameObject exitMenuRoot;
 
     [Header("Combat")]
     [SerializeField] private Slider healthSlider;
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         dialogueRoot.SetActive(false);
         settings.SetActive(false);
         pauseMenuRoot.SetActive(false);
+        exitMenuRoot.SetActive(false);
 
         _currentHealth = _maxHealth;
 

@@ -35,6 +35,7 @@ public class MenuEventManager : MonoBehaviour
     public GameObject mainMenuFirstObject;
     public GameObject winScreenObject;
     public GameObject loseScreenObject;
+    public GameObject exitConfirmationObject;
 
     private void Start()
     {
@@ -51,6 +52,11 @@ public class MenuEventManager : MonoBehaviour
         {
             eventSystem.SetSelectedGameObject(titleMenuFirstObject);
         }
+    }
+
+    public void OpenConfirmation()
+    {
+        eventSystem.SetSelectedGameObject(exitConfirmationObject);
     }
 
     public void CloseConfirmation()

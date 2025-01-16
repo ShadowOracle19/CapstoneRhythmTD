@@ -100,11 +100,12 @@ public class GameManager : MonoBehaviour
         }
 
         
-
+        /*
         if(menuRoot.activeSelf || dialogueRoot.activeSelf)
         {
             Cursor.lockState = CursorLockMode.None;
         }
+        */
         
     }
 
@@ -240,7 +241,7 @@ public class GameManager : MonoBehaviour
             
             //conductor.SetActive(false);
         }
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
         isGamePaused = true;
         pauseMenuRoot.SetActive(true);
         MenuEventManager.Instance.PauseMenuOpen();
@@ -267,7 +268,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         loseState = true;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
         CombatManager.Instance.EndEncounter();
         gameOverScreen.SetActive(true);
         MenuEventManager.Instance.LoseScreenOpen();
@@ -281,7 +282,7 @@ public class GameManager : MonoBehaviour
         winState = true;
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
         //winScreen.SetActive(true);
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
@@ -296,7 +297,7 @@ public class GameManager : MonoBehaviour
         winState = true;
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
 
         CursorTD.Instance.tutorialPopupParent.SetActive(false);
 

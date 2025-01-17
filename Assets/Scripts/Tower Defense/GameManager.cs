@@ -287,7 +287,7 @@ public class GameManager : MonoBehaviour
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         //conductor.SetActive(false);
-        MenuEventManager.Instance.WinScreenOpen();
+        //MenuEventManager.Instance.WinScreenOpen();
         ConductorV2.instance.StopMusic();
     }
 

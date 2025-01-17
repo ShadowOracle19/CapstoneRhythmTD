@@ -157,7 +157,7 @@ public class CombatManager : MonoBehaviour
         }
         enemySpawners.startOnce = false;
         CursorTD.Instance.pauseMovement = true;
-        Cursor.lockState = CursorLockMode.None;
+
         GameManager.Instance.menuMusic.Play();
         ConductorV2.instance.drums.volume = 0;
         ConductorV2.instance.bass.volume = 0;

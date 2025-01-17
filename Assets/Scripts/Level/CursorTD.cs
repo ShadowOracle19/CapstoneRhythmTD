@@ -252,36 +252,8 @@ public class CursorTD : MonoBehaviour
 
     public void MoveCursor(Vector2 direction)
     {
-        if (isMoving) return;
-        ////on press log which direction needs to be moved
-        //if (Input.GetKeyUp(KeyCode.W))
-        //{
-        //    Debug.Log("is this happening?");
-        //    //movement
-        //    desiredMovement = Vector3.up;
-        //    SpawnBeatHitResult();
-        //}
-        //else if (Input.GetKeyUp(KeyCode.A))
-        //{
-        //    //movement
-        //    desiredMovement = Vector3.left;
-        //    SpawnBeatHitResult();
-
-        //}
-        //else if (Input.GetKeyUp(KeyCode.S))
-        //{
-        //    //movement
-        //    desiredMovement = Vector3.down;
-        //    SpawnBeatHitResult();
-
-        //}
-        //else if (Input.GetKeyUp(KeyCode.D))
-        //{
-        //    //movement
-        //    desiredMovement = Vector3.right;
-
-        //    SpawnBeatHitResult();
-        //}
+        if (isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) return;
+        
         //get the angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -413,7 +385,7 @@ public class CursorTD : MonoBehaviour
 
     public void TogglePlacementMenu()
     {
-        if (destructMode) return;
+        if (destructMode || GameManager.Instance.winState || GameManager.Instance.loseState) return;
 
         towerSelectMenuOpened = !towerSelectMenuOpened;
         placementMenu.SetActive(towerSelectMenuOpened);
@@ -428,20 +400,6 @@ public class CursorTD : MonoBehaviour
             wasdParent.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0);
             CombatManager.Instance.towerDisplay.SetActive(true);
         }
-        //else if(GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && !towerSelectMenuOpened)
-        //{
-        //    towerPlacementMenuSequence = true;
-        //    towerPlaceSequence = false;
-        //}
-        //if (inputHandler.RadialTrigger && !destructMode && !inputOnce)
-        //{
-        //    inputOnce = true;
-            
-        //}
-        //else if(!inputHandler.RadialTrigger)
-        //{
-        //    inputOnce = false;
-        //}
 
 
     }
@@ -489,50 +447,12 @@ public class CursorTD : MonoBehaviour
 
         }
 
-
-        //if (Input.GetKeyUp(KeyCode.W))
-        //{
-        //    if (towerSelectMenuOpened && tile.placedTower == null)
-        //    {
-        //        TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
-        //        return;
-        //    }
-        //}
-        //else if (Input.GetKeyUp(KeyCode.A))
-        //{
-        //    if (towerSelectMenuOpened && tile.placedTower == null)
-        //    {
-        //        TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
-        //        return;
-        //    }
-
-        //}
-        //else if (Input.GetKeyUp(KeyCode.S))
-        //{
-        //    if (towerSelectMenuOpened && tile.placedTower == null)
-        //    {
-        //        TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
-        //        return;
-        //    }
-
-        //}
-        //else if (Input.GetKeyUp(KeyCode.D))
-        //{
-
-        //    if (towerSelectMenuOpened && tile.placedTower == null)
-        //    {
-        //        TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
-
-        //        return;
-        //    }
-
-        //}
     }
 
 
     public void Move(Vector2 direction)
     {
-        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving) return;
+        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) return;
         Debug.Log(direction);
 
         
@@ -651,6 +571,7 @@ public class CursorTD : MonoBehaviour
 
     public void SpawnBeatHitResult()
     {
+        if (GameManager.Instance.winState || GameManager.Instance.loseState) return;
         Debug.Log(ConductorV2.instance.beatDuration);
         GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
 

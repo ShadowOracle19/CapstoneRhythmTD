@@ -203,6 +203,14 @@ public class GameManager : MonoBehaviour
         tutorialRunning = false;
         currentEncounter = encounter;
         encounterRunning = true;
+
+        if(currentEncounter.introDialogue == null)
+        {
+            combatRoot.SetActive(true);
+            combatRunning = true;
+            CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter);
+            return;
+        }
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
 
@@ -282,13 +290,17 @@ public class GameManager : MonoBehaviour
         winState = true;
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
-        //Cursor.lockState = CursorLockMode.None;
-        //winScreen.SetActive(true);
+        ConductorV2.instance.StopMusic();
+
+        if (currentEncounter.endDialogue == null)
+        {
+            winScreen.SetActive(true);
+            MenuEventManager.Instance.WinScreenOpen();
+            return;
+        }
+
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
-        //conductor.SetActive(false);
-        MenuEventManager.Instance.WinScreenOpen();
-        ConductorV2.instance.StopMusic();
     }
 
     public void TutorialWinState()

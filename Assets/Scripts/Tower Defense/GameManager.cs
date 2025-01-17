@@ -203,6 +203,16 @@ public class GameManager : MonoBehaviour
         tutorialRunning = false;
         currentEncounter = encounter;
         encounterRunning = true;
+        winState = false;
+        loseState = false;
+
+        if(currentEncounter.introDialogue == null)
+        {
+            combatRoot.SetActive(true);
+            combatRunning = true;
+            CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter);
+            return;
+        }
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
 
@@ -215,6 +225,10 @@ public class GameManager : MonoBehaviour
     public void Damage()
     {
         _currentHealth -= 1;
+        if (_currentHealth <= 0)
+        {
+            GameOver();
+        }
     }
 
     void Health()
@@ -222,11 +236,9 @@ public class GameManager : MonoBehaviour
         healthSlider.maxValue = _maxHealth;
         healthSlider.value = _currentHealth;
 
-        if (_currentHealth <= 0)
-        {
-            GameOver();
-        }
+        
     }
+
 
     public void PauseGame()
     {
@@ -267,13 +279,14 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (loseState) return;
         loseState = true;
         //Cursor.lockState = CursorLockMode.None;
         CombatManager.Instance.EndEncounter();
         gameOverScreen.SetActive(true);
         MenuEventManager.Instance.LoseScreenOpen();
         //conductor.SetActive(false);
-        ConductorV2.instance.StopMusic();
+        //ConductorV2.instance.StopMusic();
     }
 
     public void WinLevel()
@@ -282,8 +295,15 @@ public class GameManager : MonoBehaviour
         winState = true;
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
-        //Cursor.lockState = CursorLockMode.None;
-        //winScreen.SetActive(true);
+        ConductorV2.instance.StopMusic();
+
+        if (currentEncounter.endDialogue == null)
+        {
+            winScreen.SetActive(true);
+            MenuEventManager.Instance.WinScreenOpen();
+            return;
+        }
+
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         //conductor.SetActive(false);

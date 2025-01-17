@@ -88,6 +88,7 @@ public class CombatManager : MonoBehaviour
     {
         GameManager.Instance.menuMusic.Stop();
         GameManager.Instance.winState = false;
+        GameManager.Instance.loseState = false;
         currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
         ConductorV2.instance.CountUsIn(currentEncounter.encounterBPM);

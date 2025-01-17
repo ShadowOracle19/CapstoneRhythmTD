@@ -571,7 +571,7 @@ public class CursorTD : MonoBehaviour
 
     public void SpawnBeatHitResult()
     {
-        if (GameManager.Instance.winState || GameManager.Instance.loseState) return;
+        if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused) return;
         Debug.Log(ConductorV2.instance.beatDuration);
         GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
 

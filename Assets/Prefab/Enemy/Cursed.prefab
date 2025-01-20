@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 79028663795836632}
   - component: {fileID: 2951424127729736265}
   - component: {fileID: 268270836958475243}
+  - component: {fileID: 6447767761400459899}
   m_Layer: 0
   m_Name: Cursed
   m_TagString: Enemy
@@ -50,10 +51,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: a244aef10e8a0884ebeeb0b89f5269d2, type: 2}
+  enemyEffect: {fileID: 6447767761400459899}
   enemyDeathSFX: {fileID: 268270836958475243}
   path: []
   currentPositionHolder: {x: 0, y: 0, z: 0}
-  move: 1
+  dontMove: 0
+  barTracker: 0
   currentHealth: 0
   trigger:
     m_PersistentCalls:
@@ -241,6 +244,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6447767761400459899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239132429429542008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddcde8752fb34584597e1bf3f255e69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &663426221981257777
 GameObject:
   m_ObjectHideFlags: 0

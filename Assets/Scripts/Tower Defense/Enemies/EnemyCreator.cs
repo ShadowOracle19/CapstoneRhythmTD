@@ -16,6 +16,7 @@ public class EnemyCreator : ScriptableObject
     public EnemyMovementPattern movementPattern;
     public ClashStrength clashStrength;
     public int deathIncome;
+    public bool onDeathEffect;
 }
 
 public enum EnemyMovementPattern

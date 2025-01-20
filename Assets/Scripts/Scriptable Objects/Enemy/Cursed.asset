@@ -18,3 +18,5 @@ MonoBehaviour:
   maxHealth: 45
   movementPattern: 1
   clashStrength: 1
+  deathIncome: 0
+  onDeathEffect: 1

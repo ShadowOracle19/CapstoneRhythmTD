@@ -231,6 +231,11 @@ public class Enemy : MonoBehaviour
 
     public void Kill()
     {
+        if(enemy.onDeathEffect)
+        {
+            enemyEffect.UseEffect();
+        }
+
         RemoveEnemy();
     }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class UndoingEffect : EnemyEffect
 {
+    
     public override void UseEffect()
     {
         base.UseEffect();

@@ -239,7 +239,7 @@ public class Tower : MonoBehaviour
                 CursorTD.Instance.feverModeSequence = true;
                 FeverSystem.Instance.feverBarNum = 50;
 
-                EnemySpawner.Instance.ForceEnemySpawn(CursorTD.Instance.gameObject.transform.position.y);
+                EnemySpawner.Instance.ForceEnemySpawn(CursorTD.Instance.gameObject.transform.position.y, EnemyType.Walker);
                 CursorTD.Instance.buffCounter = 0;
             }
         }

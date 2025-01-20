@@ -51,7 +51,7 @@ public class ConductorV2 : MonoBehaviour
 
     //public bool threshold;
 
-    private int beatTrack;
+    public int beatTrack;
 
     private int lastInterval;
 
@@ -162,7 +162,7 @@ public class ConductorV2 : MonoBehaviour
 
         completedLoops = 0;
         numberOfBeats = 0;
-        beatTrack = 0;
+        beatTrack = 1;
         beatDuration = 0;
 
         drums.volume = 0;
@@ -239,6 +239,8 @@ public class ConductorV2 : MonoBehaviour
 
 
         TriggerBeatEvent(musicSource.timeSamples / (musicSource.clip.frequency * crotchet));
+
+        beatTrack = Mathf.Clamp(beatTrack, 0, 4);
     }
 
     public void Tick()
@@ -268,18 +270,14 @@ public class ConductorV2 : MonoBehaviour
 
     }
 
-    public bool Beat()
+    public void Beat()
     {
-        if (GameManager.Instance.isGamePaused)
-            return false;
-
-        if (songPositionInBeats >= beatTrack + 4 * 1)
+        if (beatTrack == 4)
         {
-            beatTrack++;
-            return true;
+            beatTrack = 0;
         }
-        else
-            return false;
+
+        beatTrack += 1;
 
         
     }

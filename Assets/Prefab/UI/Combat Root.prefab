@@ -588,6 +588,7 @@ MonoBehaviour:
   towersParent: {fileID: 4567449751264449402}
   projectilesParent: {fileID: 7179906817177105308}
   enemiesSpawnIn: {fileID: 1087988791341581498}
+  enemyTimerMax: 30
   enemyTimer: 35
   resourceNum: 0
   maxResource: 100
@@ -606,6 +607,7 @@ MonoBehaviour:
   metronome: {fileID: 6112978531658207272}
   waveCounter: {fileID: 6768568521675754656}
   combo: {fileID: 2083200320753664648}
+  knockEmDead: {fileID: 0}
 --- !u!1 &4315412304900578376
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +933,7 @@ MonoBehaviour:
   perfectBeatThreshold: 0.5
   beatDuration: 0
   numberOfBeats: 0
+  beatTrack: 1
   drums: {fileID: 8723546351570440409}
   bass: {fileID: 9211614422583926158}
   piano: {fileID: 7958775825279511900}
@@ -1013,6 +1016,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7350431759063249165}
+        m_TargetAssemblyTypeName: ConductorV2, Assembly-CSharp
+        m_MethodName: Beat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 527936733991456964}
@@ -1029,6 +1044,7 @@ MonoBehaviour:
         m_CallState: 2
   pauseConductor: 0
   countInText: {fileID: 1972839837729125251}
+  countingIn: 0
 --- !u!82 &8935945286973304900
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1041,7 +1057,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 8300000, guid: 5b1779a8fe179ed4ab51d69bf4770191, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1254,7 +1270,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 8300000, guid: aacee094186844e419bc49d7b600e494, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1440,10 +1456,18 @@ MonoBehaviour:
   guitarCooldownBack: 0
   pianoCooldownSlotBack: {fileID: 6328596300317074030}
   pianoCooldownBack: 0
+  drumCooldownSlotPM: {fileID: 0}
+  bassCooldownSlotPM: {fileID: 0}
+  pianoCooldownSlotPM: {fileID: 0}
+  guitarCooldownSlotPM: {fileID: 0}
   tower1Cost: {fileID: 8543834545541548160}
   tower2Cost: {fileID: 8484796512763453483}
   tower3Cost: {fileID: 4730147763677971128}
   tower4Cost: {fileID: 9026284104367381160}
+  towerCost1PM: {fileID: 0}
+  towerCost2PM: {fileID: 0}
+  towerCost3PM: {fileID: 0}
+  towerCost4PM: {fileID: 0}
   towerSwap: 0
 --- !u!1 &7243257818393121727
 GameObject:

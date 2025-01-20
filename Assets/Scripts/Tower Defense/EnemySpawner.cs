@@ -48,8 +48,9 @@ public class EnemySpawner : MonoBehaviour
     public int numEnemiesInWave = 0;
     public int delay;
 
-    [Header("Tutorial")]
-    public GameObject tutortialEnemy;
+    [Header("EnemyType")]
+    public GameObject walkerEnemy;
+    public GameObject wispEnemy;
 
     private void Update()
     {
@@ -73,10 +74,23 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void ForceEnemySpawn(float ypos)
+    public void ForceEnemySpawn(float ypos, EnemyType enemyType)
     {
         currentNumberOfEnemiesSpawned += 1;
-        GameObject enemy = Instantiate(tutortialEnemy, new Vector3(transform.position.x, ypos), Quaternion.identity, enemyParent);
+        GameObject enemy = null;
+        switch (enemyType)
+        {
+            case EnemyType.Wisp:
+                enemy = Instantiate(wispEnemy, new Vector3(transform.position.x, ypos), Quaternion.identity, enemyParent);
+                break;
+            case EnemyType.Walker:
+                enemy = Instantiate(walkerEnemy, new Vector3(transform.position.x, ypos), Quaternion.identity, enemyParent);
+                break;
+            default:
+                break;
+        }
+        
+        
         ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
 
     }
@@ -133,4 +147,9 @@ public class EnemySpawner : MonoBehaviour
             allEnemiesSpawnedFromWave = true;
         }
     }
+}
+
+public enum EnemyType
+{
+    Wisp, Walker
 }

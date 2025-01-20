@@ -15,11 +15,13 @@ public class EnemyCreator : ScriptableObject
     public int maxHealth;
     public EnemyMovementPattern movementPattern;
     public ClashStrength clashStrength;
+    public int deathIncome;
+    public bool onDeathEffect;
 }
 
 public enum EnemyMovementPattern
 {
-    everyBeat, everyOtherBeat
+    everyBeat, everyOtherBeat, random, moveThenCast, dontMove, everyTwoBeats, oncePerBar, onceEveryTwoBars
 }
 
 public enum ClashStrength

@@ -41,6 +41,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public Transform projectilesParent;
 
     public TextMeshProUGUI enemiesSpawnIn;
+    public int enemyTimerMax = 30;
     public int enemyTimer = 40;
     bool switchColor = false;
 
@@ -106,7 +107,7 @@ public class CombatManager : MonoBehaviour
         enemySpawners.currentWaves = currentEncounter.waves;
 
         resourceNum = 24;
-        enemyTimer = 30;
+        enemyTimer = enemyTimerMax;
         enemiesSpawnIn.gameObject.SetActive(true);
 
         //Conductor.Instance.bass.volume = 0;
@@ -215,7 +216,7 @@ public class CombatManager : MonoBehaviour
     {
         enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
         //Start spawning enemies on the 10th bar
-        if (ConductorV2.instance.numberOfBeats >= 30)
+        if (ConductorV2.instance.numberOfBeats >= enemyTimerMax)
         {
             enemiesSpawnIn.gameObject.SetActive(false);
             enemySpawners.StartSpawningEnemies();

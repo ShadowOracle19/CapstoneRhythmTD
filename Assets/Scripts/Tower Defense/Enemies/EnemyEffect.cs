@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyEffect : MonoBehaviour
 {
-    public void UseEffect()
+    public virtual void UseEffect()
     {
         Debug.Log("Effect method called");
     }

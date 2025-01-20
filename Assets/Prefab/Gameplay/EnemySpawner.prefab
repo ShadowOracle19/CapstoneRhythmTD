@@ -148,7 +148,8 @@ MonoBehaviour:
   allEnemiesSpawnedFromWave: 0
   numEnemiesInWave: 0
   delay: 0
-  tutortialEnemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+  walkerEnemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+  wispEnemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
 --- !u!120 &5314118494258792361
 LineRenderer:
   serializedVersion: 2

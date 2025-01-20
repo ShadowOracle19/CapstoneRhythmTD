@@ -80,11 +80,11 @@ public class FeverSystem : MonoBehaviour
             {
                 CursorTD.Instance.tutorialText.text = "Quick activate fever mode by pressing the down arrow key!";
 
-                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[0].transform.position.y);
-                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[1].transform.position.y);
-                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[2].transform.position.y);
-                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[3].transform.position.y);
-                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[4].transform.position.y);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[0].transform.position.y, EnemyType.Walker);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[1].transform.position.y, EnemyType.Walker);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[2].transform.position.y, EnemyType.Walker);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[3].transform.position.y, EnemyType.Walker);
+                EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[4].transform.position.y, EnemyType.Walker);
                 EnemySpawner.Instance.allEnemiesSpawned = true;
             }
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2951424127729736265}
   - component: {fileID: -8889972146457848405}
   m_Layer: 0
-  m_Name: Enemy Base
+  m_Name: Wisp
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,8 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ad5d2c844a09d46bfd90e9270aa7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  enemyDeathSFX: {fileID: 0}
+  enemy: {fileID: 11400000, guid: 88c909d276b1bdb479278ff3c34adc7a, type: 2}
+  enemyEffect: {fileID: 0}
+  enemyDeathSFX: {fileID: -8889972146457848405}
   path: []
   currentPositionHolder: {x: 0, y: 0, z: 0}
   dontMove: 0
@@ -269,7 +270,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4066651677582518194}
@@ -316,7 +317,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 1740127526, guid: 681b36b64a9036f49bb005faa1f1d3ed, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.97893786, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

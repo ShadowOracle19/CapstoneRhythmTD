@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     public EnemyCreator enemy;
+    public EnemyEffect enemyEffect;
     public AudioSource enemyDeathSFX;
 
     public List<Vector3> path;
@@ -65,25 +66,48 @@ public class Enemy : MonoBehaviour
 
             case EnemyMovementPattern.everyOtherBeat:
                 otherBeatMove = !otherBeatMove;
-                if (otherBeatMove)
+                dontMove = otherBeatMove;
+                break;
+
+            case EnemyMovementPattern.random:
+                otherBeatMove = Random.value < 0.5f;
+
+                if(otherBeatMove)
                 {
+                    int randYPos = Random.Range(0, 2) * 2 - 1;
+                    float _rand;
+                    if(randYPos == -1)
+                    {
+                        _rand = -1.2f;
+                    }
+                    else
+                    {
+                        _rand = 1.2f;
+                    }
+
+                    nextPosition = new Vector3(transform.position.x, transform.position.y + _rand);
+
+                    if(nextPosition.y >= 2 || nextPosition.y <= -3.5)//if hit top of bottom of the map
+                    {
+                        nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
+                    }
+                    dontMove = false;
+                }
+                else
+                {
+                    nextPosition = new Vector3(transform.position.x - 2.4f, transform.position.y);
                     dontMove = false;
                 }
                 break;
 
-            case EnemyMovementPattern.twiceEveryBeat:
-                nextPosition = new Vector3(transform.position.x - 2.4f, transform.position.y);
-                dontMove = false;
-                break;
-
             case EnemyMovementPattern.moveThenCast:
-                if(ConductorV2.instance.beatTrack == 2)
+                if(ConductorV2.instance.beatTrack == 2 || ConductorV2.instance.beatTrack == 4)
                 {
                    dontMove = false;
                 }
-                else if (ConductorV2.instance.beatTrack == 3)
+                else if (ConductorV2.instance.beatTrack == 4)
                 {
-                    enemy.effect.UseEffect();
+                    enemyEffect.UseEffect();
                 }
                 break;
 
@@ -172,7 +196,6 @@ public class Enemy : MonoBehaviour
     //}
     #endregion
 
-    //fixed directiondontMovement
     public void Movement()
     {
         if (tileInFront != null && tileInFront.placedTower != null)

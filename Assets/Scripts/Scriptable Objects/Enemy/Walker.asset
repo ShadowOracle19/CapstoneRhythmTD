@@ -19,4 +19,3 @@ MonoBehaviour:
   movementPattern: 0
   clashStrength: 0
   deathIncome: 0
-  effect: {fileID: 0}

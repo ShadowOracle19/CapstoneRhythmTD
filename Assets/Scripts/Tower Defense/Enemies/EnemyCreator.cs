@@ -16,13 +16,11 @@ public class EnemyCreator : ScriptableObject
     public EnemyMovementPattern movementPattern;
     public ClashStrength clashStrength;
     public int deathIncome;
-    [Tooltip("Only set if enemy has an effect")]
-    public EnemyEffect effect;
 }
 
 public enum EnemyMovementPattern
 {
-    everyBeat, everyOtherBeat, twiceEveryBeat, moveThenCast, dontMove, everyTwoBeats, oncePerBar, onceEveryTwoBars
+    everyBeat, everyOtherBeat, random, moveThenCast, dontMove, everyTwoBeats, oncePerBar, onceEveryTwoBars
 }
 
 public enum ClashStrength

@@ -384,7 +384,7 @@ public class TowerManager : MonoBehaviour
             CursorTD.Instance.wasdParent.transform.localPosition = new Vector3(0, 1, 0);
             CursorTD.Instance.wasdParent.SetActive(false);
             CursorTD.Instance.towerBuffSequence = true;
-            EnemySpawner.Instance.ForceEnemySpawn(gameObject.transform.position.y);
+            EnemySpawner.Instance.ForceEnemySpawn(gameObject.transform.position.y, EnemyType.Walker);
         }
     }
 

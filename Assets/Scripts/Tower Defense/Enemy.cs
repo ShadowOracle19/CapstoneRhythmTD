@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
@@ -13,10 +12,10 @@ public class Enemy : MonoBehaviour
     private float speed = 1;
     float timer;
     public Vector3 currentPositionHolder;
-    int currentNode;
 
-    public bool move;
+    public bool dontMove;
     private bool otherBeatMove = false;
+    public int barTracker = 0;
 
     public int currentHealth;
 
@@ -33,16 +32,13 @@ public class Enemy : MonoBehaviour
 
 
 
+
     // Start is called before the first frame update
     void Start()
     {
-        //GetComponent<AIPath>().path.vectorPath
-        //if (path.Count == 0) gameObject.SetActive(false);
-        //currentPositionHolder = path[currentNode += 1];
-
         currentHealth = enemy.maxHealth;
 
-        move = true;
+        dontMove = true;
 
         nextPosition = new Vector3(transform.position.x - 1, transform.position.y);
     }
@@ -64,38 +60,67 @@ public class Enemy : MonoBehaviour
         switch (enemy.movementPattern)
         {
             case EnemyMovementPattern.everyBeat:
-                if (tileInFront.placedTower != null)
-                {
-                    Clash(enemy.clashStrength);
-                }
-                else
-                {
-                    move = false;
-
-                }
+                dontMove = false;
                 break;
 
             case EnemyMovementPattern.everyOtherBeat:
-                if (tileInFront.placedTower != null)
+                otherBeatMove = !otherBeatMove;
+                if (otherBeatMove)
                 {
-                    Clash(enemy.clashStrength);
+                    dontMove = false;
                 }
-                else
-                {
-                    otherBeatMove = !otherBeatMove;
-                    if (otherBeatMove)
-                    {
-                        move = false;
-                    }
+                break;
 
+            case EnemyMovementPattern.twiceEveryBeat:
+                nextPosition = new Vector3(transform.position.x - 2.4f, transform.position.y);
+                dontMove = false;
+                break;
+
+            case EnemyMovementPattern.moveThenCast:
+                if(ConductorV2.instance.beatTrack == 2)
+                {
+                   dontMove = false;
                 }
-                
+                else if (ConductorV2.instance.beatTrack == 3)
+                {
+                    enemy.effect.UseEffect();
+                }
+                break;
+
+            case EnemyMovementPattern.dontMove:
+               dontMove = true;
+                break;
+
+            case EnemyMovementPattern.everyTwoBeats:
+                if (ConductorV2.instance.beatTrack == 2 || ConductorV2.instance.beatTrack == 4)
+                {
+                    dontMove = false;
+                }
+                break;
+
+            case EnemyMovementPattern.oncePerBar:
+                if (ConductorV2.instance.beatTrack == 4)
+                {
+                    dontMove = false;
+                }
+                break;
+
+            case EnemyMovementPattern.onceEveryTwoBars:
+                if(ConductorV2.instance.beatTrack == 4)
+                {
+                    barTracker += 1;
+                    if(barTracker == 2)
+                    {
+                        dontMove = false;
+                        barTracker = 0;
+                    }
+                }
                 break;
 
             default:
                 break;
         }
-        
+
     }
 
 
@@ -122,7 +147,7 @@ public class Enemy : MonoBehaviour
 
     #region pathing
     //Pathing Function
-    //void Movement()
+    //voiddontMovement()
     //{
     //    timer += Time.deltaTime * speed;
     //    if (gameObject.transform.position != currentPositionHolder)
@@ -133,7 +158,7 @@ public class Enemy : MonoBehaviour
     //    {
     //        if (currentNode < path.Count - 1)
     //        {
-    //            move = false;
+    //           dontMove = false;
     //            currentNode++;
     //            CheckNode();
     //        }
@@ -147,17 +172,23 @@ public class Enemy : MonoBehaviour
     //}
     #endregion
 
-    //fixed direction movement
+    //fixed directiondontMovement
     public void Movement()
     {
+        if (tileInFront != null && tileInFront.placedTower != null)
+        {
+            Clash(enemy.clashStrength);
+            dontMove = true;
+            return;
+        }
         timer += Time.deltaTime * speed;
-        if (gameObject.transform.position != nextPosition && !move)
+        if (gameObject.transform.position != nextPosition && !dontMove)
         {
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, nextPosition, timer);
         }
         else
         {
-            move = true;
+           dontMove = true;
             timer = 0;
             nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
         }

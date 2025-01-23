@@ -78,7 +78,12 @@ public class PlayerInputHandler : MonoBehaviour
     void RegisterInputActions()
     {
         //moveAction.performed += context => MoveInput = context.ReadValue<Vector2>();
-        moveAction.performed += context => CursorTD.Instance.MoveCursor(context.ReadValue<Vector2>());
+        //moveAction.performed += context => CursorTD.Instance.MoveCursor(context.ReadValue<Vector2>());
+        moveAction.performed += context =>
+        {
+            if(context.interaction is PressInteraction)
+                CursorTD.Instance.MoveCursor(context.ReadValue<Vector2>());
+        };
         moveAction.canceled += context => MoveInput = Vector2.zero;
 
         radialAction.performed += context =>
@@ -162,7 +167,7 @@ public class PlayerInputHandler : MonoBehaviour
         buff2Action.Disable();
         buff3Action.Disable();
         feverAction.Disable();
-        optionsAction.Disable();
+        //optionsAction.Disable();
     }
 
 }

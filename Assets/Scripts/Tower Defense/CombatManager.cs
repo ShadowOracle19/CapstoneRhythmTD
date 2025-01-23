@@ -87,6 +87,7 @@ public class CombatManager : MonoBehaviour
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
+        GameManager.Instance.playerInputManager.SetActive(true);
         GameManager.Instance.menuMusic.Stop();
         GameManager.Instance.winState = false;
         GameManager.Instance.loseState = false;
@@ -162,6 +163,7 @@ public class CombatManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         GameManager.Instance.menuMusic.Play();
+        GameManager.Instance.playerInputManager.SetActive(false);
         ConductorV2.instance.drums.volume = 0;
         ConductorV2.instance.bass.volume = 0;
         ConductorV2.instance.piano.volume = 0;

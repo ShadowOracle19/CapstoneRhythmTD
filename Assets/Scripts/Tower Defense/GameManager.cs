@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int _currentHealth = 0;
     [SerializeField] public bool combatRunning = false;
     public TextMeshProUGUI waveCounter;
+    public GameObject playerInputManager;
 
     [Header("Pause Menu")]
     [SerializeField] public bool isGamePaused = false;
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(QualitySettings.maxQueuedFrames + " frame");
         Debug.Log(QualitySettings.vSyncCount + " Vsync");
         Cursor.lockState = CursorLockMode.Locked;
+        playerInputManager.SetActive(false);
     }
 
     // Update is called once per frame
@@ -140,6 +142,7 @@ public class GameManager : MonoBehaviour
         EnemySpawner.Instance.allEnemiesSpawned = false;
         tutorialRunning = true;
         winState = false;
+        playerInputManager.SetActive(true);
 
         CombatManager.Instance.enemyTimerObject.SetActive(false);
         CombatManager.Instance.healthBar.SetActive(false);

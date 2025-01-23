@@ -167,7 +167,7 @@ public class PlayerInputHandler : MonoBehaviour
         buff2Action.Disable();
         buff3Action.Disable();
         feverAction.Disable();
-        optionsAction.Disable();
+        //optionsAction.Disable();
     }
 
 }

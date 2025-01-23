@@ -282,6 +282,7 @@ MonoBehaviour:
   _currentHealth: 0
   combatRunning: 0
   waveCounter: {fileID: 422979661}
+  playerInputManager: {fileID: 611689253}
   isGamePaused: 0
   restartEncounterButton: {fileID: 336209612}
   currentEncounter: {fileID: 0}

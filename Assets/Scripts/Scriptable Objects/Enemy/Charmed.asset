@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bcd4c7a6ee51543a7cf4900f94b217, type: 3}
   m_Name: Charmed
   m_EditorClassIdentifier: 
-  enemyName: 
+  enemyName: Charmed
   enemyDescription: 
   enemySprite: {fileID: 0}
-  maxHealth: 0
-  movementPattern: 0
+  maxHealth: 55
+  movementPattern: 4
   clashStrength: 0
-  deathIncome: 0
+  deathIncome: 40
   onDeathEffect: 0

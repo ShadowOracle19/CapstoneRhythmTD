@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bcd4c7a6ee51543a7cf4900f94b217, type: 3}
   m_Name: Downfall
   m_EditorClassIdentifier: 
-  enemyName: 
+  enemyName: Downfall
   enemyDescription: 
   enemySprite: {fileID: 0}
-  maxHealth: 0
-  movementPattern: 0
+  maxHealth: 15
+  movementPattern: 5
   clashStrength: 0
   deathIncome: 0
   onDeathEffect: 0

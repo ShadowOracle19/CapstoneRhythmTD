@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -60,6 +61,11 @@ public class DialogueManager : MonoBehaviour
 
     public float textSpeed = 0.05f;
     public float defaultTextSpeed = 0.05f;
+       
+    // Contains a reference to the object last selected before opening a dialogue sequence
+    public GameObject lastActiveObject;
+
+    EventSystem eventSystem;
 
     Coroutine typing;
 
@@ -71,6 +77,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        eventSystem = EventSystem.current;
     }
 
 
@@ -159,7 +166,14 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.dialogueRoot.SetActive(false);
             }
 
+            // Sets the active object to the object last active before dialogue started
+            if (GameManager.Instance.menuRoot.activeSelf)
+            {
+                eventSystem.SetSelectedGameObject(lastActiveObject);
+            }
+
             dialogueSystemParent.SetActive(false);
+
             return;
         }
     }
@@ -223,7 +237,19 @@ public class DialogueManager : MonoBehaviour
             GameManager.Instance.dialogueRoot.SetActive(false);
         }
 
+        // Sets the active object to the object last active before dialogue started
+        if (GameManager.Instance.menuRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(lastActiveObject);
+        }
+
         dialogueSystemParent.SetActive(false);
     }
+
+    public void SetLastActiveObject(GameObject currentlyActiveObject)
+    {
+        lastActiveObject = currentlyActiveObject;
+    }
+
 
 }

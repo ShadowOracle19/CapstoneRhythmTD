@@ -163,11 +163,11 @@ public class DialogueManager : MonoBehaviour
             if(GameManager.Instance.winState)
             {
                 GameManager.Instance.winScreen.SetActive(true);
+                MenuEventManager.Instance.WinScreenOpen();
                 GameManager.Instance.dialogueRoot.SetActive(false);
             }
-
             // Sets the active object to the object last active before dialogue started
-            if (GameManager.Instance.menuRoot.activeSelf)
+            else if (GameManager.Instance.menuRoot.activeSelf)
             {
                 eventSystem.SetSelectedGameObject(lastActiveObject);
             }

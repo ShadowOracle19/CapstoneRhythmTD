@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7655154fc842744b51cf435ac0e112, type: 3}
   m_Name: Encounter 1-1
   m_EditorClassIdentifier: 
-  introDialogue: {fileID: 4900000, guid: f71b754b3cdd0c04c9bd896a3f2ccfdc, type: 3}
+  introDialogue: {fileID: 4900000, guid: 9e31dd82a67fada45bb0eac23fea11a4, type: 3}
   combatEncounter: {fileID: 11400000, guid: bd262b5d3ba6df643b62e7226d4ad5d2, type: 2}
-  endDialogue: {fileID: 4900000, guid: 899f6d42998d0404a96d485d29ea9ed6, type: 3}
+  endDialogue: {fileID: 4900000, guid: fdde7c5fd65533c47905e404cd58e47c, type: 3}

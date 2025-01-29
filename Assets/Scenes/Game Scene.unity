@@ -4236,10 +4236,6 @@ PrefabInstance:
       propertyPath: knockEmDead
       value: 
       objectReference: {fileID: 65746389}
-    - target: {fileID: 6003804639936651715, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: enemyTimerMax
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6087572985972860289, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -408.47998

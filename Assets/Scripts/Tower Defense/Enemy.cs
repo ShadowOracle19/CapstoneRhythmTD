@@ -105,8 +105,9 @@ public class Enemy : MonoBehaviour
                 {
                    dontMove = false;
                 }
-                else if (ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.beatTrack == 4)
                 {
+                    Debug.Log("Effect");
                     enemyEffect.UseEffect();
                 }
                 break;

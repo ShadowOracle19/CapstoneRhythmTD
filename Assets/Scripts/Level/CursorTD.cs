@@ -88,6 +88,8 @@ public class CursorTD : MonoBehaviour
     public GameObject tutorialPopupParent;
     public TextMeshProUGUI tutorialText;
 
+    public bool beatIsHit = false;
+
 
 
     // Start is called before the first frame update
@@ -536,6 +538,7 @@ public class CursorTD : MonoBehaviour
     {
         //Debug.Log("pulse");
         cursorSprite.transform.localScale = pulseSize;
+        beatIsHit = false;
 
         //tutorial stuff
         //display movement tutorial
@@ -571,8 +574,9 @@ public class CursorTD : MonoBehaviour
 
     public void SpawnBeatHitResult()
     {
-        if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused) return;
+        if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused || beatIsHit) return;
         Debug.Log(ConductorV2.instance.beatDuration);
+        beatIsHit = true;
         GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
 
         switch (CheckOnBeat())

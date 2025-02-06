@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -37,6 +38,8 @@ public class GridManager : MonoBehaviour
     bool squareInit = false;
     int squareTick = 0;
 
+    public Dictionary<Vector2, Tile> grid = new Dictionary<Vector2, Tile>();
+    public List<Tile> tiles;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +53,7 @@ public class GridManager : MonoBehaviour
         //GenerateGrid();
         float y = 0;
         float x = 0;
-
+        tiles.Clear();
         //at start iterate through tiles to allow offset color then after set width change the offset so they make checkered pattern
         foreach(Transform child in gridParent)
         {
@@ -61,12 +64,19 @@ public class GridManager : MonoBehaviour
             }
             squareInit = !squareInit;
             child.GetComponent<Tile>().Init(squareInit);
-
+            tiles.Add(child.GetComponent<Tile>());
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public Tile GetTileAtPosition(Vector2 position)
+    {
+        if (grid.TryGetValue(position, out var tile))
+            return tile;
+
+        return null;
+    }
+
+    public void RecordGrid()
     {
         
     }

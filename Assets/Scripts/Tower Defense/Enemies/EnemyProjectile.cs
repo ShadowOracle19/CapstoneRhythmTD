@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
     public float speed = 1;
     float timer;
@@ -15,32 +14,31 @@ public class Projectile : MonoBehaviour
 
     public int damage = 1;
 
-    public GameObject towerFiredFrom;
-
     public UnityEvent trigger;
+
     // Start is called before the first frame update
     void Start()
     {
-        nextPosition = new Vector3(transform.position.x + 1.2f, transform.position.y);
+        nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
         if (!canMove) return;
         //transform.Translate(transform.right * 20 * Time.deltaTime);
         timer += Time.deltaTime * speed;
-        if(gameObject.transform.position != nextPosition)
+        if (gameObject.transform.position != nextPosition)
         {
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, nextPosition, timer);
         }
         else
         {
-            nextPosition = new Vector3(transform.position.x + 1.2f, transform.position.y);
+            nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
             canMove = false;
         }
-        
+
     }
 
     public void OnTick()
@@ -55,9 +53,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Tower"))
         {
-            collision.GetComponent<Enemy>().Damage(damage);
+            collision.GetComponent<Tower>().Damage(damage);
 
             RemoveProjectile();
         }

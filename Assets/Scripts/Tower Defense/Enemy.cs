@@ -113,7 +113,14 @@ public class Enemy : MonoBehaviour
                 break;
 
             case EnemyMovementPattern.dontMove:
-               dontMove = true;
+                if(!playOnce)
+                {
+                    playOnce = true;
+                    int rand = Random.Range(0, GridManager.Instance.tiles.Count - 1);
+                    transform.position = GridManager.Instance.tiles[rand].transform.position;
+
+                }
+                dontMove = true;
                 break;
 
             case EnemyMovementPattern.everyTwoBeats:

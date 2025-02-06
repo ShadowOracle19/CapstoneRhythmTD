@@ -95,6 +95,9 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
         ConductorV2.instance.CountUsIn(currentEncounter.encounterBPM);
 
+
+        GridManager.Instance.InitGrid();
+
         allEnemiesSpawned = false;
 
         enemyTotal = 0;

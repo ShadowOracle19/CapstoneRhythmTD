@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
 
         dontMove = true;
 
-        nextPosition = new Vector3(transform.position.x - 1, transform.position.y);
+        nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
     }
 
     // Update is called once per frame
@@ -119,7 +119,16 @@ public class Enemy : MonoBehaviour
             case EnemyMovementPattern.everyTwoBeats:
                 if (ConductorV2.instance.beatTrack == 2 || ConductorV2.instance.beatTrack == 4)
                 {
-                    dontMove = false;
+                    if(tileInFront != null && tileInFront.placedTower != null)
+                    {
+                        dontMove = true;
+                        enemyEffect.UseEffect();
+                    }
+                    else
+                    {
+                        dontMove = false;
+
+                    }
                 }
                 break;
 
@@ -199,12 +208,7 @@ public class Enemy : MonoBehaviour
 
     public void Movement()
     {
-        if (tileInFront != null && tileInFront.placedTower != null)
-        {
-            Clash(enemy.clashStrength);
-            dontMove = true;
-            return;
-        }
+        
         timer += Time.deltaTime * speed;
         if (gameObject.transform.position != nextPosition && !dontMove)
         {
@@ -215,6 +219,12 @@ public class Enemy : MonoBehaviour
            dontMove = true;
             timer = 0;
             nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
+        }
+        if (tileInFront != null && tileInFront.placedTower != null && gameObject.transform.position == tileInFront.placedTower.transform.position)
+        {
+            Clash(enemy.clashStrength);
+            dontMove = true;
+            return;
         }
     }
 

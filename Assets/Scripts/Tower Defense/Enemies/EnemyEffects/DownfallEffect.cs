@@ -9,6 +9,7 @@ public class DownfallEffect : EnemyEffect
     {
         base.UseEffect();
         
-
+        GameObject bullet = Instantiate(downfallProjectile, transform.position,transform.rotation, GameManager.Instance.projectileParent);
+        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<EnemyProjectile>().trigger);
     }
 }

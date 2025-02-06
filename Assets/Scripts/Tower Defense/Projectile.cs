@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z) + transform.right;
+        nextPosition = new Vector3(transform.position.x + 1.2f, transform.position.y);
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z) + transform.right;
+            nextPosition = new Vector3(transform.position.x + 1.2f, transform.position.y);
             canMove = false;
         }
         

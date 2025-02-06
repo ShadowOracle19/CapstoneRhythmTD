@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 79028663795836632}
   - component: {fileID: 2951424127729736265}
   - component: {fileID: -8889972146457848405}
+  - component: {fileID: 8671263623215796113}
   m_Layer: 0
   m_Name: Downfall
   m_TagString: Enemy
@@ -50,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 15e37155218e691469ea833bbdae7f96, type: 2}
-  enemyEffect: {fileID: 0}
+  enemyEffect: {fileID: 8671263623215796113}
   enemyDeathSFX: {fileID: -8889972146457848405}
   path: []
   currentPositionHolder: {x: 0, y: 0, z: 0}
@@ -243,6 +244,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8671263623215796113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239132429429542008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cca86af678f71248b95dac5f35e70e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downfallProjectile: {fileID: 2456792131810543251, guid: 82e30346fba96144bb0e89f2d98d404a, type: 3}
 --- !u!1 &663426221981257777
 GameObject:
   m_ObjectHideFlags: 0

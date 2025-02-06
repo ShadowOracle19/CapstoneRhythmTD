@@ -74,10 +74,25 @@ public class DialogueManager : MonoBehaviour
     public Transform logParent;
     public GameObject log;
 
+    [Header("Audio")]
+    [SerializeField] private DialogueAudioInfoSO defaultAudioInfo;
+    [SerializeField] private AudioClip dialogueTypingSoundClip;
+    [SerializeField] private bool stopAudioSource;
+    [SerializeField] private DialogueAudioInfoSO[] audioInfos;
+    private DialogueAudioInfoSO currentAudioInfo;
+    private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
+    
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         eventSystem = EventSystem.current;
+
+        audioSource = this.gameObject.AddComponent<AudioSource>();
+        currentAudioInfo = defaultAudioInfo;
+
+        
     }
 
 
@@ -86,6 +101,8 @@ public class DialogueManager : MonoBehaviour
     {
         
     }
+
+  
 
     public void LoadDialogue(TextAsset desiredDialogue)
     {
@@ -125,6 +142,7 @@ public class DialogueManager : MonoBehaviour
 
     public void NextLine()
     {
+        AudioClip[] dialogueTypingSoundClips = currentAudioInfo.dialogueTypingSoundClips;
         GameObject _newLog = Instantiate(logEntry, logParent);
         _newLog.GetComponent<DialogueLogEntry>().characterName.text = _speakerName.text;
         _newLog.GetComponent<DialogueLogEntry>().dialogue.text = _dialogue.text;
@@ -132,6 +150,11 @@ public class DialogueManager : MonoBehaviour
         if (index < myDialogue.dialogue.Length - 1)
         {
             index++;
+            if (stopAudioSource)
+            {
+                audioSource.Stop();
+            }
+            audioSource.PlayOneShot(dialogueTypingSoundClip);
             _dialogue.text = string.Empty;
             typing = StartCoroutine(TypeLine());
         }

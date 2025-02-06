@@ -4488,6 +4488,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1036729813113359282, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: stopAudioSource
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1036729813113359282, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: defaultAudioInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 19bb7a2f98ac6b046befbf5ca81d8d5e, type: 2}
+    - target: {fileID: 1036729813113359282, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: dialogueTypingSoundClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1999350985037739712, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 4

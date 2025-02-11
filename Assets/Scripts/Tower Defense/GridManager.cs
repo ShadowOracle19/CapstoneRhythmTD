@@ -55,17 +55,17 @@ public class GridManager : MonoBehaviour
         float x = 0;
         tiles.Clear();
         //at start iterate through tiles to allow offset color then after set width change the offset so they make checkered pattern
-        foreach(Transform child in gridParent)
-        {
-            if(y != child.position.y)
-            {
-                squareInit = !squareInit;
-                y = child.position.y;
-            }
-            squareInit = !squareInit;
-            child.GetComponent<Tile>().Init(squareInit);
-            tiles.Add(child.GetComponent<Tile>());
-        }
+        //foreach(Transform child in gridParent)
+        //{
+        //    if(y != child.position.y)
+        //    {
+        //        squareInit = !squareInit;
+        //        y = child.position.y;
+        //    }
+        //    squareInit = !squareInit;
+        //    child.GetComponent<Tile>().Init(squareInit);
+        //    tiles.Add(child.GetComponent<Tile>());
+        //}
     }
 
     public Tile GetTileAtPosition(Vector2 position)

@@ -89,14 +89,14 @@ public class CombatManager : MonoBehaviour
     {
         GameManager.Instance.playerInputManager.SetActive(true);
         GameManager.Instance.menuMusic.Stop();
+        GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
+        GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
         currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
         ConductorV2.instance.CountUsIn(currentEncounter.encounterBPM);
 
-
-        GridManager.Instance.InitGrid();
 
         allEnemiesSpawned = false;
 
@@ -190,6 +190,8 @@ public class CombatManager : MonoBehaviour
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
+
+        
 
         //checks if all enemies have spawned
         if (!enemySpawners.allEnemiesSpawned)

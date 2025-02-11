@@ -184,12 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c87ab4710db37e4ea02ddf1ef3f9d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
-  _offsetColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+  _baseColor: {r: 0, g: 0, b: 0, a: 0}
   _renderer: {fileID: 6026861394526949737}
-  _highlight: {fileID: 6026861393989481480}
   placedTower: {fileID: 0}
-  currentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &8747713961684648156
 BoxCollider2D:
   m_ObjectHideFlags: 0

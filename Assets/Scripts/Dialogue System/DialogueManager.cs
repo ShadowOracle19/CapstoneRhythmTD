@@ -74,10 +74,18 @@ public class DialogueManager : MonoBehaviour
     public Transform logParent;
     public GameObject log;
 
+    
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         eventSystem = EventSystem.current;
+
+        
+        
+
+        
     }
 
 
@@ -86,6 +94,8 @@ public class DialogueManager : MonoBehaviour
     {
         
     }
+
+  
 
     public void LoadDialogue(TextAsset desiredDialogue)
     {
@@ -111,11 +121,12 @@ public class DialogueManager : MonoBehaviour
         _speakerName.text = myDialogue.dialogue[index].name;
         for (int i = 0; i < dialogueText.Length; i++)
         {
+            
             if (dialogueText[i] == '<')
                 _dialogue.text += GetCompleteRichTextTag(ref i);
             else
                 _dialogue.text += dialogueText[i];
-
+            PlayCharacterAudio();
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
 
@@ -144,7 +155,6 @@ public class DialogueManager : MonoBehaviour
 
         if (index < myDialogue.dialogue.Length - 1)
         {
-            index++;
             _dialogue.text = string.Empty;
             typing = StartCoroutine(TypeLine());
         }
@@ -195,6 +205,8 @@ public class DialogueManager : MonoBehaviour
     {
         var characterSprite = Resources.Load<Sprite>(myDialogue.dialogue[index].name);
 
+
+
         if (characterSprite == null)
         {
             characterImage.sprite = null;
@@ -207,6 +219,20 @@ public class DialogueManager : MonoBehaviour
             characterImage.sprite = characterSprite;
         }
     }
+    private void PlayCharacterAudio()
+    {
+        int randNum = Random.Range(1, 6); //gets random number between 1 and 5
+        var _characterSpeaking = Resources.Load<AudioClip>($"audio/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}{randNum}");
+
+        if (_characterSpeaking == null)
+            return;
+        else
+        {
+            GetComponent<AudioSource>().clip = _characterSpeaking;
+            audioSource.Play();
+        }
+    }
+
 
     public void FinishLine()
     {

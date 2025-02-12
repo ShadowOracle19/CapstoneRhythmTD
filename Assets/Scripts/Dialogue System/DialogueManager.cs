@@ -155,6 +155,7 @@ public class DialogueManager : MonoBehaviour
 
         if (index < myDialogue.dialogue.Length - 1)
         {
+            index++;
             _dialogue.text = string.Empty;
             typing = StartCoroutine(TypeLine());
         }
@@ -221,6 +222,8 @@ public class DialogueManager : MonoBehaviour
     }
     private void PlayCharacterAudio()
     {
+        if (audioSource.isPlaying)
+            return;
         int randNum = Random.Range(1, 6); //gets random number between 1 and 5
         var _characterSpeaking = Resources.Load<AudioClip>($"audio/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}{randNum}");
 

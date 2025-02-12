@@ -123,21 +123,34 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        foreach (char c in myDialogue.dialogue[index].text.ToCharArray())
+        string dialogueText = myDialogue.dialogue[index].text;
+        LoadCharacterSprite();
+        _speakerName.text = myDialogue.dialogue[index].name;
+        for (int i = 0; i < dialogueText.Length; i++)
         {
-            LoadCharacterSprite();
+            if (dialogueText[i] == '<')
+                _dialogue.text += GetCompleteRichTextTag(ref i);
+            else
+                _dialogue.text += dialogueText[i];
 
-            _speakerName.text = myDialogue.dialogue[index].name;
-            _dialogue.text += c;
-            if (c == '<'){
-                GameManager.Instance.textSpeed = 0f;
-            }
-            else if (c == '>'){
-                GameManager.Instance.textSpeed = defaultTextSpeed;
-            }
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
-        
+
+        //foreach (char c in dialogueText)
+        //{
+        //    LoadCharacterSprite();
+
+        //    _speakerName.text = myDialogue.dialogue[index].name;
+        //    _dialogue.text += c;
+        //    //if (c == '<'){
+        //    //    GameManager.Instance.textSpeed = 0f;
+        //    //}
+        //    //else if (c == '>'){
+        //    //    GameManager.Instance.textSpeed = defaultTextSpeed;
+        //    //}
+        //    yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+        //}
+
     }
 
     public void NextLine()
@@ -274,5 +287,19 @@ public class DialogueManager : MonoBehaviour
         lastActiveObject = currentlyActiveObject;
     }
 
+    string GetCompleteRichTextTag(ref int _index)
+    {
+        string completeTag = string.Empty;
+
+        while(_index < myDialogue.dialogue[index].text.Length)
+        {
+            completeTag += myDialogue.dialogue[index].text[_index];
+            if (myDialogue.dialogue[index].text[_index] == '>')
+                return completeTag;
+
+            _index++;
+        }
+        return string.Empty;
+    }
 
 }

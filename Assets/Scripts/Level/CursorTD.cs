@@ -591,25 +591,25 @@ public class CursorTD : MonoBehaviour
                 break;
             case _BeatResult.early:
                 beatResult.GetComponent<TMP_Text>().text = "early";
-                beatResult.GetComponent<TMP_Text>().fontSize = 56;
+                beatResult.GetComponent<TMP_Text>().fontSize = 40;
                 beatResult.GetComponent<TMP_Text>().color = Color.yellow;
                 break;
             case _BeatResult.great:
                 CombatManager.Instance.resourceNum += 1;
                 beatResult.GetComponent<TMP_Text>().text = "great";
-                beatResult.GetComponent<TMP_Text>().fontSize = 65;
+                beatResult.GetComponent<TMP_Text>().fontSize = 45;
                 beatResult.GetComponent<TMP_Text>().color = Color.blue;
                 break;
             case _BeatResult.perfect:
                 CombatManager.Instance.resourceNum += 3;
-                beatResult.GetComponent<TMP_Text>().text = "perfect!";
-                beatResult.GetComponent<TMP_Text>().fontSize = 72;
+                beatResult.GetComponent<TMP_Text>().text = "perfect";
+                beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
                 break;
             default:
                 CombatManager.Instance.resourceNum += 3;
-                beatResult.GetComponent<TMP_Text>().text = "perfect!";
-                beatResult.GetComponent<TMP_Text>().fontSize = 72;
+                beatResult.GetComponent<TMP_Text>().text = "perfect";
+                beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
                 break;
         }

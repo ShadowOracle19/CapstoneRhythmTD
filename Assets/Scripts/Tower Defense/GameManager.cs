@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public Transform projectileParent;
     public AudioSource menuMusic;
 
-    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] public GameObject gameOverScreen;
     [SerializeField] public GameObject winScreen;
     [SerializeField] private GameObject conductor;
 

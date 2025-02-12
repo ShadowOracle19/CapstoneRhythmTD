@@ -74,23 +74,16 @@ public class DialogueManager : MonoBehaviour
     public Transform logParent;
     public GameObject log;
 
-    [Header("Audio")]
-    [SerializeField] private DialogueAudioInfoSO defaultAudioInfo;
-    [SerializeField] private AudioClip dialogueTypingSoundClip;
-    [SerializeField] private bool stopAudioSource;
-    [SerializeField] private DialogueAudioInfoSO[] audioInfos;
-    private DialogueAudioInfoSO currentAudioInfo;
-    private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
     
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         eventSystem = EventSystem.current;
 
-        audioSource = this.gameObject.AddComponent<AudioSource>();
-        currentAudioInfo = defaultAudioInfo;
+        
+        
 
         
     }
@@ -128,11 +121,12 @@ public class DialogueManager : MonoBehaviour
         _speakerName.text = myDialogue.dialogue[index].name;
         for (int i = 0; i < dialogueText.Length; i++)
         {
+            
             if (dialogueText[i] == '<')
                 _dialogue.text += GetCompleteRichTextTag(ref i);
             else
                 _dialogue.text += dialogueText[i];
-
+            PlayCharacterAudio();
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
 
@@ -155,19 +149,12 @@ public class DialogueManager : MonoBehaviour
 
     public void NextLine()
     {
-        AudioClip[] dialogueTypingSoundClips = currentAudioInfo.dialogueTypingSoundClips;
         GameObject _newLog = Instantiate(logEntry, logParent);
         _newLog.GetComponent<DialogueLogEntry>().characterName.text = _speakerName.text;
         _newLog.GetComponent<DialogueLogEntry>().dialogue.text = _dialogue.text;
 
         if (index < myDialogue.dialogue.Length - 1)
         {
-            index++;
-            if (stopAudioSource)
-            {
-                audioSource.Stop();
-            }
-            audioSource.PlayOneShot(dialogueTypingSoundClip);
             _dialogue.text = string.Empty;
             typing = StartCoroutine(TypeLine());
         }
@@ -218,6 +205,8 @@ public class DialogueManager : MonoBehaviour
     {
         var characterSprite = Resources.Load<Sprite>(myDialogue.dialogue[index].name);
 
+
+
         if (characterSprite == null)
         {
             characterImage.sprite = null;
@@ -230,6 +219,20 @@ public class DialogueManager : MonoBehaviour
             characterImage.sprite = characterSprite;
         }
     }
+    private void PlayCharacterAudio()
+    {
+        int randNum = Random.Range(1, 6); //gets random number between 1 and 5
+        var _characterSpeaking = Resources.Load<AudioClip>($"audio/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}{randNum}");
+
+        if (_characterSpeaking == null)
+            return;
+        else
+        {
+            GetComponent<AudioSource>().clip = _characterSpeaking;
+            audioSource.Play();
+        }
+    }
+
 
     public void FinishLine()
     {

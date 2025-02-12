@@ -222,6 +222,33 @@ public class Tower : MonoBehaviour
 
     public void RemoveTower()
     {
+        switch (towerInfo.type)
+        {
+            case InstrumentType.Drums:
+                ConductorV2.instance.drums.volume -= 0.05f;
+                ConductorV2.instance.drums.volume = Mathf.Clamp(ConductorV2.instance.drums.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Guitar:
+                ConductorV2.instance.guitarH.volume -= 0.05f;
+                ConductorV2.instance.guitarM.volume -= 0.05f;
+                ConductorV2.instance.guitarH.volume = Mathf.Clamp(ConductorV2.instance.guitarH.volume, 0, 0.5f);
+                ConductorV2.instance.guitarM.volume = Mathf.Clamp(ConductorV2.instance.guitarM.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Bass:
+                ConductorV2.instance.bass.volume -= 0.05f;
+                ConductorV2.instance.bass.volume = Mathf.Clamp(ConductorV2.instance.bass.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Piano:
+                ConductorV2.instance.piano.volume -= 0.05f;
+                ConductorV2.instance.piano.volume = Mathf.Clamp(ConductorV2.instance.piano.volume, 0, 0.5f);
+                break;
+
+            default:
+                break;
+        }
         ConductorV2.instance.triggerEvent.Remove(trigger);
         connectedTile.placedTower = null;
         Destroy(gameObject);

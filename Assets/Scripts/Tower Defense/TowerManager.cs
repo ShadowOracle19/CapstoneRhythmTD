@@ -94,6 +94,8 @@ public class TowerManager : MonoBehaviour
 
     public bool towerSwap;
 
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -322,6 +324,7 @@ public class TowerManager : MonoBehaviour
         _tower.GetComponent<Tower>().rotateStarted = true;
         _tower.GetComponent<Tower>().connectedTile = tile;
         ConductorV2.instance.triggerEvent.Add(_tower.GetComponent<Tower>().trigger);
+        audioSource.Play();
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 
         switch (result)

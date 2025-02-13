@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Encounter 1-2
   m_EditorClassIdentifier: 
   introDialogue: {fileID: 0}
-  combatEncounter: {fileID: 11400000, guid: 78adc995361411041aba78b47a2a7a46, type: 2}
+  combatEncounter: {fileID: 11400000, guid: db38fbd7a1fe4fd4e947a2edf670614e, type: 2}
   endDialogue: {fileID: 0}

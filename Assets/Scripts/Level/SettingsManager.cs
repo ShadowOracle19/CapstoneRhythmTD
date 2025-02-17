@@ -19,16 +19,22 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private TextMeshProUGUI sfxVolumeText;
 
+    [Header("display")]
+    [SerializeField] private FullScreenMode fullScreenMode;
+    [SerializeField] private Vector2 resolution = new Vector2(1280, 720);
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        fullScreenMode = FullScreenMode.Windowed;
+        resolution = new Vector2(1280, 720);
     }
 
     // Update is called once per frame
     void Update()
     {
         Volume();
+        //SetGameResolution(resolution);
     }
 
     //Audio Setting Function
@@ -54,17 +60,42 @@ public class SettingsManager : MonoBehaviour
         {
             //Medium
             case 0:
-                GameManager.Instance.textSpeed = 0.05f;
+                GameManager.Instance.textSpeed = 0.01f;
                 break;
             //Slow
             case 1:
-                GameManager.Instance.textSpeed = 0.1f;
+                GameManager.Instance.textSpeed = 0.05f;
                 break;
             //Fast
             case 2:
-                GameManager.Instance.textSpeed = 0.01f;
+                GameManager.Instance.textSpeed = 0.001f;
                 break;
 
+            default:
+                break;
+        }
+    }
+
+    public void HandleScreenMode(int num)
+    {
+        switch (num)
+        {
+            //Windowed
+            case 0:
+                fullScreenMode = FullScreenMode.Windowed;
+                
+                SetGameResolution();
+                break;
+            //Borderless Windowed
+            case 1:
+                fullScreenMode = FullScreenMode.FullScreenWindow;
+                SetGameResolution();
+                break;
+            //Fullscreen
+            case 2:
+                fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                SetGameResolution();
+                break;
             default:
                 break;
         }
@@ -76,22 +107,24 @@ public class SettingsManager : MonoBehaviour
         //1920x1080
         if(num == 1)
         {
-            SetGameResolution(new Vector2(1920, 1080));
+            resolution = new Vector2(1920, 1080);
         }
         //1280x720
         else if (num == 0)
         {
-            SetGameResolution(new Vector2(1280, 720));
+            resolution = new Vector2(1280, 720);
         }
         //800x600
         else if (num == 2)
         {
-            SetGameResolution(new Vector2(960, 540));
+            resolution = new Vector2(960, 540);
         }
+        SetGameResolution();
     }
 
-    void SetGameResolution(Vector2 resolution)
+    void SetGameResolution()
     {
-        Screen.SetResolution((int)resolution.x, (int)resolution.y, false);
+        Cursor.visible = false;
+        Screen.SetResolution((int)resolution.x, (int)resolution.y, fullScreenMode);
     }
 }

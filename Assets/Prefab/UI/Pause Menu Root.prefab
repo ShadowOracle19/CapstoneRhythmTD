@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4087081484132687325}
   - component: {fileID: 1751113022366189139}
   - component: {fileID: 7107929581728409911}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Settings
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0184b23ccc4fccb43ac109ea247f23e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8126b4291ee892644bfeaa4d26d8f50e, type: 2}
   m_sharedMaterial: {fileID: 1949168130703415336, guid: 0184b23ccc4fccb43ac109ea247f23e9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &809247017996623845
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7306972876258082523}
   - component: {fileID: 1053099779066241245}
   - component: {fileID: 4422427307334475618}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pause Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 8227048385207646157}
   - component: {fileID: 8514429537813956}
   - component: {fileID: 930808769568818475}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 876525453248178993}
   - component: {fileID: 1129336418916264728}
   - component: {fileID: 992501071954414429}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,10 +418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 191990965504574055}
+    m_SelectOnDown: {fileID: 8135977072551329703}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 2
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 1317745398, guid: ddbbfe052c7586f4090e4f2fe40f52f0, type: 3}
     m_PressedSprite: {fileID: 1317745398, guid: ddbbfe052c7586f4090e4f2fe40f52f0, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 1317745398, guid: ddbbfe052c7586f4090e4f2fe40f52f0, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -473,6 +473,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.EventSystems.EventSystem, UnityEngine.UI
+        m_MethodName: SetSelectedGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2176624660514764875
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +496,7 @@ GameObject:
   - component: {fileID: 8266918055088766097}
   - component: {fileID: 8484035954022675299}
   - component: {fileID: 5214046092013968997}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +574,7 @@ GameObject:
   - component: {fileID: 5895684201870455815}
   - component: {fileID: 3147850960675562165}
   - component: {fileID: 1157745428928140188}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +650,7 @@ GameObject:
   - component: {fileID: 6621781000778379940}
   - component: {fileID: 818740939599844015}
   - component: {fileID: 191990965504574055}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -794,7 +806,7 @@ GameObject:
   - component: {fileID: 7842076971132826766}
   - component: {fileID: 5885179812947701377}
   - component: {fileID: 1669389827164478364}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +862,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0184b23ccc4fccb43ac109ea247f23e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8126b4291ee892644bfeaa4d26d8f50e, type: 2}
   m_sharedMaterial: {fileID: 1949168130703415336, guid: 0184b23ccc4fccb43ac109ea247f23e9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -914,7 +926,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4010947961210242657
@@ -929,7 +941,7 @@ GameObject:
   - component: {fileID: 4332000191290438228}
   - component: {fileID: 3602673626690291132}
   - component: {fileID: 3315305797098003016}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Resume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1007,10 +1019,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 8135977072551329703}
+    m_SelectOnDown: {fileID: 191990965504574055}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 2
@@ -1073,7 +1085,7 @@ GameObject:
   - component: {fileID: 2884564368183478736}
   - component: {fileID: 5272425034828564604}
   - component: {fileID: 1293966152027062651}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1148,7 +1160,7 @@ GameObject:
   - component: {fileID: 7658655788480693831}
   - component: {fileID: 2417786448603325981}
   - component: {fileID: 2971419571478749829}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1204,7 +1216,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Resume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0184b23ccc4fccb43ac109ea247f23e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8126b4291ee892644bfeaa4d26d8f50e, type: 2}
   m_sharedMaterial: {fileID: 1949168130703415336, guid: 0184b23ccc4fccb43ac109ea247f23e9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1268,7 +1280,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8586443351132703713
@@ -1280,13 +1292,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1568591397501113129}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pause Menu Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1568591397501113129
 Transform:
   m_ObjectHideFlags: 0
@@ -1315,7 +1327,7 @@ GameObject:
   - component: {fileID: 2760851314149685183}
   - component: {fileID: 6902912546647779421}
   - component: {fileID: 8135977072551329703}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1393,10 +1405,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 992501071954414429}
+    m_SelectOnDown: {fileID: 3315305797098003016}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 2
@@ -1411,7 +1423,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: -879579176, guid: ddbbfe052c7586f4090e4f2fe40f52f0, type: 3}
     m_PressedSprite: {fileID: -879579176, guid: ddbbfe052c7586f4090e4f2fe40f52f0, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: -879579176, guid: ddbbfe052c7586f4090e4f2fe40f52f0, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1424,9 +1436,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4422427307334475618}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MenuEventManager, Assembly-CSharp
+        m_MethodName: OpenConfirmation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1459,7 +1483,7 @@ GameObject:
   - component: {fileID: 455685337588379377}
   - component: {fileID: 5023326453559779081}
   - component: {fileID: 7374648085293404608}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1515,7 +1539,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0184b23ccc4fccb43ac109ea247f23e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8126b4291ee892644bfeaa4d26d8f50e, type: 2}
   m_sharedMaterial: {fileID: 1949168130703415336, guid: 0184b23ccc4fccb43ac109ea247f23e9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1579,6 +1603,6 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}

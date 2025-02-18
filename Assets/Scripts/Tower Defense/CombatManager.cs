@@ -252,7 +252,8 @@ public class CombatManager : MonoBehaviour
             CursorTD.Instance.towerPlacementMenuSequence = true;
             return;
         }
-        resourceNum += 1;
+        //resourceNum += 1;
+        return;
     }
      
     public void SpawnBeat()

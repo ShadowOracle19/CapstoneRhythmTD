@@ -227,8 +227,9 @@ public class Enemy : MonoBehaviour
             timer = 0;
             nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
         }
-        if (tileInFront != null && tileInFront.placedTower != null && gameObject.transform.position == tileInFront.placedTower.transform.position)
+        if (tileInFront != null && tileInFront.placedTower != null)
         {
+            Debug.Log("Clash!");
             Clash(enemy.clashStrength);
             dontMove = true;
             return;

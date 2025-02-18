@@ -73,6 +73,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject logEntry;
     public Transform logParent;
     public GameObject log;
+    public bool pauseDialogue = false;
 
     
     public AudioSource audioSource;
@@ -109,7 +110,7 @@ public class DialogueManager : MonoBehaviour
         _speakerName.text = string.Empty;
         _dialogue.text = string.Empty;
 
-        MenuEventManager.Instance.DialogueOpen();
+        //MenuEventManager.Instance.DialogueOpen();
 
         typing = StartCoroutine(TypeLine());
     }
@@ -121,7 +122,10 @@ public class DialogueManager : MonoBehaviour
         _speakerName.text = myDialogue.dialogue[index].name;
         for (int i = 0; i < dialogueText.Length; i++)
         {
-            
+            while (pauseDialogue)
+            {
+                yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+            }
             if (dialogueText[i] == '<')
                 _dialogue.text += GetCompleteRichTextTag(ref i);
             else
@@ -306,6 +310,21 @@ public class DialogueManager : MonoBehaviour
             _index++;
         }
         return string.Empty;
+    }
+
+    public void OpenLog()
+    {
+        log.SetActive(true);
+        pauseDialogue = true;
+        MenuEventManager.Instance.OpenLog();
+        DialogueInputHandler.Instance.enabled = false;
+    }
+
+    public void CloseLog()
+    {
+        log.SetActive(false);
+        pauseDialogue = false;
+        DialogueInputHandler.Instance.enabled = true;
     }
 
 }

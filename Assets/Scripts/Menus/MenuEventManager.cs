@@ -38,10 +38,29 @@ public class MenuEventManager : MonoBehaviour
     public GameObject winScreenSecondObject;
     public GameObject loseScreenObject;
     public GameObject exitConfirmationObject;
+    public GameObject logFirstObject;
+
+    [Header("Last Selected Object")]
+    public GameObject lastSelectedObject;
 
     private void Start()
     {
         eventSystem = EventSystem.current;
+    }
+
+    public void RecordLastSelectedObject()
+    {
+        lastSelectedObject = eventSystem.currentSelectedGameObject;
+    }
+
+    public void SelectLastSelectedObject()
+    {
+        eventSystem.SetSelectedGameObject(lastSelectedObject);
+    }
+
+    public void OpenLog()
+    {
+        eventSystem.SetSelectedGameObject(logFirstObject);
     }
 
     public void CloseSettings()

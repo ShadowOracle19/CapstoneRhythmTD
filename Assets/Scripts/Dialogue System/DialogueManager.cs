@@ -105,7 +105,6 @@ public class DialogueManager : MonoBehaviour
         log.SetActive(false);
 
         currentDialogue = desiredDialogue;
-        dialogueBox.SetActive(true);
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);
         index = 0;
         _speakerName.text = string.Empty;

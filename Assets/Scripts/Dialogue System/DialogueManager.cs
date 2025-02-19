@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     public class Dialogue
     {
         public string name;
+        public string emotion;
         public string text;
     }
 
@@ -65,7 +66,7 @@ public class DialogueManager : MonoBehaviour
     // Contains a reference to the object last selected before opening a dialogue sequence
     public GameObject lastActiveObject;
 
-    EventSystem eventSystem;
+    private EventSystem eventSystem;
 
     Coroutine typing;
 
@@ -208,7 +209,7 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadCharacterSprite()
     {
-        var characterSprite = Resources.Load<Sprite>(myDialogue.dialogue[index].name);
+        var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}_{myDialogue.dialogue[index].emotion}");
 
 
 
@@ -295,6 +296,7 @@ public class DialogueManager : MonoBehaviour
     public void SetLastActiveObject(GameObject currentlyActiveObject)
     {
         lastActiveObject = currentlyActiveObject;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     string GetCompleteRichTextTag(ref int _index)

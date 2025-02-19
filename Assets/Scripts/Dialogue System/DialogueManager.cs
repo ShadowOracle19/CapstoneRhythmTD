@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     public class Dialogue
     {
         public string name;
+        public string emotion;
         public string text;
     }
 
@@ -208,7 +209,7 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadCharacterSprite()
     {
-        var characterSprite = Resources.Load<Sprite>(myDialogue.dialogue[index].name);
+        var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}_{myDialogue.dialogue[index].emotion}");
 
 
 

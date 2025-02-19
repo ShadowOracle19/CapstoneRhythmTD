@@ -65,7 +65,7 @@ public class DialogueManager : MonoBehaviour
     // Contains a reference to the object last selected before opening a dialogue sequence
     public GameObject lastActiveObject;
 
-    EventSystem eventSystem;
+    private EventSystem eventSystem;
 
     Coroutine typing;
 
@@ -295,6 +295,7 @@ public class DialogueManager : MonoBehaviour
     public void SetLastActiveObject(GameObject currentlyActiveObject)
     {
         lastActiveObject = currentlyActiveObject;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     string GetCompleteRichTextTag(ref int _index)

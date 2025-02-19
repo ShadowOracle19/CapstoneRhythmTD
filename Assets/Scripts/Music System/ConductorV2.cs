@@ -222,20 +222,20 @@ public class ConductorV2 : MonoBehaviour
 
         //threshold = InThreshHold();
 
-        if(ping)
-        {
+        //if(ping)
+        //{
             
-            currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationLeft, beatDuration);
-            currentRotation.eulerAngles = currentEulerAngles;
-            ticker.transform.rotation = currentRotation;
-        }
-        else
-        {
+        //    currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationLeft, beatDuration);
+        //    currentRotation.eulerAngles = currentEulerAngles;
+        //    ticker.transform.rotation = currentRotation;
+        //}
+        //else
+        //{
             
-            currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationRight, beatDuration);
-            currentRotation.eulerAngles = currentEulerAngles;
-            ticker.transform.rotation = currentRotation;
-        }
+        //    currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationRight, beatDuration);
+        //    currentRotation.eulerAngles = currentEulerAngles;
+        //    ticker.transform.rotation = currentRotation;
+        //}
 
 
         TriggerBeatEvent(musicSource.timeSamples / (musicSource.clip.frequency * crotchet));

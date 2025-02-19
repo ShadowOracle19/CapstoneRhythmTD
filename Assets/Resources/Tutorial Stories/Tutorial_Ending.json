@@ -1,12 +1,12 @@
 {
     "dialogue": [
-        {"name": "Sonu", "text": "Okay, that's all. You're free now."},
-        {"name": "Fayruz", "text": "You know, you were right, Sonu. That was actually pretty helpful!"},
-        {"name": "Sonu", "text": "...wait, really?"},
-        {"name": "Niimi", "text": "I'm glad we did it."},
-        {"name": "Sonu", "text": "..."},
-        {"name": "", "text": "A phone alarm sounds."},
-        {"name": "Sonu", "text": "OH! It's almost time, we need to go!"},
-        {"name": "Fayruz", "text": "Everybody to the van!!!"}
+        {"name": "Sonu", "emotion":  "1", "text": "Okay, that's all. You're free now."},
+        {"name": "Fayruz", "emotion":  "1", "text": "You know, you were right, Sonu. That was actually pretty helpful!"},
+        {"name": "Sonu", "emotion":  "1", "text": "...wait, really?"},
+        {"name": "Niimi", "emotion":  "1", "text": "I'm glad we did it."},
+        {"name": "Sonu", "emotion":  "1", "text": "..."},
+        {"name": "", "emotion":  "1", "text": "A phone alarm sounds."},
+        {"name": "Sonu", "emotion":  "1", "text": "OH! It's almost time, we need to go!"},
+        {"name": "Fayruz", "emotion":  "1", "text": "Everybody to the van!!!"}
     ]
 }

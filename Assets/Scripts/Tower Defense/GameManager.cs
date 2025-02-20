@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
         EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
 
         CursorTD.Instance.tutorialPopupParent.SetActive(true);
-        CursorTD.Instance.tutorialText.text = "Use WASD keys to move the cursor";
+        CursorTD.Instance.tutorialText.text = "Use Arrow keys to move the cursor";
     }
 
     public void LoadEncounter(EncounterCreator encounter)

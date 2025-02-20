@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 5700760158978340127}
   - component: {fileID: 3668187743330692291}
   m_Layer: 0
-  m_Name: Image (6)
+  m_Name: Coming Soon Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1906,6 +1906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7015327317605380938}
+  - component: {fileID: 7134933574816678803}
   m_Layer: 0
   m_Name: UI Graphics
   m_TagString: Untagged
@@ -1928,8 +1929,30 @@ Transform:
   m_Children:
   - {fileID: 8768141729604333033}
   - {fileID: 803085933334323073}
+  - {fileID: 233098560854862406}
   m_Father: {fileID: 5982189785013336315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7134933574816678803
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4523888054081944224}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf88764c5142ac745b4596b3ce9eba40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4622877015299208248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,7 +2478,7 @@ GameObject:
   - component: {fileID: 6692135659307308056}
   - component: {fileID: 3327821767670159268}
   m_Layer: 0
-  m_Name: Image (8)
+  m_Name: Move Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2475,10 +2498,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 233098560854862406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6692135659307308056
 CanvasRenderer:
@@ -3049,7 +3072,7 @@ GameObject:
   - component: {fileID: 1952689440248311015}
   - component: {fileID: 2706273546004066618}
   m_Layer: 0
-  m_Name: Image (7)
+  m_Name: Select Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3069,10 +3092,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 233098560854862406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1952689440248311015
 CanvasRenderer:
@@ -3137,7 +3160,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6832201527774495548}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3559,7 +3582,6 @@ RectTransform:
   - {fileID: 8239931760089501488}
   - {fileID: 1489342942541515483}
   - {fileID: 7015327317605380938}
-  - {fileID: 233098560854862406}
   m_Father: {fileID: 7330145580714047673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4196,7 +4218,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8841553022374656702}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4207,7 +4229,7 @@ RectTransform:
   - {fileID: 4740695463845092610}
   - {fileID: 55168332040451646}
   - {fileID: 7284091262758909392}
-  m_Father: {fileID: 5982189785013336315}
+  m_Father: {fileID: 7015327317605380938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

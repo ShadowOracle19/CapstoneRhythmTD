@@ -23,6 +23,24 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private FullScreenMode fullScreenMode;
     [SerializeField] private Vector2 resolution = new Vector2(1280, 720);
 
+    [Header("Screens")]
+    [SerializeField] private GameObject settingsSelection;
+    [SerializeField] private GameObject gameSettings;
+    [SerializeField] private GameObject soundSettings;
+    [SerializeField] private GameObject displaySettings;
+    [SerializeField] private GameObject constrolsSettings;
+
+
+    private void OnEnable()
+    {
+        settingsSelection.SetActive(true);
+        gameSettings.SetActive(false);
+        soundSettings.SetActive(false);
+        displaySettings.SetActive(false);
+        constrolsSettings.SetActive(false);
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {

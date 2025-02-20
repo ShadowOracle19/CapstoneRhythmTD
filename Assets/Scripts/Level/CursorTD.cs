@@ -395,11 +395,11 @@ public class CursorTD : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
         {
             towerPlacementMenuSequencePassed = true;
-            tutorialText.text = "use WASD to select and place a tower";
+            tutorialText.text = "use Arrow Keys to select and place a tower";
             towerPlacementMenuSequence = false;
             spaceKeyParent.SetActive(false);
             towerPlaceSequence = true;
-            wasdParent.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0);
+            arrowKeyParent.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0);
             CombatManager.Instance.towerDisplay.SetActive(true);
         }
 
@@ -502,7 +502,7 @@ public class CursorTD : MonoBehaviour
             if (moveCounter == 4)
             {
                 movementSequence = false;
-                wasdParent.SetActive(false);
+                arrowKeyParent.SetActive(false);
                 moveCounter = 0;
 
                 tutorialPopupParent.SetActive(false);
@@ -544,13 +544,12 @@ public class CursorTD : MonoBehaviour
         //display movement tutorial
         if((movementSequence || towerPlaceSequence) && GameManager.Instance.tutorialRunning)
         {
-            wasdParent.SetActive(true);
-            wKey.GetComponent<TextMeshPro>().color = Color.red;
-            aKey.GetComponent<TextMeshPro>().color = Color.red;
-            sKey.GetComponent<TextMeshPro>().color = Color.red;
-            dKey.GetComponent<TextMeshPro>().color = Color.red;
-            
-            
+            arrowKeyParent.SetActive(true);
+            upKey.GetComponent<TextMeshPro>().color = Color.red;
+            leftKey.GetComponent<TextMeshPro>().color = Color.red;
+            rightKey.GetComponent<TextMeshPro>().color = Color.red;
+
+            downKey.GetComponent<TextMeshPro>().color = Color.red;
         }
         if(towerPlacementMenuSequence && GameManager.Instance.tutorialRunning)
         {
@@ -559,16 +558,15 @@ public class CursorTD : MonoBehaviour
         }
         if (towerBuffSequence && GameManager.Instance.tutorialRunning && tile != null && tile.placedTower != null)
         {
-            arrowKeyParent.SetActive(true);
-            upKey.GetComponent<TextMeshPro>().color = Color.red;
-            leftKey.GetComponent<TextMeshPro>().color = Color.red;
-            rightKey.GetComponent<TextMeshPro>().color = Color.red;
-            
+            wasdParent.SetActive(true);
+            wKey.GetComponent<TextMeshPro>().color = Color.red;
+            aKey.GetComponent<TextMeshPro>().color = Color.red;
+            dKey.GetComponent<TextMeshPro>().color = Color.red;
         }
         if (feverModeSequence && FeverSystem.Instance.feverBarNum == 100 && GameManager.Instance.tutorialRunning)
         {
-            arrowKeyParent.SetActive(true);
-            downKey.GetComponent<TextMeshPro>().color = Color.red;
+            wasdParent.SetActive(true);
+            sKey.GetComponent<TextMeshPro>().color = Color.red;
         }
     }
 

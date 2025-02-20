@@ -51,11 +51,16 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI _speakerName;
     public TextMeshProUGUI _dialogue;
     public Image characterImage;
+    public Image secondCharacterImage;
     public int index;
 
     public DialogueList myDialogue = new DialogueList();
 
-    public GameObject dialogueBox;
+    public GameObject talkingDialogueBox;
+    public GameObject descriptiveDialogueBox;
+    public GameObject previousTalkingDialogueBox;
+    public Color fadedColor;
+    private Sprite previousCharacter;
 
     public bool dialogueFinished = false;
     public GameObject dialogueSystemParent;
@@ -105,7 +110,6 @@ public class DialogueManager : MonoBehaviour
         log.SetActive(false);
 
         currentDialogue = desiredDialogue;
-        dialogueBox.SetActive(true);
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);
         index = 0;
         _speakerName.text = string.Empty;
@@ -215,15 +219,36 @@ public class DialogueManager : MonoBehaviour
 
         if (characterSprite == null)
         {
+            descriptiveDialogueBox.SetActive(true);
+            talkingDialogueBox.SetActive(false);
+            previousTalkingDialogueBox.SetActive(false);
+
             characterImage.sprite = null;
             characterImage.color = Color.clear;
+
+            secondCharacterImage.sprite = null;
+            secondCharacterImage.color = Color.clear;
         }
         else
         {
+            descriptiveDialogueBox.SetActive(false);
+            talkingDialogueBox.SetActive(true);
+
+            if(index != 0 && myDialogue.dialogue[index].name != myDialogue.dialogue[index - 1].name && myDialogue.dialogue[index].name != string.Empty)
+            {
+                secondCharacterImage.sprite = previousCharacter;
+                secondCharacterImage.color = fadedColor;
+
+                if (secondCharacterImage.sprite == null)
+                {
+                    secondCharacterImage.color = Color.clear;
+                }
+            }
 
             characterImage.color = Color.white;
             characterImage.sprite = characterSprite;
         }
+        previousCharacter = characterSprite;
     }
     private void PlayCharacterAudio()
     {

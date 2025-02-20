@@ -4042,6 +4042,11 @@ MonoBehaviour:
   sfxVolumeText: {fileID: 5005697927580911477}
   fullScreenMode: 3
   resolution: {x: 1280, y: 720}
+  settingsSelection: {fileID: 3357313318107346276}
+  gameSettings: {fileID: 2777075213953252934}
+  soundSettings: {fileID: 1096302865687289819}
+  displaySettings: {fileID: 2981493290238783475}
+  constrolsSettings: {fileID: 161006491081406019}
 --- !u!1 &3298415977128542029
 GameObject:
   m_ObjectHideFlags: 0
@@ -5704,7 +5709,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 3506787989133476766}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 8544968186764435429}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -5944,7 +5949,7 @@ MonoBehaviour:
         m_MethodName: SetSelectedGameObject
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6544553188363909557}
+          m_ObjectArgument: {fileID: 4709987582875039168}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -10528,7 +10533,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 592772545691722308}
+    m_SelectOnUp: {fileID: 372761357732457118}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}

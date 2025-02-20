@@ -59,6 +59,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject talkingDialogueBox;
     public GameObject descriptiveDialogueBox;
     public GameObject previousTalkingDialogueBox;
+    public Color fadedColor;
     private Sprite previousCharacter;
 
     public bool dialogueFinished = false;
@@ -236,7 +237,12 @@ public class DialogueManager : MonoBehaviour
             if(index != 0 && myDialogue.dialogue[index].name != myDialogue.dialogue[index - 1].name && myDialogue.dialogue[index].name != string.Empty)
             {
                 secondCharacterImage.sprite = previousCharacter;
-                secondCharacterImage.color = Color.white;
+                secondCharacterImage.color = fadedColor;
+
+                if (secondCharacterImage.sprite == null)
+                {
+                    secondCharacterImage.color = Color.clear;
+                }
             }
 
             characterImage.color = Color.white;

@@ -2893,6 +2893,7 @@ MonoBehaviour:
   talkingDialogueBox: {fileID: 9202114562466465708}
   descriptiveDialogueBox: {fileID: 709971411308650486}
   previousTalkingDialogueBox: {fileID: 1943102943867653088}
+  fadedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   dialogueFinished: 0
   dialogueSystemParent: {fileID: 9088167558878582843}
   textSpeed: 0.05

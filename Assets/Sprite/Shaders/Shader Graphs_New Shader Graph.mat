@@ -54,19 +54,37 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Brightness: 0
+    - _BrightnessAmount: 0
+    - _Contrast: 0
+    - _ContrastAmount: 1
     - _Distortion: 0
     - _DistortionScale: 10
     - _DistortionStrength: 0.02
+    - _Emission: 0
+    - _EmissionMultiplier: 1
+    - _HitEffect: 0
+    - _HitEffectBlend: 0
+    - _HitEffectGlow: 1
+    - _HueShift: 1
+    - _HueShiftAmount: 0
+    - _HueShiftAnimate: 0
+    - _HueShiftAnimateSpeed: 0.5
     - _LineThickness: 0.02
+    - _Negative: 0
+    - _NegativeAmount: 0
     - _Outline: 0
-    - _Pixel_Resolution: 16
+    - _Pixel_Resolution: 1000
     - _Pixelation: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Saturation: 0
+    - _SaturationAmount: 1
     - _Use8Directions: 0
     m_Colors:
     - _Direction: {r: 0, g: 0, b: 0, a: 0}
     - _DistortionScrollDirection: {r: 0.15, g: 0, b: 0, a: 0}
-    - _OutlineColor: {r: 1, g: 0, b: 0, a: 0}
+    - _HitEffectColor: {r: 1, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
     - _UVs: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

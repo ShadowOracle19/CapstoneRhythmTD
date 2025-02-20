@@ -51,11 +51,15 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI _speakerName;
     public TextMeshProUGUI _dialogue;
     public Image characterImage;
+    public Image secondCharacterImage;
     public int index;
 
     public DialogueList myDialogue = new DialogueList();
 
-    public GameObject dialogueBox;
+    public GameObject talkingDialogueBox;
+    public GameObject descriptiveDialogueBox;
+    public GameObject previousTalkingDialogueBox;
+    private Sprite previousCharacter;
 
     public bool dialogueFinished = false;
     public GameObject dialogueSystemParent;
@@ -214,15 +218,31 @@ public class DialogueManager : MonoBehaviour
 
         if (characterSprite == null)
         {
+            descriptiveDialogueBox.SetActive(true);
+            talkingDialogueBox.SetActive(false);
+            previousTalkingDialogueBox.SetActive(false);
+
             characterImage.sprite = null;
             characterImage.color = Color.clear;
+
+            secondCharacterImage.sprite = null;
+            secondCharacterImage.color = Color.clear;
         }
         else
         {
+            descriptiveDialogueBox.SetActive(false);
+            talkingDialogueBox.SetActive(true);
+
+            if(index != 0 && myDialogue.dialogue[index].name != myDialogue.dialogue[index - 1].name && myDialogue.dialogue[index].name != string.Empty)
+            {
+                secondCharacterImage.sprite = previousCharacter;
+                secondCharacterImage.color = Color.white;
+            }
 
             characterImage.color = Color.white;
             characterImage.sprite = characterSprite;
         }
+        previousCharacter = characterSprite;
     }
     private void PlayCharacterAudio()
     {

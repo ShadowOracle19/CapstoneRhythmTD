@@ -135,4 +135,11 @@ public class MenuEventManager : MonoBehaviour
     {
         eventSystem.SetSelectedGameObject(winScreenFirstObject);
     }
+
+    /*
+    void OnSelect(BaseEventData eventData) 
+    {
+
+    }
+    */
 }

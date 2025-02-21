@@ -115,6 +115,9 @@ public class DialogueManager : MonoBehaviour
         _speakerName.text = string.Empty;
         _dialogue.text = string.Empty;
 
+        secondCharacterImage.sprite = null;
+        secondCharacterImage.color = Color.clear;
+
         //MenuEventManager.Instance.DialogueOpen();
 
         typing = StartCoroutine(TypeLine());

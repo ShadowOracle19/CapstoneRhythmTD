@@ -22,6 +22,10 @@ public class ButtonHighlightAnimationManager : MonoBehaviour, ISelectHandler, ID
         silhouetteAnimator = bandSilhouette.GetComponent<Animator>();
         silhouetteSprite = bandSilhouette.GetComponent<Image>();
 
+        //Sprite[] sprites = Resources.LoadAll<Sprite>("Characters/Fayruz");
+
+        //bandSprites.AddRange(sprites);
+
         spriteIndex = Random.Range(0 , bandSprites.Count);
 
         //animationFlipped = true;

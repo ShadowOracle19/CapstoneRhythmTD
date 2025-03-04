@@ -66,12 +66,12 @@ public class Tower : MonoBehaviour
         {
             beatIndicator.SetActive(true);
             beatCircle.SetActive(true);
-            beatIndicator.transform.localScale = Vector3.Lerp(Vector3.one * 1.5f, Vector3.one * 0.75f, beatDuration);
+            //beatIndicator.transform.localScale = Vector3.Lerp(Vector3.one * 1.5f, Vector3.one * 0.75f, beatDuration);
 
-            if (ConductorV2.instance.beatDuration < 0.2)
-            {
-                beatIndicator.transform.localScale = Vector3.one * 1.5f;
-            }
+            //if (ConductorV2.instance.beatDuration < 0.2)
+            //{
+            //    beatIndicator.transform.localScale = Vector3.one * 1.5f;
+            //}
         }
         else
         {

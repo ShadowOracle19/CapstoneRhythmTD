@@ -166,9 +166,8 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
-        bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
-        bullet.GetComponent<Projectile>().damage = currentDamage;
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+        
 
         if(attackBuffed || FeverSystem.Instance.feverModeActive)
             bullet.GetComponent<SpriteRenderer>().color = Color.red;
@@ -202,17 +201,15 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
-        bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
-        bullet.GetComponent<Projectile>().damage = currentDamage;
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+
         bullet.GetComponent<SpriteRenderer>().color = Color.blue;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
         GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet2.GetComponent<Projectile>().bulletRange = towerInfo.range;
-        bullet2.GetComponent<Projectile>().towerFiredFrom = gameObject;
-        bullet2.GetComponent<Projectile>().damage = currentDamage;
+        bullet2.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+
         bullet2.GetComponent<SpriteRenderer>().color = Color.blue;
 
         ConductorV2.instance.triggerEvent.Add(bullet2.GetComponent<Projectile>().trigger);

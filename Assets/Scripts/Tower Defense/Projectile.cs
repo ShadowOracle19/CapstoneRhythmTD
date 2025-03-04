@@ -12,12 +12,22 @@ public class Projectile : MonoBehaviour
     Vector3 nextPosition;
     public int bulletRange = 0;
     int activeTime;
+    public bool piercing;
 
     public int damage = 1;
 
     public GameObject towerFiredFrom;
 
     public UnityEvent trigger;
+
+    public void InitializeProjectile(int range, GameObject firedFrom, int _damage, bool isPiercing)
+    {
+        bulletRange = range;
+        towerFiredFrom = firedFrom;
+        damage = _damage;
+        piercing = isPiercing;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +69,8 @@ public class Projectile : MonoBehaviour
         {
             collision.GetComponent<Enemy>().Damage(damage);
 
-            RemoveProjectile();
+            if(!piercing) RemoveProjectile();
+
         }
     }
     public void RemoveProjectile()

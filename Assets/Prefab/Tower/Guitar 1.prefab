@@ -380,6 +380,8 @@ GameObject:
   - component: {fileID: 1969963013028165710}
   - component: {fileID: 6367522176411443336}
   - component: {fileID: 886765858360855341}
+  - component: {fileID: 8103603545924643400}
+  - component: {fileID: 4596348695406721119}
   m_Layer: 0
   m_Name: Guitar 1
   m_TagString: Tower
@@ -459,6 +461,7 @@ MonoBehaviour:
   towerHover: 0
   beatIndicator: {fileID: 2499767275724444200}
   beatCircle: {fileID: 1205972593765645086}
+  towerAboutToFire: 0
   shieldEffect: {fileID: 1876591643564607199}
   isShielded: 0
   beat: 0
@@ -604,3 +607,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &8103603545924643400
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183850645279424415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80b7bc3e425b3f0409e99951d72f2683, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4596348695406721119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183850645279424415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3d7567aa4e5774586dcf19149c350e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8103603545924643400}
+  currentState: 0

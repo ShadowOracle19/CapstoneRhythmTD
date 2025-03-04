@@ -120,25 +120,30 @@ public class EnemySpawner : MonoBehaviour
             allEnemiesSpawned = true;
             return;
         }
-
-
-        int randSpawn = Random.Range(0, spawnTiles.Count);
-        if (randSpawn == lastRandomSpawn)
+        
+        for (int i = 0; i < currentWaves[waveIndex].numberOfEnemies; i++)
         {
-            randSpawn = Random.Range(0, spawnTiles.Count);
+            int randSpawn = Random.Range(0, spawnTiles.Count);
+            if (randSpawn == lastRandomSpawn)
+            {
+                randSpawn = Random.Range(0, spawnTiles.Count);
+            }
+            GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, spawnTiles[randSpawn].transform.position.y), Quaternion.identity, enemyParent);
+            lastRandomSpawn = randSpawn;
+
+            ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
+
+            currentNumberOfEnemiesSpawned += 1;
+
+            numEnemiesInWave += 1;
         }
-        GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, spawnTiles[randSpawn].transform.position.y), Quaternion.identity, enemyParent);
-        lastRandomSpawn = randSpawn;
-
-        ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
-
-        currentNumberOfEnemiesSpawned += 1;
+        
 
 
         if (GameManager.Instance.tutorialRunning)
             return;
 
-        numEnemiesInWave += 1;
+        
         if(numEnemiesInWave == currentWaves[waveIndex].numberOfEnemies)
         {
             waveIndex += 1;

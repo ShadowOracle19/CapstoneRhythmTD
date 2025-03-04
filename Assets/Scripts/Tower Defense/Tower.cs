@@ -82,50 +82,50 @@ public class Tower : MonoBehaviour
 
     public void OnBeat()
     {
-        switch (towerInfo.attackPattern)
-        {
-            case TowerAttackPattern.everyBeat:
-                towerAboutToFire = true;
-                Fire();
-                break;
-            case TowerAttackPattern.everyMeasure:
-                beat += 1;
-                if(beat == 4)
-                {
-                    Fire();
-                    beat = 1;
-                    towerAboutToFire = false;
-                }
-                else if(beat == 3)
-                {
-                    towerAboutToFire = true;
-                }
-                break;
-            case TowerAttackPattern.everyOtherBeat:
-                everyOtherBeat = !everyOtherBeat;
-                towerAboutToFire = !everyOtherBeat; 
-                if(everyOtherBeat)
-                {
-                    Fire();
-                }
-                break;
-            case TowerAttackPattern.everyBeatButOne:
-                beat += 1;
-                if (beat < 4)
-                {
-                    towerAboutToFire = true;
-                    Fire();
+        //switch (towerInfo.attackPattern)
+        //{
+        //    case TowerAttackPattern.everyBeat:
+        //        towerAboutToFire = true;
+        //        Fire();
+        //        break;
+        //    case TowerAttackPattern.everyMeasure:
+        //        beat += 1;
+        //        if(beat == 4)
+        //        {
+        //            Fire();
+        //            beat = 1;
+        //            towerAboutToFire = false;
+        //        }
+        //        else if(beat == 3)
+        //        {
+        //            towerAboutToFire = true;
+        //        }
+        //        break;
+        //    case TowerAttackPattern.everyOtherBeat:
+        //        everyOtherBeat = !everyOtherBeat;
+        //        towerAboutToFire = !everyOtherBeat; 
+        //        if(everyOtherBeat)
+        //        {
+        //            Fire();
+        //        }
+        //        break;
+        //    case TowerAttackPattern.everyBeatButOne:
+        //        beat += 1;
+        //        if (beat < 4)
+        //        {
+        //            towerAboutToFire = true;
+        //            Fire();
                     
-                }
-                else if(beat == 4)
-                {
-                    towerAboutToFire = false;
-                    beat = 1;
-                }
-                break;
-            default:
-                break;
-        }
+        //        }
+        //        else if(beat == 4)
+        //        {
+        //            towerAboutToFire = false;
+        //            beat = 1;
+        //        }
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
 

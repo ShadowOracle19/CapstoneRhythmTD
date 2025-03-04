@@ -96,11 +96,8 @@ public class TowerManager : MonoBehaviour
 
     public AudioSource audioSource;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Tower")]
+    [SerializeField] private List<Tower> towerList;
 
     // Update is called once per frame
     void Update()
@@ -314,70 +311,82 @@ public class TowerManager : MonoBehaviour
 
     public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type, _BeatResult result)
     {
-       
-
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<SpriteFollowMouse>().enabled = false;
         _tower.GetComponent<BoxCollider2D>().enabled = true;
+
         _tower.transform.position = tilePosition;
+
         tile.placedTower = _tower;
-        _tower.GetComponent<Tower>().rotateStarted = true;
-        _tower.GetComponent<Tower>().connectedTile = tile;
-        ConductorV2.instance.triggerEvent.Add(_tower.GetComponent<Tower>().trigger);
+
+        Tower placingTower = _tower.GetComponent<Tower>();
+        placingTower.rotateStarted = true;
+        placingTower.connectedTile = tile;
         audioSource.Play();
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 
         switch (result)
         {
             case _BeatResult.miss:
-                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage;
+                placingTower.currentDamage = placingTower.towerInfo.damage;
 
 
                 break;
             case _BeatResult.early:
-                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage + 1;
+                placingTower.currentDamage = placingTower.towerInfo.damage + 1;
                 break;
             case _BeatResult.perfect:
-                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage + 2;
+                placingTower.currentDamage = placingTower.towerInfo.damage + 2;
                 break;
             default:
                 break;
         }
-        _tower.GetComponent<Tower>().tempDamageHolder = _tower.GetComponent<Tower>().currentDamage;
+        placingTower.tempDamageHolder = placingTower.currentDamage;
+
+        towerList.Add(placingTower);
 
         switch (type)
         {
             case InstrumentType.Drums:
+
                 ConductorV2.instance.drums.volume += 0.05f;
                 ConductorV2.instance.drums.volume = Mathf.Clamp(ConductorV2.instance.drums.volume, 0, 0.5f);
+
                 drumCooldown = true;
-                drumCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                drumCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
                 drumCooldownTime = 0;
                 break;
 
             case InstrumentType.Guitar:
+
                 ConductorV2.instance.guitarH.volume += 0.05f;
                 ConductorV2.instance.guitarM.volume += 0.05f;
+
                 ConductorV2.instance.guitarH.volume = Mathf.Clamp(ConductorV2.instance.guitarH.volume, 0, 0.5f);
                 ConductorV2.instance.guitarM.volume = Mathf.Clamp(ConductorV2.instance.guitarM.volume, 0, 0.5f);
+
                 guitarCooldown = true;
-                guitarCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                guitarCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
                 guitarCooldownTime = 0;
                 break;
 
             case InstrumentType.Bass:
+
                 ConductorV2.instance.bass.volume += 0.05f;
                 ConductorV2.instance.bass.volume = Mathf.Clamp(ConductorV2.instance.bass.volume, 0, 0.5f);
+
                 bassCooldown = true;
-                bassCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                bassCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
                 bassCooldownTime = 0;
                 break;
 
             case InstrumentType.Piano:
+
                 ConductorV2.instance.piano.volume += 0.05f;
                 ConductorV2.instance.piano.volume = Mathf.Clamp(ConductorV2.instance.piano.volume, 0, 0.5f);
+
                 pianoCooldown = true;
-                pianoCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                pianoCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
                 pianoCooldownTime = 0;
                 break;
 
@@ -396,4 +405,71 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    public void ResetTowerManager()
+    {
+        drumCooldown = false;
+        bassCooldown = false;
+        pianoCooldown = false;
+        guitarCooldown = false;
+
+        drumCooldownBack = false;
+        bassCooldownBack = false;
+        pianoCooldownBack = false;
+        guitarCooldownBack = false;
+
+        towerList.Clear();
+    }
+
+    public void FireTowers()
+    {
+        if (towerList.Count == 0) return;
+
+        foreach (Tower tower in towerList)
+        {
+            switch (tower.towerInfo.attackPattern)
+            {
+                case TowerAttackPattern.everyBeat:
+                    tower.towerAboutToFire = true;
+                    tower.Fire();
+                    break;
+                case TowerAttackPattern.everyMeasure:
+                    tower.beat += 1;
+                    if (tower.beat == 4)
+                    {
+                        tower.Fire();
+                        tower.beat = 1;
+                        tower.towerAboutToFire = false;
+                    }
+                    else if (tower.beat == 3)
+                    {
+                        tower.towerAboutToFire = true;
+                    }
+                    break;
+                case TowerAttackPattern.everyOtherBeat:
+                    tower.everyOtherBeat = !tower.everyOtherBeat;
+                    tower.towerAboutToFire = !tower.everyOtherBeat;
+                    if (tower.everyOtherBeat)
+                    {
+                        tower.Fire();
+                    }
+                    break;
+                case TowerAttackPattern.everyBeatButOne:
+                    tower.beat += 1;
+                    if (tower.beat < 4)
+                    {
+                        tower.towerAboutToFire = true;
+                        tower.Fire();
+
+                    }
+                    else if (tower.beat == 4)
+                    {
+                        tower.towerAboutToFire = false;
+                        tower.beat = 1;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

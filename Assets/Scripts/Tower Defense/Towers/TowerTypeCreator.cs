@@ -34,7 +34,7 @@ public class TowerTypeCreator : ScriptableObject
 
 public enum TowerAttackPattern
 {
-    everyBeat, everyMeasure, everyOtherBeat, everyBeatButOne
+    everyBeat, everyMeasure, everyOtherBeat, everyBeatButOne, none
 }
 
 public enum TowerResourceCost

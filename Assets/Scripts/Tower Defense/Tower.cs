@@ -247,6 +247,7 @@ public class Tower : MonoBehaviour
                 break;
         }
         ConductorV2.instance.triggerEvent.Remove(trigger);
+        TowerManager.Instance.towers.Remove(gameObject);
         connectedTile.placedTower = null;
         Destroy(gameObject);
     }

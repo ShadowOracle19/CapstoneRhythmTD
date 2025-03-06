@@ -484,8 +484,13 @@ public class TowerManager : MonoBehaviour
     {
         if (towerList.Count == 0) return;
 
-        foreach (Tower tower in towerList)
+        foreach (Tower tower in towerList.ToArray())
         {
+            if(tower == null)
+            {
+                towerList.Remove(tower);
+                continue;
+            }
             switch (tower.towerInfo.attackPattern)
             {
                 case TowerAttackPattern.everyBeat:

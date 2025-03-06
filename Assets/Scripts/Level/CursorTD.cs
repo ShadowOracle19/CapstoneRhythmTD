@@ -451,7 +451,7 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
+                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
                 return;
             }
 
@@ -470,8 +470,8 @@ public class CursorTD : MonoBehaviour
 
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
 
+                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
                 return;
             }
 

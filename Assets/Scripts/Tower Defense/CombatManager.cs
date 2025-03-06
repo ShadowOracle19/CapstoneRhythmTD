@@ -126,6 +126,7 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.placementMenu.SetActive(false);
 
         TowerManager.Instance.ResetTowerManager();
+        TowerManager.Instance.SetupResourceBars();
 
         CursorTD.Instance.tutorialParent.SetActive(false);
         CursorTD.Instance.tutorialPopupParent.SetActive(false);

@@ -14,6 +14,7 @@ public class TowerTypeCreator : ScriptableObject
     [Header("Tower Stats")]
     public InstrumentType type;
     public int resourceCost = 0;
+    public TowerResourceCost cost;
     [Tooltip("In Beats")]
     public int cooldownTime = 0;
     public int towerHealth = 0;
@@ -34,4 +35,9 @@ public class TowerTypeCreator : ScriptableObject
 public enum TowerAttackPattern
 {
     everyBeat, everyMeasure, everyOtherBeat, everyBeatButOne
+}
+
+public enum TowerResourceCost
+{
+    one, two, three, four
 }

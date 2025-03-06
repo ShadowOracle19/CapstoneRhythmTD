@@ -174,15 +174,8 @@ public class GameManager : MonoBehaviour
         CursorTD.Instance.towerSwap = false;
         CursorTD.Instance.placementMenu.SetActive(false);
 
-        TowerManager.Instance.drumCooldown = false;
-        TowerManager.Instance.bassCooldown = false;
-        TowerManager.Instance.pianoCooldown = false;
-        TowerManager.Instance.guitarCooldown = false;
-
-        TowerManager.Instance.drumCooldownBack = false;
-        TowerManager.Instance.bassCooldownBack = false;
-        TowerManager.Instance.pianoCooldownBack = false;
-        TowerManager.Instance.guitarCooldownBack = false;
+        TowerManager.Instance.ResetTowerManager();
+        TowerManager.Instance.SetupResourceBars();
 
 
         ConductorV2.instance.CountUsIn(80);

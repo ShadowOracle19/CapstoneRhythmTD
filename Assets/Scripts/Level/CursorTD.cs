@@ -257,6 +257,7 @@ public class CursorTD : MonoBehaviour
 
     public void InitializeCursor()
     {
+        isMoving = false;
         gameObject.transform.position = new Vector3(-2.5f, -0.54f, 0);
 
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];

@@ -68,8 +68,8 @@ public class CombatManager : MonoBehaviour
     public GameObject waveCounter;
     public GameObject combo;
     public GameObject knockEmDead;
-    
-           
+
+    public GameObject grid;
 
     // Start is called before the first frame update
     void Start()
@@ -183,6 +183,12 @@ public class CombatManager : MonoBehaviour
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
+        for (int i = 0; i < grid.transform.childCount; i++){
+            if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower == null)
+            {
+                print("foiaheiaof");
+            }
+        }
 
         
 

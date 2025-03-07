@@ -93,9 +93,12 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
+
         currentEncounter = encounter;
+
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
-        ConductorV2.instance.CountUsIn(currentEncounter.encounterBPM);
+
+        ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
 
 
         allEnemiesSpawned = false;
@@ -131,9 +134,6 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.tutorialParent.SetActive(false);
         CursorTD.Instance.tutorialPopupParent.SetActive(false);
 
-        
-
-
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -156,6 +156,7 @@ public class CombatManager : MonoBehaviour
         }
         enemySpawners.startOnce = false;
         CursorTD.Instance.pauseMovement = true;
+        CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         GameManager.Instance.menuMusic.Play();

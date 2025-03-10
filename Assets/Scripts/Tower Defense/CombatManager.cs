@@ -51,11 +51,6 @@ public class CombatManager : MonoBehaviour
     public Slider resourceSlider;
     public TextMeshProUGUI resourceText;
 
-    [Header("beat indicator")]
-    public GameObject beatPrefab;
-    public Transform beatParent;
-    public Transform beatSpawnPoint;
-    public Transform beatEndPoint;
 
     [Header("Combat UI")]
     public GameObject enemyTimerObject;
@@ -93,10 +88,10 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
+        GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
 
         currentEncounter = encounter;
 
-        GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
 
         ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
 
@@ -117,22 +112,11 @@ public class CombatManager : MonoBehaviour
         enemyTimer = enemyTimerMax;
         enemiesSpawnIn.gameObject.SetActive(true);
 
-        //Conductor.Instance.bass.volume = 0;
-        //Conductor.Instance.piano.volume = 0;
-        //Conductor.Instance.guitarH.volume = 0;
-        //Conductor.Instance.guitarM.volume = 0;
-        //Conductor.Instance.drums.volume = 0;
 
         CursorTD.Instance.InitializeCursor();
-        CursorTD.Instance.pauseMovement = false;
-        CursorTD.Instance.towerSwap = false;
-        CursorTD.Instance.placementMenu.SetActive(false);
 
         TowerManager.Instance.ResetTowerManager();
         TowerManager.Instance.SetupResourceBars();
-
-        CursorTD.Instance.tutorialParent.SetActive(false);
-        CursorTD.Instance.tutorialPopupParent.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -249,11 +233,4 @@ public class CombatManager : MonoBehaviour
         resourceNum += 1;
     }
      
-    public void SpawnBeat()
-    {
-        if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused) return;
-
-        GameObject beat = Instantiate(beatPrefab, beatSpawnPoint.position, Quaternion.identity, beatParent);
-        beat.GetComponent<BeatMover>().endPos = beatEndPoint;
-    }
 }

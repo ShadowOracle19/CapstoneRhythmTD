@@ -218,6 +218,13 @@ public class DialogueManager : MonoBehaviour
             //dialogue if its going into a combat
             if(GameManager.Instance.encounterRunning)
             {
+                if(GameManager.Instance.tutorialRunning)
+                {
+                    GameManager.Instance.dialogueRoot.SetActive(false);
+                    GameManager.Instance.LoadTutorial();
+                    return;
+                }
+                Debug.Log("Does this happen");
                 GameManager.Instance.combatRoot.SetActive(true);
                 GameManager.Instance.combatRunning = true;
                 CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
@@ -339,6 +346,12 @@ public class DialogueManager : MonoBehaviour
         //dialogue if its going into a combat
         if (GameManager.Instance.encounterRunning)
         {
+            if (GameManager.Instance.tutorialRunning)
+            {
+                GameManager.Instance.dialogueRoot.SetActive(false);
+                GameManager.Instance.LoadTutorial();
+                return;
+            }
             GameManager.Instance.combatRoot.SetActive(true);
             GameManager.Instance.combatRunning = true;
             CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);

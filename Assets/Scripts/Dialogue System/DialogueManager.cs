@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -84,6 +86,9 @@ public class DialogueManager : MonoBehaviour
     
     public AudioSource audioSource;
 
+    private int totalVisibleCharacters;
+    private int visibleCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -115,6 +120,9 @@ public class DialogueManager : MonoBehaviour
         _speakerName.text = string.Empty;
         _dialogue.text = string.Empty;
 
+        secondCharacterImage.sprite = null;
+        secondCharacterImage.color = Color.clear;
+
         //MenuEventManager.Instance.DialogueOpen();
 
         typing = StartCoroutine(TypeLine());
@@ -123,21 +131,56 @@ public class DialogueManager : MonoBehaviour
     IEnumerator TypeLine()
     {
         string dialogueText = myDialogue.dialogue[index].text;
+
         LoadCharacterSprite();
+
         _speakerName.text = myDialogue.dialogue[index].name;
-        for (int i = 0; i < dialogueText.Length; i++)
+
+        _dialogue.text = dialogueText;
+
+        bool typeText = true;
+
+        _dialogue.ForceMeshUpdate();
+        
+        TMP_TextInfo textInfo = _dialogue.textInfo;
+
+        totalVisibleCharacters = textInfo.characterCount;
+        visibleCount = 0;
+
+        while (typeText)
         {
             while (pauseDialogue)
             {
                 yield return new WaitForSeconds(GameManager.Instance.textSpeed);
             }
-            if (dialogueText[i] == '<')
-                _dialogue.text += GetCompleteRichTextTag(ref i);
-            else
-                _dialogue.text += dialogueText[i];
+
+            if (visibleCount > totalVisibleCharacters)
+            {
+                yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+                //visibleCount = 0;
+                typeText = false;
+            }
+
+            _dialogue.maxVisibleCharacters = visibleCount;
+
             PlayCharacterAudio();
+            visibleCount += 1; 
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
+
+        //for (int i = 0; i < dialogueText.Length; i++)
+        //{
+        //    while (pauseDialogue)
+        //    {
+        //        yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+        //    }
+        //    if (dialogueText[i] == '<')
+        //        _dialogue.text += GetCompleteRichTextTag(ref i);
+        //    else
+        //        _dialogue.text += dialogueText[i];
+        //    PlayCharacterAudio();
+        //    yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+        //}
 
         //foreach (char c in dialogueText)
         //{
@@ -162,7 +205,7 @@ public class DialogueManager : MonoBehaviour
         _newLog.GetComponent<DialogueLogEntry>().characterName.text = _speakerName.text;
         _newLog.GetComponent<DialogueLogEntry>().dialogue.text = _dialogue.text;
 
-        if (index < myDialogue.dialogue.Length - 1)
+        if (index < myDialogue.dialogue.Length - 1)//start next line
         {
             index++;
             _dialogue.text = string.Empty;
@@ -269,14 +312,15 @@ public class DialogueManager : MonoBehaviour
 
     public void FinishLine()
     {
-        if(_dialogue.text == myDialogue.dialogue[index].text)
+        if(visibleCount >= totalVisibleCharacters)
         {
             NextLine();
         }
         else
         {
             StopCoroutine(typing);
-            _dialogue.text = myDialogue.dialogue[index].text;
+            visibleCount = totalVisibleCharacters;
+            _dialogue.maxVisibleCharacters = visibleCount;
         }
     }
 

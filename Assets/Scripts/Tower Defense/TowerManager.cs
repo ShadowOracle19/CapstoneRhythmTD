@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class TowerManager : MonoBehaviour
@@ -82,25 +83,39 @@ public class TowerManager : MonoBehaviour
 
 
     [Header("Tower Cost Labels")]
-    public TextMeshProUGUI tower1Cost;
-    public TextMeshProUGUI tower2Cost;
-    public TextMeshProUGUI tower3Cost;
-    public TextMeshProUGUI tower4Cost;
+    public Sprite oneBar;
+    public Sprite twoBar;
+    public Sprite threeBar;
+    public Sprite fourBar;
 
-    public TextMeshPro towerCost1PM;
-    public TextMeshPro towerCost2PM;
-    public TextMeshPro towerCost3PM;
-    public TextMeshPro towerCost4PM;
+    public Slider tower1Slider;
+    public Image tower1ResourceSprite;
+
+    public Slider tower2Slider;
+    public Image tower2ResourceSprite;
+
+    public Slider tower3Slider;
+    public Image tower3ResourceSprite;
+
+    public Slider tower4Slider;
+    public Image tower4ResourceSprite;
+
+    //public TextMeshProUGUI tower1Cost;
+    //public TextMeshProUGUI tower2Cost;
+    //public TextMeshProUGUI tower3Cost;
+    //public TextMeshProUGUI tower4Cost;
+
+    //public TextMeshPro towerCost1PM;
+    //public TextMeshPro towerCost2PM;
+    //public TextMeshPro towerCost3PM;
+    //public TextMeshPro towerCost4PM;
 
     public bool towerSwap;
 
     public AudioSource audioSource;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Tower")]
+    [SerializeField] private List<Tower> towerList;
 
     // Update is called once per frame
     void Update()
@@ -108,32 +123,74 @@ public class TowerManager : MonoBehaviour
         Cooldown();
     }
 
+    public void SetupResourceBars()
+    {
+        SetResourceBarSprite(towers[0].GetComponent<Tower>(), tower1Slider, tower1ResourceSprite);
+        SetResourceBarSprite(towers[1].GetComponent<Tower>(), tower2Slider, tower2ResourceSprite);
+        SetResourceBarSprite(towers[2].GetComponent<Tower>(), tower3Slider, tower3ResourceSprite);
+        SetResourceBarSprite(towers[3].GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
+    }
+
+    public void SetResourceBarSprite(Tower tower, Slider resourceSlider, Image resourceImage)
+    {
+        switch (tower.towerInfo.cost)
+        {
+            case TowerResourceCost.one:
+                resourceSlider.maxValue = 25;
+                resourceImage.sprite = oneBar;
+                break;
+
+            case TowerResourceCost.two:
+                resourceSlider.maxValue = 50;
+                resourceImage.sprite = twoBar;
+                break;
+
+            case TowerResourceCost.three:
+                resourceSlider.maxValue = 75;
+                resourceImage.sprite = threeBar;
+                break;
+
+            case TowerResourceCost.four:
+                resourceSlider.maxValue = 100;
+                resourceImage.sprite = fourBar;
+                break;
+
+            default:
+                break;
+        }
+    }
+
     public void TowerCost()
     {
-        if (!towerSwap)
-        {
-            tower1Cost.text = towers[0].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            tower2Cost.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            tower3Cost.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            tower4Cost.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        tower1Slider.value = CombatManager.Instance.resourceNum;
+        tower2Slider.value = CombatManager.Instance.resourceNum;
+        tower3Slider.value = CombatManager.Instance.resourceNum;
+        tower4Slider.value = CombatManager.Instance.resourceNum;
 
-            towerCost1PM.text = towers[0].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            towerCost2PM.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            towerCost3PM.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            towerCost4PM.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        }
-        else
-        {
-            tower1Cost.text = towers[4].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            tower2Cost.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            tower3Cost.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            tower4Cost.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //if (!towerSwap)
+        //{
+        //    tower1Cost.text = towers[0].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    tower2Cost.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    tower3Cost.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    tower4Cost.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
 
-            towerCost1PM.text = towers[4].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            towerCost2PM.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            towerCost3PM.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-            towerCost4PM.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        }
+        //    towerCost1PM.text = towers[0].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    towerCost2PM.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    towerCost3PM.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    towerCost4PM.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //}
+        //else
+        //{
+        //    tower1Cost.text = towers[4].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    tower2Cost.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    tower3Cost.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    tower4Cost.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+
+        //    towerCost1PM.text = towers[4].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    towerCost2PM.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    towerCost3PM.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //    towerCost4PM.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
+        //}
         
     }
 
@@ -273,22 +330,22 @@ public class TowerManager : MonoBehaviour
 
     public void SwapTowers()
     {
-        (drumCooldown, drumCooldownBack) = (drumCooldownBack, drumCooldown);
-        (bassCooldown, bassCooldownBack) = (bassCooldownBack, bassCooldown);
-        (guitarCooldown, guitarCooldownBack) = (guitarCooldownBack, guitarCooldown);
-        (pianoCooldown, pianoCooldownBack) = (pianoCooldownBack, pianoCooldown);
+        //(drumCooldown, drumCooldownBack) = (drumCooldownBack, drumCooldown);
+        //(bassCooldown, bassCooldownBack) = (bassCooldownBack, bassCooldown);
+        //(guitarCooldown, guitarCooldownBack) = (guitarCooldownBack, guitarCooldown);
+        //(pianoCooldown, pianoCooldownBack) = (pianoCooldownBack, pianoCooldown);
 
-        (drumCooldownTime, drumCooldownTimeBack) = (drumCooldownTimeBack, drumCooldownTime);
-        (bassCooldownTime, bassCooldownTimeBack) = (bassCooldownTimeBack, bassCooldownTime);
-        (guitarCooldownTime, guitarCooldownTimeBack) = (guitarCooldownTimeBack, guitarCooldownTime);
-        (pianoCooldownTime, pianoCooldownTimeBack) = (pianoCooldownTimeBack, pianoCooldownTime);
+        //(drumCooldownTime, drumCooldownTimeBack) = (drumCooldownTimeBack, drumCooldownTime);
+        //(bassCooldownTime, bassCooldownTimeBack) = (bassCooldownTimeBack, bassCooldownTime);
+        //(guitarCooldownTime, guitarCooldownTimeBack) = (guitarCooldownTimeBack, guitarCooldownTime);
+        //(pianoCooldownTime, pianoCooldownTimeBack) = (pianoCooldownTimeBack, pianoCooldownTime);
 
-        (drumCooldownTimeRemaining, drumCooldownTimeRemainingBack) = (drumCooldownTimeRemainingBack, drumCooldownTimeRemaining);
-        (bassCooldownTimeRemaining, bassCooldownTimeRemainingBack) = (bassCooldownTimeRemainingBack, bassCooldownTimeRemaining);
-        (guitarCooldownTimeRemaining, guitarCooldownTimeRemainingBack) = (guitarCooldownTimeRemainingBack, guitarCooldownTimeRemaining);
-        (pianoCooldownTimeRemaining, pianoCooldownTimeRemainingBack) = (pianoCooldownTimeRemainingBack, pianoCooldownTimeRemaining);
+        //(drumCooldownTimeRemaining, drumCooldownTimeRemainingBack) = (drumCooldownTimeRemainingBack, drumCooldownTimeRemaining);
+        //(bassCooldownTimeRemaining, bassCooldownTimeRemainingBack) = (bassCooldownTimeRemainingBack, bassCooldownTimeRemaining);
+        //(guitarCooldownTimeRemaining, guitarCooldownTimeRemainingBack) = (guitarCooldownTimeRemainingBack, guitarCooldownTimeRemaining);
+        //(pianoCooldownTimeRemaining, pianoCooldownTimeRemainingBack) = (pianoCooldownTimeRemainingBack, pianoCooldownTimeRemaining);
 
-        towerSwap = !towerSwap;
+        //towerSwap = !towerSwap;
     }
 
     public bool CheckIfOnCoolDown(InstrumentType type)
@@ -314,70 +371,82 @@ public class TowerManager : MonoBehaviour
 
     public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type, _BeatResult result)
     {
-       
-
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<SpriteFollowMouse>().enabled = false;
         _tower.GetComponent<BoxCollider2D>().enabled = true;
+
         _tower.transform.position = tilePosition;
+
         tile.placedTower = _tower;
-        _tower.GetComponent<Tower>().rotateStarted = true;
-        _tower.GetComponent<Tower>().connectedTile = tile;
-        ConductorV2.instance.triggerEvent.Add(_tower.GetComponent<Tower>().trigger);
+
+        Tower placingTower = _tower.GetComponent<Tower>();
+        placingTower.rotateStarted = true;
+        placingTower.connectedTile = tile;
         audioSource.Play();
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 
         switch (result)
         {
             case _BeatResult.miss:
-                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage;
+                placingTower.currentDamage = placingTower.towerInfo.damage;
 
 
                 break;
             case _BeatResult.early:
-                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage + 1;
+                placingTower.currentDamage = placingTower.towerInfo.damage + 1;
                 break;
             case _BeatResult.perfect:
-                _tower.GetComponent<Tower>().currentDamage = _tower.GetComponent<Tower>().towerInfo.damage + 2;
+                placingTower.currentDamage = placingTower.towerInfo.damage + 2;
                 break;
             default:
                 break;
         }
-        _tower.GetComponent<Tower>().tempDamageHolder = _tower.GetComponent<Tower>().currentDamage;
+        placingTower.tempDamageHolder = placingTower.currentDamage;
+
+        towerList.Add(placingTower);
 
         switch (type)
         {
             case InstrumentType.Drums:
+
                 ConductorV2.instance.drums.volume += 0.05f;
                 ConductorV2.instance.drums.volume = Mathf.Clamp(ConductorV2.instance.drums.volume, 0, 0.5f);
+
                 drumCooldown = true;
-                drumCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                drumCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
                 drumCooldownTime = 0;
                 break;
 
             case InstrumentType.Guitar:
+
                 ConductorV2.instance.guitarH.volume += 0.05f;
                 ConductorV2.instance.guitarM.volume += 0.05f;
+
                 ConductorV2.instance.guitarH.volume = Mathf.Clamp(ConductorV2.instance.guitarH.volume, 0, 0.5f);
                 ConductorV2.instance.guitarM.volume = Mathf.Clamp(ConductorV2.instance.guitarM.volume, 0, 0.5f);
+
                 guitarCooldown = true;
-                guitarCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                guitarCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
                 guitarCooldownTime = 0;
                 break;
 
             case InstrumentType.Bass:
+
                 ConductorV2.instance.bass.volume += 0.05f;
                 ConductorV2.instance.bass.volume = Mathf.Clamp(ConductorV2.instance.bass.volume, 0, 0.5f);
+
                 bassCooldown = true;
-                bassCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                bassCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
                 bassCooldownTime = 0;
                 break;
 
             case InstrumentType.Piano:
+
                 ConductorV2.instance.piano.volume += 0.05f;
                 ConductorV2.instance.piano.volume = Mathf.Clamp(ConductorV2.instance.piano.volume, 0, 0.5f);
+
                 pianoCooldown = true;
-                pianoCooldownTimeRemaining = tower.GetComponent<Tower>().towerInfo.cooldownTime;
+                pianoCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
                 pianoCooldownTime = 0;
                 break;
 
@@ -396,4 +465,76 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    public void ResetTowerManager()
+    {
+        drumCooldown = false;
+        bassCooldown = false;
+        pianoCooldown = false;
+        guitarCooldown = false;
+
+        drumCooldownBack = false;
+        bassCooldownBack = false;
+        pianoCooldownBack = false;
+        guitarCooldownBack = false;
+
+        towerList.Clear();
+    }
+
+    public void FireTowers()
+    {
+        if (towerList.Count == 0) return;
+
+        foreach (Tower tower in towerList.ToArray())
+        {
+            if(tower == null)
+            {
+                towerList.Remove(tower);
+                continue;
+            }
+            switch (tower.towerInfo.attackPattern)
+            {
+                case TowerAttackPattern.everyBeat:
+                    tower.towerAboutToFire = true;
+                    tower.Fire();
+                    break;
+                case TowerAttackPattern.everyMeasure:
+                    tower.beat += 1;
+                    if (tower.beat == 4)
+                    {
+                        tower.Fire();
+                        tower.beat = 1;
+                        tower.towerAboutToFire = false;
+                    }
+                    else if (tower.beat == 3)
+                    {
+                        tower.towerAboutToFire = true;
+                    }
+                    break;
+                case TowerAttackPattern.everyOtherBeat:
+                    tower.everyOtherBeat = !tower.everyOtherBeat;
+                    tower.towerAboutToFire = !tower.everyOtherBeat;
+                    if (tower.everyOtherBeat)
+                    {
+                        tower.Fire();
+                    }
+                    break;
+                case TowerAttackPattern.everyBeatButOne:
+                    tower.beat += 1;
+                    if (tower.beat < 4)
+                    {
+                        tower.towerAboutToFire = true;
+                        tower.Fire();
+
+                    }
+                    else if (tower.beat == 4)
+                    {
+                        tower.towerAboutToFire = false;
+                        tower.beat = 1;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

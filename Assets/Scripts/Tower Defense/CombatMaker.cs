@@ -6,7 +6,7 @@ using UnityEngine;
 public class CombatMaker : ScriptableObject
 {
     
-    public int encounterBPM = 0;
+    public DynamicSongCreator dynamicSong;
     public List<Wave> waves = new List<Wave>();
 }
 

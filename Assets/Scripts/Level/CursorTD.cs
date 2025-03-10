@@ -3,6 +3,7 @@ using Pathfinding.Ionic.Zip;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CursorTD : MonoBehaviour
 {
@@ -40,7 +41,9 @@ public class CursorTD : MonoBehaviour
     private bool towerSelectMenuOpened = false;
     private bool inputOnce = false;
     private bool destructMode = false;
+
     public Tile tile;
+
     public GameObject placementMenu;
     public GameObject SlotW;
     public GameObject SlotA;
@@ -90,7 +93,18 @@ public class CursorTD : MonoBehaviour
 
     public bool beatIsHit = false;
 
+    [Header("Resource Bar")]
+    public Slider tower1Slider;
+    public Image tower1ResourceSprite;
 
+    public Slider tower2Slider;
+    public Image tower2ResourceSprite;
+
+    public Slider tower3Slider;
+    public Image tower3ResourceSprite;
+
+    public Slider tower4Slider;
+    public Image tower4ResourceSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +131,7 @@ public class CursorTD : MonoBehaviour
             tile.placedTower.GetComponent<Tower>().towerHover = true;
         }
 
+        PlacementResourceBar();
 
         #region tutorial
         if (GameManager.Instance.tutorialRunning) //reset color of keys
@@ -145,6 +160,14 @@ public class CursorTD : MonoBehaviour
         #endregion
     }
 
+    public void PlacementResourceBar()
+    {
+        tower1Slider.value = CombatManager.Instance.resourceNum;
+        tower2Slider.value = CombatManager.Instance.resourceNum;
+        tower3Slider.value = CombatManager.Instance.resourceNum;
+        tower4Slider.value = CombatManager.Instance.resourceNum;
+    }
+
     public void HandleFeverModeInput()
     {
         if (GameManager.Instance.tutorialRunning && !feverModeSequence)
@@ -157,41 +180,41 @@ public class CursorTD : MonoBehaviour
 
     public void SwapTowers()
     {
-        towerSwap = !towerSwap;
-        if (towerSwap)
-        {
-            SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[4];
-            SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[4].GetComponent<Tower>().towerInfo.towerImage;
+        //towerSwap = !towerSwap;
+        //if (towerSwap)
+        //{
+        //    SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[4];
+        //    SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[4].GetComponent<Tower>().towerInfo.towerImage;
 
-            SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[5];
-            SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[5].GetComponent<Tower>().towerInfo.towerImage;
-
-
-            SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[6];
-            SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[6].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[5];
+        //    SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[5].GetComponent<Tower>().towerInfo.towerImage;
 
 
-            SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[7];
-            SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[7].GetComponent<Tower>().towerInfo.towerImage;
-        }
-        else
-        {
-            SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
-            SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
-
-            SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
-            SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[6];
+        //    SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[6].GetComponent<Tower>().towerInfo.towerImage;
 
 
-            SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
-            SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[7];
+        //    SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[7].GetComponent<Tower>().towerInfo.towerImage;
+        //}
+        //else
+        //{
+        //    SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
+        //    SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+
+        //    SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
+        //    SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
 
 
-            SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
-            SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
-        }
+        //    SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
+        //    SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
 
-        TowerManager.Instance.SwapTowers();
+
+        //    SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
+        //    SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
+        //}
+
+        //TowerManager.Instance.SwapTowers();
         
         
     }
@@ -234,21 +257,27 @@ public class CursorTD : MonoBehaviour
 
     public void InitializeCursor()
     {
+        isMoving = false;
         gameObject.transform.position = new Vector3(-2.5f, -0.54f, 0);
 
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
         SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[0].GetComponent<Tower>(), tower1Slider, tower1ResourceSprite);
+
 
         SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
         SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[1].GetComponent<Tower>(), tower2Slider, tower2ResourceSprite);
 
 
         SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
         SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[2].GetComponent<Tower>(), tower3Slider, tower3ResourceSprite);
 
 
         SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
         SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[3].GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
 
     }
 
@@ -423,7 +452,7 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
+                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
                 return;
             }
 
@@ -442,8 +471,8 @@ public class CursorTD : MonoBehaviour
 
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
 
+                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
                 return;
             }
 

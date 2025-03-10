@@ -15,7 +15,6 @@ public class EncounterCreator : ScriptableObject
 
     [Header("Show Case Level")]
     public bool isShowcase = false;
-    public EncounterCreator level1;
-    public EncounterCreator level2;
+    public EncounterCreator nextEncounter;
 
 }

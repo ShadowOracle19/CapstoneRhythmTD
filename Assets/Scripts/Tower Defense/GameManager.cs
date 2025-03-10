@@ -282,6 +282,8 @@ public class GameManager : MonoBehaviour
         encounterRunning = false;
         ConductorV2.instance.StopMusic();
 
+        CursorTD.Instance.tutorialPopupParent.SetActive(false);
+
         if (currentEncounter.endDialogue == null)
         {
             winScreen.SetActive(true);
@@ -304,11 +306,19 @@ public class GameManager : MonoBehaviour
         encounterRunning = false;
         //Cursor.lockState = CursorLockMode.None;
 
-        CursorTD.Instance.tutorialPopupParent.SetActive(false);
 
-        winScreen.SetActive(true);
+        if(currentEncounter.isShowcase)
+        {
+            combatRoot.SetActive(false);
+            LoadEncounter(currentEncounter.nextEncounter);
+            return;
+        }
+
+        //winScreen.SetActive(true);
         //conductor.SetActive(false);
-        MenuEventManager.Instance.WinScreenOpen();
+        //MenuEventManager.Instance.WinScreenOpen();
+        dialogueRoot.SetActive(true);
+        DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         ConductorV2.instance.StopMusic();
     }
 

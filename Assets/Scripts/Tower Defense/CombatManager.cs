@@ -183,15 +183,15 @@ public class CombatManager : MonoBehaviour
         }
         
         //checks if all enemies have died or player health hasnt reached zero to give a win state
-        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0 && !GameManager.Instance.tutorialRunning)
+        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0)
         {
             GameManager.Instance.WinLevel();
         }
 
-        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0 && GameManager.Instance.tutorialRunning)
-        {
-            GameManager.Instance.TutorialWinState();
-        }
+        //if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0 && GameManager.Instance.tutorialRunning)
+        //{
+        //    GameManager.Instance.TutorialWinState();
+        //}
 
         //delays enemy spawning
         DelayTimer();

@@ -245,6 +245,12 @@ public class DialogueManager : MonoBehaviour
             //dialogue after combat
             if(GameManager.Instance.winState)
             {
+                if (GameManager.Instance.currentEncounter.isShowcase && GameManager.Instance.currentEncounter.nextEncounter != null)
+                {
+                    GameManager.Instance.combatRoot.SetActive(false);
+                    GameManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.nextEncounter);
+                    return;
+                }
                 GameManager.Instance.winScreen.SetActive(true);
                 MenuEventManager.Instance.WinScreenOpen();
                 GameManager.Instance.dialogueRoot.SetActive(false);
@@ -361,6 +367,13 @@ public class DialogueManager : MonoBehaviour
         //dialogue after combat
         if (GameManager.Instance.winState)
         {
+            if (GameManager.Instance.currentEncounter.isShowcase && GameManager.Instance.currentEncounter.nextEncounter != null)
+            {
+                GameManager.Instance.combatRoot.SetActive(false);
+                GameManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.nextEncounter);
+                return;
+            }
+                
             GameManager.Instance.winScreen.SetActive(true);
             MenuEventManager.Instance.WinScreenOpen();
             GameManager.Instance.dialogueRoot.SetActive(false);

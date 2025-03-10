@@ -4059,6 +4059,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1329658780773032541, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d0e701f1bbab30c4a9e38e0cc94990b1, type: 3}
+    - target: {fileID: 1329658780773032541, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1943102943867653088, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4107,6 +4115,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5875663201242985825, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d0e701f1bbab30c4a9e38e0cc94990b1, type: 3}
     - target: {fileID: 7384092769861803767, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_fontSize
       value: 36
@@ -4796,7 +4808,7 @@ PrefabInstance:
     - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: 3540afcf836b467409d322512b762f04, type: 2}
+      objectReference: {fileID: 11400000, guid: a0fc9a721f09500478dc3f295422132f, type: 2}
     - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: EncounterCreator, Assembly-CSharp
@@ -5739,7 +5751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091263931038544310, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

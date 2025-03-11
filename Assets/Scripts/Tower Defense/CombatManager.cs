@@ -70,11 +70,13 @@ public class CombatManager : MonoBehaviour
     public GameObject knockEmDead;
 
     public GameObject grid;
+    public bool firstPianoTap = true;
 
     // Start is called before the first frame update
     void Start()
     {
         //LoadEncounter(currentEncounter);
+        grid = transform.GetChild(10).transform.GetChild(0).gameObject;
     }
 
 
@@ -183,12 +185,34 @@ public class CombatManager : MonoBehaviour
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
-        for (int i = 0; i < grid.transform.childCount; i++){
-            if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower == null)
+        if(transform.GetChild(11).GetComponent<CursorTD>().tile.placedTower!= null)
+        {
+            if (transform.GetChild(11).GetComponent<CursorTD>().tile.placedTower.name == "Piano(Clone)")
             {
-                print("foiaheiaof");
+                if (firstPianoTap) { 
+                    print("cring");
+                    firstPianoTap = false;
+                }
+            }
+            else
+            {
+                firstPianoTap = true;
             }
         }
+        else
+        {
+            firstPianoTap = true;
+        }
+        /*for (int i = 0; i < grid.transform.childCount; i++){
+            if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower != null)
+            {
+                print(grid.transform.GetChild(i).GetComponent<Tile>().placedTower.name);
+                if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower.name == "Piano")
+                {
+                    print("cringe");
+                }
+            }
+        }*/
 
         
 

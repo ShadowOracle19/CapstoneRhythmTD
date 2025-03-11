@@ -594,13 +594,9 @@ MonoBehaviour:
   maxResource: 100
   resourceSlider: {fileID: 5357066480712527213}
   resourceText: {fileID: 8237226722996233692}
-  beatPrefab: {fileID: 5418157054552973596, guid: e5027970126236840a3139e1285d260f, type: 3}
-  beatParent: {fileID: 0}
-  beatSpawnPoint: {fileID: 0}
-  beatEndPoint: {fileID: 0}
   enemyTimerObject: {fileID: 5186788144820312774}
   healthBar: {fileID: 7938666958808381215}
-  controls: {fileID: 4644315880953747472}
+  controls: {fileID: 3236249220394568140}
   resources: {fileID: 1186281375860481469}
   towerDisplay: {fileID: 3868834908678231448}
   feverBar: {fileID: 9154697066075946882}
@@ -3662,6 +3658,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4390918646476184721, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 1454352159991415034}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3236249220394568140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4091399386068453686, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3606425380573269237 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2747896518699224079, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
@@ -3711,11 +3712,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4644315880953747472 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6079025218450905322, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-  m_PrefabInstance: {fileID: 1454352159991415034}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4887879989977137308 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6339899913938108518, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}

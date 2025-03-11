@@ -134,7 +134,7 @@ public class ConductorV2 : MonoBehaviour
         countInText.gameObject.SetActive(true);
         for (int i = 1; i <= 4; i++)
         {
-            Debug.Log("count in " + i);
+            Debug.Log("count in " + i + 60/bpm);
             countInText.text = i.ToString();
             _ping.Play();
             yield return new WaitForSeconds(60 / bpm);
@@ -163,7 +163,7 @@ public class ConductorV2 : MonoBehaviour
         beatTrack = 1;
         beatDuration = 0;
 
-        DynamicSongInit(CombatManager.Instance.currentEncounter.dynamicSong);
+        DynamicSongInit(GameManager.Instance.currentEncounter.combatEncounter.dynamicSong);
 
         if (GameManager.Instance.tutorialRunning)
         {
@@ -171,10 +171,8 @@ public class ConductorV2 : MonoBehaviour
             CursorTD.Instance.movementSequence = true;
         }
 
-        musicSource.Play();
         //Start the song
-        
-        //musicSource.Play();
+        musicSource.Play();
     }
 
     public void DynamicSongInit(DynamicSongCreator song)

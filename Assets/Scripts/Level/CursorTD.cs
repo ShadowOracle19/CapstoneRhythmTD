@@ -279,6 +279,18 @@ public class CursorTD : MonoBehaviour
         SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
         TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[3].GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
 
+        pauseMovement = false;
+        towerSwap = false;
+
+        placementMenu.SetActive(false);
+
+        if(!GameManager.Instance.tutorialRunning)
+        {
+            tutorialParent.SetActive(false);
+            tutorialPopupParent.SetActive(false);
+
+        }
+
     }
 
     public void MoveCursor(Vector2 direction)

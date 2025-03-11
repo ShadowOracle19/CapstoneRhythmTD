@@ -164,6 +164,9 @@ public class Enemy : MonoBehaviour
 
     }
 
+    /*
+     * TODO: Update clash system to hit a tower each beat instead of killing itself on a tower
+     */ 
 
     public void Clash(ClashStrength clashStrength)
     {
@@ -178,6 +181,7 @@ public class Enemy : MonoBehaviour
                 Kill();
                 break;
             case ClashStrength.High:
+                tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
                 break;
             case ClashStrength.Immune:
                 break;

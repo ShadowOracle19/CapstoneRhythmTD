@@ -190,7 +190,10 @@ public class CombatManager : MonoBehaviour
             if (transform.GetChild(11).GetComponent<CursorTD>().tile.placedTower.name == "Piano(Clone)")
             {
                 if (firstPianoTap) { 
-                    print("cring");
+                    if(resourceNum < maxResource / 4 * 3)
+                    {
+                        resourceNum += maxResource / 4;
+                    }
                     firstPianoTap = false;
                 }
             }

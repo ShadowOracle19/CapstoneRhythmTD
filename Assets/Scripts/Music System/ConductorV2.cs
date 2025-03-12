@@ -134,7 +134,7 @@ public class ConductorV2 : MonoBehaviour
         countInText.gameObject.SetActive(true);
         for (int i = 1; i <= 4; i++)
         {
-            Debug.Log("count in " + i);
+            Debug.Log("count in " + i + 60/bpm);
             countInText.text = i.ToString();
             _ping.Play();
             yield return new WaitForSeconds(60 / bpm);
@@ -158,18 +158,12 @@ public class ConductorV2 : MonoBehaviour
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;
 
-        
-
         completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 1;
         beatDuration = 0;
 
-        drums.volume = 0;
-        bass.volume = 0;
-        piano.volume = 0;
-        guitarH.volume = 0;
-        guitarM.volume = 0;
+        DynamicSongInit(GameManager.Instance.currentEncounter.combatEncounter.dynamicSong);
 
         if (GameManager.Instance.tutorialRunning)
         {
@@ -177,10 +171,28 @@ public class ConductorV2 : MonoBehaviour
             CursorTD.Instance.movementSequence = true;
         }
 
-        musicSource.Play();
         //Start the song
-        
-        //musicSource.Play();
+        musicSource.Play();
+    }
+
+    public void DynamicSongInit(DynamicSongCreator song)
+    {
+        drums.volume = 0;
+        bass.volume = 0;
+        piano.volume = 0;
+        guitarH.volume = 0;
+        guitarM.volume = 0;
+
+        drums.clip = song.drums;
+        bass.clip = song.bass;
+        piano.clip = song.piano;
+        guitarH.clip = song.guitarHarmony;
+        guitarM.clip = song.guitarMelody;
+
+        if(song.guitarMelody == null)
+        {
+            guitarM.clip = null;
+        }
     }
 
     // Update is called once per frame

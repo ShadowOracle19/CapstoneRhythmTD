@@ -257,6 +257,7 @@ public class CursorTD : MonoBehaviour
 
     public void InitializeCursor()
     {
+        isMoving = false;
         gameObject.transform.position = new Vector3(-2.5f, -0.54f, 0);
 
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
@@ -277,6 +278,18 @@ public class CursorTD : MonoBehaviour
         SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
         SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
         TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[3].GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
+
+        pauseMovement = false;
+        towerSwap = false;
+
+        placementMenu.SetActive(false);
+
+        if(!GameManager.Instance.tutorialRunning)
+        {
+            tutorialParent.SetActive(false);
+            tutorialPopupParent.SetActive(false);
+
+        }
 
     }
 
@@ -451,7 +464,7 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
+                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
                 return;
             }
 
@@ -470,8 +483,8 @@ public class CursorTD : MonoBehaviour
 
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
 
+                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
                 return;
             }
 

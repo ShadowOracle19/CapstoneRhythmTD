@@ -129,7 +129,7 @@ public class Tower : MonoBehaviour
     }
 
 
-    public void Fire()
+    public void Fire() //make another fire method specifically for violin (pass thro)
     {
         if (!rotateStarted) return;
 
@@ -176,7 +176,55 @@ public class Tower : MonoBehaviour
         attackBuffed = false;
         
     }
-    
+
+    public void Fire(float yPos) //fire method specifically for Violin
+    {
+        if (!rotateStarted) return;
+
+        //Audio SFX
+        towerAttackSFX.Play();
+
+        if (attackBuffed || FeverSystem.Instance.feverModeActive)
+        {
+            currentDamage = currentDamage * 2;
+        }
+        else
+        {
+            currentDamage = tempDamageHolder;
+        }
+
+
+        if (towerInfo.isAOETower)
+        {
+            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
+
+            foreach (var item in colliders)
+            {
+                if (item.transform.CompareTag("StageTile"))
+                {
+                    item.transform.GetComponent<Tile>().Pulse(Color.red);
+                }
+                else if (item.transform.CompareTag("Enemy"))
+                {
+                    item.transform.GetComponent<Enemy>().Damage(currentDamage);
+                }
+            }
+            colliders = null;
+            return;
+        }
+
+        GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+
+
+        if (attackBuffed || FeverSystem.Instance.feverModeActive)
+            bullet.GetComponent<SpriteRenderer>().color = Color.red;
+
+        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        attackBuffed = false;
+
+    } //end of fire(yPos)
+
     public void ExtraFire()
     {
         if (!rotateStarted) return;
@@ -247,6 +295,7 @@ public class Tower : MonoBehaviour
                 break;
         }
         ConductorV2.instance.triggerEvent.Remove(trigger);
+        TowerManager.Instance.towers.Remove(gameObject);
         connectedTile.placedTower = null;
         Destroy(gameObject);
     }

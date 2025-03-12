@@ -17,7 +17,8 @@ MonoBehaviour:
     on hit
   towerImage: {fileID: 1578135943, guid: 3dc3546abb730ec4daec6f1bacb16737, type: 3}
   type: 1
-  resourceCost: 24
+  resourceCost: 25
+  cost: 0
   cooldownTime: 8
   towerHealth: 5
   attackPattern: 3

@@ -560,8 +560,8 @@ Transform:
   - {fileID: 7722073857774688930}
   - {fileID: 4652105118459931987}
   - {fileID: 8782242309877074322}
-  - {fileID: 6559852478841587048}
   - {fileID: 4057415934134723344}
+  - {fileID: 6559852478841587048}
   - {fileID: 5061094848007552122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -604,6 +604,7 @@ MonoBehaviour:
   waveCounter: {fileID: 6768568521675754656}
   combo: {fileID: 2083200320753664648}
   knockEmDead: {fileID: 5710594954291270279}
+  grid: {fileID: 0}
 --- !u!1 &4315412304900578376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,8 +1615,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8865174025683457049}
   - {fileID: 2057987796198086616}
+  - {fileID: 8865174025683457049}
   - {fileID: 4718492951148747408}
   - {fileID: 7117527160168387136}
   - {fileID: 6600935011647146870}

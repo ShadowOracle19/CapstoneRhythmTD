@@ -70,14 +70,18 @@ public class CombatManager : MonoBehaviour
     public GameObject knockEmDead;
 
     public GameObject grid;
-    public int pianoResourceGen = 25;
+    public int pianoResourceGen = 5;
     public bool firstPianoTap = true;
+    public CursorTD cursor;
+    public _BeatResult resultForPiano;
+    int pianoGenMultiplier = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         //LoadEncounter(currentEncounter);
         grid = transform.GetChild(10).transform.GetChild(0).gameObject;
+        cursor = transform.GetChild(11).GetComponent<CursorTD>();
     }
 
 
@@ -186,14 +190,37 @@ public class CombatManager : MonoBehaviour
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
-        if(transform.GetChild(11).GetComponent<CursorTD>().tile != null && transform.GetChild(11).GetComponent<CursorTD>().tile.placedTower != null)
+        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) { resultForPiano = cursor.CheckOnBeat(); }
+        if(cursor.tile != null && cursor.tile.placedTower != null)
         {
-            if (transform.GetChild(11).GetComponent<CursorTD>().tile.placedTower.name == "Piano(Clone)")
+            if (cursor.tile.placedTower.name == "Piano(Clone)")
             {
-                if (firstPianoTap) { 
-                    if(resourceNum < 75)
+                if (firstPianoTap) {
+                    switch (resultForPiano)
                     {
-                        resourceNum += pianoResourceGen;
+                        case _BeatResult.perfect:
+                            pianoGenMultiplier = 5;
+                            break;
+                        case _BeatResult.great:
+                            pianoGenMultiplier = 3;
+                            break;
+                        case _BeatResult.early:
+                            pianoGenMultiplier = 1;
+                            break;
+                        case _BeatResult.late:
+                            pianoGenMultiplier = 1;
+                            break;
+                        case _BeatResult.miss:
+                            pianoGenMultiplier = 0;
+                            break;
+                        default:
+                            pianoGenMultiplier = 1;
+                            break;
+                    }
+                    print(pianoGenMultiplier);
+                    if (resourceNum + (pianoResourceGen * pianoGenMultiplier) < maxResource)
+                    {
+                        resourceNum += pianoResourceGen * pianoGenMultiplier;
                     }
                     else
                     {
@@ -206,12 +233,10 @@ public class CombatManager : MonoBehaviour
             else
             {
                 firstPianoTap = true;
-                print("reset");
             }
         }
         else
         {
-            print("null tile");
             firstPianoTap = true;
         }
             /*for (int i = 0; i < grid.transform.childCount; i++){

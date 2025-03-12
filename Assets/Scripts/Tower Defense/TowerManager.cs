@@ -532,6 +532,31 @@ public class TowerManager : MonoBehaviour
                         tower.beat = 1;
                     }
                     break;
+                case TowerAttackPattern.snakePatternFire:
+                    tower.beat += 1;
+                    tower.towerAboutToFire = true;
+                    float yPosition = 0f;
+                    
+                    switch (tower.beat) 
+                    {
+                        case 1:
+                            yPosition = 0;
+                            break;
+                        case 2:
+                            yPosition = 1.2f;
+                            break;
+                        case 3:
+                            yPosition = 0;
+                            break;
+                        case 4:
+                            yPosition = -1.2f;
+                            tower.beat = 0;
+                            break;
+                    }
+                    Debug.LogWarning(tower.beat);
+                    tower.Fire(yPosition);
+                    break; 
+
                 default:
                     break;
             }

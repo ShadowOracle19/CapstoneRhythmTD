@@ -70,6 +70,7 @@ public class CombatManager : MonoBehaviour
     public GameObject knockEmDead;
 
     public GameObject grid;
+    public int pianoResourceGen = 25;
     public bool firstPianoTap = true;
 
     // Start is called before the first frame update
@@ -185,42 +186,49 @@ public class CombatManager : MonoBehaviour
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
-        if(transform.GetChild(11).GetComponent<CursorTD>().tile.placedTower!= null)
+        if(transform.GetChild(11).GetComponent<CursorTD>().tile != null && transform.GetChild(11).GetComponent<CursorTD>().tile.placedTower != null)
         {
             if (transform.GetChild(11).GetComponent<CursorTD>().tile.placedTower.name == "Piano(Clone)")
             {
                 if (firstPianoTap) { 
-                    if(resourceNum < maxResource / 4 * 3)
+                    if(resourceNum < 75)
                     {
-                        resourceNum += maxResource / 4;
+                        resourceNum += pianoResourceGen;
                     }
+                    else
+                    {
+                        resourceNum = 100;
+                    }
+                    print("generated" + resourceNum);
                     firstPianoTap = false;
                 }
             }
             else
             {
                 firstPianoTap = true;
+                print("reset");
             }
         }
         else
         {
+            print("null tile");
             firstPianoTap = true;
         }
-        /*for (int i = 0; i < grid.transform.childCount; i++){
-            if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower != null)
-            {
-                print(grid.transform.GetChild(i).GetComponent<Tile>().placedTower.name);
-                if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower.name == "Piano")
+            /*for (int i = 0; i < grid.transform.childCount; i++){
+                if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower != null)
                 {
-                    print("cringe");
+                    print(grid.transform.GetChild(i).GetComponent<Tile>().placedTower.name);
+                    if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower.name == "Piano")
+                    {
+                        print("cringe");
+                    }
                 }
-            }
-        }*/
+            }*/
 
-        
 
-        //checks if all enemies have spawned
-        if (!enemySpawners.allEnemiesSpawned)
+
+            //checks if all enemies have spawned
+            if (!enemySpawners.allEnemiesSpawned)
         {
             allEnemiesSpawned = false;
             

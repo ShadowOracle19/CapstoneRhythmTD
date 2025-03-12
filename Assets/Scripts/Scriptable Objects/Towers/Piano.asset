@@ -20,7 +20,7 @@ MonoBehaviour:
   resourceCost: 24
   cost: 2
   cooldownTime: 16
-  towerHealth: 5
+  towerHealth: 15
   attackPattern: 4
   damage: 0
   range: 0

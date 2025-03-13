@@ -21,9 +21,11 @@ MonoBehaviour:
   cost: 0
   cooldownTime: 8
   towerHealth: 5
-  attackPattern: 3
+  attackPattern: 0
   damage: 2
   range: 5
   projectilePiercesEnemies: 0
   projectileColor: {r: 1, g: 0, b: 0.62614346, a: 1}
   isAOETower: 0
+  isResourceTower: 0
+  resourceGain: 5

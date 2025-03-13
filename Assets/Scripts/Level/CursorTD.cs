@@ -106,6 +106,9 @@ public class CursorTD : MonoBehaviour
     public Slider tower4Slider;
     public Image tower4ResourceSprite;
 
+    [Header("Piano resource gain")]
+    public int pianoMod = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -495,12 +498,10 @@ public class CursorTD : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) return;
-        Debug.Log(direction);
-
+        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) 
+            return;
         
 
-        //transform.position += (Vector3)direction;
         StartCoroutine(MovePlayer(direction));
     }
 
@@ -532,6 +533,16 @@ public class CursorTD : MonoBehaviour
         }
 
         transform.position = targetPos;
+
+        //move onto piano tile
+        if (tile != null && tile.placedTower != null && tile.placedTower.GetComponent<Tower>().towerInfo.isResourceTower)
+        {
+            CheckPianoResult(tile.placedTower.GetComponent<Tower>());
+        }
+        else
+        {
+            pianoMod = 0;
+        }
 
         isMoving = false;
         desiredMovement = Vector3.zero;
@@ -611,10 +622,36 @@ public class CursorTD : MonoBehaviour
         }
     }
 
+    public void CheckPianoResult(Tower tower)
+    {
+        switch (CheckOnBeat())
+        {
+            case _BeatResult.late:
+                pianoMod = 0;
+                break;
+            case _BeatResult.miss:
+                pianoMod = 0;
+                break;
+            case _BeatResult.early:
+                pianoMod += 1;
+                break;
+            case _BeatResult.great:
+                pianoMod += 3;
+                break;
+            case _BeatResult.perfect:
+                pianoMod += 5;
+                break;
+            default:
+                break;
+        }
+
+        CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain * pianoMod;
+    }
+
     public void SpawnBeatHitResult()
     {
         if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused || beatIsHit) return;
-        Debug.Log(ConductorV2.instance.beatDuration);
+        
         beatIsHit = true;
         GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
 

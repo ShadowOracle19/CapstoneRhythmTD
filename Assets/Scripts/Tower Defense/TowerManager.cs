@@ -116,6 +116,7 @@ public class TowerManager : MonoBehaviour
 
     [Header("Tower")]
     [SerializeField] private List<Tower> towerList;
+    public bool everyOtherBeat;
 
     // Update is called once per frame
     void Update()
@@ -480,6 +481,92 @@ public class TowerManager : MonoBehaviour
         towerList.Clear();
     }
 
+    //public void FireTowers()
+    //{
+    //    if (towerList.Count == 0) return;
+
+    //    foreach (Tower tower in towerList.ToArray())
+    //    {
+    //        if(tower == null)
+    //        {
+    //            towerList.Remove(tower);
+    //            continue;
+    //        }
+    //        switch (tower.towerInfo.attackPattern)
+    //        {
+    //            case TowerAttackPattern.everyBeat:
+    //                tower.towerAboutToFire = true;
+    //                tower.Fire();
+    //                break;
+
+    //            case TowerAttackPattern.everyMeasure:
+    //                tower.beat += 1;
+    //                if (tower.beat == 4)
+    //                {
+    //                    tower.Fire();
+    //                    tower.beat = 1;
+    //                    tower.towerAboutToFire = false;
+    //                }
+    //                else if (tower.beat == 3)
+    //                {
+    //                    tower.towerAboutToFire = true;
+    //                }
+    //                break;
+
+    //            case TowerAttackPattern.everyOtherBeat:
+    //                tower.everyOtherBeat = !tower.everyOtherBeat;
+    //                tower.towerAboutToFire = !tower.everyOtherBeat;
+    //                if (tower.everyOtherBeat)
+    //                {
+    //                    tower.Fire();
+    //                }
+    //                break;
+
+    //            case TowerAttackPattern.everyBeatButOne:
+    //                tower.beat += 1;
+    //                if (tower.beat < 4)
+    //                {
+    //                    tower.towerAboutToFire = true;
+    //                    tower.Fire();
+
+    //                }
+    //                else if (tower.beat == 4)
+    //                {
+    //                    tower.towerAboutToFire = false;
+    //                    tower.beat = 1;
+    //                }
+    //                break;
+
+    //            case TowerAttackPattern.snakePatternFire:
+    //                tower.beat += 1;
+    //                tower.towerAboutToFire = true;
+    //                float yPosition = 0f;
+                    
+    //                switch (tower.beat) 
+    //                {
+    //                    case 1:
+    //                        yPosition = 0;
+    //                        break;
+    //                    case 2:
+    //                        yPosition = 1.2f;
+    //                        break;
+    //                    case 3:
+    //                        yPosition = 0;
+    //                        break;
+    //                    case 4:
+    //                        yPosition = -1.2f;
+    //                        tower.beat = 0;
+    //                        break;
+    //                }
+    //                tower.Fire(yPosition);
+    //                break; 
+
+    //            default:
+    //                break;
+    //        }
+    //    }
+    //}
+    
     public void FireTowers()
     {
         if (towerList.Count == 0) return;
@@ -497,47 +584,68 @@ public class TowerManager : MonoBehaviour
                     tower.towerAboutToFire = true;
                     tower.Fire();
                     break;
+
                 case TowerAttackPattern.everyMeasure:
-                    tower.beat += 1;
-                    if (tower.beat == 4)
+                    if (ConductorV2.instance.beatTrack == 4)
                     {
                         tower.Fire();
-                        tower.beat = 1;
                         tower.towerAboutToFire = false;
                     }
-                    else if (tower.beat == 3)
+                    else if (ConductorV2.instance.beatTrack == 3)
                     {
                         tower.towerAboutToFire = true;
                     }
                     break;
+
                 case TowerAttackPattern.everyOtherBeat:
-                    tower.everyOtherBeat = !tower.everyOtherBeat;
-                    tower.towerAboutToFire = !tower.everyOtherBeat;
-                    if (tower.everyOtherBeat)
+                    //everyOtherBeat = !everyOtherBeat;
+                    //tower.towerAboutToFire = !everyOtherBeat;
+                    //if (everyOtherBeat)
+                    //{
+                    //    tower.Fire();
+                    //}
+
+                    switch (ConductorV2.instance.beatTrack)
                     {
-                        tower.Fire();
+                        case 1:
+                            tower.towerAboutToFire = true;
+                            break;
+                        case 2:
+                            tower.Fire();
+                            tower.towerAboutToFire = false;
+                            break;
+                        case 3:
+                            tower.towerAboutToFire = true;
+                            break;
+                        case 4:
+                            tower.Fire();
+                            tower.towerAboutToFire = false;
+                            break;
                     }
+
                     break;
+
                 case TowerAttackPattern.everyBeatButOne:
                     tower.beat += 1;
-                    if (tower.beat < 4)
+                    if (ConductorV2.instance.beatTrack < 4)
                     {
                         tower.towerAboutToFire = true;
                         tower.Fire();
 
                     }
-                    else if (tower.beat == 4)
+                    else if (ConductorV2.instance.beatTrack == 4)
                     {
                         tower.towerAboutToFire = false;
                         tower.beat = 1;
                     }
                     break;
+
                 case TowerAttackPattern.snakePatternFire:
-                    tower.beat += 1;
+                    
                     tower.towerAboutToFire = true;
                     float yPosition = 0f;
                     
-                    switch (tower.beat) 
+                    switch (ConductorV2.instance.beatTrack) 
                     {
                         case 1:
                             yPosition = 0;
@@ -550,10 +658,8 @@ public class TowerManager : MonoBehaviour
                             break;
                         case 4:
                             yPosition = -1.2f;
-                            tower.beat = 0;
                             break;
                     }
-                    Debug.LogWarning(tower.beat);
                     tower.Fire(yPosition);
                     break; 
 

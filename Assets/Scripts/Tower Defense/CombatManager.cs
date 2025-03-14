@@ -175,70 +175,9 @@ public class CombatManager : MonoBehaviour
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
-        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)) { resultForPiano = cursor.CheckOnBeat(); }
-        if(cursor.tile != null && cursor.tile.placedTower != null)
-        {
-            if (cursor.tile.placedTower.name == "Piano(Clone)")
-            {
-                if (firstPianoTap) {
-                    switch (resultForPiano)
-                    {
-                        case _BeatResult.perfect:
-                            pianoGenMultiplier = 5;
-                            break;
-                        case _BeatResult.great:
-                            pianoGenMultiplier = 3;
-                            break;
-                        case _BeatResult.early:
-                            pianoGenMultiplier = 1;
-                            break;
-                        case _BeatResult.late:
-                            pianoGenMultiplier = 1;
-                            break;
-                        case _BeatResult.miss:
-                            pianoGenMultiplier = 0;
-                            break;
-                        default:
-                            pianoGenMultiplier = 1;
-                            break;
-                    }
-                    print(pianoGenMultiplier);
-                    if (resourceNum + (pianoResourceGen * pianoGenMultiplier) < maxResource)
-                    {
-                        resourceNum += pianoResourceGen * pianoGenMultiplier;
-                    }
-                    else
-                    {
-                        resourceNum = 100;
-                    }
-                    print("generated" + resourceNum);
-                    firstPianoTap = false;
-                }
-            }
-            else
-            {
-                firstPianoTap = true;
-            }
-        }
-        else
-        {
-            firstPianoTap = true;
-        }
-            /*for (int i = 0; i < grid.transform.childCount; i++){
-                if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower != null)
-                {
-                    print(grid.transform.GetChild(i).GetComponent<Tile>().placedTower.name);
-                    if (grid.transform.GetChild(i).GetComponent<Tile>().placedTower.name == "Piano")
-                    {
-                        print("cringe");
-                    }
-                }
-            }*/
 
-
-
-            //checks if all enemies have spawned
-            if (!enemySpawners.allEnemiesSpawned)
+        //checks if all enemies have spawned
+        if (!enemySpawners.allEnemiesSpawned)
         {
             allEnemiesSpawned = false;
             
@@ -254,10 +193,6 @@ public class CombatManager : MonoBehaviour
             GameManager.Instance.WinLevel();
         }
 
-        //if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0 && GameManager.Instance.tutorialRunning)
-        //{
-        //    GameManager.Instance.TutorialWinState();
-        //}
 
         //delays enemy spawning
         DelayTimer();

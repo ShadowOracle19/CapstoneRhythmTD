@@ -30,6 +30,10 @@ public class TowerTypeCreator : ScriptableObject
     [Tooltip("Set to true if you want tower to be AOE")]
     public bool isAOETower = false;
 
+    [Header("Resource Tower")]
+    public bool isResourceTower = false;
+    public int resourceGain = 5;
+
 }
 
 public enum TowerAttackPattern

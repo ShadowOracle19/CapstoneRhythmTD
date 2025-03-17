@@ -63,6 +63,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject previousTalkingDialogueBox;
     public Color fadedColor;
     private Sprite previousCharacter;
+    private string previousCharacterName;
 
     public bool dialogueFinished = false;
     public GameObject dialogueSystemParent;
@@ -168,34 +169,6 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
 
-        //for (int i = 0; i < dialogueText.Length; i++)
-        //{
-        //    while (pauseDialogue)
-        //    {
-        //        yield return new WaitForSeconds(GameManager.Instance.textSpeed);
-        //    }
-        //    if (dialogueText[i] == '<')
-        //        _dialogue.text += GetCompleteRichTextTag(ref i);
-        //    else
-        //        _dialogue.text += dialogueText[i];
-        //    PlayCharacterAudio();
-        //    yield return new WaitForSeconds(GameManager.Instance.textSpeed);
-        //}
-
-        //foreach (char c in dialogueText)
-        //{
-        //    LoadCharacterSprite();
-
-        //    _speakerName.text = myDialogue.dialogue[index].name;
-        //    _dialogue.text += c;
-        //    //if (c == '<'){
-        //    //    GameManager.Instance.textSpeed = 0f;
-        //    //}
-        //    //else if (c == '>'){
-        //    //    GameManager.Instance.textSpeed = defaultTextSpeed;
-        //    //}
-        //    yield return new WaitForSeconds(GameManager.Instance.textSpeed);
-        //}
 
     }
 
@@ -294,6 +267,7 @@ public class DialogueManager : MonoBehaviour
             {
                 secondCharacterImage.sprite = previousCharacter;
                 secondCharacterImage.color = fadedColor;
+                previousCharacterName = myDialogue.dialogue[index - 1].name;
 
                 if (secondCharacterImage.sprite == null)
                 {

@@ -49,6 +49,8 @@ public class DialogueManager : MonoBehaviour
 
     public TextAsset currentDialogue;
 
+    public Transform mainTextBox;
+    public Transform secondaryTextBox;
 
     public TextMeshProUGUI _speakerName;
     public TextMeshProUGUI _dialogue;
@@ -143,21 +145,35 @@ public class DialogueManager : MonoBehaviour
         LoadCharacterSprite();
 
         TMP_TextInfo textInfo;
+        TextMeshProUGUI currentTextBox;
 
         if (previousCharacterTalking)
         {
+            secondaryTextBox.SetAsLastSibling();
+
             _previousSpeakerName.text = myDialogue.dialogue[index].name;
             _previousSpeakerText.text = dialogueText;
+
             _previousSpeakerText.ForceMeshUpdate();
+
             textInfo = _previousSpeakerText.textInfo;
+            currentTextBox = _previousSpeakerText;
+
+            _dialogue.text = string.Empty;
         }
         else
         {
+            mainTextBox.SetAsLastSibling();
+
             _speakerName.text = myDialogue.dialogue[index].name;
             _dialogue.text = dialogueText;
-            _dialogue.ForceMeshUpdate();
-            textInfo = _dialogue.textInfo;
 
+            _dialogue.ForceMeshUpdate();
+
+            textInfo = _dialogue.textInfo;
+            currentTextBox = _dialogue;
+
+            _previousSpeakerText.text = string.Empty;
         }
 
 
@@ -181,7 +197,7 @@ public class DialogueManager : MonoBehaviour
                 typeText = false;
             }
 
-            _dialogue.maxVisibleCharacters = visibleCount;
+            currentTextBox.maxVisibleCharacters = visibleCount;
 
             PlayCharacterAudio();
             visibleCount += 1; 
@@ -286,7 +302,6 @@ public class DialogueManager : MonoBehaviour
                 characterImage.color = fadedColor;
                 secondCharacterImage.color = Color.white;
 
-                talkingDialogueBox.SetActive(false);
                 previousTalkingDialogueBox.SetActive(true);
                 previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterName}/{previousCharacterName}_1");
                 return;
@@ -341,6 +356,7 @@ public class DialogueManager : MonoBehaviour
             StopCoroutine(typing);
             visibleCount = totalVisibleCharacters;
             _dialogue.maxVisibleCharacters = visibleCount;
+            _previousSpeakerText.maxVisibleCharacters = visibleCount;
         }
     }
 

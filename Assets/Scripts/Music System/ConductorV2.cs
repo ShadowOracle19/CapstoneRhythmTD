@@ -90,7 +90,6 @@ public class ConductorV2 : MonoBehaviour
         AudioSettings.Reset(config);
         dspSongTime = (float)AudioSettings.dspTime;
 
-        PlayMusic();
 
         pauseConductor = true;
         //load the audio source attached to the conductor gameobject
@@ -168,6 +167,8 @@ public class ConductorV2 : MonoBehaviour
         {
             guitarM.clip = null;
         }
+
+        PlayMusic();
     }
 
     // Update is called once per frame

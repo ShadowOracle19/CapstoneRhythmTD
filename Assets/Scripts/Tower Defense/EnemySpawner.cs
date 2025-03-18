@@ -116,7 +116,6 @@ public class EnemySpawner : MonoBehaviour
         //once all enemies are spawned stop spawning them
         if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn) 
         {
-            Debug.Log("spawned enemies");
             allEnemiesSpawned = true;
             return;
         }

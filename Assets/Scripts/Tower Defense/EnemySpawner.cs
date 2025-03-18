@@ -130,6 +130,8 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, spawnTiles[randSpawn].transform.position.y), Quaternion.identity, enemyParent);
             lastRandomSpawn = randSpawn;
 
+            spawnTiles[randSpawn].GetComponent<Tile>().Pulse(Color.red);
+
             ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
 
             currentNumberOfEnemiesSpawned += 1;

@@ -52,7 +52,9 @@ public class DialogueManager : MonoBehaviour
 
     public TextMeshProUGUI _speakerName;
     public TextMeshProUGUI _dialogue;
+    public TextMeshProUGUI _previousSpeakerName;
     public TextMeshProUGUI _previousSpeakerText;
+
     public Image characterImage;
     public Image secondCharacterImage;
     public int index;
@@ -63,8 +65,9 @@ public class DialogueManager : MonoBehaviour
     public GameObject descriptiveDialogueBox;
     public GameObject previousTalkingDialogueBox;
     public Color fadedColor;
-    private Sprite previousCharacter;
-    private string previousCharacterName;
+    public Sprite previousCharacter;
+    public string currentCharacterName;
+    public string previousCharacterName;
     public bool previousCharacterTalking;
 
     public bool dialogueFinished = false;
@@ -116,8 +119,13 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = desiredDialogue;
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);
         index = 0;
+
         _speakerName.text = string.Empty;
         _dialogue.text = string.Empty;
+        _previousSpeakerName.text = string.Empty;
+        _previousSpeakerText.text = string.Empty;
+
+        previousCharacterName = string.Empty;
 
         secondCharacterImage.sprite = null;
         secondCharacterImage.color = Color.clear;
@@ -131,19 +139,21 @@ public class DialogueManager : MonoBehaviour
     {
         string dialogueText = myDialogue.dialogue[index].text;
 
+        currentCharacterName = myDialogue.dialogue[index].name;
         LoadCharacterSprite();
 
-        _speakerName.text = myDialogue.dialogue[index].name;
         TMP_TextInfo textInfo;
 
         if (previousCharacterTalking)
         {
+            _previousSpeakerName.text = myDialogue.dialogue[index].name;
             _previousSpeakerText.text = dialogueText;
             _previousSpeakerText.ForceMeshUpdate();
             textInfo = _previousSpeakerText.textInfo;
         }
         else
         {
+            _speakerName.text = myDialogue.dialogue[index].name;
             _dialogue.text = dialogueText;
             _dialogue.ForceMeshUpdate();
             textInfo = _dialogue.textInfo;
@@ -151,9 +161,8 @@ public class DialogueManager : MonoBehaviour
         }
 
 
-        bool typeText = true;
 
-        
+        bool typeText = true;
 
         totalVisibleCharacters = textInfo.characterCount;
         visibleCount = 0;
@@ -270,6 +279,22 @@ public class DialogueManager : MonoBehaviour
         {
             descriptiveDialogueBox.SetActive(false);
             talkingDialogueBox.SetActive(true);
+
+            if(previousCharacterName == myDialogue.dialogue[index].name)
+            {
+                previousCharacterTalking = true;
+                characterImage.color = fadedColor;
+                secondCharacterImage.color = Color.white;
+
+                talkingDialogueBox.SetActive(false);
+                previousTalkingDialogueBox.SetActive(true);
+                previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterName}/{previousCharacterName}_1");
+                return;
+            }
+            else
+            {
+                previousCharacterTalking = false;
+            }
 
             if(index != 0 && myDialogue.dialogue[index].name != myDialogue.dialogue[index - 1].name && myDialogue.dialogue[index].name != string.Empty)
             {

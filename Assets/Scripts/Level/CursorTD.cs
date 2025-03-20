@@ -109,6 +109,11 @@ public class CursorTD : MonoBehaviour
     [Header("Piano resource gain")]
     public int pianoMod = 0;
 
+    // PFX
+    [SerializeField] private ParticleSystem pianoResourceGenParticles;
+
+    private ParticleSystem pianoResourceGenParticlesInstance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -634,18 +639,23 @@ public class CursorTD : MonoBehaviour
                 break;
             case _BeatResult.early:
                 pianoMod += 1;
+                //SpawnResourceGenParticles();
                 break;
             case _BeatResult.great:
                 pianoMod += 3;
+                //SpawnResourceGenParticles();
                 break;
             case _BeatResult.perfect:
                 pianoMod += 5;
+                //SpawnResourceGenParticles();
                 break;
             default:
                 break;
         }
 
         CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain * pianoMod;
+
+        SpawnResourceGenParticles();
     }
 
     public void SpawnBeatHitResult()
@@ -720,6 +730,11 @@ public class CursorTD : MonoBehaviour
         {
             return _BeatResult.miss;
         }
+    }
+
+    private void SpawnResourceGenParticles()
+    {
+        pianoResourceGenParticlesInstance = Instantiate(pianoResourceGenParticles, transform.position, Quaternion.identity);
     }
     
 }

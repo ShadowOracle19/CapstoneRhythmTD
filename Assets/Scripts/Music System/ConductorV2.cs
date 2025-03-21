@@ -186,7 +186,7 @@ public class ConductorV2 : MonoBehaviour
             ResumeMusic();
         }
 
-        Conduct();
+        
         
         //if(beatDuration == perfectBeatThreshold)
         //{
@@ -194,6 +194,11 @@ public class ConductorV2 : MonoBehaviour
         //}
 
         beatTrack = Mathf.Clamp(beatTrack, 0, 4);
+    }
+
+    private void FixedUpdate()
+    {
+        Conduct();
     }
 
     public void Conduct()

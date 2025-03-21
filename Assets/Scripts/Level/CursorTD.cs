@@ -340,23 +340,23 @@ public class CursorTD : MonoBehaviour
     public void Buff1Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(KeyCode.LeftArrow);
+        TowerEmpowerment(BuffType.Niimi);
         SpawnBeatHitResult();
     }
     public void Buff2Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(KeyCode.UpArrow);
+        TowerEmpowerment(BuffType.Sonu);
         SpawnBeatHitResult();
     }
     public void Buff3Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(KeyCode.RightArrow);
+        TowerEmpowerment(BuffType.Fayruz);
         SpawnBeatHitResult();
     }
 
-    public void TowerEmpowerment(KeyCode _keyCode)
+    public void TowerEmpowerment(BuffType buff)
     {
         if(tile.placedTower != null)
         {
@@ -370,12 +370,12 @@ public class CursorTD : MonoBehaviour
                 case _BeatResult.great:
                     
                     ComboManager.Instance.IncreaseCombo();
-                    tile.placedTower.GetComponent<Tower>().ActivateBuff(_keyCode);
+                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
                     break;
                 case _BeatResult.perfect:
                     
                     ComboManager.Instance.IncreaseCombo();
-                    tile.placedTower.GetComponent<Tower>().ActivateBuff(_keyCode);
+                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
                     break;
                 default:
                     break;

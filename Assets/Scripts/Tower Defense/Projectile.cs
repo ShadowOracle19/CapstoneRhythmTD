@@ -20,7 +20,9 @@ public class Projectile : MonoBehaviour
 
     public UnityEvent trigger;
 
-    public void InitializeProjectile(int range, GameObject firedFrom, int _damage, bool isPiercing)
+    public bool burningBullet = false;
+
+    public void InitializeProjectile(int range, GameObject firedFrom, int _damage, bool isPiercing, bool isBurning)
     {
         bulletRange = range;
         towerFiredFrom = firedFrom;
@@ -68,6 +70,8 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().Damage(damage);
+            collision.GetComponent<Enemy>().burnDamage += 1;
+            collision.GetComponent<Enemy>().burnt = true;
 
             if(!piercing) RemoveProjectile();
 

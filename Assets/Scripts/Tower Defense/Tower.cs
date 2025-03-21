@@ -8,6 +8,16 @@ public enum InstrumentType
     Drums, Guitar, Bass, Piano
 }
 
+public enum BuffType
+{
+    Fayruz, Sonu, Niimi
+}
+
+public enum TowerState
+{
+    Default, Recording, Repeating
+}
+
 public class Tower : MonoBehaviour
 {
     public AudioSource towerAttackSFX;
@@ -43,10 +53,23 @@ public class Tower : MonoBehaviour
     public int beat;
     public bool everyOtherBeat = false;
 
+    [Header("Record Buff Input")]
+    public TowerState currentState = TowerState.Default;
+    public List<BuffType> recordedBuffs = new List<BuffType>();
+    public bool isInputtingBuffs = false;
+    public int beatRecordingStarted = 1;
+    public int buffTimer = 0;
+    int buffTimerMax = 2;
+    public int buffIndex = 0;
+    public int buffCountMeasure = 0;
+    public int buffBeatCount = 1;
+
+
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;
         beat = 1;
+        currentState = TowerState.Default;
     }
 
     private void Update()
@@ -57,6 +80,7 @@ public class Tower : MonoBehaviour
         shieldEffect.SetActive(isShielded);
 
         towerEffectVisual();
+
     }
 
     public void towerEffectVisual()
@@ -82,54 +106,11 @@ public class Tower : MonoBehaviour
 
     public void OnBeat()
     {
-        //switch (towerInfo.attackPattern)
-        //{
-        //    case TowerAttackPattern.everyBeat:
-        //        towerAboutToFire = true;
-        //        Fire();
-        //        break;
-        //    case TowerAttackPattern.everyMeasure:
-        //        beat += 1;
-        //        if(beat == 4)
-        //        {
-        //            Fire();
-        //            beat = 1;
-        //            towerAboutToFire = false;
-        //        }
-        //        else if(beat == 3)
-        //        {
-        //            towerAboutToFire = true;
-        //        }
-        //        break;
-        //    case TowerAttackPattern.everyOtherBeat:
-        //        everyOtherBeat = !everyOtherBeat;
-        //        towerAboutToFire = !everyOtherBeat; 
-        //        if(everyOtherBeat)
-        //        {
-        //            Fire();
-        //        }
-        //        break;
-        //    case TowerAttackPattern.everyBeatButOne:
-        //        beat += 1;
-        //        if (beat < 4)
-        //        {
-        //            towerAboutToFire = true;
-        //            Fire();
-                    
-        //        }
-        //        else if(beat == 4)
-        //        {
-        //            towerAboutToFire = false;
-        //            beat = 1;
-        //        }
-        //        break;
-        //    default:
-        //        break;
-        //}
+        
     }
 
 
-    public void Fire() //make another fire method specifically for violin (pass thro)
+    public void Fire() //default fire
     {
         if (!rotateStarted) return;
 
@@ -177,7 +158,7 @@ public class Tower : MonoBehaviour
         
     }
 
-    public void Fire(float yPos) //fire method specifically for Violin
+    public void Fire(float yPos) //Fire on specific ypos
     {
         if (!rotateStarted) return;
 
@@ -223,9 +204,9 @@ public class Tower : MonoBehaviour
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
         attackBuffed = false;
 
-    } //end of fire(yPos)
+    } 
 
-    public void ExtraFire()
+    public void ExtraFire() //buff fire
     {
         if (!rotateStarted) return;
         
@@ -315,9 +296,9 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void ActivateBuff(KeyCode keyCode)
+    public void ActivateBuff(BuffType buffType)
     {
-        if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerBuffSequence)
+        if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerBuffSequence) //post buff sequence in tutorial
         {
             CursorTD.Instance.buffCounter += 1;
             if(CursorTD.Instance.buffCounter == 4)
@@ -338,24 +319,95 @@ public class Tower : MonoBehaviour
                 CursorTD.Instance.buffCounter = 0;
             }
         }
-        switch (keyCode)
+
+        RecordBuff(buffType);
+
+        PlayBuffs(buffType);
+    }
+
+    public void PlayBuffs(BuffType buffType)
+    {
+        switch (buffType)
         {
-            case KeyCode.UpArrow://Sonu's Buff
-                Debug.Log("Extra Attack");
+            case BuffType.Sonu://Sonu's Buff
                 ExtraFire();
                 break;
-            case KeyCode.RightArrow://Fayruz's Buff
+            case BuffType.Fayruz://Fayruz's Buff
 
-                Debug.Log("Buff Attack");
                 attackBuffed = true;
                 break;
-            case KeyCode.LeftArrow: //Niimi's Buff
+            case BuffType.Niimi: //Niimi's Buff
                 isShielded = true;
 
                 break;
             default:
                 break;
         }
+    }
+
+    public void RecordBuff(BuffType buff) //records the buff but if a 5th buff is pressed it will remove the first buff on the list
+    {
+        currentState = TowerState.Recording;
+
+        isInputtingBuffs = true;
+
+        recordedBuffs.Add(buff);
+
+        beatRecordingStarted = ConductorV2.instance.beatTrack;
+        buffTimer = 0;
+
+        buffIndex = 0;
+
+        if (recordedBuffs.Count > 4)
+        {
+            recordedBuffs.RemoveAt(0);
+        }
+        
+    }
+
+    public void BuffPlayback(int _beat)
+    {
+        if (currentState == TowerState.Default)
+        {
+            return;
+        }
+        else if (currentState == TowerState.Recording)
+        {
+            buffTimer += 1;
+            if(buffTimer == buffTimerMax)
+            {
+                currentState = TowerState.Repeating;
+                buffTimer = 0;
+                isInputtingBuffs = false;
+            }
+            return;
+        }
+        else if(currentState == TowerState.Repeating)
+        {
+            PlayBuffs(recordedBuffs[buffIndex]);
+
+            buffIndex += 1;
+
+            buffBeatCount += 1;
+
+            if(buffBeatCount == 4)
+            {
+                buffBeatCount = 0;
+                buffCountMeasure += 1;
+                if(buffCountMeasure == 4)
+                {
+                    buffCountMeasure = 0;
+                    recordedBuffs.Clear();
+                    currentState = TowerState.Default;
+                }
+            }
+
+            if (buffIndex >= recordedBuffs.Count)
+            {
+                buffIndex = 0;
+            }
+        }
+
     }
 
 }

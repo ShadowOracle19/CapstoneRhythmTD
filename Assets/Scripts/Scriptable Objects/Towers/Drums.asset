@@ -17,7 +17,8 @@ MonoBehaviour:
     radius.
   towerImage: {fileID: -1491893640, guid: f6f4c8c3f240bfd4fbc212fff7b4d3d0, type: 3}
   type: 0
-  resourceCost: 24
+  resourceCost: 50
+  cost: 1
   cooldownTime: 16
   towerHealth: 5
   attackPattern: 2

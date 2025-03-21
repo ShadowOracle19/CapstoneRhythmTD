@@ -3,6 +3,7 @@ using Pathfinding.Ionic.Zip;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CursorTD : MonoBehaviour
 {
@@ -40,7 +41,9 @@ public class CursorTD : MonoBehaviour
     private bool towerSelectMenuOpened = false;
     private bool inputOnce = false;
     private bool destructMode = false;
+
     public Tile tile;
+
     public GameObject placementMenu;
     public GameObject SlotW;
     public GameObject SlotA;
@@ -90,7 +93,26 @@ public class CursorTD : MonoBehaviour
 
     public bool beatIsHit = false;
 
+    [Header("Resource Bar")]
+    public Slider tower1Slider;
+    public Image tower1ResourceSprite;
 
+    public Slider tower2Slider;
+    public Image tower2ResourceSprite;
+
+    public Slider tower3Slider;
+    public Image tower3ResourceSprite;
+
+    public Slider tower4Slider;
+    public Image tower4ResourceSprite;
+
+    [Header("Piano resource gain")]
+    public int pianoMod = 0;
+
+    // PFX
+    [SerializeField] private ParticleSystem pianoResourceGenParticles;
+
+    private ParticleSystem pianoResourceGenParticlesInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +139,7 @@ public class CursorTD : MonoBehaviour
             tile.placedTower.GetComponent<Tower>().towerHover = true;
         }
 
+        PlacementResourceBar();
 
         #region tutorial
         if (GameManager.Instance.tutorialRunning) //reset color of keys
@@ -145,6 +168,14 @@ public class CursorTD : MonoBehaviour
         #endregion
     }
 
+    public void PlacementResourceBar()
+    {
+        tower1Slider.value = CombatManager.Instance.resourceNum;
+        tower2Slider.value = CombatManager.Instance.resourceNum;
+        tower3Slider.value = CombatManager.Instance.resourceNum;
+        tower4Slider.value = CombatManager.Instance.resourceNum;
+    }
+
     public void HandleFeverModeInput()
     {
         if (GameManager.Instance.tutorialRunning && !feverModeSequence)
@@ -157,41 +188,41 @@ public class CursorTD : MonoBehaviour
 
     public void SwapTowers()
     {
-        towerSwap = !towerSwap;
-        if (towerSwap)
-        {
-            SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[4];
-            SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[4].GetComponent<Tower>().towerInfo.towerImage;
+        //towerSwap = !towerSwap;
+        //if (towerSwap)
+        //{
+        //    SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[4];
+        //    SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[4].GetComponent<Tower>().towerInfo.towerImage;
 
-            SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[5];
-            SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[5].GetComponent<Tower>().towerInfo.towerImage;
-
-
-            SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[6];
-            SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[6].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[5];
+        //    SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[5].GetComponent<Tower>().towerInfo.towerImage;
 
 
-            SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[7];
-            SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[7].GetComponent<Tower>().towerInfo.towerImage;
-        }
-        else
-        {
-            SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
-            SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
-
-            SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
-            SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[6];
+        //    SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[6].GetComponent<Tower>().towerInfo.towerImage;
 
 
-            SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
-            SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[7];
+        //    SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[7].GetComponent<Tower>().towerInfo.towerImage;
+        //}
+        //else
+        //{
+        //    SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
+        //    SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+
+        //    SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
+        //    SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
 
 
-            SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
-            SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
-        }
+        //    SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
+        //    SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
 
-        TowerManager.Instance.SwapTowers();
+
+        //    SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
+        //    SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
+        //}
+
+        //TowerManager.Instance.SwapTowers();
         
         
     }
@@ -234,21 +265,39 @@ public class CursorTD : MonoBehaviour
 
     public void InitializeCursor()
     {
+        isMoving = false;
         gameObject.transform.position = new Vector3(-2.5f, -0.54f, 0);
 
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
         SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[0].GetComponent<Tower>(), tower1Slider, tower1ResourceSprite);
+
 
         SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
         SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[1].GetComponent<Tower>(), tower2Slider, tower2ResourceSprite);
 
 
         SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
         SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[2].GetComponent<Tower>(), tower3Slider, tower3ResourceSprite);
 
 
         SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
         SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[3].GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
+
+        pauseMovement = false;
+        towerSwap = false;
+
+        placementMenu.SetActive(false);
+
+        if(!GameManager.Instance.tutorialRunning)
+        {
+            tutorialParent.SetActive(false);
+            tutorialPopupParent.SetActive(false);
+
+        }
 
     }
 
@@ -395,11 +444,11 @@ public class CursorTD : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
         {
             towerPlacementMenuSequencePassed = true;
-            tutorialText.text = "use WASD to select and place a tower";
+            tutorialText.text = "use Arrow Keys to select and place a tower";
             towerPlacementMenuSequence = false;
             spaceKeyParent.SetActive(false);
             towerPlaceSequence = true;
-            wasdParent.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0);
+            arrowKeyParent.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0);
             CombatManager.Instance.towerDisplay.SetActive(true);
         }
 
@@ -423,7 +472,7 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
+                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
                 return;
             }
 
@@ -442,8 +491,8 @@ public class CursorTD : MonoBehaviour
 
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
 
+                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
                 return;
             }
 
@@ -454,12 +503,10 @@ public class CursorTD : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) return;
-        Debug.Log(direction);
-
+        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) 
+            return;
         
 
-        //transform.position += (Vector3)direction;
         StartCoroutine(MovePlayer(direction));
     }
 
@@ -492,6 +539,16 @@ public class CursorTD : MonoBehaviour
 
         transform.position = targetPos;
 
+        //move onto piano tile
+        if (tile != null && tile.placedTower != null && tile.placedTower.GetComponent<Tower>().towerInfo.isResourceTower)
+        {
+            CheckPianoResult(tile.placedTower.GetComponent<Tower>());
+        }
+        else
+        {
+            pianoMod = 0;
+        }
+
         isMoving = false;
         desiredMovement = Vector3.zero;
         tile = null;
@@ -502,7 +559,7 @@ public class CursorTD : MonoBehaviour
             if (moveCounter == 4)
             {
                 movementSequence = false;
-                wasdParent.SetActive(false);
+                arrowKeyParent.SetActive(false);
                 moveCounter = 0;
 
                 tutorialPopupParent.SetActive(false);
@@ -544,13 +601,12 @@ public class CursorTD : MonoBehaviour
         //display movement tutorial
         if((movementSequence || towerPlaceSequence) && GameManager.Instance.tutorialRunning)
         {
-            wasdParent.SetActive(true);
-            wKey.GetComponent<TextMeshPro>().color = Color.red;
-            aKey.GetComponent<TextMeshPro>().color = Color.red;
-            sKey.GetComponent<TextMeshPro>().color = Color.red;
-            dKey.GetComponent<TextMeshPro>().color = Color.red;
-            
-            
+            arrowKeyParent.SetActive(true);
+            upKey.GetComponent<TextMeshPro>().color = Color.red;
+            leftKey.GetComponent<TextMeshPro>().color = Color.red;
+            rightKey.GetComponent<TextMeshPro>().color = Color.red;
+
+            downKey.GetComponent<TextMeshPro>().color = Color.red;
         }
         if(towerPlacementMenuSequence && GameManager.Instance.tutorialRunning)
         {
@@ -559,23 +615,53 @@ public class CursorTD : MonoBehaviour
         }
         if (towerBuffSequence && GameManager.Instance.tutorialRunning && tile != null && tile.placedTower != null)
         {
-            arrowKeyParent.SetActive(true);
-            upKey.GetComponent<TextMeshPro>().color = Color.red;
-            leftKey.GetComponent<TextMeshPro>().color = Color.red;
-            rightKey.GetComponent<TextMeshPro>().color = Color.red;
-            
+            wasdParent.SetActive(true);
+            wKey.GetComponent<TextMeshPro>().color = Color.red;
+            aKey.GetComponent<TextMeshPro>().color = Color.red;
+            dKey.GetComponent<TextMeshPro>().color = Color.red;
         }
         if (feverModeSequence && FeverSystem.Instance.feverBarNum == 100 && GameManager.Instance.tutorialRunning)
         {
-            arrowKeyParent.SetActive(true);
-            downKey.GetComponent<TextMeshPro>().color = Color.red;
+            wasdParent.SetActive(true);
+            sKey.GetComponent<TextMeshPro>().color = Color.red;
         }
+    }
+
+    public void CheckPianoResult(Tower tower)
+    {
+        switch (CheckOnBeat())
+        {
+            case _BeatResult.late:
+                pianoMod = 0;
+                break;
+            case _BeatResult.miss:
+                pianoMod = 0;
+                break;
+            case _BeatResult.early:
+                pianoMod += 1;
+                //SpawnResourceGenParticles();
+                break;
+            case _BeatResult.great:
+                pianoMod += 3;
+                //SpawnResourceGenParticles();
+                break;
+            case _BeatResult.perfect:
+                pianoMod += 5;
+                //SpawnResourceGenParticles();
+                break;
+            default:
+                break;
+        }
+
+        CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain * pianoMod;
+
+        SpawnResourceGenParticles();
     }
 
     public void SpawnBeatHitResult()
     {
         if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused || beatIsHit) return;
-        Debug.Log(ConductorV2.instance.beatDuration);
+        
         beatIsHit = true;
         GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
 
@@ -644,6 +730,11 @@ public class CursorTD : MonoBehaviour
         {
             return _BeatResult.miss;
         }
+    }
+
+    private void SpawnResourceGenParticles()
+    {
+        pianoResourceGenParticlesInstance = Instantiate(pianoResourceGenParticles, transform.position, Quaternion.identity);
     }
     
 }

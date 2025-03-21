@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     public class Dialogue
     {
         public string name;
+        public string emotion;
         public string text;
     }
 
@@ -46,15 +49,28 @@ public class DialogueManager : MonoBehaviour
 
     public TextAsset currentDialogue;
 
+    public Transform mainTextBox;
+    public Transform secondaryTextBox;
 
     public TextMeshProUGUI _speakerName;
     public TextMeshProUGUI _dialogue;
+    public TextMeshProUGUI _previousSpeakerName;
+    public TextMeshProUGUI _previousSpeakerText;
+
     public Image characterImage;
+    public Image secondCharacterImage;
     public int index;
 
     public DialogueList myDialogue = new DialogueList();
 
-    public GameObject dialogueBox;
+    public GameObject talkingDialogueBox;
+    public GameObject descriptiveDialogueBox;
+    public GameObject previousTalkingDialogueBox;
+    public Color fadedColor;
+    public Sprite previousCharacter;
+    public string currentCharacterName;
+    public string previousCharacterName;
+    public bool previousCharacterTalking;
 
     public bool dialogueFinished = false;
     public GameObject dialogueSystemParent;
@@ -65,7 +81,7 @@ public class DialogueManager : MonoBehaviour
     // Contains a reference to the object last selected before opening a dialogue sequence
     public GameObject lastActiveObject;
 
-    EventSystem eventSystem;
+    private EventSystem eventSystem;
 
     Coroutine typing;
 
@@ -78,15 +94,14 @@ public class DialogueManager : MonoBehaviour
     
     public AudioSource audioSource;
 
+    private int totalVisibleCharacters;
+    private int visibleCount;
+
     // Start is called before the first frame update
     void Start()
     {
         eventSystem = EventSystem.current;
 
-        
-        
-
-        
     }
 
 
@@ -104,11 +119,18 @@ public class DialogueManager : MonoBehaviour
         log.SetActive(false);
 
         currentDialogue = desiredDialogue;
-        dialogueBox.SetActive(true);
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);
         index = 0;
+
         _speakerName.text = string.Empty;
         _dialogue.text = string.Empty;
+        _previousSpeakerName.text = string.Empty;
+        _previousSpeakerText.text = string.Empty;
+
+        previousCharacterName = string.Empty;
+
+        secondCharacterImage.sprite = null;
+        secondCharacterImage.color = Color.clear;
 
         //MenuEventManager.Instance.DialogueOpen();
 
@@ -118,36 +140,70 @@ public class DialogueManager : MonoBehaviour
     IEnumerator TypeLine()
     {
         string dialogueText = myDialogue.dialogue[index].text;
+
+        currentCharacterName = myDialogue.dialogue[index].name;
         LoadCharacterSprite();
-        _speakerName.text = myDialogue.dialogue[index].name;
-        for (int i = 0; i < dialogueText.Length; i++)
+
+        TMP_TextInfo textInfo;
+        TextMeshProUGUI currentTextBox;
+
+        if (previousCharacterTalking)
+        {
+            secondaryTextBox.SetAsLastSibling();
+
+            _previousSpeakerName.text = myDialogue.dialogue[index].name;
+            _previousSpeakerText.text = dialogueText;
+
+            _previousSpeakerText.ForceMeshUpdate();
+
+            textInfo = _previousSpeakerText.textInfo;
+            currentTextBox = _previousSpeakerText;
+
+            _dialogue.text = string.Empty;
+        }
+        else
+        {
+            mainTextBox.SetAsLastSibling();
+
+            _speakerName.text = myDialogue.dialogue[index].name;
+            _dialogue.text = dialogueText;
+
+            _dialogue.ForceMeshUpdate();
+
+            textInfo = _dialogue.textInfo;
+            currentTextBox = _dialogue;
+
+            _previousSpeakerText.text = string.Empty;
+        }
+
+
+
+        bool typeText = true;
+
+        totalVisibleCharacters = textInfo.characterCount;
+        visibleCount = 0;
+
+        while (typeText)
         {
             while (pauseDialogue)
             {
                 yield return new WaitForSeconds(GameManager.Instance.textSpeed);
             }
-            if (dialogueText[i] == '<')
-                _dialogue.text += GetCompleteRichTextTag(ref i);
-            else
-                _dialogue.text += dialogueText[i];
+
+            if (visibleCount > totalVisibleCharacters)
+            {
+                yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+                //visibleCount = 0;
+                typeText = false;
+            }
+
+            currentTextBox.maxVisibleCharacters = visibleCount;
+
             PlayCharacterAudio();
+            visibleCount += 1; 
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
 
-        //foreach (char c in dialogueText)
-        //{
-        //    LoadCharacterSprite();
-
-        //    _speakerName.text = myDialogue.dialogue[index].name;
-        //    _dialogue.text += c;
-        //    //if (c == '<'){
-        //    //    GameManager.Instance.textSpeed = 0f;
-        //    //}
-        //    //else if (c == '>'){
-        //    //    GameManager.Instance.textSpeed = defaultTextSpeed;
-        //    //}
-        //    yield return new WaitForSeconds(GameManager.Instance.textSpeed);
-        //}
 
     }
 
@@ -157,7 +213,7 @@ public class DialogueManager : MonoBehaviour
         _newLog.GetComponent<DialogueLogEntry>().characterName.text = _speakerName.text;
         _newLog.GetComponent<DialogueLogEntry>().dialogue.text = _dialogue.text;
 
-        if (index < myDialogue.dialogue.Length - 1)
+        if (index < myDialogue.dialogue.Length - 1)//start next line
         {
             index++;
             _dialogue.text = string.Empty;
@@ -170,6 +226,13 @@ public class DialogueManager : MonoBehaviour
             //dialogue if its going into a combat
             if(GameManager.Instance.encounterRunning)
             {
+                if(GameManager.Instance.tutorialRunning)
+                {
+                    GameManager.Instance.dialogueRoot.SetActive(false);
+                    GameManager.Instance.LoadTutorial();
+                    return;
+                }
+                Debug.Log("Does this happen");
                 GameManager.Instance.combatRoot.SetActive(true);
                 GameManager.Instance.combatRunning = true;
                 CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
@@ -190,6 +253,12 @@ public class DialogueManager : MonoBehaviour
             //dialogue after combat
             if(GameManager.Instance.winState)
             {
+                if (GameManager.Instance.currentEncounter.isShowcase && GameManager.Instance.currentEncounter.nextEncounter != null)
+                {
+                    GameManager.Instance.combatRoot.SetActive(false);
+                    GameManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.nextEncounter);
+                    return;
+                }
                 GameManager.Instance.winScreen.SetActive(true);
                 MenuEventManager.Instance.WinScreenOpen();
                 GameManager.Instance.dialogueRoot.SetActive(false);
@@ -208,21 +277,56 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadCharacterSprite()
     {
-        var characterSprite = Resources.Load<Sprite>(myDialogue.dialogue[index].name);
-
-
+        var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}_{myDialogue.dialogue[index].emotion}");
 
         if (characterSprite == null)
         {
+            descriptiveDialogueBox.SetActive(true);
+            talkingDialogueBox.SetActive(false);
+            previousTalkingDialogueBox.SetActive(false);
+
             characterImage.sprite = null;
             characterImage.color = Color.clear;
+
+            secondCharacterImage.sprite = null;
+            secondCharacterImage.color = Color.clear;
         }
         else
         {
+            descriptiveDialogueBox.SetActive(false);
+            talkingDialogueBox.SetActive(true);
+
+            if(previousCharacterName == myDialogue.dialogue[index].name)
+            {
+                previousCharacterTalking = true;
+                characterImage.color = fadedColor;
+                secondCharacterImage.color = Color.white;
+
+                previousTalkingDialogueBox.SetActive(true);
+                previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterName}/{previousCharacterName}_1");
+                return;
+            }
+            else
+            {
+                previousCharacterTalking = false;
+            }
+
+            if(index != 0 && myDialogue.dialogue[index].name != myDialogue.dialogue[index - 1].name && myDialogue.dialogue[index].name != string.Empty)
+            {
+                secondCharacterImage.sprite = previousCharacter;
+                secondCharacterImage.color = fadedColor;
+                previousCharacterName = myDialogue.dialogue[index - 1].name;
+
+                if (secondCharacterImage.sprite == null)
+                {
+                    secondCharacterImage.color = Color.clear;
+                }
+            }
 
             characterImage.color = Color.white;
             characterImage.sprite = characterSprite;
         }
+        previousCharacter = characterSprite;
     }
     private void PlayCharacterAudio()
     {
@@ -243,14 +347,16 @@ public class DialogueManager : MonoBehaviour
 
     public void FinishLine()
     {
-        if(_dialogue.text == myDialogue.dialogue[index].text)
+        if(visibleCount >= totalVisibleCharacters)
         {
             NextLine();
         }
         else
         {
             StopCoroutine(typing);
-            _dialogue.text = myDialogue.dialogue[index].text;
+            visibleCount = totalVisibleCharacters;
+            _dialogue.maxVisibleCharacters = visibleCount;
+            _previousSpeakerText.maxVisibleCharacters = visibleCount;
         }
     }
 
@@ -269,6 +375,12 @@ public class DialogueManager : MonoBehaviour
         //dialogue if its going into a combat
         if (GameManager.Instance.encounterRunning)
         {
+            if (GameManager.Instance.tutorialRunning)
+            {
+                GameManager.Instance.dialogueRoot.SetActive(false);
+                GameManager.Instance.LoadTutorial();
+                return;
+            }
             GameManager.Instance.combatRoot.SetActive(true);
             GameManager.Instance.combatRunning = true;
             CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
@@ -278,6 +390,13 @@ public class DialogueManager : MonoBehaviour
         //dialogue after combat
         if (GameManager.Instance.winState)
         {
+            if (GameManager.Instance.currentEncounter.isShowcase && GameManager.Instance.currentEncounter.nextEncounter != null)
+            {
+                GameManager.Instance.combatRoot.SetActive(false);
+                GameManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.nextEncounter);
+                return;
+            }
+                
             GameManager.Instance.winScreen.SetActive(true);
             MenuEventManager.Instance.WinScreenOpen();
             GameManager.Instance.dialogueRoot.SetActive(false);
@@ -295,6 +414,7 @@ public class DialogueManager : MonoBehaviour
     public void SetLastActiveObject(GameObject currentlyActiveObject)
     {
         lastActiveObject = currentlyActiveObject;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     string GetCompleteRichTextTag(ref int _index)

@@ -66,12 +66,12 @@ public class Tower : MonoBehaviour
         {
             beatIndicator.SetActive(true);
             beatCircle.SetActive(true);
-            beatIndicator.transform.localScale = Vector3.Lerp(Vector3.one * 1.5f, Vector3.one * 0.75f, beatDuration);
+            //beatIndicator.transform.localScale = Vector3.Lerp(Vector3.one * 1.5f, Vector3.one * 0.75f, beatDuration);
 
-            if (ConductorV2.instance.beatDuration < 0.2)
-            {
-                beatIndicator.transform.localScale = Vector3.one * 1.5f;
-            }
+            //if (ConductorV2.instance.beatDuration < 0.2)
+            //{
+            //    beatIndicator.transform.localScale = Vector3.one * 1.5f;
+            //}
         }
         else
         {
@@ -82,54 +82,54 @@ public class Tower : MonoBehaviour
 
     public void OnBeat()
     {
-        switch (towerInfo.attackPattern)
-        {
-            case TowerAttackPattern.everyBeat:
-                towerAboutToFire = true;
-                Fire();
-                break;
-            case TowerAttackPattern.everyMeasure:
-                beat += 1;
-                if(beat == 4)
-                {
-                    Fire();
-                    beat = 1;
-                    towerAboutToFire = false;
-                }
-                else if(beat == 3)
-                {
-                    towerAboutToFire = true;
-                }
-                break;
-            case TowerAttackPattern.everyOtherBeat:
-                everyOtherBeat = !everyOtherBeat;
-                towerAboutToFire = !everyOtherBeat; 
-                if(everyOtherBeat)
-                {
-                    Fire();
-                }
-                break;
-            case TowerAttackPattern.everyBeatButOne:
-                beat += 1;
-                if (beat < 4)
-                {
-                    towerAboutToFire = true;
-                    Fire();
+        //switch (towerInfo.attackPattern)
+        //{
+        //    case TowerAttackPattern.everyBeat:
+        //        towerAboutToFire = true;
+        //        Fire();
+        //        break;
+        //    case TowerAttackPattern.everyMeasure:
+        //        beat += 1;
+        //        if(beat == 4)
+        //        {
+        //            Fire();
+        //            beat = 1;
+        //            towerAboutToFire = false;
+        //        }
+        //        else if(beat == 3)
+        //        {
+        //            towerAboutToFire = true;
+        //        }
+        //        break;
+        //    case TowerAttackPattern.everyOtherBeat:
+        //        everyOtherBeat = !everyOtherBeat;
+        //        towerAboutToFire = !everyOtherBeat; 
+        //        if(everyOtherBeat)
+        //        {
+        //            Fire();
+        //        }
+        //        break;
+        //    case TowerAttackPattern.everyBeatButOne:
+        //        beat += 1;
+        //        if (beat < 4)
+        //        {
+        //            towerAboutToFire = true;
+        //            Fire();
                     
-                }
-                else if(beat == 4)
-                {
-                    towerAboutToFire = false;
-                    beat = 1;
-                }
-                break;
-            default:
-                break;
-        }
+        //        }
+        //        else if(beat == 4)
+        //        {
+        //            towerAboutToFire = false;
+        //            beat = 1;
+        //        }
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
 
-    public void Fire()
+    public void Fire() //make another fire method specifically for violin (pass thro)
     {
         if (!rotateStarted) return;
 
@@ -166,9 +166,8 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
-        bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
-        bullet.GetComponent<Projectile>().damage = currentDamage;
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+        
 
         if(attackBuffed || FeverSystem.Instance.feverModeActive)
             bullet.GetComponent<SpriteRenderer>().color = Color.red;
@@ -177,7 +176,55 @@ public class Tower : MonoBehaviour
         attackBuffed = false;
         
     }
-    
+
+    public void Fire(float yPos) //fire method specifically for Violin
+    {
+        if (!rotateStarted) return;
+
+        //Audio SFX
+        towerAttackSFX.Play();
+
+        if (attackBuffed || FeverSystem.Instance.feverModeActive)
+        {
+            currentDamage = currentDamage * 2;
+        }
+        else
+        {
+            currentDamage = tempDamageHolder;
+        }
+
+
+        if (towerInfo.isAOETower)
+        {
+            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
+
+            foreach (var item in colliders)
+            {
+                if (item.transform.CompareTag("StageTile"))
+                {
+                    item.transform.GetComponent<Tile>().Pulse(Color.red);
+                }
+                else if (item.transform.CompareTag("Enemy"))
+                {
+                    item.transform.GetComponent<Enemy>().Damage(currentDamage);
+                }
+            }
+            colliders = null;
+            return;
+        }
+
+        GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+
+
+        if (attackBuffed || FeverSystem.Instance.feverModeActive)
+            bullet.GetComponent<SpriteRenderer>().color = Color.red;
+
+        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        attackBuffed = false;
+
+    } //end of fire(yPos)
+
     public void ExtraFire()
     {
         if (!rotateStarted) return;
@@ -202,17 +249,15 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().bulletRange = towerInfo.range;
-        bullet.GetComponent<Projectile>().towerFiredFrom = gameObject;
-        bullet.GetComponent<Projectile>().damage = currentDamage;
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+
         bullet.GetComponent<SpriteRenderer>().color = Color.blue;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
         GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet2.GetComponent<Projectile>().bulletRange = towerInfo.range;
-        bullet2.GetComponent<Projectile>().towerFiredFrom = gameObject;
-        bullet2.GetComponent<Projectile>().damage = currentDamage;
+        bullet2.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+
         bullet2.GetComponent<SpriteRenderer>().color = Color.blue;
 
         ConductorV2.instance.triggerEvent.Add(bullet2.GetComponent<Projectile>().trigger);
@@ -250,6 +295,7 @@ public class Tower : MonoBehaviour
                 break;
         }
         ConductorV2.instance.triggerEvent.Remove(trigger);
+        TowerManager.Instance.towers.Remove(gameObject);
         connectedTile.placedTower = null;
         Destroy(gameObject);
     }

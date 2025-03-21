@@ -97,6 +97,8 @@ GameObject:
   - component: {fileID: 5445784862720018778}
   - component: {fileID: 1202811070454382304}
   - component: {fileID: 1682748152385235575}
+  - component: {fileID: 2469483507478578560}
+  - component: {fileID: 2503793250668069574}
   m_Layer: 0
   m_Name: Drums 1
   m_TagString: Tower
@@ -221,6 +223,7 @@ MonoBehaviour:
   towerHover: 0
   beatIndicator: {fileID: 4686513911658087842}
   beatCircle: {fileID: 31395926951258363}
+  towerAboutToFire: 0
   shieldEffect: {fileID: 5223548057794400369}
   isShielded: 0
   beat: 0
@@ -321,6 +324,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &2469483507478578560
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2167625354041566739}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80b7bc3e425b3f0409e99951d72f2683, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2503793250668069574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2167625354041566739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3d7567aa4e5774586dcf19149c350e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2469483507478578560}
+  currentState: 0
 --- !u!1 &3880868882564430295
 GameObject:
   m_ObjectHideFlags: 0

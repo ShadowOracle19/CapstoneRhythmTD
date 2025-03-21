@@ -51,11 +51,6 @@ public class CombatManager : MonoBehaviour
     public Slider resourceSlider;
     public TextMeshProUGUI resourceText;
 
-    [Header("beat indicator")]
-    public GameObject beatPrefab;
-    public Transform beatParent;
-    public Transform beatSpawnPoint;
-    public Transform beatEndPoint;
 
     [Header("Combat UI")]
     public GameObject enemyTimerObject;
@@ -68,13 +63,20 @@ public class CombatManager : MonoBehaviour
     public GameObject waveCounter;
     public GameObject combo;
     public GameObject knockEmDead;
-    
-           
+
+    public GameObject grid;
+    public int pianoResourceGen = 5;
+    public bool firstPianoTap = true;
+    public CursorTD cursor;
+    public _BeatResult resultForPiano;
+    int pianoGenMultiplier = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         //LoadEncounter(currentEncounter);
+        grid = transform.GetChild(10).transform.GetChild(0).gameObject;
+        cursor = transform.GetChild(11).GetComponent<CursorTD>();
     }
 
 
@@ -93,9 +95,12 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
-        currentEncounter = encounter;
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
-        ConductorV2.instance.CountUsIn(currentEncounter.encounterBPM);
+
+        currentEncounter = encounter;
+
+
+        ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
 
 
         allEnemiesSpawned = false;
@@ -114,32 +119,11 @@ public class CombatManager : MonoBehaviour
         enemyTimer = enemyTimerMax;
         enemiesSpawnIn.gameObject.SetActive(true);
 
-        //Conductor.Instance.bass.volume = 0;
-        //Conductor.Instance.piano.volume = 0;
-        //Conductor.Instance.guitarH.volume = 0;
-        //Conductor.Instance.guitarM.volume = 0;
-        //Conductor.Instance.drums.volume = 0;
 
         CursorTD.Instance.InitializeCursor();
-        CursorTD.Instance.pauseMovement = false;
-        CursorTD.Instance.towerSwap = false;
-        CursorTD.Instance.placementMenu.SetActive(false);
 
-        TowerManager.Instance.drumCooldown = false;
-        TowerManager.Instance.bassCooldown = false;
-        TowerManager.Instance.pianoCooldown = false;
-        TowerManager.Instance.guitarCooldown = false;
-
-        TowerManager.Instance.drumCooldownBack = false;
-        TowerManager.Instance.bassCooldownBack = false;
-        TowerManager.Instance.pianoCooldownBack = false;
-        TowerManager.Instance.guitarCooldownBack = false;
-
-        CursorTD.Instance.tutorialParent.SetActive(false);
-        CursorTD.Instance.tutorialPopupParent.SetActive(false);
-
-        
-
+        TowerManager.Instance.ResetTowerManager();
+        TowerManager.Instance.SetupResourceBars();
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -163,6 +147,7 @@ public class CombatManager : MonoBehaviour
         }
         enemySpawners.startOnce = false;
         CursorTD.Instance.pauseMovement = true;
+        CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         GameManager.Instance.menuMusic.Play();
@@ -191,8 +176,6 @@ public class CombatManager : MonoBehaviour
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
 
-        
-
         //checks if all enemies have spawned
         if (!enemySpawners.allEnemiesSpawned)
         {
@@ -205,15 +188,11 @@ public class CombatManager : MonoBehaviour
         }
         
         //checks if all enemies have died or player health hasnt reached zero to give a win state
-        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0 && !GameManager.Instance.tutorialRunning)
+        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0)
         {
             GameManager.Instance.WinLevel();
         }
 
-        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0 && GameManager.Instance.tutorialRunning)
-        {
-            GameManager.Instance.TutorialWinState();
-        }
 
         //delays enemy spawning
         DelayTimer();
@@ -245,7 +224,7 @@ public class CombatManager : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.movementSequence)
             return;
 
-        if (GameManager.Instance.tutorialRunning && resourceNum >= 24 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence && !CursorTD.Instance.towerPlacementMenuSequencePassed)
+        if (GameManager.Instance.tutorialRunning && resourceNum >= 25 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence && !CursorTD.Instance.towerPlacementMenuSequencePassed)
         {
             CursorTD.Instance.tutorialPopupParent.SetActive(true);
             CursorTD.Instance.tutorialText.text = "Now you have enough magic press space to open the tower place menu!";
@@ -255,11 +234,4 @@ public class CombatManager : MonoBehaviour
         resourceNum += 1;
     }
      
-    public void SpawnBeat()
-    {
-        if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused) return;
-
-        GameObject beat = Instantiate(beatPrefab, beatSpawnPoint.position, Quaternion.identity, beatParent);
-        beat.GetComponent<BeatMover>().endPos = beatEndPoint;
-    }
 }

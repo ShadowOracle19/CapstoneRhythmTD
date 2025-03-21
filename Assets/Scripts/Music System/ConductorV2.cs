@@ -83,31 +83,6 @@ public class ConductorV2 : MonoBehaviour
     public bool countingIn = false;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //if(isInTestingEnvironment)//if in a testing environment thats not the game scene play this to start conductor
-        //{
-        //    //load the audio source attached to the conductor gameobject
-        //    musicSource = GetComponent<AudioSource>();
-
-        //    //calculate the number of seconds in each beat
-        //    crotchet = 60 / bpm;
-
-        //    //record the time when the music starts
-        //    dspSongTime = (float)AudioSettings.dspTime;
-
-        //    completedLoops = 0;
-        //    numberOfBeats = 0;
-        //    beatTrack = 0;
-        //    beatDuration = 0;
-
-        //    //Start the song
-        //    musicSource.Play();
-        //}
-        
-    }
-
     public void CountUsIn(int _bpm)
     {
         ////record the time when the music starts
@@ -115,7 +90,6 @@ public class ConductorV2 : MonoBehaviour
         AudioSettings.Reset(config);
         dspSongTime = (float)AudioSettings.dspTime;
 
-        PlayMusic();
 
         pauseConductor = true;
         //load the audio source attached to the conductor gameobject
@@ -158,18 +132,12 @@ public class ConductorV2 : MonoBehaviour
         //calculate the number of seconds in each beat
         crotchet = 60 / bpm;
 
-        
-
         completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 1;
         beatDuration = 0;
 
-        drums.volume = 0;
-        bass.volume = 0;
-        piano.volume = 0;
-        guitarH.volume = 0;
-        guitarM.volume = 0;
+        DynamicSongInit(GameManager.Instance.currentEncounter.combatEncounter.dynamicSong);
 
         if (GameManager.Instance.tutorialRunning)
         {
@@ -177,10 +145,30 @@ public class ConductorV2 : MonoBehaviour
             CursorTD.Instance.movementSequence = true;
         }
 
-        musicSource.Play();
         //Start the song
-        
-        //musicSource.Play();
+        musicSource.Play();
+    }
+
+    public void DynamicSongInit(DynamicSongCreator song)
+    {
+        drums.volume = 0;
+        bass.volume = 0;
+        piano.volume = 0;
+        guitarH.volume = 0;
+        guitarM.volume = 0;
+
+        drums.clip = song.drums;
+        bass.clip = song.bass;
+        piano.clip = song.piano;
+        guitarH.clip = song.guitarHarmony;
+        guitarM.clip = song.guitarMelody;
+
+        if(song.guitarMelody == null)
+        {
+            guitarM.clip = null;
+        }
+
+        PlayMusic();
     }
 
     // Update is called once per frame
@@ -198,8 +186,18 @@ public class ConductorV2 : MonoBehaviour
             ResumeMusic();
         }
 
-       
+        Conduct();
+        
+        //if(beatDuration == perfectBeatThreshold)
+        //{
+        //    _ping.Play();
+        //}
 
+        beatTrack = Mathf.Clamp(beatTrack, 0, 4);
+    }
+
+    public void Conduct()
+    {
         //determine how many seconds since the song started
         songPosition = (float)(AudioSettings.dspTime - dspSongTime - offset);
 
@@ -211,7 +209,7 @@ public class ConductorV2 : MonoBehaviour
             completedLoops++;
         loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop + 1;
 
-        loopPositionInAnalog = (loopPositionInBeats-1) / beatsPerLoop;
+        loopPositionInAnalog = (loopPositionInBeats - 1) / beatsPerLoop;
 
         if (songPositionInBeats >= numberOfBeats + 1 * 1)
         {
@@ -219,28 +217,9 @@ public class ConductorV2 : MonoBehaviour
         }
 
         beatDuration = songPositionInBeats - numberOfBeats * 1;
-
-        //threshold = InThreshHold();
-
-        //if(ping)
-        //{
-            
-        //    currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationLeft, beatDuration);
-        //    currentRotation.eulerAngles = currentEulerAngles;
-        //    ticker.transform.rotation = currentRotation;
-        //}
-        //else
-        //{
-            
-        //    currentEulerAngles = Vector3.Lerp(currentEulerAngles, rotationRight, beatDuration);
-        //    currentRotation.eulerAngles = currentEulerAngles;
-        //    ticker.transform.rotation = currentRotation;
-        //}
-
+        beatDuration = Mathf.Round(beatDuration * 100) * 0.01f;
 
         TriggerBeatEvent(musicSource.timeSamples / (musicSource.clip.frequency * crotchet));
-
-        beatTrack = Mathf.Clamp(beatTrack, 0, 4);
     }
 
     public void Tick()

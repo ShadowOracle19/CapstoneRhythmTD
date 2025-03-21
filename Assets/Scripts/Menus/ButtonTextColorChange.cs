@@ -17,6 +17,7 @@ public class ButtonTextColorChange : MonoBehaviour, ISelectHandler, IDeselectHan
     {
         gameObject.GetComponentInChildren<TextMeshProUGUI>().color = selectedColor;
     }
+    
     public void OnDeselect(BaseEventData eventData)
     {
         gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;

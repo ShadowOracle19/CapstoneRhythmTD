@@ -296,6 +296,8 @@ GameObject:
   - component: {fileID: 1969963013028165710}
   - component: {fileID: 6367522176411443336}
   - component: {fileID: 3394822002045557788}
+  - component: {fileID: 6228855645503357460}
+  - component: {fileID: 5649830183803718164}
   m_Layer: 0
   m_Name: Viola 1
   m_TagString: Tower
@@ -375,6 +377,7 @@ MonoBehaviour:
   towerHover: 0
   beatIndicator: {fileID: 5507092617889812758}
   beatCircle: {fileID: 1651270596960188021}
+  towerAboutToFire: 0
   shieldEffect: {fileID: 789721583385408312}
   isShielded: 0
   beat: 0
@@ -520,6 +523,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &6228855645503357460
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183850645279424415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80b7bc3e425b3f0409e99951d72f2683, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5649830183803718164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183850645279424415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3d7567aa4e5774586dcf19149c350e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6228855645503357460}
+  currentState: 0
 --- !u!1 &5507092617889812758
 GameObject:
   m_ObjectHideFlags: 0

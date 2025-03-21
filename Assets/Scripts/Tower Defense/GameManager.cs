@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
     [Header("Dialogue")]
     public float textSpeed = 0.05f;
 
+    [Header("Tutorial")]
+    public DynamicSongCreator tutorialSong;
 
     // Start is called before the first frame update
     void Start()
@@ -101,16 +103,9 @@ public class GameManager : MonoBehaviour
             Health();
         }
 
-        
-        /*
-        if(menuRoot.activeSelf || dialogueRoot.activeSelf)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        */
-        
     }
 
+    #region pause function
     public void HandlePauseMenuInput()
     {
         Debug.Log("pause");
@@ -134,6 +129,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PauseGame()
+    {
+        if (dialogueRoot.activeSelf || menuRoot.activeSelf)
+        {
+            //set the restart encounter button to disabled
+            restartEncounterButton.interactable = false;
+        }
+        else
+        {
+            restartEncounterButton.interactable = true;
+
+            //conductor.SetActive(false);
+        }
+        //Cursor.lockState = CursorLockMode.None;
+        isGamePaused = true;
+        pauseMenuRoot.SetActive(true);
+        MenuEventManager.Instance.PauseMenuOpen();
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        if (combatRunning && !dialogueRoot.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            conductor.SetActive(true);
+        }
+
+        isGamePaused = false;
+        pauseMenuRoot.SetActive(false);
+        exitMenuRoot.SetActive(false);
+        settings.SetActive(false);
+        MenuEventManager.Instance.PauseMenuClose();
+        Time.timeScale = 1;
+    }
+    #endregion
+
+    #region tower defense health/damage
+    public void Damage()
+    {
+        _currentHealth -= 1;
+        if (_currentHealth <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    void Health()
+    {
+        healthSlider.maxValue = _maxHealth;
+        healthSlider.value = _currentHealth;
+
+
+    }
+    #endregion
+
     public void LoadTutorial()
     {
         menuMusic.Stop();
@@ -146,7 +197,6 @@ public class GameManager : MonoBehaviour
 
         CombatManager.Instance.enemyTimerObject.SetActive(false);
         CombatManager.Instance.healthBar.SetActive(false);
-        CombatManager.Instance.controls.SetActive(false);
         CombatManager.Instance.resources.SetActive(false);
         CombatManager.Instance.towerDisplay.SetActive(false);
         CombatManager.Instance.feverBar.SetActive(false);
@@ -170,22 +220,13 @@ public class GameManager : MonoBehaviour
         CursorTD.Instance.spaceKeyParent.SetActive(false);
 
         CursorTD.Instance.InitializeCursor();
-        CursorTD.Instance.pauseMovement = false;
-        CursorTD.Instance.towerSwap = false;
-        CursorTD.Instance.placementMenu.SetActive(false);
 
-        TowerManager.Instance.drumCooldown = false;
-        TowerManager.Instance.bassCooldown = false;
-        TowerManager.Instance.pianoCooldown = false;
-        TowerManager.Instance.guitarCooldown = false;
-
-        TowerManager.Instance.drumCooldownBack = false;
-        TowerManager.Instance.bassCooldownBack = false;
-        TowerManager.Instance.pianoCooldownBack = false;
-        TowerManager.Instance.guitarCooldownBack = false;
+        TowerManager.Instance.ResetTowerManager();
+        TowerManager.Instance.SetupResourceBars();
 
 
-        ConductorV2.instance.CountUsIn(80);
+
+
         CombatManager.Instance.enemyTotal = 7;
 
 
@@ -198,12 +239,13 @@ public class GameManager : MonoBehaviour
         EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
 
         CursorTD.Instance.tutorialPopupParent.SetActive(true);
-        CursorTD.Instance.tutorialText.text = "Use WASD keys to move the cursor";
+        CursorTD.Instance.tutorialText.text = "Use Arrow keys to move the cursor";
+        ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
     }
 
     public void LoadEncounter(EncounterCreator encounter)
     {
-        tutorialRunning = false;
+        tutorialRunning = encounter.isTutorial;
         currentEncounter = encounter;
         encounterRunning = true;
         winState = false;
@@ -218,67 +260,7 @@ public class GameManager : MonoBehaviour
         }
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
-
-        
-
-
-        
     }
-
-    public void Damage()
-    {
-        _currentHealth -= 1;
-        if (_currentHealth <= 0)
-        {
-            GameOver();
-        }
-    }
-
-    void Health()
-    {
-        healthSlider.maxValue = _maxHealth;
-        healthSlider.value = _currentHealth;
-
-        
-    }
-
-
-    public void PauseGame()
-    {
-        if (dialogueRoot.activeSelf || menuRoot.activeSelf)
-        {
-            //set the restart encounter button to disabled
-            restartEncounterButton.interactable = false;
-        }
-        else
-        {
-            restartEncounterButton.interactable = true;
-            
-            //conductor.SetActive(false);
-        }
-        //Cursor.lockState = CursorLockMode.None;
-        isGamePaused = true;
-        pauseMenuRoot.SetActive(true);
-        MenuEventManager.Instance.PauseMenuOpen();
-        Time.timeScale = 0;
-    }
-
-    public void ResumeGame()
-    {
-        if (combatRunning && !dialogueRoot.activeSelf)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            conductor.SetActive(true);
-        }
-        
-        isGamePaused = false;
-        pauseMenuRoot.SetActive(false);
-        exitMenuRoot.SetActive(false);
-        settings.SetActive(false);
-        MenuEventManager.Instance.PauseMenuClose();
-        Time.timeScale = 1;
-    }
-
 
     public void GameOver()
     {
@@ -299,6 +281,8 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
         ConductorV2.instance.StopMusic();
+
+        CursorTD.Instance.tutorialPopupParent.SetActive(false);
 
         if (currentEncounter.endDialogue == null)
         {
@@ -322,12 +306,25 @@ public class GameManager : MonoBehaviour
         encounterRunning = false;
         //Cursor.lockState = CursorLockMode.None;
 
-        CursorTD.Instance.tutorialPopupParent.SetActive(false);
 
-        winScreen.SetActive(true);
+        if(currentEncounter.isShowcase)
+        {
+            combatRoot.SetActive(false);
+            LoadEncounter(currentEncounter.nextEncounter);
+            return;
+        }
+
+        //winScreen.SetActive(true);
         //conductor.SetActive(false);
-        MenuEventManager.Instance.WinScreenOpen();
+        //MenuEventManager.Instance.WinScreenOpen();
+        dialogueRoot.SetActive(true);
+        DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         ConductorV2.instance.StopMusic();
+    }
+
+    public void ResetGameManagerVariables()
+    {
+
     }
 
 }

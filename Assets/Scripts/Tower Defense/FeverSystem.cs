@@ -78,7 +78,7 @@ public class FeverSystem : MonoBehaviour
 
             if (GameManager.Instance.tutorialRunning && CursorTD.Instance.feverModeSequence && feverBarNum >= 99 && !EnemySpawner.Instance.allEnemiesSpawned)
             {
-                CursorTD.Instance.tutorialText.text = "Quick activate fever mode by pressing the down arrow key!";
+                CursorTD.Instance.tutorialText.text = "Quick activate fever mode by pressing the S key!";
 
                 EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[0].transform.position.y, EnemyType.Walker);
                 EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[1].transform.position.y, EnemyType.Walker);

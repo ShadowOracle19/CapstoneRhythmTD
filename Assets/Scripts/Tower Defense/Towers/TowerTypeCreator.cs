@@ -14,6 +14,7 @@ public class TowerTypeCreator : ScriptableObject
     [Header("Tower Stats")]
     public InstrumentType type;
     public int resourceCost = 0;
+    public TowerResourceCost cost;
     [Tooltip("In Beats")]
     public int cooldownTime = 0;
     public int towerHealth = 0;
@@ -29,9 +30,20 @@ public class TowerTypeCreator : ScriptableObject
     [Tooltip("Set to true if you want tower to be AOE")]
     public bool isAOETower = false;
 
+    [Header("Resource Tower")]
+    public bool isResourceTower = false;
+    public int resourceGain = 5;
+
 }
 
 public enum TowerAttackPattern
 {
-    everyBeat, everyMeasure, everyOtherBeat, everyBeatButOne
+
+    everyBeat, everyMeasure, everyOtherBeat, everyBeatButOne, snakePatternFire, none
+
+}
+
+public enum TowerResourceCost
+{
+    one, two, three, four
 }

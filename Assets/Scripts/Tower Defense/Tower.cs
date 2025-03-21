@@ -117,17 +117,10 @@ public class Tower : MonoBehaviour
         //Audio SFX
         towerAttackSFX.Play();
         
-        if(attackBuffed || FeverSystem.Instance.feverModeActive)
-        {
-            currentDamage = currentDamage * 2;
-        }
-        else
-        {
-            currentDamage = tempDamageHolder;
-        }
+        
+        currentDamage = tempDamageHolder;
 
-
-        if(towerInfo.isAOETower)
+        if (towerInfo.isAOETower)
         {
             colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
 
@@ -165,15 +158,8 @@ public class Tower : MonoBehaviour
         //Audio SFX
         towerAttackSFX.Play();
 
-        if (attackBuffed || FeverSystem.Instance.feverModeActive)
-        {
-            currentDamage = currentDamage * 2;
-        }
-        else
-        {
-            currentDamage = tempDamageHolder;
-        }
-
+        
+        currentDamage = tempDamageHolder;
 
         if (towerInfo.isAOETower)
         {
@@ -195,7 +181,7 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
 
 
         if (attackBuffed || FeverSystem.Instance.feverModeActive)
@@ -230,14 +216,14 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
         bullet.GetComponent<SpriteRenderer>().color = Color.blue;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
         GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet2.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies);
+        bullet2.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
         bullet2.GetComponent<SpriteRenderer>().color = Color.blue;
 
@@ -384,7 +370,16 @@ public class Tower : MonoBehaviour
         }
         else if(currentState == TowerState.Repeating)
         {
-            PlayBuffs(recordedBuffs[buffIndex]);
+            if(buffIndex > recordedBuffs.Count - 1)
+            {
+
+            }
+            else
+            {
+                PlayBuffs(recordedBuffs[buffIndex]);
+
+            }
+
 
             buffIndex += 1;
 
@@ -402,7 +397,7 @@ public class Tower : MonoBehaviour
                 }
             }
 
-            if (buffIndex >= recordedBuffs.Count)
+            if (buffIndex >= 4)
             {
                 buffIndex = 0;
             }

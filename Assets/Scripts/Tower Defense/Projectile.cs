@@ -70,7 +70,7 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().Damage(damage);
-            collision.GetComponent<Enemy>().burnDamage += 1;
+            collision.GetComponent<Enemy>().burnDamage += 4;
             collision.GetComponent<Enemy>().burnt = true;
 
             if(!piercing) RemoveProjectile();

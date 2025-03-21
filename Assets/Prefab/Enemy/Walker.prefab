@@ -50,10 +50,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 5766a935811d27948977134265fff02b, type: 2}
+  enemyEffect: {fileID: 0}
   enemyDeathSFX: {fileID: 6874018606574302444}
   path: []
   currentPositionHolder: {x: 0, y: 0, z: 0}
-  move: 1
+  dontMove: 0
+  barTracker: 0
   currentHealth: 0
   trigger:
     m_PersistentCalls:
@@ -251,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8271242190675663843}
   - component: {fileID: 4349701985587343243}
+  - component: {fileID: 6408155196261647766}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -314,7 +317,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: -2010960486, guid: e9db40d112479b14bbb2c2fe952c0456, type: 3}
+  m_Sprite: {fileID: -1993063976, guid: a622b3722cb7cbf4b959376af65cabfb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -325,6 +328,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6408155196261647766
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663426221981257777}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c4a3c1afc4b5db24bac5b71cccc7e6ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6298202153938650124
 GameObject:
   m_ObjectHideFlags: 0

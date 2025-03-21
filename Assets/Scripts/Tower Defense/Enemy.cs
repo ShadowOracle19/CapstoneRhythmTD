@@ -31,7 +31,8 @@ public class Enemy : MonoBehaviour
 
     bool playOnce = false;
 
-
+    public int burnDamage = 0;
+    public bool burnt = false;
 
 
     // Start is called before the first frame update
@@ -58,6 +59,17 @@ public class Enemy : MonoBehaviour
 
     public void OnTick()
     {
+        if(burnt)
+        {
+            Damage(burnDamage);
+            burnDamage -= 1;
+
+            if(burnDamage == 0)
+            {
+                burnt = false;
+            }
+        }
+
         switch (enemy.movementPattern)
         {
             case EnemyMovementPattern.everyBeat:

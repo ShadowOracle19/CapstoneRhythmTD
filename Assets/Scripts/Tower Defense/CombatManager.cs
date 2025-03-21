@@ -224,7 +224,7 @@ public class CombatManager : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.movementSequence)
             return;
 
-        if (GameManager.Instance.tutorialRunning && resourceNum >= 24 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence && !CursorTD.Instance.towerPlacementMenuSequencePassed)
+        if (GameManager.Instance.tutorialRunning && resourceNum >= 25 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence && !CursorTD.Instance.towerPlacementMenuSequencePassed)
         {
             CursorTD.Instance.tutorialPopupParent.SetActive(true);
             CursorTD.Instance.tutorialText.text = "Now you have enough magic press space to open the tower place menu!";

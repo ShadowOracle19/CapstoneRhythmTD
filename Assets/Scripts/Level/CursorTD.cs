@@ -109,6 +109,11 @@ public class CursorTD : MonoBehaviour
     [Header("Piano resource gain")]
     public int pianoMod = 0;
 
+    // PFX
+    [SerializeField] private ParticleSystem pianoResourceGenParticles;
+
+    private ParticleSystem pianoResourceGenParticlesInstance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -335,23 +340,23 @@ public class CursorTD : MonoBehaviour
     public void Buff1Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(KeyCode.LeftArrow);
+        TowerEmpowerment(BuffType.Niimi);
         SpawnBeatHitResult();
     }
     public void Buff2Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(KeyCode.UpArrow);
+        TowerEmpowerment(BuffType.Sonu);
         SpawnBeatHitResult();
     }
     public void Buff3Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(KeyCode.RightArrow);
+        TowerEmpowerment(BuffType.Fayruz);
         SpawnBeatHitResult();
     }
 
-    public void TowerEmpowerment(KeyCode _keyCode)
+    public void TowerEmpowerment(BuffType buff)
     {
         if(tile.placedTower != null)
         {
@@ -365,12 +370,12 @@ public class CursorTD : MonoBehaviour
                 case _BeatResult.great:
                     
                     ComboManager.Instance.IncreaseCombo();
-                    tile.placedTower.GetComponent<Tower>().ActivateBuff(_keyCode);
+                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
                     break;
                 case _BeatResult.perfect:
                     
                     ComboManager.Instance.IncreaseCombo();
-                    tile.placedTower.GetComponent<Tower>().ActivateBuff(_keyCode);
+                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
                     break;
                 default:
                     break;
@@ -634,18 +639,23 @@ public class CursorTD : MonoBehaviour
                 break;
             case _BeatResult.early:
                 pianoMod += 1;
+                //SpawnResourceGenParticles();
                 break;
             case _BeatResult.great:
                 pianoMod += 3;
+                //SpawnResourceGenParticles();
                 break;
             case _BeatResult.perfect:
                 pianoMod += 5;
+                //SpawnResourceGenParticles();
                 break;
             default:
                 break;
         }
 
         CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain * pianoMod;
+
+        SpawnResourceGenParticles();
     }
 
     public void SpawnBeatHitResult()
@@ -720,6 +730,11 @@ public class CursorTD : MonoBehaviour
         {
             return _BeatResult.miss;
         }
+    }
+
+    private void SpawnResourceGenParticles()
+    {
+        pianoResourceGenParticlesInstance = Instantiate(pianoResourceGenParticles, transform.position, Quaternion.identity);
     }
     
 }

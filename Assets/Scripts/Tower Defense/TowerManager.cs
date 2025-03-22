@@ -30,10 +30,23 @@ public class TowerManager : MonoBehaviour
 
     public GameObject towerToPlace;
     public bool isTowerHovering = false;
-
+    
     //list of current towers the player has
     public List<GameObject> towers = new List<GameObject>();
 
+    //Tower cooldown shader management
+    public Material greyscaleShader;
+
+    public GameObject menuTower1;
+    public GameObject menuTower2;
+    public GameObject menuTower3;
+    public GameObject menuTower4;
+
+    public GameObject sidebarTower1;
+    public GameObject sidebarTower2;
+    public GameObject sidebarTower3;
+    public GameObject sidebarTower4;
+    
     //Note: After this sprint replace to be more dynamic
     public GameObject drumCooldownSlot;
     public bool drumCooldown;
@@ -122,6 +135,7 @@ public class TowerManager : MonoBehaviour
     void Update()
     {
         Cooldown();
+        UpdateCooldownShader();
     }
 
     public void SetupResourceBars()
@@ -211,7 +225,7 @@ public class TowerManager : MonoBehaviour
         bassCooldownSlotBack.SetActive(bassCooldownBack);
         pianoCooldownSlotBack.SetActive(pianoCooldownBack);
         guitarCooldownSlotBack.SetActive(guitarCooldownBack);
-
+        
         //front slots
         if (drumCooldown)
         {
@@ -291,7 +305,7 @@ public class TowerManager : MonoBehaviour
         if (bassCooldownBack)
         {
             bassCooldownTimeBack += Time.deltaTime;
-
+            
             //cooldown effect
             bassCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(bassCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((bassCooldownTimeBack / bassCooldownTimeRemainingBack) * 100));
 
@@ -577,6 +591,67 @@ public class TowerManager : MonoBehaviour
                 default:
                     break;
             }
+        }
+    }
+
+    void UpdateCooldownShader() 
+    { 
+        //GameObject menuTower, GameObject sidebarTower, bool shaderToggle
+        /*
+        if (shaderToggle)
+        {
+            menuTower.GetComponent<Image>().material = greyscaleShader;
+            sidebarTower.GetComponent<Image>().material = greyscaleShader;
+        }
+        else
+        {
+            menuTower.GetComponent<Image>().material = null;
+            sidebarTower.GetComponent<Image>().material = null;
+        }
+        */
+
+        if (guitarCooldown || CombatManager.Instance.resourceNum < towers[0].GetComponent<Tower>().towerInfo.resourceCost) 
+        {
+            menuTower1.GetComponent<Image>().material = greyscaleShader;
+            sidebarTower1.GetComponent<Image>().material = greyscaleShader;
+        }
+        else if (!guitarCooldown && CombatManager.Instance.resourceNum >= towers[0].GetComponent<Tower>().towerInfo.resourceCost)
+        {
+            menuTower1.GetComponent<Image>().material = null;
+            sidebarTower1.GetComponent<Image>().material = null;
+        }
+        
+        if (drumCooldown || CombatManager.Instance.resourceNum < towers[1].GetComponent<Tower>().towerInfo.resourceCost) 
+        {
+            menuTower2.GetComponent<Image>().material = greyscaleShader;
+            sidebarTower2.GetComponent<Image>().material = greyscaleShader;
+        }
+        else if (!drumCooldown && CombatManager.Instance.resourceNum >= towers[1].GetComponent<Tower>().towerInfo.resourceCost)
+        {
+            menuTower2.GetComponent<Image>().material = null;
+            sidebarTower2.GetComponent<Image>().material = null;
+        }
+
+        if (bassCooldown || CombatManager.Instance.resourceNum < towers[2].GetComponent<Tower>().towerInfo.resourceCost) 
+        {
+            menuTower3.GetComponent<Image>().material = greyscaleShader;
+            sidebarTower3.GetComponent<Image>().material = greyscaleShader;
+        }
+        else if (!bassCooldown && CombatManager.Instance.resourceNum >= towers[2].GetComponent<Tower>().towerInfo.resourceCost)
+        {
+            menuTower3.GetComponent<Image>().material = null;
+            sidebarTower3.GetComponent<Image>().material = null;
+        }
+
+        if (pianoCooldown || CombatManager.Instance.resourceNum < towers[3].GetComponent<Tower>().towerInfo.resourceCost) 
+        {
+            menuTower4.GetComponent<Image>().material = greyscaleShader;
+            sidebarTower4.GetComponent<Image>().material = greyscaleShader;
+        }
+        else if (!pianoCooldown && CombatManager.Instance.resourceNum >= towers[3].GetComponent<Tower>().towerInfo.resourceCost)
+        {
+            menuTower4.GetComponent<Image>().material = null;
+            sidebarTower4.GetComponent<Image>().material = null;
         }
     }
 }

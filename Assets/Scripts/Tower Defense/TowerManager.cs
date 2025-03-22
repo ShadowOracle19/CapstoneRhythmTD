@@ -384,7 +384,7 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type, _BeatResult result)
+    public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, InstrumentType type, _BeatResult result, bool isEmpowered)
     {
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<SpriteFollowMouse>().enabled = false;
@@ -397,6 +397,7 @@ public class TowerManager : MonoBehaviour
         Tower placingTower = _tower.GetComponent<Tower>();
         placingTower.rotateStarted = true;
         placingTower.connectedTile = tile;
+        placingTower.isPoweredUp = isEmpowered;
         audioSource.Play();
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 

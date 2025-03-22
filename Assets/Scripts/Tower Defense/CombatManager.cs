@@ -53,6 +53,7 @@ public class CombatManager : MonoBehaviour
 
     [Header("Overcharge Resources")]
     public Slider overchargeSlider;
+    public bool canPlaceEmpoweredTower = false;
 
 
     [Header("Combat UI")]
@@ -182,6 +183,8 @@ public class CombatManager : MonoBehaviour
         {
             overchargeResources.SetActive(false);
         }
+
+        if(resourceNum == 150) canPlaceEmpoweredTower = true;
 
 
         //checks if all enemies have spawned

@@ -429,7 +429,7 @@ public class CursorTD : MonoBehaviour
         }
         else
         {
-            TogglePlacementMenu();
+            //TogglePlacementMenu();
             return;
         }    
     }
@@ -465,6 +465,10 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
+
+                //Play the sound on the corresponding tower slot when the tower cannot be placed
+                SlotW.GetComponent<AudioSource>().Play();
+
                 return;
             }
         }
@@ -473,6 +477,10 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
+                
+                //Play the sound on the corresponding tower slot when the tower cannot be placed
+                SlotA.GetComponent<AudioSource>().Play();
+
                 return;
             }
 
@@ -482,6 +490,10 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
+
+                //Play the sound on the corresponding tower slot when the tower cannot be placed
+                SlotS.GetComponent<AudioSource>().Play();
+
                 return;
             }
 
@@ -491,8 +503,11 @@ public class CursorTD : MonoBehaviour
 
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-
                 TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
+
+                //Play the sound on the corresponding tower slot when the tower cannot be placed
+                SlotS.GetComponent<AudioSource>().Play();
+
                 return;
             }
 

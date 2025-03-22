@@ -51,12 +51,16 @@ public class CombatManager : MonoBehaviour
     public Slider resourceSlider;
     public TextMeshProUGUI resourceText;
 
+    [Header("Overcharge Resources")]
+    public Slider overchargeSlider;
+
 
     [Header("Combat UI")]
     public GameObject enemyTimerObject;
     public GameObject healthBar;
     public GameObject controls;
     public GameObject resources;
+    public GameObject overchargeResources;
     public GameObject towerDisplay;
     public GameObject feverBar;
     public GameObject metronome;
@@ -64,19 +68,11 @@ public class CombatManager : MonoBehaviour
     public GameObject combo;
     public GameObject knockEmDead;
 
-    public GameObject grid;
-    public int pianoResourceGen = 5;
-    public bool firstPianoTap = true;
-    public CursorTD cursor;
-    public _BeatResult resultForPiano;
-    int pianoGenMultiplier = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         //LoadEncounter(currentEncounter);
-        grid = transform.GetChild(10).transform.GetChild(0).gameObject;
-        cursor = transform.GetChild(11).GetComponent<CursorTD>();
     }
 
 
@@ -115,7 +111,7 @@ public class CombatManager : MonoBehaviour
         enemySpawners.currentNumberOfEnemiesSpawned = 0;
         enemySpawners.currentWaves = currentEncounter.waves;
 
-        resourceNum = 24;
+        resourceNum = 25;
         enemyTimer = enemyTimerMax;
         enemiesSpawnIn.gameObject.SetActive(true);
 
@@ -175,6 +171,18 @@ public class CombatManager : MonoBehaviour
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
+
+        overchargeSlider.value = resourceNum - 100;
+
+        if(resourceNum > 100)
+        {
+            overchargeResources.SetActive(true);
+        }
+        else
+        {
+            overchargeResources.SetActive(false);
+        }
+
 
         //checks if all enemies have spawned
         if (!enemySpawners.allEnemiesSpawned)

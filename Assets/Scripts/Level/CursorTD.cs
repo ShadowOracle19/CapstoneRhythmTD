@@ -396,39 +396,23 @@ public class CursorTD : MonoBehaviour
             && !TowerManager.Instance.CheckIfOnCoolDown(tower.GetComponent<Tower>().towerInfo.type) &&
             tile != null && tile.placedTower == null) 
         {
-            switch (CheckOnBeat())
+            if(CombatManager.Instance.resourceNum >= 150)
             {
-                case _BeatResult.late:
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
-                    break;
-                case _BeatResult.miss:
-
-                    ComboManager.Instance.ResetCombo();
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
-                    break;
-                case _BeatResult.early:
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.early);
-                    break;
-                case _BeatResult.great:
-
-                    ComboManager.Instance.IncreaseCombo();
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.perfect);
-                    break;
-                case _BeatResult.perfect:
-
-                    ComboManager.Instance.IncreaseCombo();
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.perfect);
-                    break;
-                default:
-                    break;
+                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), true);
+                CombatManager.Instance.resourceNum -= 150;
+            }
+            else if(CombatManager.Instance.resourceNum < 149)
+            {
+                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), false);
+                CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             }
 
-            CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
+
             SpawnBeatHitResult();
             TogglePlacementMenu();
             return;
         }
-        else
+        else //if tower can't be placed
         {
             //TogglePlacementMenu();
             return;
@@ -729,11 +713,13 @@ public class CursorTD : MonoBehaviour
     {
         if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
         {
+            ComboManager.Instance.IncreaseCombo();
             return _BeatResult.perfect;
             
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.greatBeatThreshold)//great beat hit
         {
+            ComboManager.Instance.IncreaseCombo();
             return _BeatResult.great;
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
@@ -743,6 +729,7 @@ public class CursorTD : MonoBehaviour
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.missBeatThreshold)//miss beat hit
         {
+            ComboManager.Instance.ResetCombo();
             return _BeatResult.miss;
 
         }

@@ -589,22 +589,23 @@ MonoBehaviour:
   projectilesParent: {fileID: 7179906817177105308}
   enemiesSpawnIn: {fileID: 1087988791341581498}
   enemyTimerMax: 30
-  enemyTimer: 35
+  enemyTimer: 30
   resourceNum: 0
-  maxResource: 100
+  maxResource: 150
   resourceSlider: {fileID: 5357066480712527213}
   resourceText: {fileID: 8237226722996233692}
+  overchargeSlider: {fileID: 2728397884488677781}
   enemyTimerObject: {fileID: 5186788144820312774}
   healthBar: {fileID: 7938666958808381215}
   controls: {fileID: 3236249220394568140}
   resources: {fileID: 1186281375860481469}
+  overchargeResources: {fileID: 7084346846394142220}
   towerDisplay: {fileID: 3868834908678231448}
   feverBar: {fileID: 9154697066075946882}
   metronome: {fileID: 6112978531658207272}
   waveCounter: {fileID: 6768568521675754656}
   combo: {fileID: 2083200320753664648}
   knockEmDead: {fileID: 5710594954291270279}
-  grid: {fileID: 0}
 --- !u!1 &4315412304900578376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1454,15 @@ MonoBehaviour:
   - {fileID: 2167625354041566739, guid: 1a208b9ecaf6f0f4d817a63e46fa6547, type: 3}
   - {fileID: 5183850645279424415, guid: f64de0cd98f03494d9a5770c06aa11a4, type: 3}
   - {fileID: 5183850645279424415, guid: d92bc725aeb0a3f46bd544fc35131520, type: 3}
+  greyscaleShader: {fileID: 0}
+  menuTower1: {fileID: 0}
+  menuTower2: {fileID: 0}
+  menuTower3: {fileID: 0}
+  menuTower4: {fileID: 0}
+  sidebarTower1: {fileID: 0}
+  sidebarTower2: {fileID: 0}
+  sidebarTower3: {fileID: 0}
+  sidebarTower4: {fileID: 0}
   drumCooldownSlot: {fileID: 8856928359568320219}
   drumCooldown: 0
   bassCooldownSlot: {fileID: 7614343940101376932}
@@ -1488,6 +1498,7 @@ MonoBehaviour:
   towerSwap: 0
   audioSource: {fileID: 2473152880360841594}
   towerList: []
+  everyOtherBeat: 0
 --- !u!82 &2473152880360841594
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3654,6 +3665,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3556342287188686244, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 1454352159991415034}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2728397884488677781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3599452515902667119, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2936708332142353515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4390918646476184721, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
@@ -3763,6 +3785,11 @@ GameObject:
 --- !u!1 &6906991662551447674 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5473128944761501824, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 1454352159991415034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7084346846394142220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8538335033657069302, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 1454352159991415034}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7310860854342391194 stripped

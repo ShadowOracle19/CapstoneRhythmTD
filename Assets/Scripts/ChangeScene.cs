@@ -26,6 +26,12 @@ public class ChangeScene : MonoBehaviour
             GameManager.Instance.menuRoot.SetActive(true);
             GameManager.Instance.ResumeGame();
         }
+        else if(GameManager.Instance.menuRoot.activeSelf)
+        {
+            GameManager.Instance.menuRoot.SetActive(false);
+            GameManager.Instance.titleRoot.SetActive(true);
+            GameManager.Instance.ResumeGame();
+        }
         else
         {
             Application.Quit();

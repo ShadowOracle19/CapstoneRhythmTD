@@ -240,6 +240,7 @@ MonoBehaviour:
   isPoweredUp: 0
   nonPoweredIcon: {fileID: 3880868882564430295}
   poweredIcon: {fileID: 2709377709178620609}
+  aoeAttackParticles: {fileID: 5103615976187222216, guid: e8889e3cb260858418962975b4770ad7, type: 3}
 --- !u!82 &3091612715999862889
 AudioSource:
   m_ObjectHideFlags: 0

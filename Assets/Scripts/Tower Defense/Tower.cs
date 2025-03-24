@@ -69,6 +69,10 @@ public class Tower : MonoBehaviour
     public GameObject nonPoweredIcon;
     public GameObject poweredIcon;
 
+    // PFX
+    [SerializeField] private ParticleSystem aoeAttackParticles;
+
+    private ParticleSystem aoeAttackParticlesInstance;
 
     private void Start()
     {
@@ -78,7 +82,8 @@ public class Tower : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
+        
         if(FeverSystem.Instance.feverModeActive)
             isShielded = true;
 
@@ -139,7 +144,9 @@ public class Tower : MonoBehaviour
             {
                 if(item.transform.CompareTag("StageTile"))
                 {
-                    item.transform.GetComponent<Tile>().Pulse(Color.red);
+                    //item.transform.GetComponent<Tile>().Pulse(Color.red);
+
+                    SpawnAoEParticles(item.transform, Color.red);
                 }
                 else if(item.transform.CompareTag("Enemy"))
                 {
@@ -180,7 +187,9 @@ public class Tower : MonoBehaviour
             {
                 if (item.transform.CompareTag("StageTile"))
                 {
-                    item.transform.GetComponent<Tile>().Pulse(Color.red);
+                    //item.transform.GetComponent<Tile>().Pulse(Color.red);
+
+                    SpawnAoEParticles(item.transform, Color.red);
                 }
                 else if (item.transform.CompareTag("Enemy"))
                 {
@@ -215,7 +224,9 @@ public class Tower : MonoBehaviour
             {
                 if(item.transform.CompareTag("StageTile"))
                 {
-                    item.transform.GetComponent<Tile>().Pulse(Color.blue);
+                    //item.transform.GetComponent<Tile>().Pulse(Color.blue);
+                    
+                    SpawnAoEParticles(item.transform, Color.blue);
                 }
                 else if(item.transform.CompareTag("Enemy"))
                 {
@@ -414,6 +425,16 @@ public class Tower : MonoBehaviour
             }
         }
 
+    }
+
+    private void SpawnAoEParticles(Transform tileTransform, Color colour)
+    {
+        // Set PFX colour (This doesn't do anything yet. Still troubleshooting.)
+        var pfxColour = aoeAttackParticles.main.startColor;
+        pfxColour= colour;
+        
+        // Create instance of the particle effect
+        aoeAttackParticlesInstance = Instantiate(aoeAttackParticles, tileTransform.position, Quaternion.identity);
     }
 
 }

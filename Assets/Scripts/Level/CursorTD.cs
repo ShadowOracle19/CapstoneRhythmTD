@@ -45,6 +45,7 @@ public class CursorTD : MonoBehaviour
     public Tile tile;
 
     public GameObject placementMenu;
+    public Animator radialMenuAnimator;
     public GameObject SlotW;
     public GameObject SlotA;
     public GameObject SlotS;
@@ -117,7 +118,7 @@ public class CursorTD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        radialMenuAnimator = placementMenu.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -395,41 +396,25 @@ public class CursorTD : MonoBehaviour
             && !TowerManager.Instance.CheckIfOnCoolDown(tower.GetComponent<Tower>().towerInfo.type) &&
             tile != null && tile.placedTower == null) 
         {
-            switch (CheckOnBeat())
+            if(CombatManager.Instance.resourceNum >= 150)
             {
-                case _BeatResult.late:
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
-                    break;
-                case _BeatResult.miss:
-
-                    ComboManager.Instance.ResetCombo();
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.miss);
-                    break;
-                case _BeatResult.early:
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.early);
-                    break;
-                case _BeatResult.great:
-
-                    ComboManager.Instance.IncreaseCombo();
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.perfect);
-                    break;
-                case _BeatResult.perfect:
-
-                    ComboManager.Instance.IncreaseCombo();
-                    TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, _BeatResult.perfect);
-                    break;
-                default:
-                    break;
+                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), true);
+                CombatManager.Instance.resourceNum -= 150;
+            }
+            else if(CombatManager.Instance.resourceNum < 149)
+            {
+                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), false);
+                CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             }
 
-            CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
+
             SpawnBeatHitResult();
             TogglePlacementMenu();
             return;
         }
-        else
+        else //if tower can't be placed
         {
-            TogglePlacementMenu();
+            //TogglePlacementMenu();
             return;
         }    
     }
@@ -465,6 +450,12 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
+
+                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+                SlotW.GetComponent<AudioSource>().Play();
+                radialMenuAnimator.SetTrigger("Check Slot 01");
+                //radialMenuAnimator.ResetTrigger("Check Slot 01");
+
                 return;
             }
         }
@@ -473,6 +464,12 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
+                
+                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+                SlotA.GetComponent<AudioSource>().Play();
+                radialMenuAnimator.SetTrigger("Check Slot 04");
+                //radialMenuAnimator.ResetTrigger("Check Slot 04");
+
                 return;
             }
 
@@ -482,6 +479,12 @@ public class CursorTD : MonoBehaviour
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
+
+                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+                SlotS.GetComponent<AudioSource>().Play();
+                radialMenuAnimator.SetTrigger("Check Slot 03");
+                //radialMenuAnimator.ResetTrigger("Check Slot 03");
+
                 return;
             }
 
@@ -491,8 +494,13 @@ public class CursorTD : MonoBehaviour
 
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
-
                 TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
+
+                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+                SlotS.GetComponent<AudioSource>().Play();
+                radialMenuAnimator.SetTrigger("Check Slot 02");
+                //radialMenuAnimator.ResetTrigger("Check Slot 02");
+
                 return;
             }
 
@@ -705,11 +713,13 @@ public class CursorTD : MonoBehaviour
     {
         if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
         {
+            ComboManager.Instance.IncreaseCombo();
             return _BeatResult.perfect;
             
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.greatBeatThreshold)//great beat hit
         {
+            ComboManager.Instance.IncreaseCombo();
             return _BeatResult.great;
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
@@ -719,6 +729,7 @@ public class CursorTD : MonoBehaviour
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.missBeatThreshold)//miss beat hit
         {
+            ComboManager.Instance.ResetCombo();
             return _BeatResult.miss;
 
         }

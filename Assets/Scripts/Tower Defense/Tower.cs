@@ -64,6 +64,11 @@ public class Tower : MonoBehaviour
     public int buffCountMeasure = 0;
     public int buffBeatCount = 1;
 
+    [Header("Powered UP Tower")]
+    public bool isPoweredUp = false;
+    public GameObject nonPoweredIcon;
+    public GameObject poweredIcon;
+
 
     private void Start()
     {
@@ -78,6 +83,12 @@ public class Tower : MonoBehaviour
             isShielded = true;
 
         shieldEffect.SetActive(isShielded);
+
+        if (isPoweredUp) 
+        { 
+            poweredIcon.SetActive(true);
+            nonPoweredIcon.SetActive(false);
+        }
 
         towerEffectVisual();
 

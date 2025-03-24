@@ -478,6 +478,7 @@ MonoBehaviour:
   isPoweredUp: 0
   nonPoweredIcon: {fileID: 2416119472238725123}
   poweredIcon: {fileID: 7187616780832598186}
+  aoeAttackParticles: {fileID: 5103615976187222216, guid: e8889e3cb260858418962975b4770ad7, type: 3}
 --- !u!61 &6367522176411443336
 BoxCollider2D:
   m_ObjectHideFlags: 0

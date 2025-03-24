@@ -116,6 +116,10 @@ public class MenuEventManager : MonoBehaviour
         {
             eventSystem.SetSelectedGameObject(mainMenuFirstObject);
         }
+        else if(GameManager.Instance.titleRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(titleMenuFirstObject);
+        }
         else if(GameManager.Instance.dialogueRoot.activeSelf)
         {
             eventSystem.SetSelectedGameObject(DialogueMenuFirstObject);

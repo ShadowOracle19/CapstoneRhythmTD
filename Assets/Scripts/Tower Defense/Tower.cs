@@ -40,6 +40,8 @@ public class Tower : MonoBehaviour
 
     public bool attackBuffed = false;
 
+    public int towerRange;
+
     [Header("Tower Empower Indicator")]
     public bool towerHover = false;
     public GameObject beatIndicator;
@@ -77,8 +79,15 @@ public class Tower : MonoBehaviour
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;
+
+        if(isPoweredUp && towerInfo.type == InstrumentType.Piano)
+        {
+            currentHealth = currentHealth * 2;
+        }
+
         beat = 1;
         currentState = TowerState.Default;
+        towerRange = towerInfo.range;
     }
 
     private void Update()
@@ -93,6 +102,12 @@ public class Tower : MonoBehaviour
         { 
             poweredIcon.SetActive(true);
             nonPoweredIcon.SetActive(false);
+
+            if(towerInfo.type == InstrumentType.Guitar)
+            {
+                towerRange = 6;
+            }
+
         }
 
         towerEffectVisual();
@@ -120,11 +135,6 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void OnBeat()
-    {
-        
-    }
-
 
     public void Fire() //default fire
     {
@@ -138,7 +148,7 @@ public class Tower : MonoBehaviour
 
         if (towerInfo.isAOETower)
         {
-            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
+            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerRange, 0, transform.forward);
 
             foreach (var item in colliders)
             {
@@ -150,6 +160,11 @@ public class Tower : MonoBehaviour
                 }
                 else if(item.transform.CompareTag("Enemy"))
                 {
+                    if(isPoweredUp && item.transform.GetComponent<Enemy>().isStunned == false) //empowered drum effect
+                    {
+                        item.transform.GetComponent<Enemy>().isStunned = true;
+                    }
+
                     item.transform.GetComponent<Enemy>().Damage(currentDamage);
                 }
             }
@@ -158,18 +173,31 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
         
 
         if(attackBuffed || FeverSystem.Instance.feverModeActive)
             bullet.GetComponent<SpriteRenderer>().color = Color.red;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+
+        if (isPoweredUp && towerInfo.type == InstrumentType.Guitar)
+        {
+            GameObject _bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y), gameObject.transform.rotation, GameManager.Instance.projectileParent);
+            _bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
+
+
+            if (attackBuffed || FeverSystem.Instance.feverModeActive)
+                _bullet.GetComponent<SpriteRenderer>().color = Color.red;
+
+            ConductorV2.instance.triggerEvent.Add(_bullet.GetComponent<Projectile>().trigger);
+        }
+
         attackBuffed = false;
         
     }
 
-    public void Fire(float yPos) //Fire on specific ypos
+    public void Fire(float yPos) //Fire on specific ypos mainly for viola
     {
         if (!rotateStarted) return;
 
@@ -179,35 +207,27 @@ public class Tower : MonoBehaviour
         
         currentDamage = tempDamageHolder;
 
-        if (towerInfo.isAOETower)
-        {
-            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range, 0, transform.forward);
-
-            foreach (var item in colliders)
-            {
-                if (item.transform.CompareTag("StageTile"))
-                {
-                    //item.transform.GetComponent<Tile>().Pulse(Color.red);
-
-                    SpawnAoEParticles(item.transform, Color.red);
-                }
-                else if (item.transform.CompareTag("Enemy"))
-                {
-                    item.transform.GetComponent<Enemy>().Damage(currentDamage);
-                }
-            }
-            colliders = null;
-            return;
-        }
-
         GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
 
 
         if (attackBuffed || FeverSystem.Instance.feverModeActive)
             bullet.GetComponent<SpriteRenderer>().color = Color.red;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+
+        if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
+        {
+            GameObject _bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + -yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
+            _bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
+
+
+            if (attackBuffed || FeverSystem.Instance.feverModeActive)
+                _bullet.GetComponent<SpriteRenderer>().color = Color.red;
+
+            ConductorV2.instance.triggerEvent.Add(_bullet.GetComponent<Projectile>().trigger);
+        }
+
         attackBuffed = false;
 
     } 
@@ -218,7 +238,7 @@ public class Tower : MonoBehaviour
         
         if(towerInfo.isAOETower)
         {
-            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerInfo.range * 2, 0, transform.forward);
+            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerRange * 2, 0, transform.forward);
 
             foreach (var item in colliders)
             {
@@ -230,6 +250,11 @@ public class Tower : MonoBehaviour
                 }
                 else if(item.transform.CompareTag("Enemy"))
                 {
+                    if (isPoweredUp && item.transform.GetComponent<Enemy>().isStunned == false)//empowered drum effect
+                    {
+                        item.transform.GetComponent<Enemy>().isStunned = true;
+                    }
+
                     item.transform.GetComponent<Enemy>().Damage(currentDamage);
                 }
             }
@@ -238,14 +263,14 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
         bullet.GetComponent<SpriteRenderer>().color = Color.blue;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
         GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet2.GetComponent<Projectile>().InitializeProjectile(towerInfo.range, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
+        bullet2.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
         bullet2.GetComponent<SpriteRenderer>().color = Color.blue;
 

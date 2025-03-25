@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
 
     public int burnDamage = 0;
     public bool burnt = false;
+    public bool isStunned = false;
+    public int isStunnedCounter = 0;
 
 
     // Start is called before the first frame update
@@ -68,6 +70,17 @@ public class Enemy : MonoBehaviour
             {
                 burnt = false;
             }
+        }
+
+        if(isStunned)
+        {
+            isStunnedCounter += 1;
+            if(isStunnedCounter > 2)
+            {
+                isStunnedCounter = 0;
+                isStunned = false;
+            }
+            return;
         }
 
         switch (enemy.movementPattern)

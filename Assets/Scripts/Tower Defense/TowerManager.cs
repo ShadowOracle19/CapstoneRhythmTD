@@ -510,6 +510,12 @@ public class TowerManager : MonoBehaviour
                 towerList.Remove(tower);
                 continue;
             }
+
+            if(tower.towerInfo.type == InstrumentType.Piano && tower.isPoweredUp)
+            {
+                CombatManager.Instance.resourceNum += 1;
+            }
+
             switch (tower.towerInfo.attackPattern)
             {
                 case TowerAttackPattern.everyBeat:

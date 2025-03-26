@@ -415,6 +415,7 @@ public class CursorTD : MonoBehaviour
         else //if tower can't be placed
         {
             //TogglePlacementMenu();
+
             return;
         }    
     }
@@ -451,27 +452,26 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotW.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 01");
-                //radialMenuAnimator.ResetTrigger("Check Slot 01");
+                PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
 
                 return;
             }
+
+            PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
+
         }
         else if (direction == Vector2.left)
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
-                
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotA.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 04");
-                //radialMenuAnimator.ResetTrigger("Check Slot 04");
+
+                PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
 
                 return;
             }
+
+            PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
 
         }
         else if (direction == Vector2.down)
@@ -480,13 +480,12 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotS.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 03");
-                //radialMenuAnimator.ResetTrigger("Check Slot 03");
+                PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
 
                 return;
             }
+
+            PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
 
         }
         else if (direction == Vector2.right)
@@ -496,13 +495,12 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotS.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 02");
-                //radialMenuAnimator.ResetTrigger("Check Slot 02");
+                PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
 
                 return;
             }
+
+            PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
 
         }
 
@@ -747,5 +745,13 @@ public class CursorTD : MonoBehaviour
     {
         pianoResourceGenParticlesInstance = Instantiate(pianoResourceGenParticles, transform.position, Quaternion.identity);
     }
-    
+
+    private void PlacementFeedback(AudioSource invalidPlacementSFX, string invalidPlacementAnimation)
+    {
+        //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+        invalidPlacementSFX.Play();
+        radialMenuAnimator.SetTrigger(invalidPlacementAnimation);
+        //radialMenuAnimator.ResetTrigger(invalidPlacementAnimation);
+    }
+
 }

@@ -372,7 +372,7 @@ public class CursorTD : MonoBehaviour
 
     public void TogglePlacementMenu()
     {
-        if (destructMode || GameManager.Instance.winState || GameManager.Instance.loseState) return;
+        if (destructMode || GameManager.Instance.winState || GameManager.Instance.loseState || ConductorV2.instance.countingIn) return;
 
         towerSelectMenuOpened = !towerSelectMenuOpened;
         placementMenu.SetActive(towerSelectMenuOpened);

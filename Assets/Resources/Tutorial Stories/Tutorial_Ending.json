@@ -5,7 +5,7 @@
         {"name": "Sonu", "emotion":  "1", "text": "...wait, really?"},
         {"name": "Niimi", "emotion":  "1", "text": "I'm glad we did it."},
         {"name": "Sonu", "emotion":  "1", "text": "..."},
-        {"name": "", "emotion":  "1", "text": "A phone alarm sounds."},
+        {"name": "", "emotion":  "1", "text": "<color=#000000>A phone alarm sounds."},
         {"name": "Sonu", "emotion":  "1", "text": "OH! It's almost time, we need to go!"},
         {"name": "Fayruz", "emotion":  "1", "text": "Everybody to the van!!!"}
     ]

@@ -285,6 +285,11 @@ public class DialogueManager : MonoBehaviour
             talkingDialogueBox.SetActive(false);
             previousTalkingDialogueBox.SetActive(false);
 
+            _previousSpeakerName.text = string.Empty;
+            _speakerName.text = string.Empty;
+            previousCharacterName = string.Empty;
+            previousCharacterTalking = false;
+
             characterImage.sprite = null;
             characterImage.color = Color.clear;
 

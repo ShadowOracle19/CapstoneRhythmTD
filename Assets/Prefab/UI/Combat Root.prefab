@@ -595,6 +595,7 @@ MonoBehaviour:
   resourceSlider: {fileID: 5357066480712527213}
   resourceText: {fileID: 8237226722996233692}
   overchargeSlider: {fileID: 2728397884488677781}
+  canPlaceEmpoweredTower: 0
   enemyTimerObject: {fileID: 5186788144820312774}
   healthBar: {fileID: 7938666958808381215}
   controls: {fileID: 3236249220394568140}
@@ -606,6 +607,7 @@ MonoBehaviour:
   waveCounter: {fileID: 6768568521675754656}
   combo: {fileID: 2083200320753664648}
   knockEmDead: {fileID: 5710594954291270279}
+  tutorialManager: {fileID: 8522556072755218974}
 --- !u!1 &4315412304900578376
 GameObject:
   m_ObjectHideFlags: 0

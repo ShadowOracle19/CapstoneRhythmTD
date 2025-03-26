@@ -194,6 +194,9 @@ public class GameManager : MonoBehaviour
         EnemySpawner.Instance.allEnemiesSpawned = false;
         tutorialRunning = true;
         winState = false;
+        winScreen.SetActive(false);
+        loseState = false;
+        gameOverScreen.SetActive(false);
         playerInputManager.SetActive(true);
 
         CombatManager.Instance.enemyTimerObject.SetActive(false);
@@ -247,9 +250,11 @@ public class GameManager : MonoBehaviour
         currentEncounter = encounter;
         encounterRunning = true;
         winState = false;
+        winScreen.SetActive(false);
         loseState = false;
+        gameOverScreen.SetActive(false);
 
-        if(currentEncounter.introDialogue == null)
+        if (currentEncounter.introDialogue == null)
         {
             combatRoot.SetActive(true);
             CombatManager.Instance.tutorialManager.SetActive(false);

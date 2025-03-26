@@ -4155,6 +4155,10 @@ PrefabInstance:
       propertyPath: pianoResourceGenParticles
       value: 
       objectReference: {fileID: 3700797917211557132, guid: b91a14bf3c6a9eb4db80dead864033ca, type: 3}
+    - target: {fileID: 2305934097963249292, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: cursorResourceGenParticles
+      value: 
+      objectReference: {fileID: 3700797917211557132, guid: a2de0d7bbcf9c80488808aba94b2ba01, type: 3}
     - target: {fileID: 2317857108284389931, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5

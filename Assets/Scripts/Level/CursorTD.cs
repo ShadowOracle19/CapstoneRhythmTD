@@ -647,15 +647,15 @@ public class CursorTD : MonoBehaviour
                 break;
             case _BeatResult.early:
                 pianoMod += 1;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             case _BeatResult.great:
                 pianoMod += 3;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             case _BeatResult.perfect:
                 pianoMod += 5;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             default:
                 break;
@@ -663,7 +663,7 @@ public class CursorTD : MonoBehaviour
 
         CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain * pianoMod;
 
-        SpawnResourceGenParticles();
+        //SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
     }
 
     public void SpawnBeatHitResult()
@@ -689,19 +689,28 @@ public class CursorTD : MonoBehaviour
                 beatResult.GetComponent<TMP_Text>().color = Color.yellow;
                 break;
             case _BeatResult.great:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 1;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "great";
                 beatResult.GetComponent<TMP_Text>().fontSize = 45;
                 beatResult.GetComponent<TMP_Text>().color = Color.blue;
                 break;
             case _BeatResult.perfect:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
                 break;
             default:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
@@ -743,9 +752,9 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    private void SpawnResourceGenParticles()
+    private void SpawnResourceGenParticles(ParticleSystem particlesSource, ParticleSystem particlesInstance)
     {
-        pianoResourceGenParticlesInstance = Instantiate(pianoResourceGenParticles, transform.position, Quaternion.identity);
+        particlesInstance = Instantiate(particlesSource, transform.position, Quaternion.identity);
     }
 
     private void PlacementFeedback(AudioSource invalidPlacementSFX, string invalidPlacementAnimation)

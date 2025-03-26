@@ -38,7 +38,7 @@ public class CursorTD : MonoBehaviour
     public Vector3 desiredMovement;
 
     //placement menu
-    private bool towerSelectMenuOpened = false;
+    [SerializeField]private bool towerSelectMenuOpened = false;
     private bool inputOnce = false;
     private bool destructMode = false;
 
@@ -61,23 +61,6 @@ public class CursorTD : MonoBehaviour
     public bool towerSwap;
 
     [Header("Tutorial Objects")]
-    public GameObject tutorialParent;
-
-    public GameObject wasdParent;
-    public GameObject wKey;
-    public GameObject aKey;
-    public GameObject sKey;
-    public GameObject dKey;
-
-    public GameObject arrowKeyParent;
-    public GameObject upKey;
-    public GameObject leftKey;
-    public GameObject downKey;
-    public GameObject rightKey;
-
-    public GameObject spaceKeyParent;
-    public GameObject spaceKey;
-
     public bool movementSequence = false;
     public bool towerPlacementMenuSequence = false;
     public bool towerPlacementMenuSequencePassed = false;
@@ -87,10 +70,6 @@ public class CursorTD : MonoBehaviour
 
     public int moveCounter = 0;
     public int buffCounter = 0;
-
-
-    public GameObject tutorialPopupParent;
-    public TextMeshProUGUI tutorialText;
 
     public bool beatIsHit = false;
 
@@ -141,32 +120,6 @@ public class CursorTD : MonoBehaviour
         }
 
         PlacementResourceBar();
-
-        #region tutorial
-        if (GameManager.Instance.tutorialRunning) //reset color of keys
-        {
-            wKey.GetComponent<TextMeshPro>().color = Color.Lerp(wKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            aKey.GetComponent<TextMeshPro>().color = Color.Lerp(aKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            sKey.GetComponent<TextMeshPro>().color = Color.Lerp(sKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            dKey.GetComponent<TextMeshPro>().color = Color.Lerp(dKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-
-            upKey.GetComponent<TextMeshPro>().color = Color.Lerp(upKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            leftKey.GetComponent<TextMeshPro>().color = Color.Lerp(leftKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            downKey.GetComponent<TextMeshPro>().color = Color.Lerp(downKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            rightKey.GetComponent<TextMeshPro>().color = Color.Lerp(rightKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-
-            spaceKey.GetComponent<TextMeshPro>().color = Color.Lerp(spaceKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-        }
-        else
-        {
-            tutorialParent.SetActive(false);
-        }
-        if(feverModeSequence)
-        {
-            wasdParent.SetActive(false);
-            spaceKeyParent.SetActive(false);
-        }
-        #endregion
     }
 
     public void PlacementResourceBar()
@@ -293,12 +246,6 @@ public class CursorTD : MonoBehaviour
 
         placementMenu.SetActive(false);
 
-        if(!GameManager.Instance.tutorialRunning)
-        {
-            tutorialParent.SetActive(false);
-            tutorialPopupParent.SetActive(false);
-
-        }
 
     }
 
@@ -324,8 +271,11 @@ public class CursorTD : MonoBehaviour
 
         SpawnBeatHitResult();
 
+        
+
         if(towerSelectMenuOpened)
         {
+            Debug.Log("movement");
             HighlightPlacementSlot(desiredMovement);
         }
         else
@@ -407,6 +357,7 @@ public class CursorTD : MonoBehaviour
                 CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             }
 
+            Debug.Log("Place towers");
 
             SpawnBeatHitResult();
             TogglePlacementMenu();
@@ -429,11 +380,9 @@ public class CursorTD : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
         {
             towerPlacementMenuSequencePassed = true;
-            tutorialText.text = "use Arrow Keys to select and place a tower";
+            TutorialManager.Instance.LoadNextTutorialDialogue();
             towerPlacementMenuSequence = false;
-            spaceKeyParent.SetActive(false);
             towerPlaceSequence = true;
-            arrowKeyParent.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0);
             CombatManager.Instance.towerDisplay.SetActive(true);
         }
 
@@ -567,10 +516,9 @@ public class CursorTD : MonoBehaviour
             if (moveCounter == 4)
             {
                 movementSequence = false;
-                arrowKeyParent.SetActive(false);
                 moveCounter = 0;
 
-                tutorialPopupParent.SetActive(false);
+                TutorialManager.Instance.LoadNextTutorialDialogue();
 
                 CombatManager.Instance.resources.SetActive(true);
                 CombatManager.Instance.resourceNum = 0;
@@ -604,35 +552,6 @@ public class CursorTD : MonoBehaviour
         //Debug.Log("pulse");
         cursorSprite.transform.localScale = pulseSize;
         beatIsHit = false;
-
-        //tutorial stuff
-        //display movement tutorial
-        if((movementSequence || towerPlaceSequence) && GameManager.Instance.tutorialRunning)
-        {
-            arrowKeyParent.SetActive(true);
-            upKey.GetComponent<TextMeshPro>().color = Color.red;
-            leftKey.GetComponent<TextMeshPro>().color = Color.red;
-            rightKey.GetComponent<TextMeshPro>().color = Color.red;
-
-            downKey.GetComponent<TextMeshPro>().color = Color.red;
-        }
-        if(towerPlacementMenuSequence && GameManager.Instance.tutorialRunning)
-        {
-            spaceKeyParent.SetActive(true);
-            spaceKey.GetComponent<TextMeshPro>().color = Color.red;
-        }
-        if (towerBuffSequence && GameManager.Instance.tutorialRunning && tile != null && tile.placedTower != null)
-        {
-            wasdParent.SetActive(true);
-            wKey.GetComponent<TextMeshPro>().color = Color.red;
-            aKey.GetComponent<TextMeshPro>().color = Color.red;
-            dKey.GetComponent<TextMeshPro>().color = Color.red;
-        }
-        if (feverModeSequence && FeverSystem.Instance.feverBarNum == 100 && GameManager.Instance.tutorialRunning)
-        {
-            wasdParent.SetActive(true);
-            sKey.GetComponent<TextMeshPro>().color = Color.red;
-        }
     }
 
     public void CheckPianoResult(Tower tower)

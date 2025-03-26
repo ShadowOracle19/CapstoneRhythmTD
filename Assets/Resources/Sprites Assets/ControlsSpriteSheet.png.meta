@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5ca6efc844227e6499038a06ab939c11
+guid: be822d3bb1a739449bea0034b31ddfcd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -82,6 +82,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -120,24 +133,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -149,13 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Particle-Effect-Sprites_0
+      name: ArrowKeys
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 3
-        height: 6
+        x: 4
+        y: 80
+        width: 113
+        height: 73
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 452f3dabd1fab0946ba26583190d7183
-      internalID: -785234938
+      spriteID: 5e9eec3431675344e9c279acdde7d40d
+      internalID: -1811890983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Particle-Effect-Sprites_1
+      name: Space
       rect:
         serializedVersion: 2
-        x: 5
-        y: 0
-        width: 5
-        height: 10
+        x: 141
+        y: 81
+        width: 115
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,167 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2dfae5fbbb7267140a1762f8a006388b
-      internalID: 589833299
+      spriteID: 2649532199a7322408bf791f6c33a2df
+      internalID: 1080971293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Particle-Effect-Sprites_2
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 0
-        width: 2
-        height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b237a8b1b050ed74b98e9e3f7dfa26e6
-      internalID: -8391468
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle-Effect-Sprites_3
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 0
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e9368e0bc0740a24f8526b5b7eaf2358
-      internalID: -1962755634
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle-Effect-Sprites_4
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 0
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 385e406a82c37ca4eab764cd1351dfd5
-      internalID: 1101500088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle-Effect-Sprites_5
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 0
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9f058556ebc8e7c478d0039b199bce08
-      internalID: -1457867671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle-Effect-Sprites_6
-      rect:
-        serializedVersion: 2
-        x: 30
-        y: 0
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea84bcedc31666f49947345790b05d4a
-      internalID: 1409113014
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle-Effect-Sprites_7
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 0
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b027cd5b629b317479b0f15ddc06ae52
-      internalID: 1240198615
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle-Effect-Sprites_8
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 0
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fcb1e42a498b2424689b84bc587fea1c
-      internalID: -2046354228
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle-Effect-Sprites_9
+      name: S
       rect:
         serializedVersion: 2
         x: 45
-        y: 0
-        width: 5
-        height: 5
+        y: 6
+        width: 31
+        height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -352,8 +205,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbd01263d44688f449b70a9bbbf34651
-      internalID: 1892035115
+      spriteID: f2dca185d9104cb44aa51387b863f293
+      internalID: -1436207279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: A
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 6
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4466b859f451bd4da9d31626aa5c808
+      internalID: 92604989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: W
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 45
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f51df4159fcdd4084beabbd38c81f8
+      internalID: 1858366549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: D
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 6
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e01642c7d249684587f45a2335e7dc6
+      internalID: -933313901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WASD
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 6
+        width: 112
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6290c7451bca0054895cd083a900a733
+      internalID: -626250411
       vertices: []
       indices: 
       edges: []
@@ -369,16 +306,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Particle-Effect-Sprites_0: -785234938
-      Particle-Effect-Sprites_1: 589833299
-      Particle-Effect-Sprites_2: -8391468
-      Particle-Effect-Sprites_3: -1962755634
-      Particle-Effect-Sprites_4: 1101500088
-      Particle-Effect-Sprites_5: -1457867671
-      Particle-Effect-Sprites_6: 1409113014
-      Particle-Effect-Sprites_7: 1240198615
-      Particle-Effect-Sprites_8: -2046354228
-      Particle-Effect-Sprites_9: 1892035115
+      A: 92604989
+      ArrowKeys: -1811890983
+      D: -933313901
+      S: -1436207279
+      Space: 1080971293
+      W: 1858366549
+      WASD: -626250411
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

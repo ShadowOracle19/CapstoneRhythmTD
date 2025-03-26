@@ -69,6 +69,8 @@ public class CombatManager : MonoBehaviour
     public GameObject combo;
     public GameObject knockEmDead;
 
+    public GameObject tutorialManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -237,8 +239,8 @@ public class CombatManager : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning && resourceNum >= 25 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence && !CursorTD.Instance.towerPlacementMenuSequencePassed)
         {
-            CursorTD.Instance.tutorialPopupParent.SetActive(true);
-            CursorTD.Instance.tutorialText.text = "Now you have enough magic press space to open the tower place menu!";
+            if(TutorialManager.Instance.index == 5)
+                TutorialManager.Instance.LoadNextTutorialDialogue();
             CursorTD.Instance.towerPlacementMenuSequence = true;
             return;
         }

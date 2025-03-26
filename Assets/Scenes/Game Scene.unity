@@ -402,6 +402,7 @@ MonoBehaviour:
   loseScreenObject: {fileID: 4903281166377591325}
   exitConfirmationObject: {fileID: 1139744897}
   logFirstObject: {fileID: 5140289844780695288}
+  exitConfirmationText: {fileID: 1060313939}
   lastSelectedObject: {fileID: 0}
 --- !u!1 &282275869 stripped
 GameObject:
@@ -516,6 +517,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit Confirmation Root
       objectReference: {fileID: 0}
+    - target: {fileID: 1959961364393909929, guid: f46922ad386300e488119826e6c46688, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4827156781403306811, guid: f46922ad386300e488119826e6c46688, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993683609162648360, guid: f46922ad386300e488119826e6c46688, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6680884843799812567, guid: f46922ad386300e488119826e6c46688, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -606,6 +619,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8238446718447001446, guid: f46922ad386300e488119826e6c46688, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319178493920844515, guid: f46922ad386300e488119826e6c46688, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1768,6 +1785,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonHighlightAudio: {fileID: 1013587931}
+--- !u!114 &1060313939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4827156781403306811, guid: f46922ad386300e488119826e6c46688, type: 3}
+  m_PrefabInstance: {fileID: 312050885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1087718244 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1459283155326161544, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
@@ -5458,6 +5486,22 @@ PrefabInstance:
     - target: {fileID: 1943102943867653088, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692073133736695088, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_margin.w
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692073133736695088, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_margin.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692073133736695088, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_margin.y
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692073133736695088, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_margin.z
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3909590038358143892, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_LocalPosition.x

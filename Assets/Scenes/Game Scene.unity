@@ -5503,6 +5503,10 @@ PrefabInstance:
       propertyPath: m_margin.z
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 3692073133736695088, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_lineSpacing
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 3909590038358143892, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

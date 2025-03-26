@@ -112,8 +112,10 @@ public class CursorTD : MonoBehaviour
 
     // PFX
     [SerializeField] private ParticleSystem pianoResourceGenParticles;
-
     private ParticleSystem pianoResourceGenParticlesInstance;
+
+    [SerializeField] private ParticleSystem cursorResourceGenParticles;
+    private ParticleSystem cursorResourceGenParticlesInstance;
 
     // Start is called before the first frame update
     void Start()

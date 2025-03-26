@@ -336,7 +336,10 @@ public class Tower : MonoBehaviour
             CursorTD.Instance.buffCounter += 1;
             if(CursorTD.Instance.buffCounter == 4)
             {
-                CursorTD.Instance.tutorialText.text = "Now place more towers and buff them to the beat and grow that fever bar!";
+                if(TutorialManager.Instance.index == 13)
+                {
+                    TutorialManager.Instance.LoadNextTutorialDialogue();
+                }
 
                 CursorTD.Instance.towerBuffSequence = false;
                 CombatManager.Instance.healthBar.SetActive(true);
@@ -344,7 +347,6 @@ public class Tower : MonoBehaviour
                 CombatManager.Instance.combo.SetActive(true);
                 CombatManager.Instance.controls.SetActive(true);
 
-                CursorTD.Instance.arrowKeyParent.SetActive(false);
                 CursorTD.Instance.feverModeSequence = true;
                 FeverSystem.Instance.feverBarNum = 50;
 

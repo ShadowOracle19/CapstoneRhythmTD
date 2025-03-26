@@ -472,10 +472,8 @@ public class TowerManager : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerPlaceSequence)
         {
-            CursorTD.Instance.tutorialText.text = "While you hover over a tower press the W, A, and D keys to buff the tower. Try to get a great or perfect result";
+            TutorialManager.Instance.LoadNextTutorialDialogue();
             CursorTD.Instance.towerPlaceSequence = false;
-            CursorTD.Instance.wasdParent.transform.localPosition = new Vector3(0, 1, 0);
-            CursorTD.Instance.arrowKeyParent.SetActive(false);
             CursorTD.Instance.towerBuffSequence = true;
             EnemySpawner.Instance.ForceEnemySpawn(gameObject.transform.position.y, EnemyType.Walker);
         }

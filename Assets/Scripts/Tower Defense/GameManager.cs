@@ -110,8 +110,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("pause");
         //allows player to use pause menu in combat, level select and dialogue
-        if (combatRunning || menuRoot.activeSelf || dialogueRoot.activeSelf || tutorialRunning)
+        if (combatRunning || menuRoot.activeSelf || tutorialRunning)
         {
+            if (dialogueRoot.activeSelf) return;
             //flips the isGamePaused bool
             isGamePaused = !isGamePaused;
 

@@ -38,7 +38,7 @@ public class CursorTD : MonoBehaviour
     public Vector3 desiredMovement;
 
     //placement menu
-    private bool towerSelectMenuOpened = false;
+    [SerializeField]private bool towerSelectMenuOpened = false;
     private bool inputOnce = false;
     private bool destructMode = false;
 
@@ -61,23 +61,6 @@ public class CursorTD : MonoBehaviour
     public bool towerSwap;
 
     [Header("Tutorial Objects")]
-    public GameObject tutorialParent;
-
-    public GameObject wasdParent;
-    public GameObject wKey;
-    public GameObject aKey;
-    public GameObject sKey;
-    public GameObject dKey;
-
-    public GameObject arrowKeyParent;
-    public GameObject upKey;
-    public GameObject leftKey;
-    public GameObject downKey;
-    public GameObject rightKey;
-
-    public GameObject spaceKeyParent;
-    public GameObject spaceKey;
-
     public bool movementSequence = false;
     public bool towerPlacementMenuSequence = false;
     public bool towerPlacementMenuSequencePassed = false;
@@ -87,10 +70,6 @@ public class CursorTD : MonoBehaviour
 
     public int moveCounter = 0;
     public int buffCounter = 0;
-
-
-    public GameObject tutorialPopupParent;
-    public TextMeshProUGUI tutorialText;
 
     public bool beatIsHit = false;
 
@@ -112,8 +91,10 @@ public class CursorTD : MonoBehaviour
 
     // PFX
     [SerializeField] private ParticleSystem pianoResourceGenParticles;
-
     private ParticleSystem pianoResourceGenParticlesInstance;
+
+    [SerializeField] private ParticleSystem cursorResourceGenParticles;
+    private ParticleSystem cursorResourceGenParticlesInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -141,32 +122,6 @@ public class CursorTD : MonoBehaviour
         }
 
         PlacementResourceBar();
-
-        #region tutorial
-        if (GameManager.Instance.tutorialRunning) //reset color of keys
-        {
-            wKey.GetComponent<TextMeshPro>().color = Color.Lerp(wKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            aKey.GetComponent<TextMeshPro>().color = Color.Lerp(aKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            sKey.GetComponent<TextMeshPro>().color = Color.Lerp(sKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            dKey.GetComponent<TextMeshPro>().color = Color.Lerp(dKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-
-            upKey.GetComponent<TextMeshPro>().color = Color.Lerp(upKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            leftKey.GetComponent<TextMeshPro>().color = Color.Lerp(leftKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            downKey.GetComponent<TextMeshPro>().color = Color.Lerp(downKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-            rightKey.GetComponent<TextMeshPro>().color = Color.Lerp(rightKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-
-            spaceKey.GetComponent<TextMeshPro>().color = Color.Lerp(spaceKey.GetComponent<TextMeshPro>().color, Color.white, Time.deltaTime);
-        }
-        else
-        {
-            tutorialParent.SetActive(false);
-        }
-        if(feverModeSequence)
-        {
-            wasdParent.SetActive(false);
-            spaceKeyParent.SetActive(false);
-        }
-        #endregion
     }
 
     public void PlacementResourceBar()
@@ -293,12 +248,6 @@ public class CursorTD : MonoBehaviour
 
         placementMenu.SetActive(false);
 
-        if(!GameManager.Instance.tutorialRunning)
-        {
-            tutorialParent.SetActive(false);
-            tutorialPopupParent.SetActive(false);
-
-        }
 
     }
 
@@ -324,8 +273,11 @@ public class CursorTD : MonoBehaviour
 
         SpawnBeatHitResult();
 
+        
+
         if(towerSelectMenuOpened)
         {
+            Debug.Log("movement");
             HighlightPlacementSlot(desiredMovement);
         }
         else
@@ -407,6 +359,7 @@ public class CursorTD : MonoBehaviour
                 CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             }
 
+            Debug.Log("Place towers");
 
             SpawnBeatHitResult();
             TogglePlacementMenu();
@@ -415,13 +368,14 @@ public class CursorTD : MonoBehaviour
         else //if tower can't be placed
         {
             //TogglePlacementMenu();
+
             return;
         }    
     }
 
     public void TogglePlacementMenu()
     {
-        if (destructMode || GameManager.Instance.winState || GameManager.Instance.loseState) return;
+        if (destructMode || GameManager.Instance.winState || GameManager.Instance.loseState || ConductorV2.instance.countingIn) return;
 
         towerSelectMenuOpened = !towerSelectMenuOpened;
         placementMenu.SetActive(towerSelectMenuOpened);
@@ -429,11 +383,9 @@ public class CursorTD : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
         {
             towerPlacementMenuSequencePassed = true;
-            tutorialText.text = "use Arrow Keys to select and place a tower";
+            TutorialManager.Instance.LoadNextTutorialDialogue();
             towerPlacementMenuSequence = false;
-            spaceKeyParent.SetActive(false);
             towerPlaceSequence = true;
-            arrowKeyParent.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0);
             CombatManager.Instance.towerDisplay.SetActive(true);
         }
 
@@ -451,27 +403,26 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotW.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 01");
-                //radialMenuAnimator.ResetTrigger("Check Slot 01");
+                PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
 
                 return;
             }
+
+            PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
+
         }
         else if (direction == Vector2.left)
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
-                
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotA.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 04");
-                //radialMenuAnimator.ResetTrigger("Check Slot 04");
+
+                PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
 
                 return;
             }
+
+            PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
 
         }
         else if (direction == Vector2.down)
@@ -480,13 +431,12 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotS.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 03");
-                //radialMenuAnimator.ResetTrigger("Check Slot 03");
+                PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
 
                 return;
             }
+
+            PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
 
         }
         else if (direction == Vector2.right)
@@ -496,13 +446,12 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotS.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 02");
-                //radialMenuAnimator.ResetTrigger("Check Slot 02");
+                PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
 
                 return;
             }
+
+            PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
 
         }
 
@@ -567,10 +516,9 @@ public class CursorTD : MonoBehaviour
             if (moveCounter == 4)
             {
                 movementSequence = false;
-                arrowKeyParent.SetActive(false);
                 moveCounter = 0;
 
-                tutorialPopupParent.SetActive(false);
+                TutorialManager.Instance.LoadNextTutorialDialogue();
 
                 CombatManager.Instance.resources.SetActive(true);
                 CombatManager.Instance.resourceNum = 0;
@@ -604,35 +552,6 @@ public class CursorTD : MonoBehaviour
         //Debug.Log("pulse");
         cursorSprite.transform.localScale = pulseSize;
         beatIsHit = false;
-
-        //tutorial stuff
-        //display movement tutorial
-        if((movementSequence || towerPlaceSequence) && GameManager.Instance.tutorialRunning)
-        {
-            arrowKeyParent.SetActive(true);
-            upKey.GetComponent<TextMeshPro>().color = Color.red;
-            leftKey.GetComponent<TextMeshPro>().color = Color.red;
-            rightKey.GetComponent<TextMeshPro>().color = Color.red;
-
-            downKey.GetComponent<TextMeshPro>().color = Color.red;
-        }
-        if(towerPlacementMenuSequence && GameManager.Instance.tutorialRunning)
-        {
-            spaceKeyParent.SetActive(true);
-            spaceKey.GetComponent<TextMeshPro>().color = Color.red;
-        }
-        if (towerBuffSequence && GameManager.Instance.tutorialRunning && tile != null && tile.placedTower != null)
-        {
-            wasdParent.SetActive(true);
-            wKey.GetComponent<TextMeshPro>().color = Color.red;
-            aKey.GetComponent<TextMeshPro>().color = Color.red;
-            dKey.GetComponent<TextMeshPro>().color = Color.red;
-        }
-        if (feverModeSequence && FeverSystem.Instance.feverBarNum == 100 && GameManager.Instance.tutorialRunning)
-        {
-            wasdParent.SetActive(true);
-            sKey.GetComponent<TextMeshPro>().color = Color.red;
-        }
     }
 
     public void CheckPianoResult(Tower tower)
@@ -647,15 +566,15 @@ public class CursorTD : MonoBehaviour
                 break;
             case _BeatResult.early:
                 pianoMod += 1;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             case _BeatResult.great:
                 pianoMod += 3;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             case _BeatResult.perfect:
                 pianoMod += 5;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             default:
                 break;
@@ -663,7 +582,7 @@ public class CursorTD : MonoBehaviour
 
         CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain * pianoMod;
 
-        SpawnResourceGenParticles();
+        //SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
     }
 
     public void SpawnBeatHitResult()
@@ -689,19 +608,28 @@ public class CursorTD : MonoBehaviour
                 beatResult.GetComponent<TMP_Text>().color = Color.yellow;
                 break;
             case _BeatResult.great:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 1;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "great";
                 beatResult.GetComponent<TMP_Text>().fontSize = 45;
                 beatResult.GetComponent<TMP_Text>().color = Color.blue;
                 break;
             case _BeatResult.perfect:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
                 break;
             default:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
@@ -743,9 +671,17 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    private void SpawnResourceGenParticles()
+    private void SpawnResourceGenParticles(ParticleSystem particlesSource, ParticleSystem particlesInstance)
     {
-        pianoResourceGenParticlesInstance = Instantiate(pianoResourceGenParticles, transform.position, Quaternion.identity);
+        particlesInstance = Instantiate(particlesSource, transform.position, Quaternion.identity);
     }
-    
+
+    private void PlacementFeedback(AudioSource invalidPlacementSFX, string invalidPlacementAnimation)
+    {
+        //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+        invalidPlacementSFX.Play();
+        radialMenuAnimator.SetTrigger(invalidPlacementAnimation);
+        //radialMenuAnimator.ResetTrigger(invalidPlacementAnimation);
+    }
+
 }

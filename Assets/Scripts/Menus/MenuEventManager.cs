@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 public class MenuEventManager : MonoBehaviour
@@ -40,6 +41,8 @@ public class MenuEventManager : MonoBehaviour
     public GameObject exitConfirmationObject;
     public GameObject logFirstObject;
 
+    public TextMeshProUGUI exitConfirmationText;
+
     [Header("Last Selected Object")]
     public GameObject lastSelectedObject;
 
@@ -77,6 +80,19 @@ public class MenuEventManager : MonoBehaviour
 
     public void OpenConfirmation()
     {
+        if (GameManager.Instance.titleRoot.activeSelf)
+        {
+            exitConfirmationText.text = "Quit to desktop?";
+        }
+        else if (GameManager.Instance.menuRoot.activeSelf)
+        {
+            exitConfirmationText.text = "Exit to title screen?";
+        }
+        else if (GameManager.Instance.combatRoot.activeSelf)
+        {
+            exitConfirmationText.text = "Exit to level select?";
+        }
+
         eventSystem.SetSelectedGameObject(exitConfirmationObject);
     }
 
@@ -115,6 +131,10 @@ public class MenuEventManager : MonoBehaviour
         else if(GameManager.Instance.menuRoot.activeSelf)
         {
             eventSystem.SetSelectedGameObject(mainMenuFirstObject);
+        }
+        else if(GameManager.Instance.titleRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(titleMenuFirstObject);
         }
         else if(GameManager.Instance.dialogueRoot.activeSelf)
         {

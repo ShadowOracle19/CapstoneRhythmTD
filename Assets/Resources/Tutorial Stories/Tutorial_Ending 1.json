@@ -1,0 +1,12 @@
+{
+    "dialogue": [
+        {"name": "Sonu", "text": "Okay, that's all. You're free now."},
+        {"name": "Fayruz", "text": "You know, you were right, Sonu. That was actually pretty helpful!"},
+        {"name": "Sonu", "text": "...wait, really?"},
+        {"name": "Niimi", "text": "I'm glad we did it."},
+        {"name": "Sonu", "text": "..."},
+        {"name": "", "text": "A phone alarm sounds."},
+        {"name": "Sonu", "text": "OH! It's almost time, we need to go!"},
+        {"name": "Fayruz", "text": "Everybody to the van!!!"}
+    ]
+}

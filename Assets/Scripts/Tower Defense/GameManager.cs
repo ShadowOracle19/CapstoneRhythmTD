@@ -110,8 +110,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("pause");
         //allows player to use pause menu in combat, level select and dialogue
-        if (combatRunning || menuRoot.activeSelf || dialogueRoot.activeSelf || tutorialRunning)
+        if (combatRunning || menuRoot.activeSelf || tutorialRunning)
         {
+            if (dialogueRoot.activeSelf) return;
             //flips the isGamePaused bool
             isGamePaused = !isGamePaused;
 
@@ -193,6 +194,9 @@ public class GameManager : MonoBehaviour
         EnemySpawner.Instance.allEnemiesSpawned = false;
         tutorialRunning = true;
         winState = false;
+        winScreen.SetActive(false);
+        loseState = false;
+        gameOverScreen.SetActive(false);
         playerInputManager.SetActive(true);
 
         CombatManager.Instance.enemyTimerObject.SetActive(false);
@@ -204,7 +208,8 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.waveCounter.SetActive(false);
         CombatManager.Instance.combo.SetActive(false);
 
-        CursorTD.Instance.tutorialParent.SetActive(true); 
+
+        CombatManager.Instance.tutorialManager.SetActive(true);
 
 
         CursorTD.Instance.movementSequence = false;
@@ -213,11 +218,6 @@ public class GameManager : MonoBehaviour
         CursorTD.Instance.towerPlaceSequence = false;
         CursorTD.Instance.towerBuffSequence = false;
         CursorTD.Instance.feverModeSequence = false;
-
-        CursorTD.Instance.wasdParent.transform.localPosition = Vector3.zero;
-        CursorTD.Instance.wasdParent.SetActive(false);
-        CursorTD.Instance.arrowKeyParent.SetActive(false);
-        CursorTD.Instance.spaceKeyParent.SetActive(false);
 
         CursorTD.Instance.InitializeCursor();
 
@@ -238,8 +238,9 @@ public class GameManager : MonoBehaviour
 
         EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
 
-        CursorTD.Instance.tutorialPopupParent.SetActive(true);
-        CursorTD.Instance.tutorialText.text = "Use Arrow keys to move the cursor";
+
+        TutorialManager.Instance.LoadTutorial();
+
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
     }
 
@@ -249,11 +250,14 @@ public class GameManager : MonoBehaviour
         currentEncounter = encounter;
         encounterRunning = true;
         winState = false;
+        winScreen.SetActive(false);
         loseState = false;
+        gameOverScreen.SetActive(false);
 
-        if(currentEncounter.introDialogue == null)
+        if (currentEncounter.introDialogue == null)
         {
             combatRoot.SetActive(true);
+            CombatManager.Instance.tutorialManager.SetActive(false);
             combatRunning = true;
             CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter);
             return;
@@ -282,7 +286,6 @@ public class GameManager : MonoBehaviour
         encounterRunning = false;
         ConductorV2.instance.StopMusic();
 
-        CursorTD.Instance.tutorialPopupParent.SetActive(false);
 
         if (currentEncounter.endDialogue == null)
         {
@@ -302,6 +305,9 @@ public class GameManager : MonoBehaviour
     {
         if (winState) return;
         winState = true;
+
+        CombatManager.Instance.tutorialManager.SetActive(false);
+
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
         //Cursor.lockState = CursorLockMode.None;

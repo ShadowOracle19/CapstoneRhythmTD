@@ -80,7 +80,7 @@ Material:
     - _HueShiftAnimateSpeed: 1
     - _LineThickness: 0.02
     - _Negative: 1
-    - _NegativeAmount: 0.47
+    - _NegativeAmount: 0.375
     - _Outline: 0
     - _PaletteSwapControl: 1
     - _Pixel_Resolution: 1000

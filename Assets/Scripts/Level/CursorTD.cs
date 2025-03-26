@@ -91,8 +91,10 @@ public class CursorTD : MonoBehaviour
 
     // PFX
     [SerializeField] private ParticleSystem pianoResourceGenParticles;
-
     private ParticleSystem pianoResourceGenParticlesInstance;
+
+    [SerializeField] private ParticleSystem cursorResourceGenParticles;
+    private ParticleSystem cursorResourceGenParticlesInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -366,6 +368,7 @@ public class CursorTD : MonoBehaviour
         else //if tower can't be placed
         {
             //TogglePlacementMenu();
+
             return;
         }    
     }
@@ -400,27 +403,26 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotW.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 01");
-                //radialMenuAnimator.ResetTrigger("Check Slot 01");
+                PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
 
                 return;
             }
+
+            PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
+
         }
         else if (direction == Vector2.left)
         {
             if (towerSelectMenuOpened && tile.placedTower == null)
             {
                 TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
-                
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotA.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 04");
-                //radialMenuAnimator.ResetTrigger("Check Slot 04");
+
+                PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
 
                 return;
             }
+
+            PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
 
         }
         else if (direction == Vector2.down)
@@ -429,13 +431,12 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotS.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 03");
-                //radialMenuAnimator.ResetTrigger("Check Slot 03");
+                PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
 
                 return;
             }
+
+            PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
 
         }
         else if (direction == Vector2.right)
@@ -445,13 +446,12 @@ public class CursorTD : MonoBehaviour
             {
                 TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
 
-                //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-                SlotS.GetComponent<AudioSource>().Play();
-                radialMenuAnimator.SetTrigger("Check Slot 02");
-                //radialMenuAnimator.ResetTrigger("Check Slot 02");
+                PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
 
                 return;
             }
+
+            PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
 
         }
 
@@ -566,15 +566,15 @@ public class CursorTD : MonoBehaviour
                 break;
             case _BeatResult.early:
                 pianoMod += 1;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             case _BeatResult.great:
                 pianoMod += 3;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             case _BeatResult.perfect:
                 pianoMod += 5;
-                //SpawnResourceGenParticles();
+                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
                 break;
             default:
                 break;
@@ -582,7 +582,7 @@ public class CursorTD : MonoBehaviour
 
         CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain * pianoMod;
 
-        SpawnResourceGenParticles();
+        //SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
     }
 
     public void SpawnBeatHitResult()
@@ -608,19 +608,28 @@ public class CursorTD : MonoBehaviour
                 beatResult.GetComponent<TMP_Text>().color = Color.yellow;
                 break;
             case _BeatResult.great:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 1;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "great";
                 beatResult.GetComponent<TMP_Text>().fontSize = 45;
                 beatResult.GetComponent<TMP_Text>().color = Color.blue;
                 break;
             case _BeatResult.perfect:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
                 break;
             default:
+                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
+                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
@@ -662,9 +671,17 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    private void SpawnResourceGenParticles()
+    private void SpawnResourceGenParticles(ParticleSystem particlesSource, ParticleSystem particlesInstance)
     {
-        pianoResourceGenParticlesInstance = Instantiate(pianoResourceGenParticles, transform.position, Quaternion.identity);
+        particlesInstance = Instantiate(particlesSource, transform.position, Quaternion.identity);
     }
-    
+
+    private void PlacementFeedback(AudioSource invalidPlacementSFX, string invalidPlacementAnimation)
+    {
+        //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+        invalidPlacementSFX.Play();
+        radialMenuAnimator.SetTrigger(invalidPlacementAnimation);
+        //radialMenuAnimator.ResetTrigger(invalidPlacementAnimation);
+    }
+
 }

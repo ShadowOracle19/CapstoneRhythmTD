@@ -27,8 +27,6 @@ public class CombatManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private float enemySpawnDelay = 30.0f;
-    public float timeRemaining = 0;
     public bool spawnerDelayRunning = false;
     public bool allEnemiesSpawned = false;
     public int enemyTotal = 0;
@@ -215,7 +213,7 @@ public class CombatManager : MonoBehaviour
     {
         enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
         //Start spawning enemies on the 10th bar
-        if (ConductorV2.instance.numberOfBeats >= enemyTimerMax)
+        if (enemyTimer <= 0)
         {
             enemiesSpawnIn.gameObject.SetActive(false);
             enemySpawners.StartSpawningEnemies();

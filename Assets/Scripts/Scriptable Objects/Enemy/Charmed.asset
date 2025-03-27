@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Charmed
   m_EditorClassIdentifier: 
   enemyName: Charmed
-  enemyDescription: 
+  enemyDescription: Shield
   enemySprite: {fileID: 0}
   maxHealth: 55
-  movementPattern: 4
+  movementPattern: 6
   clashStrength: 0
   deathIncome: 40
   onDeathEffect: 0

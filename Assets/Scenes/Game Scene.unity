@@ -2613,17 +2613,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9091263931038544310, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
   m_PrefabInstance: {fileID: 6832378727919642353}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1836305495 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2751378064255184901, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-  m_PrefabInstance: {fileID: 4903281166377591323}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45d22675940fbe4c973c6c491c2c711, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1883795280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5086,37 +5075,9 @@ PrefabInstance:
       propertyPath: musicSource
       value: 
       objectReference: {fileID: 1300826010}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.data[6].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1836305495}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FireTowers
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TowerManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: triggerEvent.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+    - target: {fileID: 7498620752678822480, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7545979523355646789, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7346,7 +7307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091263931038544310, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

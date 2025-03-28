@@ -64,8 +64,8 @@ Material:
     m_Floats:
     - _Brightness: 0
     - _BrightnessAmount: 0
-    - _Contrast: 0
-    - _ContrastAmount: 1
+    - _Contrast: 1
+    - _ContrastAmount: 5
     - _Distortion: 1
     - _DistortionScale: 1
     - _DistortionStrength: 0
@@ -77,9 +77,9 @@ Material:
     - _HueShift: 1
     - _HueShiftAmount: 0
     - _HueShiftAnimate: 1
-    - _HueShiftAnimateSpeed: 1
+    - _HueShiftAnimateSpeed: 0.45
     - _LineThickness: 0.02
-    - _Negative: 0
+    - _Negative: 1
     - _NegativeAmount: 1
     - _Outline: 0
     - _PaletteSwapControl: 0
@@ -88,7 +88,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Saturation: 1
-    - _SaturationAmount: 14.29
+    - _SaturationAmount: 3
     - _Use8Directions: 0
     m_Colors:
     - _Direction: {r: 0, g: 0, b: 0, a: 0}

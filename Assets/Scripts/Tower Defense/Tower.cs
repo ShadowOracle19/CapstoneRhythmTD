@@ -73,8 +73,10 @@ public class Tower : MonoBehaviour
 
     // PFX
     [SerializeField] private ParticleSystem aoeAttackParticles;
-
     private ParticleSystem aoeAttackParticlesInstance;
+
+    [SerializeField] private ParticleSystem shieldDestructionParticles;
+    private ParticleSystem shieldDestructionParticlesInstance;
 
     private void Start()
     {
@@ -156,7 +158,7 @@ public class Tower : MonoBehaviour
                 {
                     //item.transform.GetComponent<Tile>().Pulse(Color.red);
 
-                    SpawnAoEParticles(item.transform, Color.red);
+                    SpawnParticles(item.transform, Color.red, aoeAttackParticles, aoeAttackParticlesInstance);
                 }
                 else if(item.transform.CompareTag("Enemy"))
                 {
@@ -246,7 +248,7 @@ public class Tower : MonoBehaviour
                 {
                     //item.transform.GetComponent<Tile>().Pulse(Color.blue);
                     
-                    SpawnAoEParticles(item.transform, Color.blue);
+                    SpawnParticles(item.transform, Color.blue, aoeAttackParticles, aoeAttackParticlesInstance);
                 }
                 else if(item.transform.CompareTag("Enemy"))
                 {
@@ -318,6 +320,8 @@ public class Tower : MonoBehaviour
     {
         if(isShielded)
         {
+            SpawnParticles(this.transform, Color.white, shieldDestructionParticles, shieldDestructionParticlesInstance);
+
             isShielded = false;
             return;
         }
@@ -454,14 +458,14 @@ public class Tower : MonoBehaviour
 
     }
 
-    private void SpawnAoEParticles(Transform tileTransform, Color colour)
+    private void SpawnParticles(Transform tileTransform, Color colour, ParticleSystem pfxSource, ParticleSystem pfxInstance)
     {
         // Set PFX colour (This doesn't do anything yet. Still troubleshooting.)
-        var pfxColour = aoeAttackParticles.main.startColor;
-        pfxColour= colour;
+        var pfxColour = pfxSource.main.startColor;
+        pfxColour = colour;
         
         // Create instance of the particle effect
-        aoeAttackParticlesInstance = Instantiate(aoeAttackParticles, tileTransform.position, Quaternion.identity);
+        pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity);
     }
 
 }

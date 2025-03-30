@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Charmed
   enemyDescription: Shield
-  enemySprite: {fileID: 0}
+  enemySprite: {fileID: 1589309281, guid: cf8e9604f48502e43aefd60f6621b9a3, type: 3}
   maxHealth: 55
   movementPattern: 6
   clashStrength: 0

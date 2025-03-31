@@ -78,6 +78,9 @@ public class Tower : MonoBehaviour
     [SerializeField] private ParticleSystem shieldDestructionParticles;
     private ParticleSystem shieldDestructionParticlesInstance;
 
+    [SerializeField] private ParticleSystem clashParticles;
+    private ParticleSystem clashParticlesInstance;
+
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;
@@ -329,6 +332,7 @@ public class Tower : MonoBehaviour
 
         if(currentHealth <= 0)
         {
+            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the tower clash particle effect
             RemoveTower();
         }
     }

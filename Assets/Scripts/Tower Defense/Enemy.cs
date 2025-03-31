@@ -40,6 +40,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem burnParticles;
     private ParticleSystem burnParticlesInstance;
 
+    [SerializeField] private ParticleSystem clashParticles;
+    private ParticleSystem clashParticlesInstance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -203,10 +206,12 @@ public class Enemy : MonoBehaviour
         {
             case ClashStrength.Weak:
                 tileInFront.placedTower.GetComponent<Tower>().Damage(1);
+                clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
                 Kill();
                 break;
             case ClashStrength.Medium:
                 tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
+                clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
                 Kill();
                 break;
             case ClashStrength.High:

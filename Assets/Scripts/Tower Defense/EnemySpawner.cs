@@ -41,6 +41,10 @@ public class EnemySpawner : MonoBehaviour
 
     public List<GameObject> spawnTiles = new List<GameObject>();
 
+    public List<Enemy> enemies = new List<Enemy>();
+
+    public bool killAllEnemiesBeforeNextWave = false;
+
     [Header("Wave info")]
     public float timeRemainingToWaveStart = 0;
     public int waveIndex = 0;
@@ -57,7 +61,9 @@ public class EnemySpawner : MonoBehaviour
         GameManager.Instance.waveCounter.text = "Wave " + waveIndex + "/" + currentWaves.Count;
         if(startOnce && allEnemiesSpawnedFromWave)
         {
-            if(timeRemainingToWaveStart >= delay)
+            if (killAllEnemiesBeforeNextWave && enemies.Count != 0)
+                return;
+            if (timeRemainingToWaveStart >= delay)
             {
                 //allow enemies to spawn
                 if(waveIndex >= currentWaves.Count) //if at the last wave stop running this
@@ -66,9 +72,11 @@ public class EnemySpawner : MonoBehaviour
                 }
                 timeRemainingToWaveStart = 0;//set delay for next wave
                 allEnemiesSpawnedFromWave = false;
+                killAllEnemiesBeforeNextWave = currentWaves[waveIndex].killAllEnemiesWave;
             }
             else
             {
+                
                 timeRemainingToWaveStart += Time.deltaTime;
             }
         }
@@ -105,6 +113,7 @@ public class EnemySpawner : MonoBehaviour
             numEnemiesInWave = 0;
             delay = 0;
             allEnemiesSpawnedFromWave = true;
+            killAllEnemiesBeforeNextWave = currentWaves[waveIndex].killAllEnemiesWave;
         }
     }
 
@@ -120,6 +129,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
         
+
         for (int i = 0; i < currentWaves[waveIndex].numberOfEnemies; i++)
         {
             int randSpawn = Random.Range(0, spawnTiles.Count);
@@ -131,6 +141,8 @@ public class EnemySpawner : MonoBehaviour
             lastRandomSpawn = randSpawn;
 
             ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
+
+            enemies.Add(enemy.GetComponent<Enemy>());
 
             currentNumberOfEnemiesSpawned += 1;
 
@@ -145,6 +157,7 @@ public class EnemySpawner : MonoBehaviour
         
         if(numEnemiesInWave == currentWaves[waveIndex].numberOfEnemies)
         {
+            
             waveIndex += 1;
             delay = currentWaves[waveIndex].delay;
             numEnemiesInWave = 0;

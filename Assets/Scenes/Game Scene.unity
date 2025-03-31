@@ -4253,10 +4253,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 1080
       objectReference: {fileID: 0}
-    - target: {fileID: 6003804639936651715, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
-      propertyPath: enemyTimerMax
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6028826794752355977, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1

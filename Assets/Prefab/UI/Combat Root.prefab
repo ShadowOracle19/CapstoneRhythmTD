@@ -577,8 +577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb6b160d8e08cc47b85946d7f48e705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnDelay: 0
-  timeRemaining: 0
   spawnerDelayRunning: 0
   allEnemiesSpawned: 0
   enemyTotal: 0
@@ -588,8 +586,8 @@ MonoBehaviour:
   towersParent: {fileID: 4567449751264449402}
   projectilesParent: {fileID: 7179906817177105308}
   enemiesSpawnIn: {fileID: 1087988791341581498}
-  enemyTimerMax: 30
-  enemyTimer: 30
+  enemyTimerMax: 15
+  enemyTimer: 15
   resourceNum: 0
   maxResource: 150
   resourceSlider: {fileID: 5357066480712527213}
@@ -1457,6 +1455,7 @@ MonoBehaviour:
   - {fileID: 5183850645279424415, guid: f64de0cd98f03494d9a5770c06aa11a4, type: 3}
   - {fileID: 5183850645279424415, guid: d92bc725aeb0a3f46bd544fc35131520, type: 3}
   greyscaleShader: {fileID: 0}
+  overchargeShader: {fileID: 0}
   menuTower1: {fileID: 0}
   menuTower2: {fileID: 0}
   menuTower3: {fileID: 0}

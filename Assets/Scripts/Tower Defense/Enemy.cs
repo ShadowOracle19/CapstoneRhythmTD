@@ -36,6 +36,9 @@ public class Enemy : MonoBehaviour
     public bool isStunned = false;
     public int isStunnedCounter = 0;
 
+    // PFX
+    [SerializeField] private ParticleSystem burnParticles;
+    private ParticleSystem burnParticlesInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +67,7 @@ public class Enemy : MonoBehaviour
         if(burnt)
         {
             Damage(burnDamage);
+            burnParticlesInstance = Instantiate(burnParticles, this.transform, worldPositionStays:false); // Create instance of the burn particle effect
             burnDamage -= 1;
 
             if(burnDamage == 0)

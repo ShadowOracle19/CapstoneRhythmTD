@@ -234,7 +234,8 @@ public class TowerManager : MonoBehaviour
 
             //cooldown effect
             drumCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(drumCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((drumCooldownTime / drumCooldownTimeRemaining) * 100));
-            drumCooldownSlotPM.transform.localScale = new Vector3(1, drumCooldownTime / drumCooldownTimeRemaining, 1);
+            drumCooldownSlotPM.GetComponent<RectTransform>().offsetMax = new Vector2(-2, -(((drumCooldownTime / drumCooldownTimeRemaining) * 100))-120);
+            //drumCooldownSlotPM.transform.localScale = new Vector3(1, drumCooldownTime / drumCooldownTimeRemaining, 1);
 
             if(drumCooldownTime >= drumCooldownTimeRemaining)
             {
@@ -249,7 +250,8 @@ public class TowerManager : MonoBehaviour
 
             //cooldown effect
             bassCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(bassCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((bassCooldownTime / bassCooldownTimeRemaining) * 100));
-            bassCooldownSlotPM.transform.localScale = new Vector3(1, bassCooldownTime / bassCooldownTimeRemaining, 1);
+            bassCooldownSlotPM.GetComponent<RectTransform>().offsetMax = new Vector2(-120, -(((bassCooldownTime / bassCooldownTimeRemaining) * 100))-232);
+            //bassCooldownSlotPM.transform.localScale = new Vector3(1, bassCooldownTime / bassCooldownTimeRemaining, 1);
 
             if (bassCooldownTime >= bassCooldownTimeRemaining)
             {
@@ -263,8 +265,8 @@ public class TowerManager : MonoBehaviour
 
             //cooldown effect
             guitarCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(guitarCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((guitarCooldownTime / guitarCooldownTimeRemaining) * 100));
-
-            guitarCooldownSlotPM.transform.localScale = new Vector3(1, guitarCooldownTime / guitarCooldownTimeRemaining, 1);
+            guitarCooldownSlotPM.GetComponent<RectTransform>().offsetMax = new Vector2(-120, -(((guitarCooldownTime / guitarCooldownTimeRemaining) * 100))-9);
+            //guitarCooldownSlotPM.transform.localScale = new Vector3(1, guitarCooldownTime / guitarCooldownTimeRemaining, 1);
 
             if (guitarCooldownTime >= guitarCooldownTimeRemaining)
             {
@@ -278,7 +280,8 @@ public class TowerManager : MonoBehaviour
 
             //cooldown effect
             pianoCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(pianoCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((pianoCooldownTime / pianoCooldownTimeRemaining) * 100));
-            pianoCooldownSlotPM.transform.localScale = new Vector3(1, pianoCooldownTime / pianoCooldownTimeRemaining, 1);
+            pianoCooldownSlotPM.GetComponent<RectTransform>().offsetMax = new Vector2(-223, -(((pianoCooldownTime / pianoCooldownTimeRemaining) * 100))-120);
+            //pianoCooldownSlotPM.transform.localScale = new Vector3(1, pianoCooldownTime / pianoCooldownTimeRemaining, 1);
 
 
             if (pianoCooldownTime >= pianoCooldownTimeRemaining)

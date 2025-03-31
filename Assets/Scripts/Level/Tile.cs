@@ -14,7 +14,11 @@ public class Tile : MonoBehaviour
     float time = 1;
     //when init is called offset color based off true or false
     //todo: look into if levels arent retangular and are at different shapes
-    
+
+    //to be changed to using beats once it's been proven to work
+    public float forecastEndsIn = 4;
+    //don't touch this bit below, this is fine
+    public bool forecastingActive = false;
 
     private void Update()
     {

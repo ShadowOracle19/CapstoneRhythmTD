@@ -243,6 +243,7 @@ public class CombatManager : MonoBehaviour
             return;
         }
         resourceNum += 1;
+        return;
     }
      
 }

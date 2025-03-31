@@ -42,14 +42,14 @@ PlayerSettings:
   m_SplashScreenLogos:
   - logo: {fileID: 10404, guid: 0000000000000000f000000000000000, type: 0}
     duration: 2
-  - logo: {fileID: 21300000, guid: 052b8f2c6b4e7b442b7453f1b121e145, type: 3}
+  - logo: {fileID: 21300000, guid: c013f68b1641ec940a90317ff3397493, type: 3}
     duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
-  defaultScreenWidth: 1280
-  defaultScreenHeight: 720
-  defaultScreenWidthWeb: 960
-  defaultScreenHeightWeb: 600
+  defaultScreenWidth: 640
+  defaultScreenHeight: 360
+  defaultScreenWidthWeb: 640
+  defaultScreenHeightWeb: 360
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   unsupportedMSAAFallback: 0
@@ -143,8 +143,9 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.0.0.4
-  preloadedAssets: []
+  bundleVersion: 1.0.0.5
+  preloadedAssets:
+  - {fileID: 11400000, guid: b1e9b8fd1e4812a44a198902549ae4bb, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -168,12 +169,12 @@ PlayerSettings:
     Standalone: com.DefaultCompany.2DProject
     WebGL: com.DefaultCompany.2DProject
   buildNumber:
-    Standalone: 10
+    Standalone: 11
     VisionOS: 0
-    iPhone: 10
+    iPhone: 11
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 11
+  AndroidBundleVersionCode: 12
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1

@@ -10,10 +10,8 @@ public class Tile : MonoBehaviour
 
     [SerializeField] public GameObject placedTower;
 
-    
+    private ParticleSystem spawnInstance;
     float time = 1;
-    //when init is called offset color based off true or false
-    //todo: look into if levels arent retangular and are at different shapes
 
     //to be changed to using beats once it's been proven to work
     public float forecastEndsIn = 4;
@@ -32,6 +30,12 @@ public class Tile : MonoBehaviour
     {
         _renderer.color = color;
         time = 1;
+    }
+
+    public void forcastEnemy(ParticleSystem particles)
+    {
+        spawnInstance = Instantiate(particles, transform.position, Quaternion.identity);
+        //Pulse(Color.red);
     }
     
 }

@@ -50,6 +50,7 @@ public class EnemySpawner : MonoBehaviour
     //don't touch this bit below, this is fine
     public bool forecastingActive = false;
 
+    [SerializeField] private ParticleSystem spawnParticles;
 
     [Header("Wave info")]
     public float timeRemainingToWaveStart = 0;
@@ -146,25 +147,8 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, spawnTiles[randSpawn].transform.position.y), Quaternion.identity, enemyParent);
             lastRandomSpawn = randSpawn;
 
-            forecastingActive = true;
 
-            if (forecastingActive)
-            {
-                if (forecastEndsIn > 0)
-                {
-                    //to be changed to using beats once it's been proven to work
-                    forecastEndsIn -= Time.deltaTime;
-                    spawnTiles[randSpawn].GetComponent<Tile>().Pulse(Color.red);
-                    Debug.Log("WHEN YOU COME OUT YOUR SHIT IS GONE. WHEN YOU COME OUT YOUR SHIT IS GONE.");
-                }
-
-                else
-                {
-                    Debug.Log("Forecasting ended, over");
-                    forecastEndsIn = 0;
-                    forecastingActive = false;
-                }
-            }
+            spawnTiles[randSpawn].GetComponent<Tile>().forcastEnemy(spawnParticles);
             
 
             ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);

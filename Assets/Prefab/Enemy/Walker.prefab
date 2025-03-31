@@ -75,6 +75,12 @@ MonoBehaviour:
   nextPosition: {x: 0, y: 0, z: 0}
   _renderer: {fileID: 4349701985587343243}
   tileInFront: {fileID: 0}
+  burnDamage: 0
+  burnt: 0
+  isStunned: 0
+  isStunnedCounter: 0
+  burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
+  clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
 --- !u!61 &79028663795836632
 BoxCollider2D:
   m_ObjectHideFlags: 0

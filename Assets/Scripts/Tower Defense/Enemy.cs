@@ -36,6 +36,12 @@ public class Enemy : MonoBehaviour
     public bool isStunned = false;
     public int isStunnedCounter = 0;
 
+    // PFX
+    [SerializeField] private ParticleSystem burnParticles;
+    private ParticleSystem burnParticlesInstance;
+
+    [SerializeField] private ParticleSystem clashParticles;
+    private ParticleSystem clashParticlesInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +70,7 @@ public class Enemy : MonoBehaviour
         if(burnt)
         {
             Damage(burnDamage);
+            burnParticlesInstance = Instantiate(burnParticles, this.transform, worldPositionStays:false); // Create instance of the burn particle effect
             burnDamage -= 1;
 
             if(burnDamage == 0)
@@ -199,10 +206,12 @@ public class Enemy : MonoBehaviour
         {
             case ClashStrength.Weak:
                 tileInFront.placedTower.GetComponent<Tower>().Damage(1);
+                clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
                 Kill();
                 break;
             case ClashStrength.Medium:
                 tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
+                clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
                 Kill();
                 break;
             case ClashStrength.High:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Show Case Level - 2
   m_EditorClassIdentifier: 
   introDialogue: {fileID: 4900000, guid: 9e31dd82a67fada45bb0eac23fea11a4, type: 3}
-  combatEncounter: {fileID: 11400000, guid: b23ed59c52bc8ab45988713c174df69a, type: 2}
+  combatEncounter: {fileID: 11400000, guid: bd262b5d3ba6df643b62e7226d4ad5d2, type: 2}
   endDialogue: {fileID: 4900000, guid: fdde7c5fd65533c47905e404cd58e47c, type: 3}
   isTutorial: 0
   isShowcase: 1

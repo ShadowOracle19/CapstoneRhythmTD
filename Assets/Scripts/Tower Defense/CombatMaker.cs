@@ -16,4 +16,5 @@ public class Wave
     public int delay;
     public GameObject enemy;
     public int numberOfEnemies;
+    public bool killAllEnemiesWave;
 }

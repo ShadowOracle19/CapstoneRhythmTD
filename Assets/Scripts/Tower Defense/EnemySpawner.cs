@@ -41,10 +41,16 @@ public class EnemySpawner : MonoBehaviour
 
     public List<GameObject> spawnTiles = new List<GameObject>();
 
+    public List<Enemy> enemies = new List<Enemy>();
+
+    public bool killAllEnemiesBeforeNextWave = false;
+
     //to be changed to using beats once it's been proven to work
     public float forecastEndsIn = 4;
     //don't touch this bit below, this is fine
     public bool forecastingActive = false;
+
+    [SerializeField] private ParticleSystem spawnParticles;
 
     [Header("Wave info")]
     public float timeRemainingToWaveStart = 0;
@@ -62,7 +68,9 @@ public class EnemySpawner : MonoBehaviour
         GameManager.Instance.waveCounter.text = "Wave " + waveIndex + "/" + currentWaves.Count;
         if(startOnce && allEnemiesSpawnedFromWave)
         {
-            if(timeRemainingToWaveStart >= delay)
+            if (killAllEnemiesBeforeNextWave && enemies.Count != 0)
+                return;
+            if (timeRemainingToWaveStart >= delay)
             {
                 //allow enemies to spawn
                 if(waveIndex >= currentWaves.Count) //if at the last wave stop running this
@@ -71,9 +79,11 @@ public class EnemySpawner : MonoBehaviour
                 }
                 timeRemainingToWaveStart = 0;//set delay for next wave
                 allEnemiesSpawnedFromWave = false;
+                killAllEnemiesBeforeNextWave = currentWaves[waveIndex].killAllEnemiesWave;
             }
             else
             {
+                
                 timeRemainingToWaveStart += Time.deltaTime;
             }
         }
@@ -110,6 +120,7 @@ public class EnemySpawner : MonoBehaviour
             numEnemiesInWave = 0;
             delay = 0;
             allEnemiesSpawnedFromWave = true;
+            killAllEnemiesBeforeNextWave = currentWaves[waveIndex].killAllEnemiesWave;
         }
     }
 
@@ -125,6 +136,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
         
+
         for (int i = 0; i < currentWaves[waveIndex].numberOfEnemies; i++)
         {
             int randSpawn = Random.Range(0, spawnTiles.Count);
@@ -135,28 +147,13 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, spawnTiles[randSpawn].transform.position.y), Quaternion.identity, enemyParent);
             lastRandomSpawn = randSpawn;
 
-            forecastingActive = true;
 
-            if (forecastingActive)
-            {
-                if (forecastEndsIn > 0)
-                {
-                    //to be changed to using beats once it's been proven to work
-                    forecastEndsIn -= Time.deltaTime;
-                    spawnTiles[randSpawn].GetComponent<Tile>().Pulse(Color.red);
-                    Debug.Log("WHEN YOU COME OUT YOUR SHIT IS GONE. WHEN YOU COME OUT YOUR SHIT IS GONE.");
-                }
-
-                else
-                {
-                    Debug.Log("Forecasting ended, over");
-                    forecastEndsIn = 0;
-                    forecastingActive = false;
-                }
-            }
+            spawnTiles[randSpawn].GetComponent<Tile>().forcastEnemy(spawnParticles);
             
 
             ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
+
+            enemies.Add(enemy.GetComponent<Enemy>());
 
             currentNumberOfEnemiesSpawned += 1;
 
@@ -171,6 +168,7 @@ public class EnemySpawner : MonoBehaviour
         
         if(numEnemiesInWave == currentWaves[waveIndex].numberOfEnemies)
         {
+            
             waveIndex += 1;
             delay = currentWaves[waveIndex].delay;
             numEnemiesInWave = 0;

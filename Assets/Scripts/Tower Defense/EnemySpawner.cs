@@ -170,9 +170,15 @@ public class EnemySpawner : MonoBehaviour
         {
             
             waveIndex += 1;
-            delay = currentWaves[waveIndex].delay;
             numEnemiesInWave = 0;
             allEnemiesSpawnedFromWave = true;
+
+            if(waveIndex == currentWaves.Count)
+            {
+                allEnemiesSpawned = true;
+                return;
+            }
+            delay = currentWaves[waveIndex].delay;
         }
     }
 }

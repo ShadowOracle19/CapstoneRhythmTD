@@ -481,6 +481,7 @@ MonoBehaviour:
   poweredIcon: {fileID: 3312135199651036046}
   aoeAttackParticles: {fileID: 5103615976187222216, guid: e8889e3cb260858418962975b4770ad7, type: 3}
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
+  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
 --- !u!61 &6367522176411443336
 BoxCollider2D:
   m_ObjectHideFlags: 0

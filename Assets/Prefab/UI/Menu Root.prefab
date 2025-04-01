@@ -2097,9 +2097,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 1078178538, guid: 4245e61bccfb05142a07c16ef15762bd, type: 3}
-    m_PressedSprite: {fileID: 1078178538, guid: 4245e61bccfb05142a07c16ef15762bd, type: 3}
-    m_SelectedSprite: {fileID: 1078178538, guid: 4245e61bccfb05142a07c16ef15762bd, type: 3}
+    m_HighlightedSprite: {fileID: 1074888292, guid: 1bd920bf006d4784e8f484c2f5dc23a0, type: 3}
+    m_PressedSprite: {fileID: 1074888292, guid: 1bd920bf006d4784e8f484c2f5dc23a0, type: 3}
+    m_SelectedSprite: {fileID: 1074888292, guid: 1bd920bf006d4784e8f484c2f5dc23a0, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -2657,8 +2657,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 289.0525, y: 87.5113}
+  m_AnchoredPosition: {x: -2.303, y: 1.3}
+  m_SizeDelta: {x: 179.686, y: 101.435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2537974310405572437
 CanvasRenderer:
@@ -2688,7 +2688,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1878781481, guid: 072c5c153e69af94398d1492240189b7, type: 3}
+  m_Sprite: {fileID: -1900802788, guid: 0097760bb11092f4ebfe11ea9785d816, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

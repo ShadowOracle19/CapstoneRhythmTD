@@ -186,6 +186,7 @@ public class Tower : MonoBehaviour
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
+        //empowered guitar function
         if (isPoweredUp && towerInfo.type == InstrumentType.Guitar)
         {
             GameObject _bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y), gameObject.transform.rotation, GameManager.Instance.projectileParent);

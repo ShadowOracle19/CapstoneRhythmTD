@@ -207,11 +207,19 @@ public class CombatManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //checks if all enemies have died or player health hasnt reached zero to give a win state
-        if (GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal == 0)
+        if (GameManager.Instance._currentHealth == 0)
         {
-            GameManager.Instance.WinLevel();
+            GameManager.Instance.GameOver();
         }
+
+        else if(GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal == 0)
+        {
+            if (GameManager.Instance._currentHealth == 0)
+                return;
+
+            GameManager.Instance.WinLevel();
+        } //checks if all enemies have died or player health hasnt reached zero to give a win state
+
     }
 
     void DelayTimer()

@@ -171,10 +171,6 @@ public class GameManager : MonoBehaviour
     public void Damage()
     {
         _currentHealth -= 1;
-        if (_currentHealth <= 0)
-        {
-            GameOver();
-        }
     }
 
     void Health()

@@ -209,28 +209,6 @@
                 },
                 {
                     "name": "",
-                    "id": "5c141c3d-abfc-429b-b99a-6dc0e3de9566",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Destruct Mode Toggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "eb545608-fad9-43ef-9f4f-ab5b8e135637",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Destruct Mode Toggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "bfa17902-586f-433e-9834-ea8041cfa725",
                     "path": "<Keyboard>/space",
                     "interactions": "",

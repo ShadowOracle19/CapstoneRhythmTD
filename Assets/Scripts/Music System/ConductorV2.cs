@@ -177,8 +177,6 @@ public class ConductorV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pauseConductor) return;
-
         if (GameManager.Instance.isGamePaused)
         {
             PauseMusic();
@@ -189,8 +187,10 @@ public class ConductorV2 : MonoBehaviour
             ResumeMusic();
         }
 
-        
-        
+        if (pauseConductor) return;
+
+        Conduct();
+
         //if(beatDuration == perfectBeatThreshold)
         //{
         //    _ping.Play();
@@ -201,16 +201,19 @@ public class ConductorV2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Conduct();
+        
     }
 
     public void Conduct()
     {
         //determine how many seconds since the song started
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime - offset);
+        //possibly another place to offset 
+        songPosition = (musicSource.time);
+        //songPosition = (musicSource.time - dspSongTime) - offset;
+        //songPosition = (float)(AudioSettings.dspTime - dspSongTime - offset);
 
         //determine how many beats since the song started
-        songPositionInBeats = songPosition / crotchet;
+        songPositionInBeats = (songPosition / crotchet) - offset;
 
         //calculate the loop position
         if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
@@ -224,12 +227,16 @@ public class ConductorV2 : MonoBehaviour
             numberOfBeats++;
         }
 
+        //beat duration is what you need to offset if you wanna change the "latency" of the input
         beatDuration = songPositionInBeats - numberOfBeats * 1;
         beatDuration = Mathf.Round(beatDuration * 100) * 0.01f;
 
+        beatDuration = Mathf.Clamp(beatDuration, 0, 1);
+
         //add a minus offset to this to offset beat events
+        //_interval = musicSource.timeSamples / (musicSource.clip.frequency * crotchet);
         _interval = musicSource.timeSamples / (musicSource.clip.frequency * crotchet);
-        TriggerBeatEvent(_interval);
+        TriggerBeatEvent(songPositionInBeats);
     }
 
     public void Tick()

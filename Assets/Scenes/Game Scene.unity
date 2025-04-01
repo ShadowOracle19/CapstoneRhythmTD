@@ -2712,6 +2712,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0.496
       objectReference: {fileID: 0}
+    - target: {fileID: 7350431759063249165, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: offset
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7498620752678822480, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2724,6 +2728,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 8522556072755218974, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8631162794056137449, guid: 7e00a4d800da3c54f9c52d7cd6628703, type: 3}
       propertyPath: buttonHighlightAudio
       value: 

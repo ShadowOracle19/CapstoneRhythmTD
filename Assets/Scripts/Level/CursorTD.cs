@@ -124,6 +124,11 @@ public class CursorTD : MonoBehaviour
         PlacementResourceBar();
     }
 
+    private void FixedUpdate()
+    {
+        //beatIsHit = false;
+    }
+
     public void PlacementResourceBar()
     {
         tower1Slider.value = CombatManager.Instance.resourceNum;
@@ -551,7 +556,7 @@ public class CursorTD : MonoBehaviour
     {
         //Debug.Log("pulse");
         cursorSprite.transform.localScale = pulseSize;
-        beatIsHit = false;
+        //beatIsHit = false;
     }
 
     public void CheckPianoResult(Tower tower)

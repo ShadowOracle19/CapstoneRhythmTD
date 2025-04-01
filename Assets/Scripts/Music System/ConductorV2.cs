@@ -53,7 +53,9 @@ public class ConductorV2 : MonoBehaviour
 
     public int beatTrack;
 
-    private int lastInterval;
+    public float _interval;
+
+    public int lastInterval;
 
     //Dynamic Music tracks
     public AudioSource drums;
@@ -81,6 +83,7 @@ public class ConductorV2 : MonoBehaviour
     public bool pauseConductor = false;
     public TextMeshProUGUI countInText;
     public bool countingIn = false;
+
 
 
     public void CountUsIn(int _bpm)
@@ -224,7 +227,9 @@ public class ConductorV2 : MonoBehaviour
         beatDuration = songPositionInBeats - numberOfBeats * 1;
         beatDuration = Mathf.Round(beatDuration * 100) * 0.01f;
 
-        TriggerBeatEvent(musicSource.timeSamples / (musicSource.clip.frequency * crotchet));
+        //add a minus offset to this to offset beat events
+        _interval = musicSource.timeSamples / (musicSource.clip.frequency * crotchet);
+        TriggerBeatEvent(_interval);
     }
 
     public void Tick()
@@ -270,6 +275,7 @@ public class ConductorV2 : MonoBehaviour
     {
         if(Mathf.FloorToInt(interval) != lastInterval)
         {
+            CursorTD.Instance.beatIsHit = false;
             lastInterval = Mathf.FloorToInt(interval);
             foreach(UnityEvent _event in triggerEvent.ToArray())
             {

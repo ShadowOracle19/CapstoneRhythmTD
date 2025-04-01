@@ -1507,17 +1507,6 @@
                 },
                 {
                     "name": "",
-                    "id": "2fc5245a-d0c0-4571-bf9e-797a2fe28c88",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AdvanceDialog",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a0650078-5ced-4ad1-bfd7-26bf28976fb0",
                     "path": "<Keyboard>/enter",
                     "interactions": "",

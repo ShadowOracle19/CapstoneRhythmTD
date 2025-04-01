@@ -197,16 +197,21 @@ public class CombatManager : MonoBehaviour
         {
             allEnemiesSpawned = true;
         }
+
         
+
+
+            //delays enemy spawning
+            DelayTimer();
+    }
+
+    private void FixedUpdate()
+    {
         //checks if all enemies have died or player health hasnt reached zero to give a win state
-        if(allEnemiesSpawned && enemyTotal == 0 && GameManager.Instance._currentHealth != 0)
+        if (GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal == 0)
         {
             GameManager.Instance.WinLevel();
         }
-
-
-        //delays enemy spawning
-        DelayTimer();
     }
 
     void DelayTimer()

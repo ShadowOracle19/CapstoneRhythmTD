@@ -515,7 +515,7 @@ public class CursorTD : MonoBehaviour
         desiredMovement = Vector3.zero;
         tile = null;
 
-        if(GameManager.Instance.tutorialRunning && movementSequence)
+        if(GameManager.Instance.tutorialRunning && movementSequence && TutorialManager.Instance.index == 1)
         {
             moveCounter += 1;
             if (moveCounter == 4)

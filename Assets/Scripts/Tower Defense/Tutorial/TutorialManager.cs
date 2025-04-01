@@ -49,7 +49,7 @@ public class TutorialManager : MonoBehaviour
     {
         pressKeyToNextPopup.SetActive(pressKeyToNextDialogue);
 
-        if(pressKeyToNextDialogue && Input.anyKeyDown && !ConductorV2.instance.countingIn)
+        if(pressKeyToNextDialogue && Input.GetKeyDown(KeyCode.Return) && !ConductorV2.instance.countingIn)
         {
             LoadNextTutorialDialogue();
         }

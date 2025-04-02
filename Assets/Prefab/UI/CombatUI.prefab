@@ -6723,13 +6723,13 @@ MonoBehaviour:
   - text: This is your <color=#FF0084>stage
     isSkippableText: 1
   - text: Use  <sprite name="ArrowKeys">to <color=#FF0084>move
-    isSkippableText: 0
+    isSkippableText: 1
   - text: ' Try to move <color=#FF0084>on-beat'
     isSkippableText: 1
   - text: Listen, or watch the cursor and metronome
     isSkippableText: 1
   - text: Aim for <color=#00D0FF>Great</color> or <color=#6FFF00>Perfect
-    isSkippableText: 1
+    isSkippableText: 0
   - text: moving on-beat gives <color=#FF0084>magic
     isSkippableText: 0
   - text: Press <sprite name="Space"> to open the <color=#FF0084>Tower Menu

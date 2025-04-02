@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial")]
     public DynamicSongCreator tutorialSong;
 
+    [Header("Conductor")]
+    public float audioOffset;
+    public float inputOffset;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -171,10 +175,6 @@ public class GameManager : MonoBehaviour
     public void Damage()
     {
         _currentHealth -= 1;
-        if (_currentHealth <= 0)
-        {
-            GameOver();
-        }
     }
 
     void Health()

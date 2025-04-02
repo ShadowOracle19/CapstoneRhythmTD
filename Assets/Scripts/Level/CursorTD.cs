@@ -515,7 +515,7 @@ public class CursorTD : MonoBehaviour
         desiredMovement = Vector3.zero;
         tile = null;
 
-        if(GameManager.Instance.tutorialRunning && movementSequence && TutorialManager.Instance.index == 1)
+        if(GameManager.Instance.tutorialRunning && movementSequence && TutorialManager.Instance.index == 4)
         {
             moveCounter += 1;
             if (moveCounter == 4)
@@ -644,6 +644,13 @@ public class CursorTD : MonoBehaviour
 
     public _BeatResult CheckOnBeat()
     {
+        //float songInBeats = ConductorV2.instance.songPositionInBeats;
+        //float adjustedInputTime = songInBeats - GameManager.Instance.inputOffset;
+        ////float timingError = Mathf.Abs(ConductorV2.instance.numberOfBeats - adjustedInputTime);
+        //float timingError = Mathf.Abs(ConductorV2.instance.beatDuration - GameManager.Instance.inputOffset);
+        ////Debug.Log($"Time Pressed:{ConductorV2.instance.songPositionInBeats}    Adjusted Input Time:{adjustedInputTime}   TimingError:{timingError}    beat duration: {ConductorV2.instance.beatDuration}");
+        //Debug.Log($"TimingError:{timingError}    beat duration: {ConductorV2.instance.beatDuration}");
+
         if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
         {
             ComboManager.Instance.IncreaseCombo();
@@ -675,6 +682,7 @@ public class CursorTD : MonoBehaviour
             return _BeatResult.miss;
         }
     }
+
 
     private void SpawnResourceGenParticles(ParticleSystem particlesSource, ParticleSystem particlesInstance)
     {

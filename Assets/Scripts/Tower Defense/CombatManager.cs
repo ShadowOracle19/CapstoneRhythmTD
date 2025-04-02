@@ -173,18 +173,7 @@ public class CombatManager : MonoBehaviour
         resourceSlider.value = resourceNum;
         resourceText.text = resourceNum.ToString();
 
-        overchargeSlider.value = resourceNum - 100;
-
-        if(resourceNum > 100)
-        {
-            overchargeResources.SetActive(true);
-        }
-        else
-        {
-            overchargeResources.SetActive(false);
-        }
-
-        if(resourceNum == 150) canPlaceEmpoweredTower = true;
+        
 
 
         //checks if all enemies have spawned
@@ -203,15 +192,38 @@ public class CombatManager : MonoBehaviour
 
             //delays enemy spawning
             DelayTimer();
+
+        overchargeSlider.value = resourceNum - 100;
+
+        if (resourceNum > 100)
+        {
+            if (GameManager.Instance.tutorialRunning && CursorTD.Instance.movementSequence) //if player moves to much in tutorial they could show the overcharge bar this prevents that
+                return;
+            overchargeResources.SetActive(true);
+        }
+        else
+        {
+            overchargeResources.SetActive(false);
+        }
+
+        if (resourceNum == 150) canPlaceEmpoweredTower = true;
     }
 
     private void FixedUpdate()
     {
-        //checks if all enemies have died or player health hasnt reached zero to give a win state
-        if (GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal == 0)
+        if (GameManager.Instance._currentHealth == 0)
         {
-            GameManager.Instance.WinLevel();
+            GameManager.Instance.GameOver();
         }
+
+        else if(GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal == 0)
+        {
+            if (GameManager.Instance._currentHealth == 0)
+                return;
+
+            GameManager.Instance.WinLevel();
+        } //checks if all enemies have died or player health hasnt reached zero to give a win state
+
     }
 
     void DelayTimer()

@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial")]
     public DynamicSongCreator tutorialSong;
 
+    [Header("Conductor")]
+    public float audioOffset;
+    public float inputOffset;
+
     // Start is called before the first frame update
     void Start()
     {

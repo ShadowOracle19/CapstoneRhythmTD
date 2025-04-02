@@ -23,8 +23,6 @@ public class ConductorV2 : MonoBehaviour
     public float dspSongTime;//how many seconds have passed since the song started
     public AudioSource musicSource;
 
-    public float offset;
-
     //The number of beats in each loop
     public float beatsPerLoop;
 
@@ -103,6 +101,8 @@ public class ConductorV2 : MonoBehaviour
         beatTrack = 0;
         beatDuration = 0;
         countingIn = true;
+        //calculate the number of seconds in each beat
+        crotchet = 60 / bpm;
         StartCoroutine(CountIn());
     }
 
@@ -114,7 +114,7 @@ public class ConductorV2 : MonoBehaviour
             Debug.Log("count in " + i);
             countInText.text = i.ToString();
             _ping.Play();
-            yield return new WaitForSeconds(60 / bpm);
+            yield return new WaitForSeconds(crotchet);
         }
         StartConductor();
         yield return null;
@@ -132,8 +132,6 @@ public class ConductorV2 : MonoBehaviour
         Debug.Log("Conductor Start");
 
 
-        //calculate the number of seconds in each beat
-        crotchet = 60 / bpm;
 
         completedLoops = 0;
         numberOfBeats = 0;
@@ -208,12 +206,12 @@ public class ConductorV2 : MonoBehaviour
     {
         //determine how many seconds since the song started
         //possibly another place to offset 
-        songPosition = (musicSource.time);
+        songPosition = (musicSource.time) ;
         //songPosition = (musicSource.time - dspSongTime) - offset;
         //songPosition = (float)(AudioSettings.dspTime - dspSongTime - offset);
 
         //determine how many beats since the song started
-        songPositionInBeats = (songPosition / crotchet) - offset;
+        songPositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
 
         //calculate the loop position
         if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
@@ -230,6 +228,9 @@ public class ConductorV2 : MonoBehaviour
         //beat duration is what you need to offset if you wanna change the "latency" of the input
         beatDuration = songPositionInBeats - numberOfBeats * 1;
         beatDuration = Mathf.Round(beatDuration * 100) * 0.01f;
+
+        //this line adds the input offset if things break remove this
+        beatDuration = Mathf.Abs(beatDuration - GameManager.Instance.inputOffset);
 
         beatDuration = Mathf.Clamp(beatDuration, 0, 1);
 

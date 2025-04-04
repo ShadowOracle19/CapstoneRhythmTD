@@ -79,8 +79,49 @@ public class CombatManager : MonoBehaviour
 
     public void RestartEncounter()
     {
+        if (GameManager.Instance.tutorialRunning)
+        {
+            RestartTutorialEncounter();
+            return;
+        }
+
         EndEncounter();
         LoadEncounter(currentEncounter);
+    }
+
+    public void RestartTutorialEncounter()
+    {
+        GameManager.Instance.LoadTutorial();
+        //remove enemies
+        foreach (Transform child in enemiesParent)
+        {
+            child.gameObject.GetComponent<Enemy>().RemoveEnemy();
+        }
+        //remove towers
+        foreach (Transform child in towersParent)
+        {
+            child.gameObject.GetComponent<Tower>().RemoveTower();
+        }
+        //remove enemies
+        foreach (Transform child in projectilesParent)
+        {
+            child.gameObject.GetComponent<Projectile>().RemoveProjectile();
+        }
+        enemySpawners.startOnce = false;
+        CursorTD.Instance.isMoving = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        ConductorV2.instance.drums.volume = 0;
+        ConductorV2.instance.bass.volume = 0;
+        ConductorV2.instance.piano.volume = 0;
+        ConductorV2.instance.guitarH.volume = 0;
+        ConductorV2.instance.guitarM.volume = 0;
+
+        FeverSystem.Instance.feverBarNum = 0;
+        ComboManager.Instance.ResetCombo();
+        ComboManager.Instance.highestCombo = 0;
+
+        ConductorV2.instance.StopMusic();
     }
 
     //play this when loading up an encounter

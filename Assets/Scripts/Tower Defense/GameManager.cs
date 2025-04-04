@@ -112,7 +112,6 @@ public class GameManager : MonoBehaviour
     #region pause function
     public void HandlePauseMenuInput()
     {
-        Debug.Log("pause");
         //allows player to use pause menu in combat, level select and dialogue
         if (combatRunning || menuRoot.activeSelf || tutorialRunning)
         {

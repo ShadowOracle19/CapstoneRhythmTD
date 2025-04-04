@@ -97,6 +97,8 @@ public class DialogueManager : MonoBehaviour
     private int totalVisibleCharacters;
     private int visibleCount;
 
+    private int previousCharacterAudioCue;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -338,6 +340,18 @@ public class DialogueManager : MonoBehaviour
         if (audioSource.isPlaying)
             return;
         int randNum = Random.Range(1, 6); //gets random number between 1 and 5
+
+        while (previousCharacterAudioCue == randNum)
+        {
+            randNum = Random.Range(1, 6);
+        }
+        //if(previousCharacterAudioCue == randNum)//respins random character audio cue
+        //{
+        //    randNum = Random.Range(1, 6);
+        //}
+
+        previousCharacterAudioCue = randNum;
+
         var _characterSpeaking = Resources.Load<AudioClip>($"audio/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}{randNum}");
 
         if (_characterSpeaking == null)

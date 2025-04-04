@@ -314,6 +314,13 @@ public class CursorTD : MonoBehaviour
         SpawnBeatHitResult();
     }
 
+    public void Buff4Trigger()
+    {
+        if (towerSelectMenuOpened) return;
+        TowerEmpowerment(BuffType.Normal);
+        SpawnBeatHitResult();
+    }
+
     public void TowerEmpowerment(BuffType buff)
     {
         if(tile.placedTower != null)

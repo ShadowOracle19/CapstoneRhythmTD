@@ -148,6 +148,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   burningBullet: 0
+  burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
 --- !u!58 &-4907637576801480368
 CircleCollider2D:
   m_ObjectHideFlags: 0

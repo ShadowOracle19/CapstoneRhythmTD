@@ -21,6 +21,8 @@ public class Projectile : MonoBehaviour
     public UnityEvent trigger;
 
     public bool burningBullet = false;
+    [SerializeField] private ParticleSystem burningParticles;
+    private ParticleSystem burningParticlesInstance;
 
     public void InitializeProjectile(int range, GameObject firedFrom, int _damage, bool isPiercing, bool isBurning)
     {
@@ -28,6 +30,7 @@ public class Projectile : MonoBehaviour
         towerFiredFrom = firedFrom;
         damage = _damage;
         piercing = isPiercing;
+        burningBullet = isBurning;
     }
 
     // Start is called before the first frame update
@@ -57,6 +60,12 @@ public class Projectile : MonoBehaviour
 
     public void OnTick()
     {
+        if(burningBullet)
+        {
+            Debug.Log("burn effect particles");
+            burningParticlesInstance = Instantiate(burningParticles, transform.position, Quaternion.identity);
+        }
+
         canMove = true;
         activeTime += 1;
         if (activeTime == bulletRange)

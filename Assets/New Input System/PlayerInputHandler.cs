@@ -21,6 +21,7 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private string buff1 = "Buff 1";
     [SerializeField] private string buff2 = "Buff 2";
     [SerializeField] private string buff3 = "Buff 3";
+    [SerializeField] private string buff4 = "Buff 4";
     [SerializeField] private string feverMode = "Fever Mode";
     [SerializeField] private string options = "Options";
 
@@ -33,6 +34,7 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction buff1Action;
     private InputAction buff2Action;
     private InputAction buff3Action;
+    private InputAction buff4Action;
     private InputAction feverAction;
     private InputAction optionsAction;
 
@@ -44,6 +46,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool Buff1Trigger { get; private set; }
     public bool Buff2Trigger { get; private set; }
     public bool Buff3Trigger { get; private set; }
+    public bool Buff4Trigger { get; private set; }
     public bool FeverTrigger { get; private set; }
     public bool OptionsTrigger { get; private set; }
 
@@ -69,6 +72,7 @@ public class PlayerInputHandler : MonoBehaviour
         buff1Action = playerControls.FindActionMap(actionMapName).FindAction(buff1);
         buff2Action = playerControls.FindActionMap(actionMapName).FindAction(buff2);
         buff3Action = playerControls.FindActionMap(actionMapName).FindAction(buff3);
+        buff4Action = playerControls.FindActionMap(actionMapName).FindAction(buff4);
         feverAction = playerControls.FindActionMap(actionMapName).FindAction(feverMode);
         optionsAction = playerControls.FindActionMap(actionMapName).FindAction(options);
         
@@ -129,6 +133,12 @@ public class PlayerInputHandler : MonoBehaviour
         };
         buff3Action.canceled += context => Buff3Trigger = false;
 
+        buff4Action.performed += context => {
+            if (context.interaction is TapInteraction)
+                CursorTD.Instance.Buff4Trigger();
+        };
+        buff4Action.canceled += context => Buff4Trigger = false;
+
         feverAction.performed += context => {
             if (context.interaction is TapInteraction)
                 CursorTD.Instance.HandleFeverModeInput();
@@ -152,6 +162,7 @@ public class PlayerInputHandler : MonoBehaviour
         buff1Action.Enable();
         buff2Action.Enable();
         buff3Action.Enable();
+        buff4Action.Enable();
         feverAction.Enable();
         optionsAction.Enable(); 
     }
@@ -166,6 +177,7 @@ public class PlayerInputHandler : MonoBehaviour
         buff1Action.Disable();
         buff2Action.Disable();
         buff3Action.Disable();
+        buff4Action.Disable();
         feverAction.Disable();
         //optionsAction.Disable();
     }

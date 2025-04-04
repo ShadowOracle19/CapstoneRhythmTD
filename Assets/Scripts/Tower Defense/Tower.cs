@@ -10,7 +10,7 @@ public enum InstrumentType
 
 public enum BuffType
 {
-    Fayruz, Sonu, Niimi
+    Fayruz, Sonu, Niimi, Normal
 }
 
 public enum TowerState
@@ -38,7 +38,8 @@ public class Tower : MonoBehaviour
     public int currentDamage;
     public int tempDamageHolder;
 
-    public bool attackBuffed = false;
+    public bool burningBullet = false;
+    public bool increaseBulletDamage = false;
 
     public int towerRange;
 
@@ -151,6 +152,11 @@ public class Tower : MonoBehaviour
         
         currentDamage = tempDamageHolder;
 
+        if (increaseBulletDamage)
+        {
+            currentDamage = currentDamage * 5;
+        }
+
         if (towerInfo.isAOETower)
         {
             colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerRange, 0, transform.forward);
@@ -178,10 +184,10 @@ public class Tower : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
         
 
-        if(attackBuffed || FeverSystem.Instance.feverModeActive)
+        if(increaseBulletDamage || FeverSystem.Instance.feverModeActive)
             bullet.GetComponent<SpriteRenderer>().color = Color.red;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
@@ -190,16 +196,17 @@ public class Tower : MonoBehaviour
         if (isPoweredUp && towerInfo.type == InstrumentType.Guitar)
         {
             GameObject _bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-            _bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
+            _bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
 
 
-            if (attackBuffed || FeverSystem.Instance.feverModeActive)
+            if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
                 _bullet.GetComponent<SpriteRenderer>().color = Color.red;
 
             ConductorV2.instance.triggerEvent.Add(_bullet.GetComponent<Projectile>().trigger);
         }
 
-        attackBuffed = false;
+        burningBullet = false;
+        increaseBulletDamage = false;
         
     }
 
@@ -213,11 +220,16 @@ public class Tower : MonoBehaviour
         
         currentDamage = tempDamageHolder;
 
+        if (increaseBulletDamage)
+        {
+            currentDamage = currentDamage * 5;
+        }
+
         GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
 
 
-        if (attackBuffed || FeverSystem.Instance.feverModeActive)
+        if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
             bullet.GetComponent<SpriteRenderer>().color = Color.red;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
@@ -225,16 +237,17 @@ public class Tower : MonoBehaviour
         if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
         {
             GameObject _bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + -yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-            _bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, attackBuffed);
+            _bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
 
 
-            if (attackBuffed || FeverSystem.Instance.feverModeActive)
+            if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
                 _bullet.GetComponent<SpriteRenderer>().color = Color.red;
 
             ConductorV2.instance.triggerEvent.Add(_bullet.GetComponent<Projectile>().trigger);
         }
 
-        attackBuffed = false;
+        burningBullet = false;
+        increaseBulletDamage = false;
 
     } 
 
@@ -281,7 +294,6 @@ public class Tower : MonoBehaviour
         bullet2.GetComponent<SpriteRenderer>().color = Color.blue;
 
         ConductorV2.instance.triggerEvent.Add(bullet2.GetComponent<Projectile>().trigger);
-        attackBuffed = false;
         
     }
 
@@ -377,12 +389,16 @@ public class Tower : MonoBehaviour
                 ExtraFire();
                 break;
             case BuffType.Fayruz://Fayruz's Buff
-
-                attackBuffed = true;
+                burningBullet = true;
+                Debug.Log("fayruz");
                 break;
             case BuffType.Niimi: //Niimi's Buff
                 isShielded = true;
 
+                break;
+            case BuffType.Normal:
+                increaseBulletDamage = true;
+                Debug.Log("default");
                 break;
             default:
                 break;

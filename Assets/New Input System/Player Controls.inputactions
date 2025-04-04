@@ -78,6 +78,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Buff 4",
+                    "type": "Button",
+                    "id": "9abbad64-1444-4244-aa77-eda9fc3756af",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Fever Mode",
                     "type": "Button",
                     "id": "55ebfa10-3c59-4067-9cff-61ed44675138",
@@ -243,7 +252,7 @@
                 {
                     "name": "",
                     "id": "aa209ecc-14ae-4c83-831d-7eec31025aef",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -265,7 +274,7 @@
                 {
                     "name": "",
                     "id": "365a61e1-9876-4538-a321-c240cc98554b",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -287,7 +296,7 @@
                 {
                     "name": "",
                     "id": "2faf0b93-e349-4579-b65d-b02fb0c3fd4a",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -336,6 +345,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Options",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b61e2e1-f344-4052-a2f2-d69ad2d7ca41",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Buff 4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
